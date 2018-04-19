@@ -1,0 +1,19 @@
+{
+  "name": "storybook-ts",
+  "version": "1.0.0",
+  "description": "testing storybook",
+  "main": "index.js",
+  "scripts": {
+    "storybook": "start-storybook -p 9001 -c .storybook"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@storybook/react": "^3.4.2",
+    "babel-core": "^6.26.0"
+  },
+  "dependencies": {
+    "react": "^16.3.2",
+    "react-dom": "^16.3.2"
+  }
+}
