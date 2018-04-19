@@ -6,8 +6,8 @@ import {Button} from '../src/components/Button';
 
 storiesOf('Button', module)
     .add('with text',
-        withInfo({ inline: true })(() => <Button onClick={action('clicked')}>Hello Button</Button>)
+        withInfo()(() => <Button onClick={action('clicked')}>Hello Button</Button>)
     )
     .add('with some emoji',
-        withInfo({ inline: true })(() => <Button onClick={action('clicked')}><span role="img" aria-label="so cool">😀 😎 👍 💯</span></Button>)
+        withInfo()(() => <Button onClick={action('clicked')}><span role="img" aria-label="so cool">😀 😎 👍 💯</span></Button>)
     );
