@@ -4,16 +4,36 @@
   "description": "testing storybook",
   "main": "index.js",
   "scripts": {
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "start": "react-scripts-ts start",
+    "build": "npm run lint && npm run build-lib && build-storybook",
+    "build-lib-watch": "tsc -w",
+    "build-lib": "tsc && npm run copy-css-to-lib && npm run copy-svg-to-lib && npm run copy-png-to-lib && npm run copy-woff2-to-lib",
+    "test": "react-scripts-ts test --env=jsdom",
+    "test:coverage": "npm test -- --coverage",
+    "eject": "react-scripts-ts eject",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook",
+    "copy-css-to-lib": "cpx \"./src/**/*.css\" ./build/lib",
+    "copy-woff2-to-lib": "cpx \"./src/**/*.woff2\" ./build/lib",
+    "copy-svg-to-lib": "cpx \"./src/**/*.svg\" ./build/lib",
+    "copy-png-to-lib": "cpx \"./src/**/*.png\" ./build/lib",
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
   },
   "author": "",
   "license": "MIT",
   "devDependencies": {
     "@storybook/react": "^3.4.2",
-    "babel-core": "^6.26.0"
+    "awesome-typescript-loader": "^5.0.0",
+    "babel-core": "^6.26.0",
+    "typescript": "^2.8.1"
   },
   "dependencies": {
+    "@storybook/addon-info": "^3.4.2",
+    "@types/jest": "^22.2.3",
+    "jest": "^22.4.3",
     "react": "^16.3.2",
-    "react-dom": "^16.3.2"
+    "react-docgen-typescript-webpack-plugin": "^1.1.0",
+    "react-dom": "^16.3.2",
+    "ts-jest": "^22.4.4"
   }
 }
