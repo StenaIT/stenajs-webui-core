@@ -15,7 +15,9 @@
     "eject": "react-scripts-ts eject",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "npm run clean-storybook && build-storybook",
-    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'"
+    "lint": "tslint -c tslint.json 'src/**/*.{ts,tsx}'",
+    "prettier": "yarn run prettier:src",
+    "prettier:src": "prettier --parser typescript --trailing-comma all --single-quote --write 'src/**/*.ts' 'src/**/*.tsx'"
   },
   "author": "",
   "license": "MIT",
@@ -36,13 +38,25 @@
     "typescript": "^2.8.1"
   },
   "dependencies": {
+    "@fortawesome/fontawesome": "^1.2.0-6",
+    "@fortawesome/fontawesome-svg-core": "^1.2.0-14",
+    "@fortawesome/free-brands-svg-icons": "^5.1.0-8",
+    "@fortawesome/free-regular-svg-icons": "^5.1.0-8",
+    "@fortawesome/free-solid-svg-icons": "^5.1.0-8",
+    "@fortawesome/react-fontawesome": "^0.1.0-11",
     "@storybook/addon-info": "^3.4.2",
     "@types/jest": "^22.2.3",
+    "@types/lodash": "^4.14.108",
+    "@types/recompose": "^0.26.1",
+    "glamorous": "^4.13.0",
     "jest": "^22.4.3",
+    "lodash": "^4.17.10",
     "react": "^16.3.2",
     "react-docgen-typescript-webpack-plugin": "^1.1.0",
     "react-dom": "^16.3.2",
     "react-scripts-ts": "^2.15.1",
+    "react-spinkit": "^3.0.0",
+    "recompose": "^0.27.0",
     "ts-jest": "^22.4.4"
   }
 }

@@ -1,13 +1,13 @@
 {
   "compilerOptions": {
-    "outDir": "build/lib",
+    "outDir": "lib/",
     "module": "commonjs",
     "target": "es5",
     "lib": ["es5", "es6", "es7", "es2017", "dom"],
-    "sourceMap": true,
-    "allowJs": false,
     "jsx": "react",
     "moduleResolution": "node",
+    "sourceMap": true,
+    "allowJs": false,
     "rootDirs": ["src"],
     "baseUrl": "src",
     "forceConsistentCasingInFileNames": true,
@@ -18,8 +18,14 @@
     "suppressImplicitAnyIndexErrors": true,
     "noUnusedLocals": true,
     "declaration": true,
+    "pretty": true,
+    "noEmitOnError": true,
+    "strict": true,
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+
+    "importHelpers": true,
+    "noFallthroughCasesInSwitch": true,
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "build", "scripts", "src/setupTests.ts", "**/__tests__/**"]

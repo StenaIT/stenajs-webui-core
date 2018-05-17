@@ -1,0 +1,7 @@
+.clickable {
+
+}
+
+.clickable:hover {
+    opacity: 0.7;
+}

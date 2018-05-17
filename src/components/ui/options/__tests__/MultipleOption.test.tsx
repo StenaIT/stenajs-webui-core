@@ -30,7 +30,9 @@ describe('MultipleOption', () => {
             label: 'label 2',
           },
         ];
-        const wrapper = shallow(<MultipleOption {...props} options={options} />);
+        const wrapper = shallow(
+          <MultipleOption {...props} options={options} />,
+        );
         expect(wrapper.find('input[name="all"]').prop('checked')).toBe(true);
       });
 
@@ -48,7 +50,13 @@ describe('MultipleOption', () => {
           },
         ];
         const onAllClick = jest.fn();
-        const wrapper = shallow(<MultipleOption {...props} onAllClick={onAllClick} options={options} />);
+        const wrapper = shallow(
+          <MultipleOption
+            {...props}
+            onAllClick={onAllClick}
+            options={options}
+          />,
+        );
         const e = {
           target: {
             value: 'value',
@@ -73,7 +81,9 @@ describe('MultipleOption', () => {
             label: 'label 2',
           },
         ];
-        const wrapper = shallow(<MultipleOption {...props} options={options} />);
+        const wrapper = shallow(
+          <MultipleOption {...props} options={options} />,
+        );
         expect(wrapper.find('input[name="all"]').prop('checked')).toBe(false);
       });
 
@@ -91,7 +101,13 @@ describe('MultipleOption', () => {
           },
         ];
         const onAllClick = jest.fn();
-        const wrapper = shallow(<MultipleOption {...props} onAllClick={onAllClick} options={options} />);
+        const wrapper = shallow(
+          <MultipleOption
+            {...props}
+            onAllClick={onAllClick}
+            options={options}
+          />,
+        );
         const e = {
           target: {
             value: 'value',
@@ -118,7 +134,13 @@ describe('MultipleOption', () => {
         },
       ];
       const onOptionClick = jest.fn();
-      const wrapper = shallow(<MultipleOption {...props} onOptionClick={onOptionClick} options={options} />);
+      const wrapper = shallow(
+        <MultipleOption
+          {...props}
+          onOptionClick={onOptionClick}
+          options={options}
+        />,
+      );
       const optionsWrapper = wrapper.find('.options');
       expect(optionsWrapper.length).toBe(2);
       optionsWrapper.forEach((optionWrapper, index) => {
