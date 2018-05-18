@@ -1,9 +1,10 @@
 {
-  "name": "storybook-ts",
-  "version": "1.0.0",
-  "description": "testing storybook",
-  "main": "index.js",
+  "name": "stenajs-webui-common",
+  "version": "0.0.1",
+  "description": "A library of React components made by Stena IT.",
+  "main": "lib/index.js",
   "scripts": {
+    "start": "start-storybook -p 6006",
     "clean": "npm run clean-build && npm run clean-storybook",
     "clean-build": "rimraf build",
     "clean-storybook": "rimraf storybok-static",

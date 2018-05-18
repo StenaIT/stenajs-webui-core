@@ -1,4 +1,10 @@
 import { ButtonTheme } from '../components/ui/buttons/ButtonTheme';
+import { SimpleCheckboxTheme } from '../components/ui/form/SimpleCheckboxTheme';
+import { SimpleTextInputTheme } from '../components/ui/form/SimpleTextInputTheme';
+import { StandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
+import { SmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
+import { FlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';
+import { TextTheme } from '../components/ui/text/TextTheme';
 
 export interface Theme {
   colors: ThemeColors;
@@ -51,4 +57,15 @@ export interface ThemeFontSizes {
 
 export interface ComponentThemes {
   Button: ButtonTheme;
+  FlatButton: FlatButtonTheme;
+  SmallButton: SmallButtonTheme;
+  StandardButton: StandardButtonTheme;
+  SimpleCheckbox: SimpleCheckboxTheme;
+  SimpleTextInput: SimpleTextInputTheme;
+  HeaderText: TextTheme;
+  LargeText: TextTheme;
+  DefaultText: TextTheme;
+  SmallText: TextTheme;
+  SmallerText: TextTheme;
+  TinyText: TextTheme;
 }

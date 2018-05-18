@@ -53,9 +53,9 @@ export class Clickable extends React.Component<ClickableProps, ClickableState> {
         }}
         onClick={onClick}
         onDoubleClick={onDblClick}
-        onMouseDown={this.onMouseDown}
-        onMouseUp={this.onMouseUp}
-        onMouseOut={this.onMouseUp}
+        onMouseDown={hasClickHandler ? this.onMouseDown : undefined}
+        onMouseUp={hasClickHandler ? this.onMouseUp : undefined}
+        onMouseOut={hasClickHandler ? this.onMouseUp : undefined}
       >
         {this.props.children}
       </div>

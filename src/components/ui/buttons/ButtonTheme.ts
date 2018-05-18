@@ -14,7 +14,7 @@ export interface ButtonTheme {
   borderRadius: string | undefined;
 }
 
-export const buttonDefaultTheme: ButtonTheme = {
+export const defaultButtonTheme: ButtonTheme = {
   textColor: defaultColors.white,
   bgColor: '#605988',
   textColorDisabled: defaultColors.white,

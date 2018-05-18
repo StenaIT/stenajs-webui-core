@@ -5,7 +5,7 @@ import {UseTheme} from '../../src/components/theme/UseTheme';
 import {StandardButton} from '../../src/components/ui/buttons/StandardButton';
 
 export const addStandardButtonStories = () => {
-  storiesOf('StandardButton', module)
+  storiesOf('Buttons/StandardButton', module)
     .add('default', withInfo()(() => <StandardButton label={'Submit'} />))
     .add(
       'disabled',

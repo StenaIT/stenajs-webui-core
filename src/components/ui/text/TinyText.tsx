@@ -2,17 +2,17 @@ import * as React from 'react';
 import { GetTheme } from '../../theme/GetTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
 
-export type DefaultTextProps = TextBaseSharedProps;
+export type TinyTextProps = TextBaseSharedProps;
 
-export class DefaultText extends React.PureComponent<DefaultTextProps> {
+export class TinyText extends React.PureComponent<TinyTextProps> {
   render() {
     return (
       <GetTheme>
         {theme => (
           <TextBase
             {...this.props}
-            fontSize={theme.components.DefaultText.fontSize}
-            fontFamily={theme.components.DefaultText.fontFamily}
+            fontSize={theme.components.TinyText.fontSize}
+            fontFamily={theme.components.TinyText.fontFamily}
           />
         )}
       </GetTheme>
