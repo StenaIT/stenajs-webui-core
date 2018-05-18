@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { Space } from '../../src/components/ui/layout/Space';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 import { Row } from '../../src/components/ui/layout/Row';
-import { DefaultText } from '../../lib/components/ui/text/DefaultText';
+import { DefaultText } from '../../src/components/ui/text/DefaultText';
 
 export const addSpaceStories = () => {
   storiesOf('Layout/Space', module)

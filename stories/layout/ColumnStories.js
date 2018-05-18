@@ -2,8 +2,8 @@ import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Column } from '../../src/components/ui/layout/Column';
-import { Space } from '../../lib/components/ui/layout/Space';
-import { Border } from '../../lib/components/ui/decorations/Border';
+import { Space } from '../../src/components/ui/layout/Space';
+import { Border } from '../../src/components/ui/decorations/Border';
 
 export const addColumnStories = () => {
   storiesOf('Layout/Column', module)

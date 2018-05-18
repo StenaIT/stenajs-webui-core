@@ -2,7 +2,7 @@ import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Border } from '../../src/components/ui/decorations/Border';
-import { DefaultText } from '../../lib/components/ui/text/DefaultText';
+import { DefaultText } from '../../src/components/ui/text/DefaultText';
 
 export const addBorderStories = () => {
   storiesOf('Decorators/Border', module)
