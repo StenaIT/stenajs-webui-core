@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { GetTheme } from '../../theme/GetTheme';
 import './TextBase.css';
 
 export interface TextBaseProps {
@@ -33,25 +32,21 @@ export class TextBase extends React.PureComponent<
       disableSelect,
     } = this.props;
     return (
-      <GetTheme>
-        {theme => (
-          <span
-            className={hoverUnderline ? 'hover-text-underline' : undefined}
-            style={{
-              fontSize,
-              fontStyle: italic ? 'italic' : undefined,
-              color,
-              fontFamily,
-              whiteSpace: nowrap ? 'nowrap' : undefined,
-              textDecoration: underline ? 'underline' : undefined,
-              fontWeight: bold ? 'bold' : undefined,
-              userSelect: disableSelect ? 'none' : undefined,
-            }}
-          >
-            {this.props.children}
-          </span>
-        )}
-      </GetTheme>
+      <span
+        className={hoverUnderline ? 'hover-text-underline' : undefined}
+        style={{
+          fontSize,
+          fontStyle: italic ? 'italic' : undefined,
+          color,
+          fontFamily,
+          whiteSpace: nowrap ? 'nowrap' : undefined,
+          textDecoration: underline ? 'underline' : undefined,
+          fontWeight: bold ? 'bold' : undefined,
+          userSelect: disableSelect ? 'none' : undefined,
+        }}
+      >
+        {this.props.children}
+      </span>
     );
   }
 }

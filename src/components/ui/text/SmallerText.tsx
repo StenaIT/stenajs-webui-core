@@ -1,21 +1,22 @@
 import * as React from 'react';
-import { GetTheme } from '../../theme/GetTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
+import { compose, pure } from 'recompose';
+import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export type SmallerTextProps = TextBaseSharedProps;
 
-export class SmallerText extends React.PureComponent<SmallerTextProps> {
-  render() {
-    return (
-      <GetTheme>
-        {theme => (
-          <TextBase
-            {...this.props}
-            fontSize={theme.components.SmallerText.fontSize}
-            fontFamily={theme.components.SmallerText.fontFamily}
-          />
-        )}
-      </GetTheme>
-    );
-  }
-}
+const SmallerTextComponent = ({
+  theme,
+  ...textProps
+}: SmallerTextProps & WithThemeProps) => (
+  <TextBase
+    {...textProps}
+    fontSize={theme.components.SmallerText.fontSize}
+    fontFamily={theme.components.SmallerText.fontFamily}
+  />
+);
+
+export const SmallerText = compose<
+  SmallerTextProps & WithThemeProps,
+  SmallerTextProps
+>(pure, withTheme)(SmallerTextComponent);

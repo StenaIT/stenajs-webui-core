@@ -1,21 +1,22 @@
 import * as React from 'react';
-import { GetTheme } from '../../theme/GetTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
+import { compose, pure } from 'recompose';
+import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export type HeaderTextProps = TextBaseSharedProps;
 
-export class HeaderText extends React.PureComponent<HeaderTextProps> {
-  render() {
-    return (
-      <GetTheme>
-        {theme => (
-          <TextBase
-            {...this.props}
-            fontSize={theme.components.HeaderText.fontSize}
-            fontFamily={theme.components.HeaderText.fontFamily}
-          />
-        )}
-      </GetTheme>
-    );
-  }
-}
+const HeaderTextComponent = ({
+  theme,
+  ...textProps
+}: HeaderTextProps & WithThemeProps) => (
+  <TextBase
+    {...textProps}
+    fontSize={theme.components.HeaderText.fontSize}
+    fontFamily={theme.components.HeaderText.fontFamily}
+  />
+);
+
+export const HeaderText = compose<
+  HeaderTextProps & WithThemeProps,
+  HeaderTextProps
+>(pure, withTheme)(HeaderTextComponent);
