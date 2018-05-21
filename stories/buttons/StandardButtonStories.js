@@ -12,6 +12,10 @@ export const addStandardButtonStories = () => {
       withInfo()(() => <StandardButton label={'Submit'} disabled />),
     )
     .add(
+      'with icon and no text',
+      withInfo()(() => <StandardButton leftIcon={'coffee'} />),
+    )
+    .add(
       'with icon left',
       withInfo()(() => <StandardButton label={'Submit'} leftIcon={'coffee'} />),
     )

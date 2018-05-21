@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { CSSProperties, MouseEventHandler } from 'react';
 import './Clickable.css';
+import { compose, withHandlers, withState } from 'recompose';
 
 export interface ClickableProps {
   onClick?: MouseEventHandler<HTMLDivElement>;
@@ -12,21 +13,23 @@ export interface ClickableProps {
   style?: CSSProperties;
 }
 
-export interface ClickableState {
-  mouseIsDown?: boolean;
+export interface MouseIsDown {
+  mouseIsDown: boolean;
 }
 
-export class Clickable extends React.Component<ClickableProps, ClickableState> {
-  state: ClickableState = {};
+export interface SetMouseIsDown {
+  setMouseIsDown: (mouseIsDown: boolean) => void;
+}
 
-  onMouseDown = () => {
-    this.setState(() => ({ mouseIsDown: true }));
-  };
+export interface ClickHandlers {
+  onMouseDown: () => void;
+  onMouseUp: () => void;
+  onMouseOut: () => void;
+}
 
-  onMouseUp = () => {
-    this.setState(() => ({ mouseIsDown: false }));
-  };
+export type ClickableInnerProps = ClickableProps & MouseIsDown & ClickHandlers;
 
+export class ClickableComponent extends React.Component<ClickableInnerProps> {
   render() {
     const {
       onClick,
@@ -36,9 +39,17 @@ export class Clickable extends React.Component<ClickableProps, ClickableState> {
       disablePointer,
       opacityOnHover,
       style,
+      onMouseDown,
+      onMouseUp,
+      mouseIsDown,
+      onMouseOut,
     } = this.props;
-    const { mouseIsDown } = this.state;
-    const hasClickHandler = !!(onDblClick || onClick);
+    const hasClickHandler = ((
+      onClick?: React.MouseEventHandler<HTMLDivElement>,
+      onDblClick?: React.MouseEventHandler<HTMLDivElement>,
+    ): boolean => {
+      return !!(onClick || onDblClick);
+    })(onClick, onDblClick);
     const opacity = !disableOpacityOnClick && mouseIsDown ? 0.5 : undefined;
     return (
       <div
@@ -53,12 +64,37 @@ export class Clickable extends React.Component<ClickableProps, ClickableState> {
         }}
         onClick={onClick}
         onDoubleClick={onDblClick}
-        onMouseDown={hasClickHandler ? this.onMouseDown : undefined}
-        onMouseUp={hasClickHandler ? this.onMouseUp : undefined}
-        onMouseOut={hasClickHandler ? this.onMouseUp : undefined}
+        onMouseDown={getMouseCallback(hasClickHandler, onMouseDown)}
+        onMouseUp={getMouseCallback(hasClickHandler, onMouseUp)}
+        onMouseOut={getMouseCallback(hasClickHandler, onMouseOut)}
       >
         {this.props.children}
       </div>
     );
   }
 }
+
+export const Clickable = compose<ClickableInnerProps, ClickableProps>(
+  withState('mouseIsDown', 'setMouseIsDown', false),
+  withHandlers({
+    onMouseDown: ({ setMouseIsDown }: SetMouseIsDown) => () => {
+      setMouseIsDown(true);
+    },
+    onMouseUp: ({ setMouseIsDown }: SetMouseIsDown) => () => {
+      setMouseIsDown(false);
+    },
+    onMouseOut: ({ setMouseIsDown }: SetMouseIsDown) => () => {
+      setMouseIsDown(false);
+    },
+  }),
+)(ClickableComponent);
+
+const getMouseCallback = (
+  clickable: boolean,
+  callback: () => void,
+): undefined | (() => void) => {
+  if (clickable) {
+    return callback;
+  }
+  return undefined;
+};
