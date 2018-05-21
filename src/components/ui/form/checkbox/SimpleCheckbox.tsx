@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import { Clickable } from '../../interaction/Clickable';
-import { compose } from 'recompose';
+import { compose, pure, withHandlers } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 
 export interface SimpleCheckboxProps {
@@ -13,50 +13,53 @@ export interface SimpleCheckboxProps {
   disabled?: boolean;
 }
 
-class SimpleCheckboxComponent extends React.Component<
-  SimpleCheckboxProps & WithThemeProps
-> {
-  onChange = () => {
-    const { onChange, value } = this.props;
+export interface WithOnChangeHandlerPropsForSimpleCheckboxComponent {
+  onToggle: () => void;
+}
+
+export type InnerPropsForSimpleCheckboxComponent = SimpleCheckboxProps &
+  WithOnChangeHandlerPropsForSimpleCheckboxComponent &
+  WithThemeProps;
+
+export const SimpleCheckboxComponent = ({
+  value,
+  colorOn,
+  colorOff,
+  colorDisabled,
+  disabled,
+  theme,
+  onToggle,
+}: InnerPropsForSimpleCheckboxComponent) => (
+  <Clickable onClick={disabled ? undefined : onToggle}>
+    <FontAwesomeIcon
+      icon={
+        value
+          ? theme.components.SimpleCheckbox.iconOn
+          : theme.components.SimpleCheckbox.iconOff
+      }
+      color={getColor(
+        value,
+        disabled,
+        colorOn || theme.components.SimpleCheckbox.colorOn,
+        colorOff || theme.components.SimpleCheckbox.colorOff,
+        colorDisabled || theme.components.SimpleCheckbox.colorDisabled,
+      )}
+    />
+  </Clickable>
+);
+
+const withOnChangeHandler = withHandlers({
+  onToggle: ({ onChange, value }: SimpleCheckboxProps) => () => {
     if (onChange) {
       onChange(!value);
     }
-  };
-
-  render() {
-    const {
-      value,
-      colorOn,
-      colorOff,
-      colorDisabled,
-      disabled,
-      theme,
-    } = this.props;
-    return (
-      <Clickable onClick={disabled ? undefined : this.onChange}>
-        <FontAwesomeIcon
-          icon={
-            value
-              ? theme.components.SimpleCheckbox.iconOn
-              : theme.components.SimpleCheckbox.iconOff
-          }
-          color={getColor(
-            value,
-            disabled,
-            colorOn || theme.components.SimpleCheckbox.colorOn,
-            colorOff || theme.components.SimpleCheckbox.colorOff,
-            colorDisabled || theme.components.SimpleCheckbox.colorDisabled,
-          )}
-        />
-      </Clickable>
-    );
-  }
-}
+  },
+});
 
 export const SimpleCheckbox = compose<
-  SimpleCheckboxProps & WithThemeProps,
+  InnerPropsForSimpleCheckboxComponent,
   SimpleCheckboxProps
->(withTheme)(SimpleCheckboxComponent);
+>(pure, withOnChangeHandler, withTheme)(SimpleCheckboxComponent);
 
 const getColor = (
   value?: boolean,
