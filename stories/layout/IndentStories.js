@@ -2,6 +2,7 @@ import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Indent } from '../../src/components/ui/layout/Indent';
+import { UseTheme } from '../../src/components/theme/UseTheme';
 
 export const addIndentStories = () => {
   storiesOf('Layout/Indent', module)
@@ -39,6 +40,26 @@ export const addIndentStories = () => {
             </Indent>
           </div>
         </div>
+      )),
+    )
+    .add(
+      'with custom theme',
+      withInfo()(() => (
+        <UseTheme theme={{ metrics: { indent: 30 } }}>
+          <div style={{ display: 'table' }}>
+            <div style={{ border: '1px solid black' }}>
+              <Indent>
+                <div
+                  style={{
+                    backgroundColor: 'red',
+                    width: '50px',
+                    height: '20px',
+                  }}
+                />
+              </Indent>
+            </div>
+          </div>
+        </UseTheme>
       )),
     );
 };

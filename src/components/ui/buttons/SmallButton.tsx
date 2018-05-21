@@ -1,19 +1,19 @@
 import * as React from 'react';
 import { Button, ButtonProps } from './Button';
-import { GetTheme } from '../../theme/GetTheme';
+import { compose } from 'recompose';
+import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
-export class SmallButton extends React.Component<ButtonProps> {
-  render() {
-    return (
-      <GetTheme>
-        {theme => (
-          <Button
-            height={theme.components.SmallButton.height}
-            borderRadius={theme.components.SmallButton.borderRadius}
-            {...this.props}
-          />
-        )}
-      </GetTheme>
-    );
-  }
-}
+const SmallButtonComponent = ({
+  theme,
+  ...buttonProps
+}: ButtonProps & WithThemeProps) => (
+  <Button
+    height={theme.components.SmallButton.height}
+    borderRadius={theme.components.SmallButton.borderRadius}
+    {...buttonProps}
+  />
+);
+
+export const SmallButton = compose<ButtonProps & WithThemeProps, ButtonProps>(
+  withTheme,
+)(SmallButtonComponent);

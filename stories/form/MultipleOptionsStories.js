@@ -2,7 +2,7 @@ import { withState } from '@dump247/storybook-state';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { MultipleOption } from '../../src/components/ui/options/MultipleOption';
+import { MultipleOption } from '../../src/components/ui/form/options/MultipleOption';
 
 export const addMultipleOptionsStories = () => {
   storiesOf('Form/MultipleOptions', module).add(

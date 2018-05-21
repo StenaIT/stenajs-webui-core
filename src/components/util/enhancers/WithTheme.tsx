@@ -8,15 +8,14 @@ export interface WithThemeProps {
 
 export const withTheme = <
   OuterProps,
-  WrappedComponentProps extends WithThemeProps,
-  State = {}
+  WrappedComponentProps extends WithThemeProps
 >(
-  WrappedComponent:
-    | React.ComponentClass<WrappedComponentProps>
-    | React.StatelessComponent<WrappedComponentProps>,
-): React.ComponentClass<OuterProps> | React.StatelessComponent<OuterProps> => {
+  WrappedComponent: React.ComponentType<WrappedComponentProps>,
+): React.ComponentType<OuterProps> => {
   return class extends React.Component<OuterProps> {
     renderChildren = (theme: Theme) => {
+      console.log('withTheme');
+      console.log('theme', theme);
       return <WrappedComponent {...this.props} theme={theme} />;
     };
 

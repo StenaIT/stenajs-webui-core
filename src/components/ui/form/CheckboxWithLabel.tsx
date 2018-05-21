@@ -4,7 +4,8 @@ import { Space } from '../layout/Space';
 import { DefaultText } from '../text/DefaultText';
 import { SimpleCheckbox, SimpleCheckboxProps } from './SimpleCheckbox';
 import { Clickable } from '../interaction/Clickable';
-import { GetTheme } from '../../theme/GetTheme';
+import { compose } from 'recompose';
+import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export interface CheckboxWithLabelProps extends SimpleCheckboxProps {
   label?: string;
@@ -12,7 +13,9 @@ export interface CheckboxWithLabelProps extends SimpleCheckboxProps {
   disabled?: boolean;
 }
 
-export class CheckboxWithLabel extends React.Component<CheckboxWithLabelProps> {
+class CheckboxWithLabelComponent extends React.Component<
+  CheckboxWithLabelProps & WithThemeProps
+> {
   onChange = () => {
     const { onChange, value } = this.props;
     if (onChange) {
@@ -26,32 +29,34 @@ export class CheckboxWithLabel extends React.Component<CheckboxWithLabelProps> {
       label,
       textColor,
       disabled,
+      theme,
       onChange, // Do not pass to SimpleCheckbox
       ...propsToCheckbox
     } = this.props;
     return (
-      <GetTheme>
-        {theme => (
-          <Clickable onClick={disabled ? undefined : this.onChange}>
-            <Row alignItems={'center'}>
-              <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />
-              <Space />
-              {label && (
-                <DefaultText
-                  color={
-                    disabled
-                      ? theme.components.SimpleCheckbox.colorDisabled
-                      : textColor
-                  }
-                >
-                  {label}
-                </DefaultText>
-              )}
-              {children}
-            </Row>
-          </Clickable>
-        )}
-      </GetTheme>
+      <Clickable onClick={disabled ? undefined : this.onChange}>
+        <Row alignItems={'center'}>
+          <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />
+          <Space />
+          {label && (
+            <DefaultText
+              color={
+                disabled
+                  ? theme.components.SimpleCheckbox.colorDisabled
+                  : textColor
+              }
+            >
+              {label}
+            </DefaultText>
+          )}
+          {children}
+        </Row>
+      </Clickable>
     );
   }
 }
+
+export const CheckboxWithLabel = compose<
+  CheckboxWithLabelProps & WithThemeProps,
+  CheckboxWithLabelProps
+>(withTheme)(CheckboxWithLabelComponent);

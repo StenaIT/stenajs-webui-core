@@ -5,7 +5,8 @@ import {
   CSSProperties,
   KeyboardEventHandler,
 } from 'react';
-import { GetTheme } from '../../theme/GetTheme';
+import { compose } from 'recompose';
+import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 // tslint:disable:no-any
 
@@ -39,8 +40,8 @@ export interface SimpleTextInputState {
   wasCancelled: boolean;
 }
 
-export class SimpleTextInput extends React.Component<
-  SimpleTextInputProps,
+class SimpleTextInputComponent extends React.Component<
+  SimpleTextInputProps & WithThemeProps,
   SimpleTextInputState
 > {
   textInput: any;
@@ -161,37 +162,38 @@ export class SimpleTextInput extends React.Component<
       disabled = false,
       style,
       className,
+      theme,
     } = this.props;
 
     return (
-      <GetTheme>
-        {theme => (
-          <input
-            style={{
-              width,
-              height: height || theme.components.SimpleTextInput.height,
-              fontSize: fontSize || theme.components.SimpleTextInput.fontSize,
-              backgroundColor:
-                backgroundColor ||
-                theme.components.SimpleTextInput.backgroundColor,
-              fontFamily: theme.components.SimpleTextInput.fontFamily,
-              color: textColor || theme.components.SimpleTextInput.textColor,
-              ...style,
-            }}
-            className={className}
-            type="text"
-            ref={input => (this.textInput = input)}
-            onKeyDown={this.onKeyDown}
-            onChange={this.onChange}
-            onBlur={this.onBlur}
-            value={value}
-            maxLength={maxLength}
-            placeholder={placeholder}
-            size={size}
-            disabled={disabled}
-          />
-        )}
-      </GetTheme>
+      <input
+        style={{
+          width,
+          height: height || theme.components.SimpleTextInput.height,
+          fontSize: fontSize || theme.components.SimpleTextInput.fontSize,
+          backgroundColor:
+            backgroundColor || theme.components.SimpleTextInput.backgroundColor,
+          fontFamily: theme.components.SimpleTextInput.fontFamily,
+          color: textColor || theme.components.SimpleTextInput.textColor,
+          ...style,
+        }}
+        className={className}
+        type="text"
+        ref={input => (this.textInput = input)}
+        onKeyDown={this.onKeyDown}
+        onChange={this.onChange}
+        onBlur={this.onBlur}
+        value={value}
+        maxLength={maxLength}
+        placeholder={placeholder}
+        size={size}
+        disabled={disabled}
+      />
     );
   }
 }
+
+export const SimpleTextInput = compose<
+  SimpleTextInputProps & WithThemeProps,
+  SimpleTextInputProps
+>(withTheme)(SimpleTextInputComponent);
