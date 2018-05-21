@@ -3,7 +3,7 @@ import { Button, ButtonProps } from './Button';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
-const FlatButtonComponent = ({
+export const FlatButtonComponent = ({
   textColor,
   disabled,
   theme,
