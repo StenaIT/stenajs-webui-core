@@ -6,7 +6,7 @@ import {
   KeyboardEventHandler,
 } from 'react';
 import { compose } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 
 // tslint:disable:no-any
 

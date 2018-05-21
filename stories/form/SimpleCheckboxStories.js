@@ -2,7 +2,7 @@ import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { SimpleCheckbox } from '../../src';
-import { CheckboxWithLabel } from '../../src/components/ui/form/CheckboxWithLabel';
+import { CheckboxWithLabel } from '../../src/components/ui/form/checkbox/CheckboxWithLabel';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 
 export const addSimpleCheckboxStories = () => {

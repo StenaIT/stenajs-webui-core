@@ -6,8 +6,8 @@ import {
   defaultFontSizes,
   defaultMetrics,
 } from './DefaultThemeValues';
-import { defaultSimpleCheckboxTheme } from '../components/ui/form/SimpleCheckboxTheme';
-import { defaultSimpleTextInputTheme } from '../components/ui/form/SimpleTextInputTheme';
+import { defaultSimpleCheckboxTheme } from '../components/ui/form/checkbox/SimpleCheckboxTheme';
+import { defaultSimpleTextInputTheme } from '../components/ui/form/textinput/SimpleTextInputTheme';
 import { defaultStandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
 import { defaultSmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
 import { defaultFlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';

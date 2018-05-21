@@ -2,7 +2,7 @@ import {
   defaultColors,
   defaultFonts,
   defaultFontSizes,
-} from '../../../themes/DefaultThemeValues';
+} from '../../../../themes/DefaultThemeValues';
 
 export interface SimpleTextInputTheme {
   fontSize: string;

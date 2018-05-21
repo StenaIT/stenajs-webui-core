@@ -20,7 +20,9 @@ export interface BorderProps {
   overflow?: 'auto' | 'hidden' | 'scroll' | 'visible';
 }
 
-class BorderComponent extends React.Component<BorderProps & WithThemeProps> {
+export class BorderComponent extends React.Component<
+  BorderProps & WithThemeProps
+> {
   render() {
     const {
       children,

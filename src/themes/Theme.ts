@@ -1,6 +1,6 @@
 import { ButtonTheme } from '../components/ui/buttons/ButtonTheme';
-import { SimpleCheckboxTheme } from '../components/ui/form/SimpleCheckboxTheme';
-import { SimpleTextInputTheme } from '../components/ui/form/SimpleTextInputTheme';
+import { SimpleCheckboxTheme } from '../components/ui/form/checkbox/SimpleCheckboxTheme';
+import { SimpleTextInputTheme } from '../components/ui/form/textinput/SimpleTextInputTheme';
 import { StandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
 import { SmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
 import { FlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';

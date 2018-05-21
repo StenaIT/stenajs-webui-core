@@ -1,8 +1,8 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import { Clickable } from '../interaction/Clickable';
+import { Clickable } from '../../interaction/Clickable';
 import { compose } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 
 export interface SimpleCheckboxProps {
   value?: boolean;

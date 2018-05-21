@@ -1,11 +1,11 @@
 import * as React from 'react';
-import { Row } from '../layout/Row';
-import { Space } from '../layout/Space';
-import { DefaultText } from '../text/DefaultText';
+import { Row } from '../../layout/Row';
+import { Space } from '../../layout/Space';
+import { DefaultText } from '../../text/DefaultText';
 import { SimpleCheckbox, SimpleCheckboxProps } from './SimpleCheckbox';
-import { Clickable } from '../interaction/Clickable';
+import { Clickable } from '../../interaction/Clickable';
 import { compose } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 
 export interface CheckboxWithLabelProps extends SimpleCheckboxProps {
   label?: string;

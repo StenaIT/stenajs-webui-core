@@ -49,6 +49,7 @@
     "@types/jest": "^22.2.3",
     "@types/lodash": "^4.14.108",
     "@types/recompose": "^0.26.1",
+    "enzyme-to-json": "^3.3.4",
     "glamorous": "^4.13.0",
     "jest": "^22.4.3",
     "lodash": "^4.17.10",
@@ -59,5 +60,10 @@
     "react-spinkit": "^3.0.0",
     "recompose": "^0.27.0",
     "ts-jest": "^22.4.4"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }

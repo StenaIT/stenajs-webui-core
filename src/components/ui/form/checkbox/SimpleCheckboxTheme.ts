@@ -1,5 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome';
-import { defaultColors } from '../../../themes/DefaultThemeValues';
+import { defaultColors } from '../../../../themes/DefaultThemeValues';
 
 export interface SimpleCheckboxTheme {
   colorOn: string | undefined;

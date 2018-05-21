@@ -1,0 +1,28 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`FlexBase must not change 1`] = `
+<div
+  style={
+    Object {
+      "alignItems": "flex-end",
+      "alignSelf": "flex-start",
+      "backgroundColor": "#fff",
+      "border": "1px solid black",
+      "color": "#000",
+      "display": "none",
+      "flexDirection": "row",
+      "flexGrow": 1,
+      "height": "60px",
+      "justifyContent": "center",
+      "minHeight": "50px",
+      "minWidth": "45px",
+      "paddingBottom": "10px",
+      "paddingLeft": "15px",
+      "paddingRight": "15px",
+      "paddingTop": "10px",
+      "width": "30px",
+    }
+  }
+  tabIndex={0}
+/>
+`;

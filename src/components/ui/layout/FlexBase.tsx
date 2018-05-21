@@ -53,7 +53,6 @@ export class FlexBase extends React.Component<
       style,
       tabIndex,
       flexDirection,
-      ...restProps
     } = this.props;
 
     return (
@@ -78,7 +77,6 @@ export class FlexBase extends React.Component<
           paddingRight: paddingHorizontal,
           ...style,
         }}
-        {...restProps}
       >
         {children}
       </div>

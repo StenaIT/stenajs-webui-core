@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { SimpleTextInput, SimpleTextInputProps } from './SimpleTextInput';
-import { Debounce } from '../../util/events/Debounce';
+import { Debounce } from '../../../util/events/Debounce';
 
 export interface DebouncedTextInputProps extends SimpleTextInputProps {
   debouncedOnChange?: (value: string) => void;

@@ -13,14 +13,12 @@ export const withTheme = <
   WrappedComponent: React.ComponentType<WrappedComponentProps>,
 ): React.ComponentType<OuterProps> => {
   return class extends React.Component<OuterProps> {
-    renderChildren = (theme: Theme) => {
-      console.log('withTheme');
-      console.log('theme', theme);
+    renderWrappedComponent = (theme: Theme) => {
       return <WrappedComponent {...this.props} theme={theme} />;
     };
 
     render() {
-      return <GetTheme>{this.renderChildren}</GetTheme>;
+      return <GetTheme>{this.renderWrappedComponent}</GetTheme>;
     }
   };
 };
