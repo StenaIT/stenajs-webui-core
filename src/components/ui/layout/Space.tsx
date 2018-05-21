@@ -8,7 +8,7 @@ export interface SpaceProps {
   children?: {};
 }
 
-const SpaceComponent = ({
+export const SpaceComponent = ({
   children,
   num = 1,
   half = false,

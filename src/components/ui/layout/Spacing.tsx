@@ -5,10 +5,10 @@ import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 export interface SpacingProps {
   num?: number;
   half?: boolean;
-  children: {};
+  children?: {};
 }
 
-const SpacingComponent = ({
+export const SpacingComponent = ({
   num = 1,
   half = false,
   children,

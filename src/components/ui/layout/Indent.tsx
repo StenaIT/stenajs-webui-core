@@ -8,7 +8,7 @@ export interface IndentProps {
   children?: {};
 }
 
-const IndentComponent = ({
+export const IndentComponent = ({
   num = 1,
   children,
   half,
