@@ -5,12 +5,13 @@ import { Row } from '../../src/components/ui/layout/Row';
 import { Space } from '../../src/components/ui/layout/Space';
 import { Background } from '../../src/components/ui/colors/Background';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
+import {Column} from "../../src/components/ui/layout/Column";
 
 export const addRowStories = () => {
   storiesOf('Layout/Row', module)
     .add(
       'standard',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Space] })(() => (
         <div style={{ display: 'table' }}>
           <Row>
             <div
@@ -42,7 +43,7 @@ export const addRowStories = () => {
     )
     .add(
       'with justifyContent',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Background, DefaultText, Space] })(() => (
         <div style={{ display: 'table' }}>
           <Background color={'#eeeeee'}>
             <Row justifyContent={'center'} width={'200px'}>
@@ -73,7 +74,7 @@ export const addRowStories = () => {
     )
     .add(
       'with alignItems',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Background, DefaultText, Space] })(() => (
         <div style={{ display: 'table' }}>
           <Background color={'#eeeeee'}>
             <Row

@@ -4,12 +4,13 @@ import { storiesOf } from '@storybook/react';
 import { Column } from '../../src/components/ui/layout/Column';
 import { Space } from '../../src/components/ui/layout/Space';
 import { Border } from '../../src/components/ui/decorations/Border';
+import {UseTheme} from "../../src/components/theme/UseTheme";
 
 export const addColumnStories = () => {
   storiesOf('Layout/Column', module)
     .add(
       'standard',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Space] })(() => (
         <div style={{ display: 'table' }}>
           <Column>
             <div
@@ -41,7 +42,7 @@ export const addColumnStories = () => {
     )
     .add(
       'with justifyContent=flex-start',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Space, Column] })(() => (
         <div style={{ display: 'table' }}>
           <Border>
             <Column
@@ -79,7 +80,7 @@ export const addColumnStories = () => {
     )
     .add(
       'with justifyContent=center',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Space, Column] })(() => (
         <div style={{ display: 'table' }}>
           <Border>
             <Column justifyContent={'center'} width={'150px'} height={'150px'}>
@@ -113,7 +114,7 @@ export const addColumnStories = () => {
     )
     .add(
       'with justifyContent=flex-end',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Space, Column] })(() => (
         <div style={{ display: 'table' }}>
           <Border>
             <Column
@@ -151,7 +152,7 @@ export const addColumnStories = () => {
     )
     .add(
       'with alignItems=flex-start',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Space, Column] })(() => (
         <div style={{ display: 'table' }}>
           <Border>
             <Column alignItems={'flex-start'} width={'150px'} height={'150px'}>
@@ -185,7 +186,7 @@ export const addColumnStories = () => {
     )
     .add(
       'with alignItems=center',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Space, Column] })(() => (
         <div style={{ display: 'table' }}>
           <Border>
             <Column alignItems={'center'} width={'150px'} height={'150px'}>
@@ -219,7 +220,7 @@ export const addColumnStories = () => {
     )
     .add(
       'with alignItems=flex-end',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Space, Column] })(() => (
         <div style={{ display: 'table' }}>
           <Border>
             <Column alignItems={'flex-end'} width={'150px'} height={'150px'}>

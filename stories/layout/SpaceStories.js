@@ -5,12 +5,13 @@ import { Space } from '../../src/components/ui/layout/Space';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 import { Row } from '../../src/components/ui/layout/Row';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
+import {Background} from "../../src/components/ui/colors/Background";
 
 export const addSpaceStories = () => {
   storiesOf('Layout/Space', module)
     .add(
       'standard',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Row] })(() => (
         <div style={{ display: 'table' }}>
           <Row>
             <div
@@ -26,7 +27,7 @@ export const addSpaceStories = () => {
     )
     .add(
       'with default theme and num=2',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Row] })(() => (
         <div style={{ display: 'table' }}>
           <Row>
             <div
@@ -42,7 +43,7 @@ export const addSpaceStories = () => {
     )
     .add(
       'with custom theme',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Row, UseTheme] })(() => (
         <div style={{ display: 'table' }}>
           <Row>
             <div
@@ -60,7 +61,7 @@ export const addSpaceStories = () => {
     )
     .add(
       'with custom theme and num=3',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Row, UseTheme] })(() => (
         <div style={{ display: 'table' }}>
           <Row>
             <div
@@ -78,7 +79,7 @@ export const addSpaceStories = () => {
     )
     .add(
       'as text separator',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Row, DefaultText] })(() => (
         <div style={{ display: 'table' }}>
           <Row>
             <DefaultText>Username:</DefaultText>

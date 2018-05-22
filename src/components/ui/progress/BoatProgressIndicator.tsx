@@ -20,7 +20,7 @@ const Locator = glamorous.div({
   marginLeft: '6px',
 });
 
-export const BoatProgressIndicator = () => (
+export const BoatProgressIndicator: React.ComponentType = () => (
   <Wrapper>
     <Locator>
       <span className={'ferry'}>
@@ -30,3 +30,5 @@ export const BoatProgressIndicator = () => (
     </Locator>
   </Wrapper>
 );
+
+BoatProgressIndicator.displayName = 'BoatProgressIndicator';

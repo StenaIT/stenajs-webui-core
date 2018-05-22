@@ -33,7 +33,7 @@ export const addSmallButtonStories = () => {
     )
     .add(
       'with custom theme with height=16',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [UseTheme] })(() => (
         <UseTheme
           theme={{
             components: {

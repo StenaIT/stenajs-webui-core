@@ -3,6 +3,9 @@ import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Spacing } from '../../src/components/ui/layout/Spacing';
 import { UseTheme } from '../../src/components/theme/UseTheme';
+import {DefaultText} from "../../src/components/ui/text/DefaultText";
+import {Background} from "../../src/components/ui/colors/Background";
+import {Space} from "../../src/components/ui/layout/Space";
 
 export const addSpacingStories = () => {
   storiesOf('Layout/Spacing', module)
@@ -44,7 +47,7 @@ export const addSpacingStories = () => {
     )
     .add(
       'with num=2 and custom theme',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [UseTheme] })(() => (
         <UseTheme theme={{ metrics: { spacing: 20 } }}>
           <div style={{ display: 'table' }}>
             <div style={{ border: '1px solid black' }}>

@@ -8,7 +8,7 @@ import { Indent } from '../../src/components/ui/layout/Indent';
 export const addBoatProgressIndicatorStories = () => {
   storiesOf('Progress/BoatProgressIndicator', module).add(
     'standard',
-    withInfo()(() => (
+    withInfo({ propTablesExclude: [Spacing, Indent] })(() => (
       <div style={{ backgroundColor: '#cccccc', display: 'table' }}>
         <Spacing>
           <Indent>

@@ -26,7 +26,7 @@ export const addFlatButtonStories = () => {
     )
     .add(
       'with custom theme with textColor=red',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [UseTheme] })(() => (
         <UseTheme
           theme={{
             components: {

@@ -3,6 +3,7 @@ import {withInfo} from '@storybook/addon-info';
 import {storiesOf} from '@storybook/react';
 import {UseTheme} from '../../src/components/theme/UseTheme';
 import {StandardButton} from '../../src/components/ui/buttons/StandardButton';
+import {Border} from "../../src/components/ui/decorations/Border";
 
 export const addStandardButtonStories = () => {
   storiesOf('Buttons/StandardButton', module)
@@ -37,7 +38,7 @@ export const addStandardButtonStories = () => {
     )
     .add(
       'with custom theme background red',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [UseTheme] })(() => (
         <UseTheme
           theme={{
             components: {
