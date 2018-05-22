@@ -3,7 +3,9 @@ import * as React from 'react';
 const Spinner = require('react-spinkit');
 
 export interface ProgressIndicatorProps {
+  /** Use small indicator. */
   small?: boolean;
+  /** The color of the indicator. */
   color?: string;
 }
 

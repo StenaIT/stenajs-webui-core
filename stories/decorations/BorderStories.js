@@ -3,12 +3,14 @@ import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Border } from '../../src/components/ui/decorations/Border';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
+import {Spacing} from "../../src/components/ui/layout/Spacing";
+import {Indent} from "../../src/components/ui/layout/Indent";
 
 export const addBorderStories = () => {
   storiesOf('Decorators/Border', module)
     .add(
       'default',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [DefaultText] })(() => (
         <div style={{ display: 'table' }}>
           <Border>
             <DefaultText>This text has a border</DefaultText>
@@ -18,7 +20,7 @@ export const addBorderStories = () => {
     )
     .add(
       'with color',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [DefaultText] })(() => (
         <div style={{ display: 'table' }}>
           <Border color={'#f284ff'}>
             <DefaultText>This text has a border</DefaultText>
@@ -28,7 +30,7 @@ export const addBorderStories = () => {
     )
     .add(
       'partial border',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [DefaultText] })(() => (
         <div style={{ display: 'table' }}>
           <Border left bottom right>
             <DefaultText>This text has no border in the top</DefaultText>
@@ -38,7 +40,7 @@ export const addBorderStories = () => {
     )
     .add(
       'with borderRadius',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [DefaultText] })(() => (
         <div style={{ display: 'table' }}>
           <Border borderRadius={'5px'}>
             <DefaultText>This text has a border</DefaultText>
@@ -48,7 +50,7 @@ export const addBorderStories = () => {
     )
     .add(
       'with partial borderRadius',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [DefaultText] })(() => (
         <div style={{ display: 'table' }}>
           <Border borderTopLeftRadius={'5px'} borderTopRightRadius={'5px'}>
             <DefaultText>This text has a borderRadius in top</DefaultText>

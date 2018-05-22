@@ -4,12 +4,19 @@ import './Clickable.css';
 import { compose, withHandlers, withState } from 'recompose';
 
 export interface ClickableProps {
+  /** Callback function called when clicking on click area. */
   onClick?: MouseEventHandler<HTMLDivElement>;
+  /** Callback function called when double clicking on click area. */
   onDblClick?: MouseEventHandler<HTMLDivElement>;
+  /** Adds a title to the click area. */
   tooltip?: string;
+  /** If set, there is no opacity applies when clicking on the click area. */
   disableOpacityOnClick?: boolean;
+  /** Mouse does not turn into pointer when hovering over click area. */
   disablePointer?: boolean;
+  /** When set, click area receives opacity when mouse hovers over it. */
   opacityOnHover?: boolean;
+  /** Custom style on div with click event. */
   style?: CSSProperties;
 }
 

@@ -9,7 +9,7 @@ export const addArrowBoxStories = () => {
   storiesOf('Box/ArrowBox', module)
     .add(
       'standard',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Spacing, Indent] })(() => (
         <div style={{ display: 'table' }}>
           <ArrowBox>
             <Spacing>
@@ -21,7 +21,7 @@ export const addArrowBoxStories = () => {
     )
     .add(
       'arrow left',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Spacing, Indent] })(() => (
         <div style={{ display: 'table' }}>
           <ArrowBox direction={'left'}>
             <Spacing>
@@ -33,7 +33,7 @@ export const addArrowBoxStories = () => {
     )
     .add(
       'arrow right',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Spacing, Indent] })(() => (
         <div style={{ display: 'table' }}>
           <ArrowBox direction={'right'}>
             <Spacing>
@@ -45,7 +45,7 @@ export const addArrowBoxStories = () => {
     )
     .add(
       'arrow down',
-      withInfo()(() => (
+      withInfo({ propTablesExclude: [Spacing, Indent] })(() => (
         <div style={{ display: 'table' }}>
           <ArrowBox direction={'down'}>
             <Spacing>

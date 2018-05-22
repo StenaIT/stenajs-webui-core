@@ -1,6 +1,6 @@
 import * as React from 'react';
-import { defaultTheme } from '../../themes/DefaultTheme';
-import { Theme } from '../../themes/Theme';
+import { defaultTheme } from '../../themes';
+import { Theme } from '../../themes';
 
 export type ThemeContextValue = Theme;
 

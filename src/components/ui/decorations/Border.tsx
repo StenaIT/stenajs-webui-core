@@ -4,19 +4,33 @@ import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export interface BorderProps {
+  /** The width of the border. */
   width?: number;
+  /** The color of the border. */
   color?: string;
+  /** Sets flex on style. */
   flex?: number;
+  /** The border radius of the border. */
   borderRadius?: string;
+  /** The top left border radius of the border. */
   borderTopLeftRadius?: string;
+  /** The top right border radius of the border. */
   borderTopRightRadius?: string;
+  /** The bottom left border radius of the border. */
   borderBottomLeftRadius?: string;
+  /** The bottom right border radius of the border. */
   borderBottomRightRadius?: string;
+  /** Custom style of the div that has the border. */
   style?: CSSProperties;
+  /** Add border to the top. */
   top?: boolean;
+  /** Add border to the bottom. */
   bottom?: boolean;
+  /** Add border to the left. */
   left?: boolean;
+  /** Add border to the right. */
   right?: boolean;
+  /** Sets overflow of the border div. */
   overflow?: 'auto' | 'hidden' | 'scroll' | 'visible';
 }
 

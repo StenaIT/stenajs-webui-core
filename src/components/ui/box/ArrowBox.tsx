@@ -4,6 +4,7 @@ import './ArrowBox.css';
 export type ArrowDirection = 'up' | 'down' | 'left' | 'right';
 
 export interface ArrowBoxProps {
+  /** The direction of the arrow. */
   direction?: ArrowDirection;
 }
 

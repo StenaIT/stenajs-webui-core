@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Theme } from '../../themes/Theme';
+import { Theme } from '../../themes';
 import { ThemeContext } from './ThemeContext';
-import { defaultTheme } from '../../themes/DefaultTheme';
+import { defaultTheme } from '../../themes';
 import { merge } from 'lodash';
 
 export interface UseThemeProps {

@@ -12,21 +12,37 @@ import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export interface ButtonProps {
+  /** The color of the button. */
   color?: string;
+  /** The color of the button when disabled. */
   disabledColor?: string;
+  /** The color of the text on the button. */
   textColor?: string;
+  /** The text on the button. */
   label?: string;
+  /** React element to place to the left of the text. */
   left?: React.ReactElement<{}>;
+  /** React element to place to the right of the text. */
   right?: React.ReactElement<{}>;
+  /** FontAwesome icon to place to the left of the text. */
   leftIcon?: IconProp;
+  /** FontAwesome icon to place to the right of the text. */
   rightIcon?: IconProp;
+  /** The width of the button */
   width?: string;
+  /** The height of the button */
   height?: string;
+  /** onClick callback, called when button is clicked. */
   onClick?: () => void;
+  /** Disables the button. Changes to disabled color and clicks are disabled. */
   disabled?: boolean;
+  /** The size of the icons */
   iconSize?: number;
+  /** Border radius of the button. */
   borderRadius?: string;
+  /** Render loading spinner instead of button. */
   loading?: boolean;
+  /** Render success check icon instead of button. */
   success?: boolean;
 }
 
