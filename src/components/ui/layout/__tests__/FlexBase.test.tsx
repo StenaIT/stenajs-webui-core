@@ -33,13 +33,13 @@ describe('FlexBase', () => {
 
   describe('hidden', () => {
     describe('when hidden is provided', () => {
-      it("sets display to 'none'", () => {
+      it('sets display to none', () => {
         const wrapper = shallow(<FlexBase hidden {...props} />);
         expect(wrapper.find('div').prop('style')!.display).toBe('none');
       });
     });
     describe('when hidden is not provided', () => {
-      it("sets display to 'flex'", () => {
+      it('sets display to flex', () => {
         const wrapper = shallow(<FlexBase {...props} />);
         expect(wrapper.find('div').prop('style')!.display).toBe('flex');
       });

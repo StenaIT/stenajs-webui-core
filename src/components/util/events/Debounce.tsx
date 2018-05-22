@@ -1,7 +1,9 @@
 import { debounce } from 'lodash';
 import * as React from 'react';
 
-export type DebouncedFunc = (_: any) => void;
+// tslint:disable:no-any
+export type DebouncedFunc = (...args: any[]) => any;
+// tslint:enable:no-any
 
 export interface DebounceProps {
   func: DebouncedFunc;

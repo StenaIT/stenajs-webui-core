@@ -3,10 +3,11 @@
   "version": "0.0.2",
   "description": "A library of React components made by Stena IT.",
   "sideEffects": false,
+  "repository": "https://github.com/StenaIT/stenajs-webui-common",
   "main": "lib/index.js",
   "scripts": {
     "start": "start-storybook -p 6006",
-    "prepublishOnly": "export CI=true && npm test && tsc",
+    "prepublishOnly": "npm run lint && CI=true npm test && tsc",
     "clean": "npm run clean-build && npm run clean-storybook",
     "clean-build": "rimraf build",
     "clean-storybook": "rimraf storybok-static",
@@ -23,7 +24,7 @@
     "prettier": "yarn run prettier:src",
     "prettier:src": "prettier --parser typescript --trailing-comma all --single-quote --write 'src/**/*.ts' 'src/**/*.tsx'"
   },
-  "author": "",
+  "author": "Stena IT <mattias.andersson@stenaline.com>",
   "license": "MIT",
   "devDependencies": {
     "@dump247/storybook-state": "^1.5.0",

@@ -51,12 +51,7 @@ export class ClickableComponent extends React.Component<ClickableInnerProps> {
       mouseIsDown,
       onMouseOut,
     } = this.props;
-    const hasClickHandler = ((
-      onClick?: React.MouseEventHandler<HTMLDivElement>,
-      onDblClick?: React.MouseEventHandler<HTMLDivElement>,
-    ): boolean => {
-      return !!(onClick || onDblClick);
-    })(onClick, onDblClick);
+    const hasClickHandler = !!(onClick || onDblClick);
     const opacity = !disableOpacityOnClick && mouseIsDown ? 0.5 : undefined;
     return (
       <div
