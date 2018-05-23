@@ -1,5 +1,5 @@
 import * as React from 'react';
-import './ArrowBox.css';
+import { arrowWrapperStyle } from './ArrowBoxStyle';
 
 export type ArrowDirection = 'up' | 'down' | 'left' | 'right';
 
@@ -12,7 +12,9 @@ export class ArrowBox extends React.Component<ArrowBoxProps> {
   render() {
     const { direction = 'up' } = this.props;
     return (
-      <div className={`arrow_box ${direction}`}>{this.props.children}</div>
+      <div className={arrowWrapperStyle}>
+        <div className={`arrow_box ${direction}`}>{this.props.children}</div>
+      </div>
     );
   }
 }

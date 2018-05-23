@@ -1,3 +1,7 @@
+import { css } from 'emotion';
+
+// tslint:disable:max-line-length
+export const boatProgressIndicatorStyle = css(`
 .ferry {
     position: absolute;
     top: 50%;
@@ -93,3 +97,4 @@
         background-position: 400px 0;
     }
 }
+`);

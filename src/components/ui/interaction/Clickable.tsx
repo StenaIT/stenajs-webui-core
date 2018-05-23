@@ -1,6 +1,6 @@
+import { css } from 'emotion';
 import * as React from 'react';
 import { CSSProperties, MouseEventHandler } from 'react';
-import './Clickable.css';
 import { compose, withHandlers, withState } from 'recompose';
 
 export interface ClickableProps {
@@ -34,6 +34,12 @@ export interface ClickHandlers {
   onMouseOut: () => void;
 }
 
+const hoverStyle = css(`
+:hover {
+    opacity: 0.7;
+}
+`);
+
 export type ClickableInnerProps = ClickableProps & MouseIsDown & ClickHandlers;
 
 export class ClickableComponent extends React.Component<ClickableInnerProps> {
@@ -55,7 +61,7 @@ export class ClickableComponent extends React.Component<ClickableInnerProps> {
     const opacity = !disableOpacityOnClick && mouseIsDown ? 0.5 : undefined;
     return (
       <div
-        className={opacityOnHover ? 'clickable' : undefined}
+        className={opacityOnHover ? hoverStyle : undefined}
         title={tooltip}
         style={{
           cursor: hasClickHandler && !disablePointer ? 'pointer' : undefined,

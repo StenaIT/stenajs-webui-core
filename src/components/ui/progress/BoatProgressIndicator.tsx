@@ -1,8 +1,8 @@
 import * as React from 'react';
-import './BoatProgressIndicator.css';
-import glamorous from 'glamorous';
+import styled from 'react-emotion';
+import { boatProgressIndicatorStyle } from './BoatProgressIndicatorStyle';
 
-const Wrapper = glamorous.div({
+const Wrapper = styled('div')({
   width: '80px',
   height: '80px',
   backgroundColor: '#ffffff',
@@ -14,21 +14,23 @@ const Wrapper = glamorous.div({
   alignItems: 'center',
 });
 
-const Locator = glamorous.div({
+const Locator = styled('div')({
   position: 'relative',
   marginTop: '20px',
   marginLeft: '6px',
 });
 
 export const BoatProgressIndicator: React.ComponentType = () => (
-  <Wrapper>
-    <Locator>
-      <span className={'ferry'}>
-        <span className={'chimney'} />
-        <span className={'waves'} />
-      </span>
-    </Locator>
-  </Wrapper>
+  <div className={boatProgressIndicatorStyle}>
+    <Wrapper>
+      <Locator>
+        <span className={'ferry'}>
+          <span className={'chimney'} />
+          <span className={'waves'} />
+        </span>
+      </Locator>
+    </Wrapper>
+  </div>
 );
 
 BoatProgressIndicator.displayName = 'BoatProgressIndicator';

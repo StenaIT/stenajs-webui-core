@@ -1,5 +1,5 @@
+import { css } from 'emotion';
 import * as React from 'react';
-import './TextBase.css';
 
 export interface TextBaseProps {
   /** The font size of the text. */
@@ -25,6 +25,12 @@ export interface TextBaseSharedProps {
   disableSelect?: boolean;
 }
 
+const hoverStyle = css(`
+:hover {
+    text-decoration: underline;
+}
+`);
+
 export class TextBase extends React.PureComponent<
   TextBaseProps & TextBaseSharedProps
 > {
@@ -42,7 +48,7 @@ export class TextBase extends React.PureComponent<
     } = this.props;
     return (
       <span
-        className={hoverUnderline ? 'hover-text-underline' : undefined}
+        className={hoverUnderline ? hoverStyle : undefined}
         style={{
           fontSize,
           fontStyle: italic ? 'italic' : undefined,

@@ -16,6 +16,7 @@ import { addRowStories } from './layout/RowStories';
 import { addColumnStories } from './layout/ColumnStories';
 import { addBorderStories } from './decorations/BorderStories';
 import { addShadowStories } from './decorations/ShadowStories';
+import { addClickableStories } from './interaction/ClickableStories';
 
 addMultipleOptionsStories();
 addSpaceStories();
@@ -33,3 +34,4 @@ addRowStories();
 addColumnStories();
 addBorderStories();
 addShadowStories();
+addClickableStories();

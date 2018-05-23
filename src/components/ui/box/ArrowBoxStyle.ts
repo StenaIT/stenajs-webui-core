@@ -1,3 +1,6 @@
+import { css } from 'react-emotion';
+
+export const arrowWrapperStyle = css(`
 .arrow_box {
     position: relative;
     background: #f9f7f4;
@@ -83,3 +86,4 @@
     border-color: rgba(164, 164, 245, 0);
     border-width: 11px;
 }
+`);
