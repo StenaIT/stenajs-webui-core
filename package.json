@@ -8,7 +8,7 @@
   "types": "lib/index",
   "scripts": {
     "start": "start-storybook -p 6006",
-    "prepublishOnly": "npm run lint && CI=true npm test && tsc",
+    "prepublishOnly": "npm run build-index && npm run lint && CI=true npm test && tsc",
     "clean": "npm run clean-build && npm run clean-storybook",
     "clean-build": "rimraf build",
     "clean-storybook": "rimraf storybok-static",
