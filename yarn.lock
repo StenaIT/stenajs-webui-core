@@ -3912,7 +3912,7 @@ glamor@^2.20.40:
     prop-types "^15.5.10"
     through "^2.3.8"
 
-glamorous@^4.12.1, glamorous@^4.13.0:
+glamorous@^4.12.1:
   version "4.13.0"
   resolved "https://registry.yarnpkg.com/glamorous/-/glamorous-4.13.0.tgz#4ac5cb05633aa49a0396d409f665dd9b614f1b5a"
   dependencies:

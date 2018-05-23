@@ -1,4 +1,4 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled, { StyledComponent } from 'react-emotion';
 
 export interface FixedProps {
   top?: string | number;
@@ -7,9 +7,10 @@ export interface FixedProps {
   right?: string | number;
 }
 
-export const Fixed: GlamorousComponent<FixedProps, FixedProps> = glamorous.div<
-  FixedProps
->(({ top, right, bottom, left }) => ({
+export const Fixed: StyledComponent<FixedProps, {}, {}> = styled<
+  FixedProps,
+  'div'
+>('div')(({ top, right, bottom, left }) => ({
   display: 'flex',
   position: 'fixed',
   top,

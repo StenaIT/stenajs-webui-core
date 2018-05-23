@@ -1,5 +1,4 @@
-import glamorous from 'glamorous';
-import { GlamorousComponent } from 'glamorous';
+import styled, { StyledComponent } from 'react-emotion';
 
 export interface BackgroundProps {
   color?: string;
@@ -7,10 +6,10 @@ export interface BackgroundProps {
   height?: string;
 }
 
-export const Background: GlamorousComponent<
+export const Background: StyledComponent<BackgroundProps, {}, {}> = styled<
   BackgroundProps,
-  BackgroundProps
-> = glamorous.div<BackgroundProps>(({ color, height, hoverColor }) => ({
+  'div'
+>('div')(({ color, height, hoverColor }) => ({
   backgroundColor: color,
   height,
   ':hover': {

@@ -1,12 +1,12 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled, { StyledComponent } from 'react-emotion';
 
 export interface TextColorProps {
   color?: string;
 }
 
-export const TextColor: GlamorousComponent<
+export const TextColor: StyledComponent<TextColorProps, {}, {}> = styled<
   TextColorProps,
-  TextColorProps
-> = glamorous.div<TextColorProps>(({ color }) => ({
+  'div'
+>('div')(({ color }) => ({
   color: color,
 }));

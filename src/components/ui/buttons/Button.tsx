@@ -1,15 +1,15 @@
-import glamorous from 'glamorous';
-import * as React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Row } from '../layout/Row';
 import { IconProp } from '@fortawesome/fontawesome';
-import { Background } from '../colors/Background';
-import { Space } from '../layout/Space';
-import { Clickable } from '../interaction/Clickable';
-import { ProgressIndicator } from '../progress/ProgressIndicator';
-import { Border } from '../decorations/Border';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import * as React from 'react';
+import styled from 'react-emotion';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { Background } from '../colors/Background';
+import { Border } from '../decorations/Border';
+import { Clickable } from '../interaction/Clickable';
+import { Row } from '../layout/Row';
+import { Space } from '../layout/Space';
+import { ProgressIndicator } from '../progress/ProgressIndicator';
 
 export interface ButtonProps {
   /** The color of the button. */
@@ -52,11 +52,9 @@ export interface ButtonTextProps {
   fontSize: string;
 }
 
-const ButtonText = glamorous.span(
-  {
+const ButtonText = styled<ButtonTextProps, 'span'>('span')(
+  ({ color, fontFamily, fontSize }) => ({
     fontWeight: 100,
-  },
-  ({ color, fontFamily, fontSize }: ButtonTextProps) => ({
     fontSize,
     color,
     fontFamily,

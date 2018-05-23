@@ -1,13 +1,14 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled, { StyledComponent } from 'react-emotion';
 
 export interface FloatProps {
   right?: boolean;
   left?: boolean;
 }
 
-export const Float: GlamorousComponent<FloatProps, FloatProps> = glamorous.div<
-  FloatProps
->(props => ({
+export const Float: StyledComponent<FloatProps, {}, {}> = styled<
+  FloatProps,
+  'div'
+>('div')(props => ({
   float: getFloat(props),
 }));
 

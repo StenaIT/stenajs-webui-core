@@ -1,6 +1,6 @@
-import glamorous from 'glamorous';
 import * as React from 'react';
 import { KeyboardEventHandler, MouseEventHandler } from 'react';
+import styled from 'react-emotion';
 
 // tslint:disable:no-any
 
@@ -10,24 +10,25 @@ export interface OverlayProps {
   zIndex?: number;
 }
 
-const ModalWrapper = glamorous.div(
-  {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-  },
-  (props: { opacity?: number; zIndex: number }) => ({
-    background: `rgba(0, 0, 0, ${
-      typeof props.opacity === 'number' ? props.opacity : 0.3
-    })`,
-    zIndex: props.zIndex || 100,
-  }),
-);
+interface ModalWrapperProps {
+  opacity?: number;
+  zIndex: number;
+}
+
+const ModalWrapper = styled<ModalWrapperProps, 'div'>('div')(props => ({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  position: 'fixed',
+  top: 0,
+  left: 0,
+  width: '100%',
+  height: '100%',
+  background: `rgba(0, 0, 0, ${
+    typeof props.opacity === 'number' ? props.opacity : 0.3
+  })`,
+  zIndex: props.zIndex || 100,
+}));
 
 export class Overlay extends React.Component<OverlayProps> {
   div: HTMLDivElement | undefined = undefined;
