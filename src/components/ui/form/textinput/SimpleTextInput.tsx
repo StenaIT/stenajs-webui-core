@@ -10,7 +10,7 @@ import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 
 // tslint:disable:no-any
 
-export type MoveDirection = 'right' | 'left' | 'down' | 'up' | 'stay';
+export type MoveDirection = 'right' | 'left' | 'down' | 'up';
 
 export interface SimpleTextInputProps {
   value?: string;
@@ -93,6 +93,10 @@ class SimpleTextInputComponent extends React.Component<
       if (onEnter) {
         onEnter();
       }
+    } else if (onEsc && key === 'Escape') {
+      this.setState(() => ({ wasCancelled: true }), onEsc);
+      e.preventDefault();
+      e.stopPropagation();
     } else if (onMove) {
       if (e.shiftKey && key === 'Tab') {
         onMove('left');
@@ -108,11 +112,6 @@ class SimpleTextInputComponent extends React.Component<
         e.stopPropagation();
       } else if (key === 'ArrowDown') {
         onMove('down');
-        e.preventDefault();
-        e.stopPropagation();
-      } else if (onEsc && key === 'Escape') {
-        this.setState(() => ({ wasCancelled: true }));
-        setTimeout(onEsc, 10);
         e.preventDefault();
         e.stopPropagation();
       } else if (key === 'ArrowRight') {

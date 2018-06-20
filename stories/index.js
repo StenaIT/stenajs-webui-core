@@ -17,6 +17,7 @@ import { addColumnStories } from './layout/ColumnStories';
 import { addBorderStories } from './decorations/BorderStories';
 import { addShadowStories } from './decorations/ShadowStories';
 import { addClickableStories } from './interaction/ClickableStories';
+import { addTableStories } from './table/TableStories';
 
 addMultipleOptionsStories();
 addSpaceStories();
@@ -35,3 +36,4 @@ addColumnStories();
 addBorderStories();
 addShadowStories();
 addClickableStories();
+addTableStories();

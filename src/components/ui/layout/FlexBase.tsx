@@ -30,6 +30,7 @@ export interface FlexBaseCommonProps {
   style?: CSSProperties;
   tabIndex?: number;
   children?: ReactNode;
+  id?: string;
 }
 
 export class FlexBase extends React.Component<
@@ -53,12 +54,16 @@ export class FlexBase extends React.Component<
       hidden,
       style,
       tabIndex,
+      className,
       flexDirection,
+      id,
     } = this.props;
 
     return (
       <div
+        className={className}
         tabIndex={tabIndex}
+        id={id}
         style={{
           display: hidden ? 'none' : 'flex',
           flexDirection,

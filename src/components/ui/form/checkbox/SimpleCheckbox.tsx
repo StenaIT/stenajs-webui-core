@@ -1,12 +1,11 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import { Clickable } from '../../interaction/Clickable';
 import { compose, pure, withHandlers } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
+import { Clickable } from '../../interaction/Clickable';
+import { ValueOnChangeProps } from '../types';
 
-export interface SimpleCheckboxProps {
-  value?: boolean;
-  onChange?: (checked: boolean) => void;
+export interface SimpleCheckboxProps extends ValueOnChangeProps<boolean> {
   colorOn?: string;
   colorOff?: string;
   colorDisabled?: string;
