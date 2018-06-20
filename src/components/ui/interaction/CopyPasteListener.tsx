@@ -15,7 +15,7 @@ import { Omit } from '../../../types/Omit';
 ComponentEnhancer must be imported and used.
 This is cause by the combination of --noUnusedLocals and --declaration.
  */
-export type __C = ComponentEnhancer<{}, {}>;
+export type __CD = ComponentEnhancer<{}, {}>;
 export interface CopyPasteListenerProps {
   onPaste?: (pasted: string) => void;
   onCopy?: string | (() => string);

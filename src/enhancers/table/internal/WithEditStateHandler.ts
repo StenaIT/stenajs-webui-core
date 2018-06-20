@@ -2,7 +2,7 @@ import { compose, withHandlers, withState } from 'recompose';
 import { CellIdGenerator } from '../../../examples/table/components/TableCell';
 import { wrapBounds } from '../../../util/NumberBoundsWrapper';
 import {
-  MoveDirection,
+  NavigationMoveDirection,
   NavigatableKeyDownHandlerOnMove,
 } from './WithNavigatableKeyDownHandler';
 import {
@@ -15,7 +15,7 @@ import { RequiredTableCellOuterProps } from '../WithTableNavigation';
 ComponentEnhancer and InferableComponentEnhancerWithProps must be imported and used.
 This is cause by the combination of --noUnusedLocals and --declaration.
  */
-export type __C = ComponentEnhancer<{}, {}> &
+export type __C81458 = ComponentEnhancer<{}, {}> &
   InferableComponentEnhancerWithProps<{}, {}>;
 
 export interface OuterTableProps {
@@ -34,7 +34,7 @@ export interface WithEditingStateProps {
 }
 
 export interface WithEditingHandlersProps {
-  onMove: (direction: MoveDirection) => void;
+  onMove: (direction: NavigationMoveDirection) => void;
   onDblClick: () => void;
   onStartEdit: (enteredText: string) => void;
   onDoneAndStay: () => void;
@@ -52,7 +52,7 @@ export const withEditingState = compose(
 );
 
 export interface EditingHandlers {
-  onMove: (direction: MoveDirection) => void;
+  onMove: (direction: NavigationMoveDirection) => void;
   onDblClick: () => void;
   onStartEdit: (enteredString: string) => void;
   onDone: () => void;

@@ -9,7 +9,7 @@ import {
 } from './internal/WithEditStateHandler';
 import {
   AllowedType,
-  MoveDirection,
+  NavigationMoveDirection,
   WithKeyDownHandlerInnerProps,
   WithKeyDownHandlerOuterProps,
   withNavigatableKeyDownHandler,
@@ -20,7 +20,7 @@ import { ComponentEnhancer } from 'recompose';
 ComponentEnhancer must be imported and used.
 This is cause by the combination of --noUnusedLocals and --declaration.
  */
-export type __C = ComponentEnhancer<{}, {}>;
+export type __C9134T = ComponentEnhancer<{}, {}>;
 
 export const withTableNavigation = <
   OuterProps extends RequiredTableCellOuterProps
@@ -48,7 +48,7 @@ export type InjectedTableInnerProps = WithKeyDownHandlerInnerProps &
   WithEditingStateProps;
 
 export interface InputComponentProps {
-  onMove?: (direction: MoveDirection) => void;
+  onMove?: (direction: NavigationMoveDirection) => void;
   onDblClick?: () => void;
   onStartEdit?: (enteredString: string) => void;
   onDone?: () => void;

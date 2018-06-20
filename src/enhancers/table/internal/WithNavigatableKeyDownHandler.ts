@@ -6,13 +6,13 @@ import { OuterTableProps } from './WithEditStateHandler';
 InferableComponentEnhancerWithProps must be imported and used.
 This is cause by the combination of --noUnusedLocals and --declaration.
  */
-export type __C = InferableComponentEnhancerWithProps<{}, {}>;
+export type __C183457 = InferableComponentEnhancerWithProps<{}, {}>;
 
 export type AllowedType = 'all' | 'numeric' | 'alphanumeric' | 'letters';
-export type MoveDirection = 'up' | 'down' | 'left' | 'right';
+export type NavigationMoveDirection = 'up' | 'down' | 'left' | 'right';
 
 export type NavigatableKeyDownHandlerOnMove = (
-  direction: MoveDirection,
+  direction: NavigationMoveDirection,
 ) => void;
 
 export interface WithKeyDownHandlerOuterProps extends OuterTableProps {

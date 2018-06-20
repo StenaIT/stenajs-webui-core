@@ -44,6 +44,7 @@ export interface WithSetCellHandlerProps {
   setCell: SetCellFunc;
 }
 
+// tslint:disable:no-shadowed-variable
 const withSetCellHandler = withHandlers({
   setCell: ({ setData, data }: WithDataStateProps) => (
     col: number,
@@ -54,6 +55,7 @@ const withSetCellHandler = withHandlers({
     setData([...data]);
   },
 });
+// tslint:enable:no-shadowed-variable
 
 export const ExampleTable = compose<InnerProps, {}>(
   withDataState,
