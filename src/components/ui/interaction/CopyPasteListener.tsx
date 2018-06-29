@@ -66,7 +66,7 @@ const withOnPasteProp = withProps<
 const omitProps = (keys: Array<string>) => mapProps(props => omit(props, keys));
 
 export const withCopyPasteListener = <
-  ChildComponentProps extends HTMLAttributes<{}>
+  ChildComponentProps extends Omit<HTMLAttributes<{}>, 'css'>
 >() =>
   compose<
     InnerOnCopyPasteProp,
@@ -78,7 +78,7 @@ export const withCopyPasteListener = <
   );
 
 export const withDivCopyPasteListener = withCopyPasteListener<
-  HTMLAttributes<HTMLDivElement>
+  Omit<HTMLAttributes<HTMLDivElement>, 'css'>
 >();
 
 export const CopyPasteListener = withCopyPasteListener()(
