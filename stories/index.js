@@ -18,6 +18,7 @@ import { addBorderStories } from './decorations/BorderStories';
 import { addShadowStories } from './decorations/ShadowStories';
 import { addClickableStories } from './interaction/ClickableStories';
 import { addTableStories } from './table/TableStories';
+import { addTextInputStories } from './form/TextInputStories';
 
 addMultipleOptionsStories();
 addSpaceStories();
@@ -37,3 +38,4 @@ addBorderStories();
 addShadowStories();
 addClickableStories();
 addTableStories();
+addTextInputStories();

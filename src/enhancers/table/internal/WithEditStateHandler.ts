@@ -1,6 +1,6 @@
 import { compose, withHandlers, withState } from 'recompose';
 import { CellIdGenerator } from '../../../examples/table/components/TableCell';
-import { wrapBounds } from '../../../util/NumberBoundsWrapper';
+import { wrapBounds } from '../../../util/bounds/NumberBoundsWrapper';
 import {
   NavigationMoveDirection,
   NavigatableKeyDownHandlerOnMove,

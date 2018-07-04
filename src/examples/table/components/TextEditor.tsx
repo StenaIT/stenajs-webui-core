@@ -23,7 +23,12 @@ const TextEditorComponent = ({
   enteredText,
   ...simpleTextInputProps
 }: InnerProps) => (
-  <SimpleTextInput value={text} onChange={setText} {...simpleTextInputProps} style={{width: '100%', height: '100%'}}/>
+  <SimpleTextInput
+    value={text}
+    onChange={setText}
+    {...simpleTextInputProps}
+    style={{ width: '100%', height: '100%' }}
+  />
 );
 
 const textState = withState(

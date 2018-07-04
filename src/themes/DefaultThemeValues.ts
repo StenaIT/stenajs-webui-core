@@ -13,6 +13,8 @@ export const defaultColors: ThemeColors = {
   successGreenLight: '#94f78c',
   errorText: '#D05353',
   errorTextLight: '#ffbfc6',
+  errorBgLight: '#ffbfc6',
+  errorBgDark: '#a8171c',
   alertText: '#dbdb51',
   alertTextLight: '#edec8a',
   infoBlue: '#7a77c3',

@@ -1,3 +1,4 @@
+import { defaultDefaultTextInputTheme } from '../components/ui/form/textinput/DefaultTextInputTheme';
 import { Theme } from './Theme';
 import { defaultButtonTheme } from '../components/ui/buttons/ButtonTheme';
 import {
@@ -38,5 +39,6 @@ export const defaultTheme: Theme = {
     SmallText: defaultSmallTextTheme,
     SmallerText: defaultSmallerTextTheme,
     TinyText: defaultTinyTextTheme,
+    DefaultTextInput: defaultDefaultTextInputTheme,
   },
 };
