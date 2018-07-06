@@ -12,12 +12,10 @@ export interface TimeIntervalNumber {
 
 export const transformTimeIntervalToNumbers = (
   interval: TimeInterval,
-): TimeIntervalNumber => {
-  return {
-    startTime: transformTimeStringToNumber(interval.startTime),
-    endTime: transformTimeStringToNumber(interval.endTime),
-  };
-};
+): TimeIntervalNumber => ({
+  startTime: transformTimeStringToNumber(interval.startTime),
+  endTime: transformTimeStringToNumber(interval.endTime),
+});
 
 export const timesOverlap = (
   i1: TimeIntervalNumber,

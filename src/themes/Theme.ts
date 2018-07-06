@@ -1,7 +1,10 @@
 import { ButtonTheme } from '../components/ui/buttons/ButtonTheme';
+import { CalendarTheme } from '../components/ui/form/calendar/components/CalendarTheme';
 import { SimpleCheckboxTheme } from '../components/ui/form/checkbox/SimpleCheckboxTheme';
-import { DefaultTextInputTheme } from '../components/ui/form/textinput/DefaultTextInputTheme';
-import { SimpleTextInputTheme } from '../components/ui/form/textinput/SimpleTextInputTheme';
+import { DateInputTheme } from '../components/ui/form/date-time-input/DateInputTheme';
+import { DateRangeInputTheme } from '../components/ui/form/date-time-input/DateRangeInputTheme';
+import { DefaultTextInputTheme } from '../components/ui/form/text-input/DefaultTextInputTheme';
+import { SimpleTextInputTheme } from '../components/ui/form/text-input/SimpleTextInputTheme';
 import { StandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
 import { SmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
 import { FlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';
@@ -24,6 +27,8 @@ export interface ThemeColors {
   disabledText: string;
   disabledTextLight: string;
   white: string;
+  separator: string;
+  separatorHighlighted: string;
   successGreen: string;
   successGreenLight: string;
   errorText: string;
@@ -66,10 +71,14 @@ export interface ComponentThemes {
   SimpleCheckbox: SimpleCheckboxTheme;
   SimpleTextInput: SimpleTextInputTheme;
   HeaderText: TextTheme;
+  SectionHeaderText: TextTheme;
   LargeText: TextTheme;
   DefaultText: TextTheme;
   SmallText: TextTheme;
   SmallerText: TextTheme;
   TinyText: TextTheme;
   DefaultTextInput: DefaultTextInputTheme;
+  DateInput: DateInputTheme;
+  DateRangeInput: DateRangeInputTheme;
+  Calendar: CalendarTheme;
 }

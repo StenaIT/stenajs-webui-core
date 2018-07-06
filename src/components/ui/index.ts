@@ -5,6 +5,7 @@ export * from './buttons';
 export * from './colors';
 export * from './decorations';
 export * from './form';
+export * from './icon';
 export * from './interaction';
 export * from './layout';
 export * from './overlay';

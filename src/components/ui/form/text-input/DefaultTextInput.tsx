@@ -14,14 +14,18 @@ const inputClass = css`
   }
 `;
 
+export interface DefaultTextInputProps extends SimpleTextInputProps {
+  border?: string;
+}
+
 const withStyle = withProps<
-  SimpleTextInputProps,
-  SimpleTextInputProps & WithThemeProps
->(({ theme }) => ({
+  DefaultTextInputProps,
+  DefaultTextInputProps & WithThemeProps
+>(({ theme, border }) => ({
   className: inputClass,
   style: {
     borderRadius: theme.components.DefaultTextInput.borderRadius,
-    border: theme.components.DefaultTextInput.border,
+    border: border || theme.components.DefaultTextInput.border,
     fontSize: theme.components.DefaultTextInput.fontSize,
     height: theme.components.DefaultTextInput.height,
     paddingLeft: theme.components.DefaultTextInput.paddingLeft,
@@ -31,5 +35,5 @@ const withStyle = withProps<
 
 export const DefaultTextInput = compose<
   SimpleTextInputProps,
-  SimpleTextInputProps
+  DefaultTextInputProps
 >(withTheme, withStyle)(SimpleTextInput);

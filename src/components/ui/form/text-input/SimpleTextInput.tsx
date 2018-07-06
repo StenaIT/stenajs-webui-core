@@ -34,6 +34,7 @@ export interface SimpleTextInputProps {
   style?: CSSProperties;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   onMove?: (direction: MoveDirection) => void;
+  onFocus?: () => void;
 }
 
 export interface SimpleTextInputState {
@@ -162,6 +163,7 @@ class SimpleTextInputComponent extends React.Component<
       style,
       className,
       theme,
+      onFocus,
     } = this.props;
 
     return (
@@ -182,6 +184,7 @@ class SimpleTextInputComponent extends React.Component<
         onKeyDown={this.onKeyDown}
         onChange={this.onChange}
         onBlur={this.onBlur}
+        onFocus={onFocus}
         value={value}
         maxLength={maxLength}
         placeholder={placeholder}

@@ -19,6 +19,8 @@ import { addShadowStories } from './decorations/ShadowStories';
 import { addClickableStories } from './interaction/ClickableStories';
 import { addTableStories } from './table/TableStories';
 import { addTextInputStories } from './form/TextInputStories';
+import { addCalendarStories } from './form/CalendarStories';
+import { addDateTimeInputStories } from './form/DateTimeInputStories';
 
 addMultipleOptionsStories();
 addSpaceStories();
@@ -39,3 +41,5 @@ addShadowStories();
 addClickableStories();
 addTableStories();
 addTextInputStories();
+addCalendarStories();
+addDateTimeInputStories();

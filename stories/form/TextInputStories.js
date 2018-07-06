@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { SimpleTextInput } from '../../src/components/ui/form/textinput/SimpleTextInput';
-import { DefaultTextInput } from '../../src/components/ui/form/textinput/DefaultTextInput';
-import { TimeTextInput } from '../../src/components/ui/form/textinput/TimeTextInput';
+import { SimpleTextInput } from '../../src/components/ui/form/text-input/SimpleTextInput';
+import { DefaultTextInput } from '../../src/components/ui/form/text-input/DefaultTextInput';
+import { TimeTextInput } from '../../src/components/ui/form/date-time-input/TimeTextInput';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 
 export const addTextInputStories = () => {
@@ -49,13 +49,5 @@ export const addTextInputStories = () => {
           <DefaultTextInput value={'some entered text'} />
         </UseTheme>
       )),
-    );
-
-  storiesOf('Form/TextInput/TimeTextInput', module)
-    .add('empty', withInfo()(() => <TimeTextInput value={''} />))
-    .add('with time', withInfo()(() => <TimeTextInput value={'23:59'} />))
-    .add(
-      'with invalid time',
-      withInfo()(() => <TimeTextInput value={'9:xx'} />),
     );
 };

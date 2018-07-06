@@ -5,4 +5,3 @@ export * from './DefaultTextInput';
 export * from './DefaultTextInputTheme';
 export * from './SimpleTextInput';
 export * from './SimpleTextInputTheme';
-export * from './TimeTextInput';

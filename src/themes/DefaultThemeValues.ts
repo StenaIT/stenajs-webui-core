@@ -1,25 +1,10 @@
 import { ThemeColors, ThemeFonts, ThemeFontSizes, ThemeMetrics } from './Theme';
+import * as colors from './Colors';
 
 export const defaultColors: ThemeColors = {
-  primaryText: '#1b2e47',
-  primaryTextLight: '#bcbabd',
-  primaryBg: '#F9F7F4',
-  primaryBgLight: '#FEFEFE',
-  primaryBgDark: '#226F81',
-  disabledText: '#b6b6b6',
-  disabledTextLight: '#dddddd',
-  white: '#ffffff',
-  successGreen: '#8bc34a',
-  successGreenLight: '#94f78c',
-  errorText: '#D05353',
-  errorTextLight: '#ffbfc6',
-  errorBgLight: '#ffbfc6',
-  errorBgDark: '#a8171c',
-  alertText: '#dbdb51',
-  alertTextLight: '#edec8a',
-  infoBlue: '#7a77c3',
-  infoBlueLight: '#e6e5ff',
+  ...colors,
 };
+
 export const defaultFonts: ThemeFonts = {
   primary: 'Open Sans',
   buttons: 'Open Sans',

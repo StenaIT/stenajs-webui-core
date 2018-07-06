@@ -13,6 +13,11 @@ export const defaultHeaderTextTheme: TextTheme = {
   fontFamily: defaultFonts.primary,
 };
 
+export const defaultSectionHeaderTextTheme: TextTheme = {
+  fontSize: defaultFontSizes.large,
+  fontFamily: defaultFonts.primary,
+};
+
 export const defaultLargeTextTheme: TextTheme = {
   fontSize: defaultFontSizes.large,
   fontFamily: defaultFonts.primary,
