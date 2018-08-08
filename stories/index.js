@@ -21,6 +21,7 @@ import { addTableStories } from './table/TableStories';
 import { addTextInputStories } from './form/TextInputStories';
 import { addCalendarStories } from './form/CalendarStories';
 import { addDateTimeInputStories } from './form/DateTimeInputStories';
+import { addCardStories } from './card/CardStories';
 
 addMultipleOptionsStories();
 addSpaceStories();
@@ -43,3 +44,4 @@ addTableStories();
 addTextInputStories();
 addCalendarStories();
 addDateTimeInputStories();
+addCardStories();
