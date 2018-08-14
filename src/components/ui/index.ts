@@ -11,4 +11,5 @@ export * from './layout';
 export * from './overlay';
 export * from './positioning';
 export * from './progress';
+export * from './slider';
 export * from './text';

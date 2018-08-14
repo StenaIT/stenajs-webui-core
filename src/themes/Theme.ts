@@ -8,6 +8,7 @@ import { SimpleTextInputTheme } from '../components/ui/form/text-input/SimpleTex
 import { StandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
 import { SmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
 import { FlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';
+import { SliderTheme } from '../components/ui/slider/SliderTheme';
 import { TextTheme } from '../components/ui/text/TextTheme';
 
 export interface Theme {
@@ -81,4 +82,5 @@ export interface ComponentThemes {
   DateInput: DateInputTheme;
   DateRangeInput: DateRangeInputTheme;
   Calendar: CalendarTheme;
+  Slider: SliderTheme;
 }

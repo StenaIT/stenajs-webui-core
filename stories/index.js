@@ -2,6 +2,8 @@ import React from 'react';
 import './initFontAwesome';
 import { addMultipleOptionsStories } from './form/MultipleOptionsStories';
 import { addSpaceStories } from './layout/SpaceStories';
+import { addSliderStories } from './slider/SliderStories';
+import { addTimeSliderStories } from './slider/TimeSliderStories';
 import { addStandardButtonStories } from './buttons/StandardButtonStories';
 import { addSimpleCheckboxStories } from './form/SimpleCheckboxStories';
 import { addIndentStories } from './layout/IndentStories';
@@ -24,6 +26,8 @@ import { addDateTimeInputStories } from './form/DateTimeInputStories';
 
 addMultipleOptionsStories();
 addSpaceStories();
+addSliderStories();
+addTimeSliderStories();
 addFlatButtonStories();
 addSmallButtonStories();
 addStandardButtonStories();
