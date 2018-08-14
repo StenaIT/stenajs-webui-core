@@ -8,7 +8,6 @@ import { defaultDateInputTheme } from '../components/ui/form/date-time-input/Dat
 import { defaultDateRangeInputTheme } from '../components/ui/form/date-time-input/DateRangeInputTheme';
 import { defaultDefaultTextInputTheme } from '../components/ui/form/text-input/DefaultTextInputTheme';
 import { defaultSimpleTextInputTheme } from '../components/ui/form/text-input/SimpleTextInputTheme';
-import { defaultSimpleTextInputTheme } from '../components/ui/form/textinput/SimpleTextInputTheme';
 import { defaultSliderTheme } from '../components/ui/slider/SliderTheme';
 import {
   defaultDefaultTextTheme,
