@@ -1,15 +1,19 @@
-import { compose, withHandlers, withState } from 'recompose';
-import { CellIdGenerator } from '../../../examples/table/components/TableCell';
-import { wrapBounds } from '../../../util/bounds/NumberBoundsWrapper';
-import {
-  NavigationMoveDirection,
-  NavigatableKeyDownHandlerOnMove,
-} from './WithNavigatableKeyDownHandler';
+import { FocusEventHandler } from 'react';
 import {
   ComponentEnhancer,
+  compose,
   InferableComponentEnhancerWithProps,
+  withHandlers,
+  withState,
 } from 'recompose';
+import { MoveDirection } from '../../../components/ui/form/text-input';
+import { CellIdGenerator } from '../../../examples/table/components/TableCell';
+import { wrapBounds } from '../../../util/bounds/NumberBoundsWrapper';
 import { RequiredTableCellOuterProps } from '../WithTableNavigation';
+import {
+  NavigatableKeyDownHandlerOnMove,
+  NavigationMoveDirection,
+} from './WithNavigatableKeyDownHandler';
 
 /*
 ComponentEnhancer and InferableComponentEnhancerWithProps must be imported and used.
@@ -18,6 +22,11 @@ This is cause by the combination of --noUnusedLocals and --declaration.
 export type __C81458 = ComponentEnhancer<{}, {}> &
   InferableComponentEnhancerWithProps<{}, {}>;
 
+export interface CellIndices {
+  columnIndex: number;
+  rowIndex: number;
+}
+
 export interface OuterTableProps {
   columnIndex: number;
   rowIndex: number;
@@ -25,6 +34,21 @@ export interface OuterTableProps {
   numRows: number;
   value: string | number;
 }
+
+export interface InjectedOnFocusProps {
+  onFocus?: FocusEventHandler<HTMLDivElement>;
+}
+
+export const withOnFocus = withHandlers<
+  RequiredTableCellOuterProps,
+  InjectedOnFocusProps
+>({
+  onFocus: ({ columnIndex, rowIndex, onCellFocus }) => () => {
+    if (onCellFocus) {
+      onCellFocus({ columnIndex, rowIndex });
+    }
+  },
+});
 
 export interface WithEditingStateProps {
   isEditing: boolean;
@@ -72,20 +96,32 @@ export const withEditingHandlers = <
       setIsEditing,
       numColumns,
       numRows,
+      onCellMove,
     }: OuterProps &
       WithEditingStateProps): NavigatableKeyDownHandlerOnMove => direction => {
       setIsEditing(false);
-      if (direction === 'up') {
-        focusOnCell(getCellId, columnIndex, rowIndex - 1, numColumns, numRows);
-      } else if (direction === 'down') {
-        focusOnCell(getCellId, columnIndex, rowIndex + 1, numColumns, numRows);
-      } else if (direction === 'left') {
-        focusOnCell(getCellId, columnIndex - 1, rowIndex, numColumns, numRows);
-      } else if (direction === 'right') {
-        focusOnCell(getCellId, columnIndex + 1, rowIndex, numColumns, numRows);
-      } else {
-        focusOnCell(getCellId, columnIndex, rowIndex, numColumns, numRows);
+      const {
+        columnIndex: nextColumnIndex,
+        rowIndex: nextRowIndex,
+      } = getIndices(columnIndex, rowIndex, direction);
+
+      if (onCellMove) {
+        onCellMove({
+          fromRowIndex: rowIndex,
+          fromColumnIndex: columnIndex,
+          rowIndex: nextRowIndex,
+          columnIndex: nextColumnIndex,
+          columnChange: columnIndex !== nextColumnIndex,
+          rowChange: rowIndex !== nextRowIndex,
+        });
       }
+      focusOnCell(
+        getCellId,
+        nextColumnIndex,
+        nextRowIndex,
+        numColumns,
+        numRows,
+      );
     },
     onDblClick: ({
       setEnteredText,
@@ -125,6 +161,41 @@ export const withEditingHandlers = <
       focusOnCell(getCellId, columnIndex, rowIndex, numColumns, numRows);
     },
   });
+
+const getIndices = (
+  columnIndex: number,
+  rowIndex: number,
+  direction: MoveDirection,
+): CellIndices => {
+  if (direction === 'up') {
+    return {
+      columnIndex,
+      rowIndex: rowIndex - 1,
+    };
+  }
+  if (direction === 'down') {
+    return {
+      columnIndex,
+      rowIndex: rowIndex + 1,
+    };
+  }
+  if (direction === 'left') {
+    return {
+      columnIndex: columnIndex - 1,
+      rowIndex,
+    };
+  }
+  if (direction === 'right') {
+    return {
+      columnIndex: columnIndex + 1,
+      rowIndex,
+    };
+  }
+  return {
+    columnIndex,
+    rowIndex,
+  };
+};
 
 const focusOnCell = (
   getCellId: CellIdGenerator,

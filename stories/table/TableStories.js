@@ -1,11 +1,12 @@
-import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { ExampleTable } from '../../src/examples/table/ExampleTable';
+import * as React from 'react';
+import { compose } from 'recompose';
+import { TableExample } from '../../src/examples/table/TableExample';
 
 export const addTableStories = () => {
   storiesOf('Table/ExampleTable', module).add(
     'default',
-    withInfo()(() => <ExampleTable label={'Submit'} />),
+    compose(withInfo())(() => <TableExample />),
   );
 };

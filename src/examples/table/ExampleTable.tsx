@@ -1,21 +1,37 @@
 import * as React from 'react';
-import { compose, withHandlers, withState } from 'recompose';
+import { compose, pure, withHandlers, withState } from 'recompose';
 import { Border } from '../../components/ui/decorations';
+import {
+  OnCellFocusEvent,
+  OnCellMoveEvent,
+} from '../../enhancers/table/WithTableNavigation';
 import { TableRow } from './components/TableRow';
 
 export type CellData = string | number;
 type Data = Array<Array<CellData>>;
-const data: Data = [];
+const initialData: Data = [];
 for (let y = 0; y < 20; y++) {
-  data[y] = [];
+  initialData[y] = [];
   for (let x = 0; x < 20; x++) {
-    data[y][x] = x * y;
+    initialData[y][x] = x * y;
   }
 }
 
-type InnerProps = WithSetCellHandlerProps;
+export interface ExampleTableProps {
+  onCellFocus: (event: OnCellFocusEvent) => void;
+  onCellMove: (event: OnCellMoveEvent) => void;
+}
 
-const ExampleTableComponent = ({ setCell }: InnerProps) => (
+type InnerProps = WithSetCellHandlerProps &
+  WithDataStateProps &
+  ExampleTableProps;
+
+const ExampleTableComponent = ({
+  setCell,
+  data,
+  onCellFocus,
+  onCellMove,
+}: InnerProps) => (
   <div style={{ display: 'table' }}>
     <Border color={'#eee'} bottom right>
       {data.map((row, rowIndex) => (
@@ -25,6 +41,8 @@ const ExampleTableComponent = ({ setCell }: InnerProps) => (
           key={rowIndex}
           numRows={data.length}
           setCell={setCell}
+          onCellFocus={onCellFocus}
+          onCellMove={onCellMove}
         />
       ))}
     </Border>
@@ -36,7 +54,9 @@ interface WithDataStateProps {
   setData: (data: Data) => void;
 }
 
-const withDataState = withState('data', 'setData', data);
+const withDataState = compose<{}, WithDataStateProps>(
+  withState('data', 'setData', initialData),
+);
 
 export type SetCellFunc = (col: number, row: number, value: string) => void;
 
@@ -45,19 +65,19 @@ export interface WithSetCellHandlerProps {
 }
 
 // tslint:disable:no-shadowed-variable
-const withSetCellHandler = withHandlers({
-  setCell: ({ setData, data }: WithDataStateProps) => (
-    col: number,
-    row: number,
-    value: string,
-  ) => {
+const withSetCellHandler = withHandlers<
+  WithDataStateProps,
+  WithSetCellHandlerProps
+>({
+  setCell: ({ setData, data }) => (col: number, row: number, value: string) => {
     data[row][col] = value;
     setData([...data]);
   },
 });
 // tslint:enable:no-shadowed-variable
 
-export const ExampleTable = compose<InnerProps, {}>(
+export const ExampleTable = compose<InnerProps, ExampleTableProps>(
+  pure,
   withDataState,
   withSetCellHandler,
 )(ExampleTableComponent);

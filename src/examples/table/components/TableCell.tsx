@@ -51,6 +51,7 @@ const TableCellComponent = ({
   onDoneAndStay,
   enteredText,
   setCell,
+  onFocus,
 }: TableCellProps & InjectedTableInnerProps) => (
   <Border color={'#eee'} top left>
     <Row
@@ -64,6 +65,7 @@ const TableCellComponent = ({
         onKeyDown={onKeyDown}
         onDoubleClick={onDblClick}
         tabIndex={0}
+        onFocus={onFocus}
         style={{ width: '100%', height: '100%' }}
         onCopy={String(value)}
         onPaste={(val: string) => {
