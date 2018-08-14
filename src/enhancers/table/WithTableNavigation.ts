@@ -1,6 +1,6 @@
 import { ComponentEnhancer, compose } from 'recompose';
-import { CellIdGenerator } from '../../examples/table/components/TableCell';
 import {
+  CellIdGenerator,
   EditingHandlers,
   InjectedOnFocusProps,
   withEditingHandlers,

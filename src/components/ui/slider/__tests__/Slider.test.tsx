@@ -29,10 +29,8 @@ xdescribe('Slider', () => {
       </UseTheme>,
     );
     const sliderWrapper = wrapper.find(Slider);
-    console.log(sliderWrapper.debug());
 
     const x = sliderWrapper.dive().dive();
-    console.log(x.childAt(0).dive());
     const rangeWrapper = sliderWrapper.dive().dive().find(Range);
     expect(rangeWrapper.length).toBe(1);
     expect(rangeWrapper.prop('max')).toBe(props.max);

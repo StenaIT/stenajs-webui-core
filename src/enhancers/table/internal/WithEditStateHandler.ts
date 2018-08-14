@@ -7,7 +7,6 @@ import {
   withState,
 } from 'recompose';
 import { MoveDirection } from '../../../components/ui/form/text-input';
-import { CellIdGenerator } from '../../../examples/table/components/TableCell';
 import { wrapBounds } from '../../../util/bounds/NumberBoundsWrapper';
 import { RequiredTableCellOuterProps } from '../WithTableNavigation';
 import {
@@ -21,6 +20,8 @@ This is cause by the combination of --noUnusedLocals and --declaration.
  */
 export type __C81458 = ComponentEnhancer<{}, {}> &
   InferableComponentEnhancerWithProps<{}, {}>;
+
+export type CellIdGenerator = (col: number, row: number) => string;
 
 export interface CellIndices {
   columnIndex: number;

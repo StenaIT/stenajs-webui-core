@@ -5,6 +5,7 @@ import { Border } from '../../../components/ui/decorations';
 import { withDivCopyPasteListener } from '../../../components/ui/interaction/CopyPasteListener';
 import { Row } from '../../../components/ui/layout';
 import { DefaultText } from '../../../components/ui/text';
+import { CellIdGenerator } from '../../../enhancers/table/internal/WithEditStateHandler';
 import {
   InjectedTableInnerProps,
   RequiredTableCellOuterProps,
@@ -32,8 +33,6 @@ const FocusedBox = withDivCopyPasteListener(styled('div')`
   height: 100%;
   overflow: hidden;
 `);
-
-export type CellIdGenerator = (col: number, row: number) => string;
 
 const getCellId: CellIdGenerator = (col, row) =>
   `block-field-cell-${col}-${row}`;
