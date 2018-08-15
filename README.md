@@ -16,7 +16,7 @@ $ npm install stenajs-webui-core
 
 ## Documentation
 
-See component examples in the storybook, [https://github.com/StenaIT/stenajs-webui-core](https://github.com/StenaIT/stenajs-webui-core)
+See component examples in the storybook, [https://stenait.github.io/stenajs-webui-core](https://stenait.github.io/stenajs-webui-core)
 
 ## Usage
 
