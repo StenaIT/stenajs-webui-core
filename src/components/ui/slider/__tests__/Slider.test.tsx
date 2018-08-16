@@ -31,7 +31,10 @@ xdescribe('Slider', () => {
     const sliderWrapper = wrapper.find(Slider);
 
     const x = sliderWrapper.dive().dive();
-    const rangeWrapper = sliderWrapper.dive().dive().find(Range);
+    const rangeWrapper = sliderWrapper
+      .dive()
+      .dive()
+      .find(Range);
     expect(rangeWrapper.length).toBe(1);
     expect(rangeWrapper.prop('max')).toBe(props.max);
     expect(rangeWrapper.prop('min')).toBe(props.min);

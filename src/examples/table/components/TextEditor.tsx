@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { compose, withState } from 'recompose';
+import { compose, lifecycle, withHandlers, withState } from 'recompose';
 import {
   SimpleTextInput,
   SimpleTextInputProps,
@@ -14,19 +14,21 @@ export interface TextStateProps {
   setText: (text: string) => void;
 }
 
-export type InnerProps = TextEditorProps & TextStateProps;
+export type InnerProps = TextEditorProps &
+  TextStateProps &
+  TriggerOnChangeWhenSetText;
 
 const TextEditorComponent = ({
-  setText,
+  setTextAndOnChange,
   text,
   value,
   enteredText,
   ...simpleTextInputProps
 }: InnerProps) => (
   <SimpleTextInput
-    value={text}
-    onChange={setText}
     {...simpleTextInputProps}
+    value={text}
+    onChange={setTextAndOnChange}
     style={{ width: '100%', height: '100%' }}
   />
 );
@@ -34,9 +36,35 @@ const TextEditorComponent = ({
 const textState = withState(
   'text',
   'setText',
-  ({ enteredText, value }: TextEditorProps) => enteredText || '',
+  ({ enteredText, value }: TextEditorProps) => enteredText || value || '',
 );
 
-export const TextEditor = compose<InnerProps, TextEditorProps>(textState)(
-  TextEditorComponent,
-);
+const triggerOnChangeWhenEnteredText = lifecycle<TextEditorProps, {}>({
+  componentDidMount() {
+    const { onChange, enteredText } = this.props;
+    if (enteredText && onChange) {
+      onChange(enteredText);
+    }
+  },
+});
+
+export interface TriggerOnChangeWhenSetText {
+  setTextAndOnChange: (value: string) => void;
+}
+
+const triggerOnChangeWhenSetText = withHandlers<
+  InnerProps,
+  TriggerOnChangeWhenSetText
+>({
+  setTextAndOnChange: ({ onChange, setText }) => (value: string) => {
+    setText(value);
+    if (onChange) {
+      onChange(value);
+    }
+  },
+});
+export const TextEditor = compose<InnerProps, TextEditorProps>(
+  triggerOnChangeWhenEnteredText,
+  textState,
+  triggerOnChangeWhenSetText,
+)(TextEditorComponent);

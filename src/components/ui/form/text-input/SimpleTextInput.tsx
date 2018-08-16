@@ -3,6 +3,7 @@ import {
   ChangeEvent,
   ChangeEventHandler,
   CSSProperties,
+  KeyboardEvent,
   KeyboardEventHandler,
 } from 'react';
 import { compose } from 'recompose';
@@ -100,43 +101,44 @@ class SimpleTextInputComponent extends React.Component<
       e.stopPropagation();
     } else if (onMove) {
       if (e.shiftKey && key === 'Tab') {
-        onMove('left');
-        e.preventDefault();
-        e.stopPropagation();
+        this.blurMoveAndCancel('left', e);
       } else if (key === 'Tab') {
-        onMove('right');
-        e.preventDefault();
-        e.stopPropagation();
+        this.blurMoveAndCancel('right', e);
       } else if (key === 'ArrowUp') {
-        onMove('up');
-        e.preventDefault();
-        e.stopPropagation();
+        this.blurMoveAndCancel('up', e);
       } else if (key === 'ArrowDown') {
-        onMove('down');
-        e.preventDefault();
-        e.stopPropagation();
+        this.blurMoveAndCancel('down', e);
       } else if (key === 'ArrowRight') {
         if (
           this.textInput.value.length === this.textInput.selectionStart &&
           this.textInput.selectionStart === this.textInput.selectionStart
         ) {
-          onMove('right');
-          e.preventDefault();
-          e.stopPropagation();
+          this.blurMoveAndCancel('right', e);
         }
       } else if (key === 'ArrowLeft') {
         if (
           this.textInput.selectionStart === 0 &&
           this.textInput.selectionStart === this.textInput.selectionStart
         ) {
-          onMove('left');
-          e.preventDefault();
-          e.stopPropagation();
+          this.blurMoveAndCancel('left', e);
         }
       }
     } else if (onKeyDown) {
       onKeyDown(e);
     }
+  };
+
+  blurMoveAndCancel = (
+    direction: MoveDirection,
+    e: KeyboardEvent<HTMLInputElement>,
+  ) => {
+    const { onMove } = this.props;
+    this.textInput.blur();
+    if (onMove) {
+      onMove(direction);
+    }
+    e.preventDefault();
+    e.stopPropagation();
   };
 
   onBlur = (e: ChangeEvent<any>) => {

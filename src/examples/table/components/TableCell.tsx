@@ -73,7 +73,8 @@ const TableCellComponent = ({
       >
         {isEditing ? (
           <TextEditor
-            enteredText={enteredText || String(value)}
+            enteredText={enteredText}
+            value={String(value)}
             focusOnMount
             selectAllOnMount={!enteredText}
             width={'100%'}

@@ -9,7 +9,7 @@
   "scripts": {
     "start": "start-storybook -p 6006",
     "start-from-scratch": "rm -rf node_modules && yarn && yarn build-index && yarn build-lib && yarn start",
-    "prepublishOnly": "npm run build-index && npm run lint && CI=true npm test && npm run build-lib",
+    "prepublishOnly": "yarn && npm run build-index && npm run lint && CI=true npm test && npm run build-lib",
     "clean": "npm run clean-build && npm run clean-storybook",
     "clean-build": "rimraf lib",
     "clean-storybook": "rimraf storybok-static",
