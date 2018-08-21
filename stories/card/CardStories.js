@@ -2,6 +2,7 @@ import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Card } from '../../src/components/ui/card/Card';
+import {IconProp} from "@fortawesome/fontawesome/index";
 
 export const addCardStories = () => {
     storiesOf('Card/Card', module)
@@ -30,6 +31,16 @@ export const addCardStories = () => {
             withInfo({})(() => (
                 <div style={{ display: 'table', width: "100%" }}>
                     <Card title="CardTitle" attributes={{hasButton:true}} onClick={() => false}>
+                        CardContent
+                    </Card>
+                </div>
+            )),
+        )
+        .add(
+            'header, notice',
+            withInfo({})(() => (
+                <div style={{ display: 'table', width: "100%" }}>
+                    <Card title="CardTitle" attributes={{hasButton:true,notice:{color: "blue",icon: "sync",text: "Information"}}} onClick={() => false}>
                         CardContent
                     </Card>
                 </div>
