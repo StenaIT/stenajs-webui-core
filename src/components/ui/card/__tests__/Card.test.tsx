@@ -272,13 +272,13 @@ describe('Card', () => {
       props = {
         ...Object.assign({}, defaultProps),
         isExpanded: true,
-        title:"Test",
+        title: 'Test',
         attributes: {
-            notice:{
-              color:"blue",
-              icon:"fire",
-              text:"Text"
-            }
+          notice: {
+            color: 'blue',
+            icon: 'fire',
+            text: 'Text',
+          },
         },
       };
       const wrapper = shallow(<Card {...props} />);
@@ -289,8 +289,7 @@ describe('Card', () => {
       props = {
         ...Object.assign({}, defaultProps),
         isExpanded: true,
-        attributes: {
-        },
+        attributes: {},
       };
       const wrapper = shallow(<Card {...props} />);
 

@@ -1,17 +1,19 @@
 import * as React from 'react';
 import {
-    cardContentStyle, cardNotice, cardNoticeContainer,
-    cardTitleStyle,
-    cardWrapperExpandedStyle,
-    cardWrapperStyle,
+  cardContentStyle,
+  cardNotice,
+  cardNoticeContainer,
+  cardTitleStyle,
+  cardWrapperExpandedStyle,
+  cardWrapperStyle,
 } from './CardStyle';
 import { Border } from '../decorations';
 import { Column, Row, Spacing, Space, Indent } from '../layout';
 import { DefaultText } from '../text';
 import { StandardButton } from '../buttons';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {ArrowBox} from "../box";
-import {IconProp} from "@fortawesome/fontawesome";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ArrowBox } from '../box';
+import { IconProp } from '@fortawesome/fontawesome';
 
 export interface CardProps {
   /** borderRadius?:          string
@@ -40,11 +42,11 @@ export interface CardAttributes {
   headerSpacingFactor?: number;
   paddingHorizontal?: number;
   paddingVertical?: number;
-  notice?:{
-    color: string,
-    icon: IconProp,
-    text: string
-  }
+  notice?: {
+    color: string;
+    icon: IconProp;
+    text: string;
+  };
 }
 
 export const Card: React.StatelessComponent<CardProps> = ({
@@ -63,7 +65,7 @@ export const Card: React.StatelessComponent<CardProps> = ({
     headerSpacingFactor: 1.4,
     paddingHorizontal: 2,
     paddingVertical: 2,
-    notice:undefined
+    notice: undefined,
   };
   const attr = {
     ...defaultAttr,
@@ -112,24 +114,25 @@ export const Card: React.StatelessComponent<CardProps> = ({
                     <Column alignSelf="flex-end" flexGrow={0}>
                       <Row>
                         <Space />
-                          {(attr.notice !== undefined) && (
-                            <Column className={`${cardNoticeContainer}`}>
-                              <div className="CardNotice">
-                                <Spacing>
-                                  <div className={`${cardNotice}`} style={{background:attr.notice.color}}>
-                                    <FontAwesomeIcon icon={attr.notice.icon} />
-                                  </div>
-                                  <ArrowBox>
-                                    <Spacing>
-                                      <Indent>
-                                        {attr.notice.text}
-                                      </Indent>
-                                    </Spacing>
-                                  </ArrowBox>
-                                </Spacing>
-                              </div>
-                            </Column>
-                          )}
+                        {attr.notice !== undefined && (
+                          <Column className={`${cardNoticeContainer}`}>
+                            <div className="CardNotice">
+                              <Spacing>
+                                <div
+                                  className={`${cardNotice}`}
+                                  style={{ background: attr.notice.color }}
+                                >
+                                  <FontAwesomeIcon icon={attr.notice.icon} />
+                                </div>
+                                <ArrowBox>
+                                  <Spacing>
+                                    <Indent>{attr.notice.text}</Indent>
+                                  </Spacing>
+                                </ArrowBox>
+                              </Spacing>
+                            </div>
+                          </Column>
+                        )}
                         {attr.hasButton && (
                           <Column className="CardBtn">
                             <Spacing>
