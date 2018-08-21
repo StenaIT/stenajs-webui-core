@@ -272,25 +272,29 @@ describe('Card', () => {
       props = {
         ...Object.assign({}, defaultProps),
         isExpanded: true,
+        title:"Test",
         attributes: {
-            hasButton: true,
+            notice:{
+              color:"blue",
+              icon:"fire",
+              text:"Text"
+            }
         },
       };
       const wrapper = shallow(<Card {...props} />);
 
-      expect(wrapper.find('.CardBtn').length).toEqual(1);
+      expect(wrapper.find('.CardNotice').length).toEqual(1);
     });
-    it('0 - !has button', () => {
+    it('0 - !has notice', () => {
       props = {
         ...Object.assign({}, defaultProps),
         isExpanded: true,
         attributes: {
-            hasButton: false,
         },
       };
       const wrapper = shallow(<Card {...props} />);
 
-      expect(wrapper.find('.CardBtn').length).toEqual(0);
+      expect(wrapper.find('.CardNotice').length).toEqual(0);
     });
   });
 });

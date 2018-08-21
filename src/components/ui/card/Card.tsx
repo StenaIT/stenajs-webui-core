@@ -87,7 +87,7 @@ export const Card: React.StatelessComponent<CardProps> = ({
             style={{ overflow: 'hidden' }}
           >
             <div className={`${cardContentStyle} ${attr.className}`}>
-              {(attr.hasButton || title) && (
+              {(attr.hasButton || title || !(attr.notice !== undefined)) && (
                 <Border bottom={true}>
                   <Row
                     width="100%"
@@ -113,19 +113,21 @@ export const Card: React.StatelessComponent<CardProps> = ({
                       <Row>
                         <Space />
                           {(attr.notice !== undefined) && (
-                            <Column className={`CardNotice ${cardNoticeContainer}`}>
-                              <Spacing>
-                                <div className={`${cardNotice}`} style={{background:attr.notice.color}}>
-                                  <FontAwesomeIcon icon={attr.notice.icon} />
-                                </div>
-                                <ArrowBox>
-                                  <Spacing>
-                                    <Indent>
-                                      {attr.notice.text}
-                                    </Indent>
-                                  </Spacing>
-                                </ArrowBox>
-                              </Spacing>
+                            <Column className={`${cardNoticeContainer}`}>
+                              <div className="CardNotice">
+                                <Spacing>
+                                  <div className={`${cardNotice}`} style={{background:attr.notice.color}}>
+                                    <FontAwesomeIcon icon={attr.notice.icon} />
+                                  </div>
+                                  <ArrowBox>
+                                    <Spacing>
+                                      <Indent>
+                                        {attr.notice.text}
+                                      </Indent>
+                                    </Spacing>
+                                  </ArrowBox>
+                                </Spacing>
+                              </div>
                             </Column>
                           )}
                         {attr.hasButton && (
