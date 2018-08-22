@@ -26,8 +26,9 @@ export const cardContentStyle = css(`
 export const cardTitleStyle = css(`
     font-size: 15px;
     color: #3A4145;
-    letter-spacing: -0.03px;
+    padding-bottom:1px;
     font-weight: 600;
+    display:block;
 `);
 export const cardNotice = css(`
   height:30px;

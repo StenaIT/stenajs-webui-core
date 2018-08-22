@@ -1,19 +1,14 @@
 import * as React from 'react';
 import {
   cardContentStyle,
-  cardNotice,
-  cardNoticeContainer,
-  cardTitleStyle,
   cardWrapperExpandedStyle,
   cardWrapperStyle,
 } from './CardStyle';
 import { Border } from '../decorations';
-import { Column, Row, Spacing, Space, Indent } from '../layout';
-import { DefaultText } from '../text';
-import { StandardButton } from '../buttons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { ArrowBox } from '../box';
-import { IconProp } from '@fortawesome/fontawesome';
+import { Spacing } from '../layout';
+import { CardContent } from './CardContent';
+import {CardHeader} from "./CardHeader";
+import {CardNotice} from "./CardHeaderNotice";
 
 export interface CardProps {
   /** borderRadius?:          string
@@ -42,11 +37,7 @@ export interface CardAttributes {
   headerSpacingFactor?: number;
   paddingHorizontal?: number;
   paddingVertical?: number;
-  notice?: {
-    color: string;
-    icon: IconProp;
-    text: string;
-  };
+  notice?: CardNotice
 }
 
 export const Card: React.StatelessComponent<CardProps> = ({
@@ -89,81 +80,10 @@ export const Card: React.StatelessComponent<CardProps> = ({
             style={{ overflow: 'hidden' }}
           >
             <div className={`${cardContentStyle} ${attr.className}`}>
-              {(attr.hasButton || title || !(attr.notice !== undefined)) && (
-                <Border bottom={true}>
-                  <Row
-                    width="100%"
-                    alignItems="flex-end"
-                    justifyContent="space-between"
-                  >
-                    <Column
-                      minWidth="300px"
-                      alignSelf="flex-start"
-                      flexGrow={1}
-                    >
-                      <Spacing num={attr.headerSpacingFactor}>
-                        <Row>
-                          <Space />
-                          <DefaultText>
-                            <span className={`${cardTitleStyle}`}>{title}</span>
-                          </DefaultText>
-                          <Space />
-                        </Row>
-                      </Spacing>
-                    </Column>
-                    <Column alignSelf="flex-end" flexGrow={0}>
-                      <Row>
-                        <Space />
-                        {attr.notice !== undefined && (
-                          <Column className={`${cardNoticeContainer}`}>
-                            <div className="CardNotice">
-                              <Spacing>
-                                <div
-                                  className={`${cardNotice}`}
-                                  style={{ background: attr.notice.color }}
-                                >
-                                  <FontAwesomeIcon icon={attr.notice.icon} />
-                                </div>
-                                <ArrowBox>
-                                  <Spacing>
-                                    <Indent>{attr.notice.text}</Indent>
-                                  </Spacing>
-                                </ArrowBox>
-                              </Spacing>
-                            </div>
-                          </Column>
-                        )}
-                        {attr.hasButton && (
-                          <Column className="CardBtn">
-                            <Spacing>
-                              <StandardButton
-                                onClick={onClick}
-                                label={
-                                  isExpanded
-                                    ? attr.btnLabelExpanded
-                                    : attr.btnLabelDefault
-                                }
-                              />
-                            </Spacing>
-                          </Column>
-                        )}
-                        <Space />
-                      </Row>
-                    </Column>
-                  </Row>
-                </Border>
-              )}
-              <Row>
-                <Column className="CardContentWrapper" width="100%">
-                  <Spacing num={attr.paddingVertical}>
-                    <Indent num={attr.paddingHorizontal}>
-                      <Column className="CardContent" width={'100%'}>
-                        {children}
-                      </Column>
-                    </Indent>
-                  </Spacing>
-                </Column>
-              </Row>
+              <CardHeader onClick={onClick} attributes={attr} title={title} isExpanded={isExpanded} />
+              <CardContent paddingHorizontal={attr.paddingHorizontal} paddingVertical={attr.paddingVertical}>
+                {children}
+              </CardContent>
             </div>
           </Border>
         </Shadow>
