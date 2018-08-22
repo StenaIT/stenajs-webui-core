@@ -3,10 +3,10 @@ import * as React from 'react';
 import { Card, CardAttributes, CardProps } from '../Card';
 import { Spacing, Indent } from '../../layout';
 import { cardWrapperExpandedStyle, cardWrapperStyle } from '../CardStyle';
-import {CardContent} from "../CardContent";
-import {CardHeaderButton} from "../CardHeaderButton";
-import {CardHeader} from "../CardHeader";
-import {CardHeaderNotice} from "../CardHeaderNotice";
+import { CardContent } from '../CardContent';
+import { CardHeaderButton } from '../CardHeaderButton';
+import { CardHeader } from '../CardHeader';
+import { CardHeaderNotice } from '../CardHeaderNotice';
 
 describe('Card', () => {
   const config = {
@@ -51,7 +51,12 @@ describe('Card', () => {
       };
       const wrapper = shallow(<Card {...props} />);
 
-      expect(wrapper.find(CardHeader).dive().find(CardHeaderButton).length).toEqual(1);
+      expect(
+        wrapper
+          .find(CardHeader)
+          .dive()
+          .find(CardHeaderButton).length,
+      ).toEqual(1);
       expect(
         wrapper
           .find(CardHeader)
@@ -70,7 +75,12 @@ describe('Card', () => {
       };
       const wrapper = shallow(<Card {...props} />);
 
-      expect(wrapper.find(CardHeader).dive().find(CardHeaderButton).length).toEqual(0);
+      expect(
+        wrapper
+          .find(CardHeader)
+          .dive()
+          .find(CardHeaderButton).length,
+      ).toEqual(0);
     });
   });
   describe('more button', () => {
@@ -84,7 +94,12 @@ describe('Card', () => {
       };
       const wrapper = shallow(<Card {...props} />);
 
-      expect(wrapper.find(CardHeader).dive().find(CardHeaderButton).length).toEqual(1);
+      expect(
+        wrapper
+          .find(CardHeader)
+          .dive()
+          .find(CardHeaderButton).length,
+      ).toEqual(1);
     });
     it('0 - !has button', () => {
       props = {
@@ -96,7 +111,12 @@ describe('Card', () => {
       };
       const wrapper = shallow(<Card {...props} />);
 
-      expect(wrapper.find(CardHeader).dive().find(CardHeaderButton).length).toEqual(0);
+      expect(
+        wrapper
+          .find(CardHeader)
+          .dive()
+          .find(CardHeaderButton).length,
+      ).toEqual(0);
     });
   });
   describe('padding', () => {
@@ -319,7 +339,12 @@ describe('Card', () => {
       };
       const wrapper = shallow(<Card {...props} />);
 
-      expect(wrapper.find(CardHeader).dive().find(CardHeaderNotice).length).toEqual(1);
+      expect(
+        wrapper
+          .find(CardHeader)
+          .dive()
+          .find(CardHeaderNotice).length,
+      ).toEqual(1);
     });
     it('0 - !has notice', () => {
       props = {
@@ -329,7 +354,12 @@ describe('Card', () => {
       };
       const wrapper = shallow(<Card {...props} />);
 
-      expect(wrapper.find(CardHeader).dive().find(CardHeaderNotice).length).toEqual(0);
+      expect(
+        wrapper
+          .find(CardHeader)
+          .dive()
+          .find(CardHeaderNotice).length,
+      ).toEqual(0);
     });
   });
 });

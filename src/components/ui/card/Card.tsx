@@ -7,8 +7,8 @@ import {
 import { Border } from '../decorations';
 import { Spacing } from '../layout';
 import { CardContent } from './CardContent';
-import {CardHeader} from "./CardHeader";
-import {CardNotice} from "./CardHeaderNotice";
+import { CardHeader } from './CardHeader';
+import { CardNotice } from './CardHeaderNotice';
 
 export interface CardProps {
   /** borderRadius?:          string
@@ -37,7 +37,7 @@ export interface CardAttributes {
   headerSpacingFactor?: number;
   paddingHorizontal?: number;
   paddingVertical?: number;
-  notice?: CardNotice
+  notice?: CardNotice;
 }
 
 export const Card: React.StatelessComponent<CardProps> = ({
@@ -80,8 +80,16 @@ export const Card: React.StatelessComponent<CardProps> = ({
             style={{ overflow: 'hidden' }}
           >
             <div className={`${cardContentStyle} ${attr.className}`}>
-              <CardHeader onClick={onClick} attributes={attr} title={title} isExpanded={isExpanded} />
-              <CardContent paddingHorizontal={attr.paddingHorizontal} paddingVertical={attr.paddingVertical}>
+              <CardHeader
+                onClick={onClick}
+                attributes={attr}
+                title={title}
+                isExpanded={isExpanded}
+              />
+              <CardContent
+                paddingHorizontal={attr.paddingHorizontal}
+                paddingVertical={attr.paddingVertical}
+              >
                 {children}
               </CardContent>
             </div>

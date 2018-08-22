@@ -2,10 +2,9 @@ import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Card } from '../../src/components/ui/card/Card';
-import {IconProp} from "@fortawesome/fontawesome/index";
 
 export const addCardStories = () => {
-    storiesOf('Card/Card', module)
+    storiesOf('Card', module)
         .add(
             'no header',
             withInfo({})(() => (
