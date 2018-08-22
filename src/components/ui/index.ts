@@ -5,6 +5,7 @@ export * from './buttons';
 export * from './card';
 export * from './colors';
 export * from './decorations';
+export * from './drawer';
 export * from './form';
 export * from './icon';
 export * from './interaction';
