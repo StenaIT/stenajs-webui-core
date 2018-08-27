@@ -11,6 +11,22 @@ export const drawerWrapperStyle = css(`
     display: block;
     z-index: 9999;
     background: white;
+    
+    .accordion *{
+        box-sizing: border-box;
+    }
+    .accordion__title,
+    .Collapsible__trigger{
+        font-size: 14px;
+        font-family: "Open Sans";
+        border-bottom: 1px solid #ebebeb !important;
+        border-top: 1px solid #ebebeb;
+    }
+    
+    .accordion__body,  
+    .Collapsible__contentInner{
+        padding: 10px 15px;
+    }
 `);
 export const drawerOpenWrapperStyle = css(`
     left: 0;
@@ -25,11 +41,13 @@ export const drawerContentStyle = css(`
 export const collapsibleStyle = css(`
   cursor:pointer;
 
+  .accordion__title,
   .Collapsible__trigger{
       font-size: 14px;
       font-family: "Open Sans";
   }
-    
+  
+  .accordion__body,  
   .Collapsible__contentInner{
     padding: 10px 15px;
   }
@@ -40,11 +58,10 @@ export const collapsibleStaticStyle = css(`
     padding:0;
     text-align:left;
 
-    .Collapsible{
-      &__trigger{
+    .accordion__title,
+    .Collapsible__trigger{
         border-bottom: 1px solid #ebebeb !important;
         border-top: 1px solid #ebebeb;
-      }
     }
 
     &:hover,&:active,&:focus{

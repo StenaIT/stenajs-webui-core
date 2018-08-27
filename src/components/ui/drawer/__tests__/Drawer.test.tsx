@@ -38,4 +38,14 @@ describe('drawer', () => {
         w.find(StandardButton).simulate('click');
         expect(onClick).toBeCalled();
     });
+
+
+    /*
+     ${(isOpen) && `${drawerOpenWrapperStyle} Drawer--open`}`} style={(marginTop) ? {top:marginTop, paddingBottom:marginTop} : {top:0, paddingBottom:0}}>
+        <div className={`DrawerContent ${drawerContentStyle}`}>
+            <Row>
+                <Column width="100%" className="DrawerHeader" style={{textAlign:"right", background: (headerColor) ? headerColor: "#87b758"}}>
+                    <StandardButton label={buttonLabel ? buttonLabel : "Hide filter"} leftIcon={buttonIcon ? buttonIcon : "angle-double-left"} color={(headerColor) ? headerColor: "#87b758"} onClick={onClick} />
+
+     */
 });

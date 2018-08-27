@@ -2,15 +2,14 @@ import * as React from "react";
 
 export interface IDrawerTextProps {
     title?: string,
-    valueString?: string | number
+    value?: string | number
 }
 export const DrawerText: React.StatelessComponent<IDrawerTextProps> = ({
     title,
-    valueString
+    value
 }) => (
     <span>{title} <strong style={{
         float: "right",
-        marginRight: 22,
         fontSize: "0.8em"
-    }}>{valueString}</strong></span>
+    }}>{value}</strong></span>
 )
