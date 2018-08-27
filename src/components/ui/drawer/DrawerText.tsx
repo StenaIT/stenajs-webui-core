@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-export interface IDrawerTextProps {
+export interface DrawerTextProps {
   title?: string;
   value?: string | number;
 }
-export const DrawerText: React.StatelessComponent<IDrawerTextProps> = ({
+export const DrawerText: React.StatelessComponent<DrawerTextProps> = ({
   title,
   value,
 }) => (

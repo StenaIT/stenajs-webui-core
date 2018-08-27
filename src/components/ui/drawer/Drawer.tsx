@@ -9,7 +9,7 @@ import {
   drawerWrapperStyle,
 } from './DrawerStyle';
 
-export interface IDrawerProps {
+export interface DrawerProps {
   isOpen: boolean;
   buttonLabel?: string;
   buttonIcon?: IconProp;
@@ -17,7 +17,7 @@ export interface IDrawerProps {
   onClick: () => void;
   marginTop?: number;
 }
-export const Drawer: React.StatelessComponent<IDrawerProps> = ({
+export const Drawer: React.StatelessComponent<DrawerProps> = ({
   isOpen,
   onClick,
   children,

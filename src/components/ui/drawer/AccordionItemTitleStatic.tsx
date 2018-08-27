@@ -1,12 +1,12 @@
 import * as React from 'react';
 import { collapsibleStaticStyle, collapsibleStyle } from './DrawerStyle';
 
-export interface IDrawerCollapsibleStaticProps {
+export interface DrawerCollapsibleStaticProps {
   onClick: () => void;
 }
 
 export const AccordionItemTitleStatic: React.StatelessComponent<
-  IDrawerCollapsibleStaticProps
+  DrawerCollapsibleStaticProps
 > = ({ onClick, children }) => (
   <button
     className={`${collapsibleStyle} ${collapsibleStaticStyle}`}
