@@ -2,6 +2,7 @@ import { shallow } from 'enzyme';
 import * as React from 'react';
 import {Drawer} from "../Drawer";
 import {StandardButton} from "../../buttons";
+import {IconProp} from "@fortawesome/fontawesome";
 
 
 describe('drawer', () => {
@@ -38,14 +39,98 @@ describe('drawer', () => {
         w.find(StandardButton).simulate('click');
         expect(onClick).toBeCalled();
     });
-
-
-    /*
-     ${(isOpen) && `${drawerOpenWrapperStyle} Drawer--open`}`} style={(marginTop) ? {top:marginTop, paddingBottom:marginTop} : {top:0, paddingBottom:0}}>
-        <div className={`DrawerContent ${drawerContentStyle}`}>
-            <Row>
-                <Column width="100%" className="DrawerHeader" style={{textAlign:"right", background: (headerColor) ? headerColor: "#87b758"}}>
-                    <StandardButton label={buttonLabel ? buttonLabel : "Hide filter"} leftIcon={buttonIcon ? buttonIcon : "angle-double-left"} color={(headerColor) ? headerColor: "#87b758"} onClick={onClick} />
-
-     */
+    describe('attributes', () => {
+        describe( 'margin', () => {
+            it('set',() => {
+                const val = 10;
+                const o = {
+                    ...defaultOptions,
+                    marginTop: val
+                };
+                const w = shallow(<Drawer {...o} />);
+                expect(w.find('.DrawerWrapper').prop('style')).toEqual({
+                    top:val,
+                    paddingBottom:val
+                });
+            });
+            it('not set',() => {
+                const val = 0;
+                const o = {
+                    ...defaultOptions
+                };
+                const w = shallow(<Drawer {...o} />);
+                expect(w.find('.DrawerWrapper').prop('style')).toEqual({
+                    top:val,
+                    paddingBottom:val
+                });
+            });
+        });
+        describe('headerColor', () => {
+            it('set',() => {
+                const val = "#ff0000";
+                const o = {
+                    ...defaultOptions,
+                    headerColor: val
+                };
+                const w = shallow(<Drawer {...o} />);
+                const h = w.find('.DrawerHeader');
+                const b = h.find(StandardButton);
+                expect(h.prop('style')).toEqual({textAlign:"right", background: val});
+                expect(b.prop('color')).toEqual(val);
+            });
+            it('not set',() => {
+                const val = "#87b758";
+                const o = {
+                    ...defaultOptions
+                };
+                const w = shallow(<Drawer {...o} />);
+                const h = w.find('.DrawerHeader');
+                const b = h.find(StandardButton);
+                expect(h.prop('style')).toEqual({textAlign:"right", background: val});
+                expect(b.prop('color')).toEqual(val);
+            });
+        });
+        describe('label', () => {
+            it('set',() => {
+                const val = "Label";
+                const o = {
+                    ...defaultOptions,
+                    buttonLabel: val
+                };
+                const w = shallow(<Drawer {...o} />);
+                const b = w.find('.DrawerHeader').find(StandardButton);
+                expect(b.prop('label')).toEqual(val);
+            });
+            it('not set',() => {
+                const val = "Hide filter";
+                const o = {
+                    ...defaultOptions
+                };
+                const w = shallow(<Drawer {...o} />);
+                const b = w.find('.DrawerHeader').find(StandardButton);
+                expect(b.prop('label')).toEqual(val);
+            });
+        });
+        describe('icon', () => {
+            it('set',() => {
+                const val = "angle-double-right";
+                const o = {
+                    ...defaultOptions,
+                    buttonIcon: val as IconProp
+                };
+                const w = shallow(<Drawer {...o} />);
+                const b = w.find('.DrawerHeader').find(StandardButton);
+                expect(b.prop('leftIcon')).toEqual(val);
+            });
+            it('not set',() => {
+                const val = "angle-double-left";
+                const o = {
+                    ...defaultOptions
+                };
+                const w = shallow(<Drawer {...o} />);
+                const b = w.find('.DrawerHeader').find(StandardButton);
+                expect(b.prop('leftIcon')).toEqual(val);
+            });
+        });
+    });
 });
