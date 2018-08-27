@@ -60,7 +60,7 @@
     "ts-jest": "^22.4.4",
     "tslint-config-prettier": "^1.10.0",
     "tslint-react": "^3.5.1",
-    "typescript": "^2.8.3"
+    "typescript": "2.8.3"
   },
   "dependencies": {
     "@fortawesome/fontawesome": "^1.2.0-6",

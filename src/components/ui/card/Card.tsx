@@ -12,14 +12,15 @@ import { CardNotice } from './CardHeaderNotice';
 
 export interface CardProps {
   /** borderRadius?:          string
-    btnLabelDefault?:       string
-    btnLabelExpanded?:      string
-    className?:             string
-    hasButton?:             boolean
-    headerSpacingFactor?:   number
-    paddingHorizontal?:     number
-    paddingVertical?:       number
-    notice?:{color: string,icon: IconProp,text: string}*/
+   * btnLabelDefault?:       string
+   * btnLabelExpanded?:      string
+   * className?:             string
+   * hasButton?:             boolean
+   * headerSpacingFactor?:   number
+   * paddingHorizontal?:     number
+   * paddingVertical?:       number
+   * notice?:{color: string,icon: IconProp,text: string}
+   */
   attributes?: CardAttributes;
   /** Collapsed or Expanded state */
   isExpanded?: boolean;
