@@ -36,8 +36,6 @@ export const drawerContentStyle = css(`
     overflow-y: scroll;
 `);
 
-
-
 export const collapsibleStyle = css(`
   cursor:pointer;
 
