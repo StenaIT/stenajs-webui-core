@@ -8,6 +8,7 @@ export * from './decorations';
 export * from './form';
 export * from './icon';
 export * from './interaction';
+export * from './label';
 export * from './layout';
 export * from './overlay';
 export * from './positioning';
