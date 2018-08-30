@@ -35,4 +35,18 @@ describe('SpaceComponent', () => {
     const wrapper = shallow(<SpaceComponent theme={theme} />);
     expect(wrapper.find('div').prop('style')!.height).toBe('30px');
   });
+
+  describe('when horizontal flag is on', () => {
+    it('sets height to 1', () => {
+      const wrapper = shallow(<SpaceComponent theme={defaultTheme} horizontal={true}/>);
+      expect(wrapper.find('div').prop('style')!.height).toBe('1px');
+    });
+  });
+
+  describe('when vertical flag is on', () => {
+    it('sets width to 1', () => {
+      const wrapper = shallow(<SpaceComponent theme={defaultTheme} vertical={true}/>);
+      expect(wrapper.find('div').prop('style')!.width).toBe('1px');
+    });
+  });
 });

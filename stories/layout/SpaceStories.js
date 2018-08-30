@@ -3,9 +3,9 @@ import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { Space } from '../../src/components/ui/layout/Space';
 import { UseTheme } from '../../src/components/theme/UseTheme';
+import { Column } from '../../src/components/ui/layout/Column';
 import { Row } from '../../src/components/ui/layout/Row';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
-import {Background} from "../../src/components/ui/colors/Background";
 
 export const addSpaceStories = () => {
   storiesOf('Layout/Space', module)
@@ -86,6 +86,30 @@ export const addSpaceStories = () => {
             <Space />
             <DefaultText>mattias800</DefaultText>
           </Row>
+        </div>
+      )),
+    )
+    .add(
+      'with horizontal',
+      withInfo({ propTablesExclude: [Row, DefaultText] })(() => (
+        <div style={{ display: 'table' }}>
+          <Row>
+            <DefaultText>Username:</DefaultText>
+            <Space horizontal={true}/>
+            <DefaultText>mattias800</DefaultText>
+          </Row>
+        </div>
+      )),
+    )
+    .add(
+      'with vertical',
+      withInfo({ propTablesExclude: [Row, DefaultText] })(() => (
+        <div style={{ display: 'table' }}>
+          <Column>
+            <DefaultText>Username:</DefaultText>
+            <Space />
+            <DefaultText>mattias800</DefaultText>
+          </Column>
         </div>
       )),
     );
