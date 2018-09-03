@@ -3,7 +3,23 @@ import { CSSProperties } from 'react';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
+export type BorderStyle =
+  | 'dashed'
+  | 'dotted'
+  | 'double'
+  | 'groove'
+  | 'hidden'
+  | 'inset'
+  | 'none'
+  | 'outset'
+  | 'ridge'
+  | 'solid';
+
 export interface BorderProps {
+  /** The border style of the border. Ex: '1px solid black' */
+  border?: string;
+  /** The border-style of the border. 'solid' for example. */
+  borderStyle?: BorderStyle;
   /** The width of the border. */
   width?: number;
   /** The color of the border. */
@@ -32,6 +48,8 @@ export interface BorderProps {
   right?: boolean;
   /** Sets overflow of the border div. */
   overflow?: 'auto' | 'hidden' | 'scroll' | 'visible';
+  /** Class name on the border div */
+  className?: string;
 }
 
 export class BorderComponent extends React.Component<
@@ -55,6 +73,8 @@ export class BorderComponent extends React.Component<
       right,
       overflow,
       theme,
+      className,
+      border,
     } = this.props;
     const isAny = top || bottom || left || right;
     const all = !isAny;
@@ -62,6 +82,7 @@ export class BorderComponent extends React.Component<
     return (
       <div
         style={{
+          border,
           borderTopWidth: all || top ? width : undefined,
           borderBottomWidth: all || bottom ? width : undefined,
           borderLeftWidth: all || left ? width : undefined,
@@ -90,6 +111,7 @@ export class BorderComponent extends React.Component<
           ...(borderRadius ? { borderRadius } : undefined),
           ...style,
         }}
+        className={className}
       >
         {children}
       </div>

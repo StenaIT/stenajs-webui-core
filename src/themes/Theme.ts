@@ -1,13 +1,13 @@
 import { ButtonTheme } from '../components/ui/buttons/ButtonTheme';
+import { FlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';
+import { SmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
+import { StandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
 import { CalendarTheme } from '../components/ui/form/calendar/components/CalendarTheme';
 import { SimpleCheckboxTheme } from '../components/ui/form/checkbox/SimpleCheckboxTheme';
 import { DateInputTheme } from '../components/ui/form/date-time-input/DateInputTheme';
 import { DateRangeInputTheme } from '../components/ui/form/date-time-input/DateRangeInputTheme';
 import { DefaultTextInputTheme } from '../components/ui/form/text-input/DefaultTextInputTheme';
 import { SimpleTextInputTheme } from '../components/ui/form/text-input/SimpleTextInputTheme';
-import { StandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
-import { SmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
-import { FlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';
 import { SliderTheme } from '../components/ui/slider/SliderTheme';
 import { TextTheme } from '../components/ui/text/TextTheme';
 

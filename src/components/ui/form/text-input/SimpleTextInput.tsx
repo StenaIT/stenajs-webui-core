@@ -2,10 +2,13 @@ import * as React from 'react';
 import {
   ChangeEvent,
   ChangeEventHandler,
+  ComponentClass,
   CSSProperties,
+  HTMLAttributes,
   KeyboardEvent,
   KeyboardEventHandler,
 } from 'react';
+import styled from 'react-emotion';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 
@@ -14,16 +17,27 @@ import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 export type MoveDirection = 'right' | 'left' | 'down' | 'up';
 
 export interface SimpleTextInputProps {
+  /** The current value shown in the text input. */
   value?: string;
+  /** CSS class name applied to the input element. */
   className?: string;
+  /** onChange callback, called when user triggers a value change in the field. */
   onChange?: (value: string) => void;
+  /** onDone callback, triggered by blur, if the blur was not triggered by esc key. */
   onDone?: (value: string) => void;
+  /** onEsc callback, called user presses the escape key. */
   onEsc?: () => void;
+  /** onEnter callback, called user presses the enter key. This triggers a blur. */
   onEnter?: () => void;
+  /** Width of the input element. */
   width?: string;
+  /** Height of the input element. */
   height?: string;
+  /** If true, field will focus automatically when mounted in DOM. */
   focusOnMount?: boolean;
+  /** If true, all text in the input field will be selected on mount. */
   selectAllOnMount?: boolean;
+  /** If true, cursor will move to the end of the entered text on mount. */
   moveCursorToEndOnMount?: boolean;
   fontSize?: string;
   maxLength?: number;
@@ -32,15 +46,35 @@ export interface SimpleTextInputProps {
   textColor?: string;
   disabled?: boolean;
   placeholder?: string;
+  placeholderColor?: string;
   style?: CSSProperties;
   onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+  /** onMove callback, triggered when user tries to move outside of field using arrow keys, tab or shift+tab. */
   onMove?: (direction: MoveDirection) => void;
   onFocus?: () => void;
+  onBlur?: () => void;
 }
 
 export interface SimpleTextInputState {
   wasCancelled: boolean;
 }
+
+interface WithPlaceholderColor {
+  placeholderColor: string;
+}
+
+type DivElement = React.DetailedHTMLProps<
+  React.InputHTMLAttributes<HTMLInputElement>,
+  HTMLInputElement
+>;
+
+const StyledInput: ComponentClass<
+  HTMLAttributes<HTMLInputElement> & WithPlaceholderColor & DivElement
+> = styled<WithPlaceholderColor, 'input'>('input')`
+  ::placeholder {
+    color: ${({ placeholderColor }) => placeholderColor};
+  }
+`;
 
 class SimpleTextInputComponent extends React.Component<
   SimpleTextInputProps & WithThemeProps,
@@ -142,11 +176,14 @@ class SimpleTextInputComponent extends React.Component<
   };
 
   onBlur = (e: ChangeEvent<any>) => {
-    const { onDone } = this.props;
+    const { onDone, onBlur } = this.props;
     const { value } = e.target;
     const { wasCancelled } = this.state;
     if (onDone && !wasCancelled) {
       onDone(value || '');
+    }
+    if (onBlur) {
+      onBlur();
     }
   };
 
@@ -166,10 +203,11 @@ class SimpleTextInputComponent extends React.Component<
       className,
       theme,
       onFocus,
+      placeholderColor,
     } = this.props;
 
     return (
-      <input
+      <StyledInput
         style={{
           width,
           height: height || theme.components.SimpleTextInput.height,
@@ -182,7 +220,7 @@ class SimpleTextInputComponent extends React.Component<
         }}
         className={className}
         type="text"
-        ref={input => (this.textInput = input)}
+        ref={(input: any) => (this.textInput = input)}
         onKeyDown={this.onKeyDown}
         onChange={this.onChange}
         onBlur={this.onBlur}
@@ -190,6 +228,9 @@ class SimpleTextInputComponent extends React.Component<
         value={value}
         maxLength={maxLength}
         placeholder={placeholder}
+        placeholderColor={
+          placeholderColor || theme.components.SimpleTextInput.placeholderColor
+        }
         size={size}
         disabled={disabled}
       />
