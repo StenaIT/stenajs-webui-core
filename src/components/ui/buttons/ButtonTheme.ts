@@ -1,7 +1,7 @@
-import { defaultFontSizes } from '../../../themes/DefaultThemeValues';
 import {
   defaultColors,
   defaultFonts,
+  defaultFontSizes,
 } from '../../../themes/DefaultThemeValues';
 
 export interface ButtonTheme {
@@ -12,6 +12,7 @@ export interface ButtonTheme {
   font: string;
   fontSize: string;
   borderRadius: string | undefined;
+  numSpacing: number;
 }
 
 export const defaultButtonTheme: ButtonTheme = {
@@ -22,4 +23,5 @@ export const defaultButtonTheme: ButtonTheme = {
   font: defaultFonts.buttons,
   fontSize: defaultFontSizes.normal,
   borderRadius: '3px',
+  numSpacing: 2,
 };

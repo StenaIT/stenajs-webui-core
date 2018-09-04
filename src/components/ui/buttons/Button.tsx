@@ -106,7 +106,7 @@ class ButtonComponent extends React.PureComponent<
             justifyContent={'center'}
             alignItems={'center'}
           >
-            <Space />
+            <Space num={theme.components.Button.numSpacing} />
             {!loading && !success && (leftIcon || left) ? (
               <>
                 {leftIcon ? (
@@ -162,7 +162,7 @@ class ButtonComponent extends React.PureComponent<
             ) : (
               undefined
             )}
-            <Space />
+            <Space num={theme.components.Button.numSpacing} />
           </Row>
         </Background>
       </Border>
