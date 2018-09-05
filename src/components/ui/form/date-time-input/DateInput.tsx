@@ -60,11 +60,13 @@ const DateInputComponent = ({
 }: InnerProps) => (
   <>
     <DefaultTextInput
+      iconLeft={'calendar-alt'}
       onFocus={showCalendar}
       value={value ? format(value, displayFormat) : ''}
       placeholder={placeholder}
       onChange={noop}
       size={9}
+      forceFocusHighlight={showingCalendar}
     />
     {showingCalendar && (
       <Relative>

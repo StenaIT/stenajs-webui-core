@@ -5,6 +5,7 @@ import { UseTheme } from '../../src/components/theme/UseTheme';
 import { DefaultTextInput } from '../../src/components/ui/form/text-input/DefaultTextInput';
 import { SimpleTextInput } from '../../src/components/ui/form/text-input/SimpleTextInput';
 import { DefaultText } from '../../src/components/ui/text';
+import { defaultColors } from '../../src/themes';
 
 export const addTextInputStories = () => {
   storiesOf('Form/TextInput/SimpleTextInput', module)
@@ -55,6 +56,17 @@ export const addTextInputStories = () => {
           iconRight={'paw'}
           iconColorLeft={'red'}
           iconColorRight={'green'}
+        />
+      )),
+    )
+    .add(
+      'with icons and background color',
+      withInfo()(() => (
+        <DefaultTextInput
+          value={'some entered text'}
+          iconLeft={'coffee'}
+          iconRight={'paw'}
+          backgroundColor={defaultColors.errorBgLight}
         />
       )),
     )

@@ -11,9 +11,10 @@ import {
 import { Theme } from '../../../../themes';
 import { withTheme } from '../../../util/enhancers';
 import { WithThemeProps } from '../../../util/enhancers/WithTheme';
+import { Background } from '../../colors';
 import { Border, BorderStyle } from '../../decorations';
 import { Icon } from '../../icon';
-import { Indent, Row } from '../../layout';
+import { Row, Space } from '../../layout';
 import { SimpleTextInput, SimpleTextInputProps } from './SimpleTextInput';
 
 export type __C_DEFAULT_TEXT_INPUT_12491142 = ComponentClass<{}>;
@@ -59,6 +60,8 @@ export interface DefaultTextInputProps extends SimpleTextInputProps {
   iconSizeLeft?: number;
   /** Size of the icon on the right side. */
   iconSizeRight?: number;
+  /** Force focus highlight. */
+  forceFocusHighlight?: boolean;
 }
 
 type InnerProps = DefaultTextInputProps &
@@ -72,6 +75,8 @@ interface TextInputIconProps {
   iconSize?: number;
   iconColor?: string;
   theme: Theme;
+  spaceOnRight?: boolean;
+  spaceOnLeft?: boolean;
 }
 
 const TextInputIcon = ({
@@ -80,12 +85,15 @@ const TextInputIcon = ({
   iconColor,
   iconSize,
   theme,
+  spaceOnLeft,
+  spaceOnRight,
 }: TextInputIconProps) => {
   if (!content && !icon) {
     return null;
   }
   return (
-    <Indent>
+    <>
+      {spaceOnLeft && <Space />}
       {content}
       {!content &&
         icon && (
@@ -95,7 +103,8 @@ const TextInputIcon = ({
             color={iconColor}
           />
         )}
-    </Indent>
+      {spaceOnRight && <Space />}
+    </>
   );
 };
 
@@ -114,6 +123,8 @@ const DefaultTextInputComponent = ({
   iconColorRight,
   iconSizeLeft,
   iconSizeRight,
+  backgroundColor,
+  forceFocusHighlight,
   ...inputProps
 }: InnerProps) => (
   <Border
@@ -123,39 +134,44 @@ const DefaultTextInputComponent = ({
     }
     color={
       borderColor ||
-      (focused
+      (forceFocusHighlight || focused
         ? theme.components.DefaultTextInput.borderColorFocused
         : theme.components.DefaultTextInput.borderColor)
     }
     borderStyle={borderStyle || theme.components.DefaultTextInput.borderStyle}
     width={borderWidth || theme.components.DefaultTextInput.borderWidth}
   >
-    <Row alignItems={'center'}>
-      <TextInputIcon
-        content={contentLeft}
-        icon={iconLeft}
-        iconSize={iconSizeLeft}
-        theme={theme}
-        iconColor={iconColorLeft}
-      />
-      <SimpleTextInput
-        {...inputProps}
-        style={{
-          fontSize: theme.components.DefaultTextInput.fontSize,
-          height: theme.components.DefaultTextInput.height,
-          paddingLeft: theme.components.DefaultTextInput.paddingLeft,
-          paddingRight: theme.components.DefaultTextInput.paddingRight,
-        }}
-        className={inputClass}
-      />
-      <TextInputIcon
-        content={contentRight}
-        icon={iconRight}
-        iconSize={iconSizeRight}
-        theme={theme}
-        iconColor={iconColorRight}
-      />
-    </Row>
+    <Background color={backgroundColor}>
+      <Row alignItems={'center'}>
+        <TextInputIcon
+          content={contentLeft}
+          icon={iconLeft}
+          iconSize={iconSizeLeft}
+          theme={theme}
+          iconColor={iconColorLeft}
+          spaceOnLeft
+        />
+        <SimpleTextInput
+          {...inputProps}
+          backgroundColor={backgroundColor}
+          style={{
+            fontSize: theme.components.DefaultTextInput.fontSize,
+            height: theme.components.DefaultTextInput.height,
+            paddingLeft: theme.components.DefaultTextInput.paddingLeft,
+            paddingRight: theme.components.DefaultTextInput.paddingRight,
+          }}
+          className={inputClass}
+        />
+        <TextInputIcon
+          content={contentRight}
+          icon={iconRight}
+          iconSize={iconSizeRight}
+          theme={theme}
+          iconColor={iconColorRight}
+          spaceOnRight
+        />
+      </Row>
+    </Background>
   </Border>
 );
 

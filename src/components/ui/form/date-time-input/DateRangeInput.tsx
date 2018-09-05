@@ -75,6 +75,7 @@ const DateRangeInputComponent = ({
   hideCalendar,
   displayFormat,
   showingCalendar,
+  showingFocusHighlight,
   placeholderStartDate,
   placeholderEndDate,
   onSelectDateRange,
@@ -90,7 +91,11 @@ const DateRangeInputComponent = ({
   <Column>
     <Row alignItems={'center'}>
       <DefaultTextInput
+        iconLeft={'calendar-alt'}
         onFocus={showCalendarStartDate}
+        forceFocusHighlight={
+          focusedInput === 'startDate' && showingFocusHighlight
+        }
         value={value.startDate ? format(value.startDate, displayFormat) : ''}
         placeholder={placeholderStartDate}
         onChange={noop}
@@ -105,7 +110,11 @@ const DateRangeInputComponent = ({
       <DefaultText>{toText}</DefaultText>
       <Space />
       <DefaultTextInput
+        iconLeft={'calendar-alt'}
         onFocus={showCalendarEndDate}
+        forceFocusHighlight={
+          focusedInput === 'endDate' && showingFocusHighlight
+        }
         value={value.endDate ? format(value.endDate, displayFormat) : ''}
         placeholder={placeholderEndDate}
         onChange={noop}
@@ -145,12 +154,13 @@ const DateRangeInputComponent = ({
 interface WithShowingCalendarStateProps {
   showingCalendar: boolean;
   setShowingCalendar: (showingCalendar: boolean) => void;
+  showingFocusHighlight: boolean;
+  setShowingFocusHighlight: (showingFocusHighlight: boolean) => void;
 }
 
-const withShowingCalendarState = withState(
-  'showingCalendar',
-  'setShowingCalendar',
-  false,
+const withShowingCalendarState = compose(
+  withState('showingCalendar', 'setShowingCalendar', false),
+  withState('showingFocusHighlight', 'setShowingFocusHighlight', false),
 );
 
 interface WithFocusedInputStateProps {
@@ -178,36 +188,57 @@ const withShowCalendarHandlers = withHandlers<
     WithFocusedInputStateProps,
   WithShowCalendarHandlers
 >({
-  showCalendarStartDate: ({ setShowingCalendar, setFocusedInput }) => () => {
+  showCalendarStartDate: ({
+    setShowingCalendar,
+    setShowingFocusHighlight,
+    setFocusedInput,
+  }) => () => {
     setFocusedInput('startDate');
     setShowingCalendar(true);
+    setShowingFocusHighlight(true);
     return true;
   },
-  showCalendarEndDate: ({ setShowingCalendar, setFocusedInput }) => () => {
+  showCalendarEndDate: ({
+    setShowingCalendar,
+    setShowingFocusHighlight,
+    setFocusedInput,
+  }) => () => {
     setFocusedInput('endDate');
     setShowingCalendar(true);
+    setShowingFocusHighlight(true);
     return true;
   },
-  hideCalendar: ({ setShowingCalendar }) => () => {
+  hideCalendar: ({ setShowingCalendar, setShowingFocusHighlight }) => () => {
     setShowingCalendar(false);
+    setShowingFocusHighlight(false);
   },
-  setStartDate: ({ value, onChange, setShowingCalendar, focusedInput }) => (
-    startDate: Date,
-  ) => {
+  setStartDate: ({
+    value,
+    onChange,
+    setShowingCalendar,
+    setShowingFocusHighlight,
+    focusedInput,
+  }) => (startDate: Date) => {
     if (onChange) {
       onChange({ startDate, endDate: value.endDate });
     }
     if (focusedInput === 'endDate') {
+      setShowingFocusHighlight(false);
       setTimeout(() => setShowingCalendar(false), 150);
     }
   },
-  setEndDate: ({ value, onChange, setShowingCalendar, focusedInput }) => (
-    endDate: Date,
-  ) => {
+  setEndDate: ({
+    value,
+    onChange,
+    setShowingCalendar,
+    setShowingFocusHighlight,
+    focusedInput,
+  }) => (endDate: Date) => {
     if (onChange) {
       onChange({ startDate: value.startDate, endDate });
     }
     if (focusedInput === 'endDate') {
+      setShowingFocusHighlight(false);
       setTimeout(() => setShowingCalendar(false), 150);
     }
   },
