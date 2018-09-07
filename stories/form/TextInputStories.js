@@ -9,16 +9,26 @@ import { defaultColors } from '../../src/themes';
 
 export const addTextInputStories = () => {
   storiesOf('Form/TextInput/SimpleTextInput', module)
+    .add(
+      'standard',
+      withInfo()(() => <SimpleTextInput value={'some entered text'} />),
+    )
     .add('empty', withInfo()(() => <SimpleTextInput value={''} />))
+    .add(
+      'focus on mount',
+      withInfo()(() => <SimpleTextInput value={''} focusOnMount />),
+    )
+    .add(
+      'select all on mount',
+      withInfo()(() => (
+        <SimpleTextInput value={'this is selected'} selectAllOnMount />
+      )),
+    )
     .add(
       'with placeholder',
       withInfo()(() => (
         <SimpleTextInput value={''} placeholder={'Enter name'} />
       )),
-    )
-    .add(
-      'standard',
-      withInfo()(() => <SimpleTextInput value={'some entered text'} />),
     );
 
   storiesOf('Form/TextInput/DefaultTextInput', module)

@@ -2,9 +2,7 @@ import * as React from 'react';
 import {
   ChangeEvent,
   ChangeEventHandler,
-  ComponentClass,
   CSSProperties,
-  HTMLAttributes,
   KeyboardEvent,
   KeyboardEventHandler,
 } from 'react';
@@ -63,14 +61,7 @@ interface WithPlaceholderColor {
   placeholderColor: string;
 }
 
-type DivElement = React.DetailedHTMLProps<
-  React.InputHTMLAttributes<HTMLInputElement>,
-  HTMLInputElement
->;
-
-const StyledInput: ComponentClass<
-  HTMLAttributes<HTMLInputElement> & WithPlaceholderColor & DivElement
-> = styled<WithPlaceholderColor, 'input'>('input')`
+const StyledInput = styled<WithPlaceholderColor, 'input'>('input')`
   ::placeholder {
     color: ${({ placeholderColor }) => placeholderColor};
   }
@@ -80,27 +71,23 @@ class SimpleTextInputComponent extends React.Component<
   SimpleTextInputProps & WithThemeProps,
   SimpleTextInputState
 > {
-  textInput: any;
-
   state = {
     wasCancelled: false,
   };
 
+  private textInput = React.createRef<HTMLInputElement>();
+
   componentDidMount() {
-    const {
-      focusOnMount,
-      selectAllOnMount,
-      moveCursorToEndOnMount,
-    } = this.props;
-    if (focusOnMount) {
-      this.textInput.focus();
-    }
+    const { selectAllOnMount, moveCursorToEndOnMount } = this.props;
     if (selectAllOnMount) {
-      this.textInput.setSelectionRange(0, this.textInput.value.length);
+      this.textInput.current!.setSelectionRange(
+        0,
+        this.textInput.current!.value.length,
+      );
     } else if (moveCursorToEndOnMount) {
-      this.textInput.setSelectionRange(
-        this.textInput.value.length,
-        this.textInput.value.length,
+      this.textInput.current!.setSelectionRange(
+        this.textInput.current!.value.length,
+        this.textInput.current!.value.length,
       );
     }
   }
@@ -109,7 +96,7 @@ class SimpleTextInputComponent extends React.Component<
     const { value: nextValue } = nextProps;
     const { value: prevValue } = this.props;
     if (nextValue && nextValue !== prevValue) {
-      this.textInput.value = nextValue;
+      this.textInput.current!.value = nextValue;
     }
   }
 
@@ -125,7 +112,7 @@ class SimpleTextInputComponent extends React.Component<
     const { onEsc, onEnter, onKeyDown, onMove } = this.props;
     const { key } = e;
     if (key === 'Enter') {
-      this.textInput.blur();
+      this.textInput.current!.blur();
       if (onEnter) {
         onEnter();
       }
@@ -144,15 +131,18 @@ class SimpleTextInputComponent extends React.Component<
         this.blurMoveAndCancel('down', e);
       } else if (key === 'ArrowRight') {
         if (
-          this.textInput.value.length === this.textInput.selectionStart &&
-          this.textInput.selectionStart === this.textInput.selectionStart
+          this.textInput.current!.value.length ===
+            this.textInput.current!.selectionStart &&
+          this.textInput.current!.selectionStart ===
+            this.textInput.current!.selectionStart
         ) {
           this.blurMoveAndCancel('right', e);
         }
       } else if (key === 'ArrowLeft') {
         if (
-          this.textInput.selectionStart === 0 &&
-          this.textInput.selectionStart === this.textInput.selectionStart
+          this.textInput.current!.selectionStart === 0 &&
+          this.textInput.current!.selectionStart ===
+            this.textInput.current!.selectionStart
         ) {
           this.blurMoveAndCancel('left', e);
         }
@@ -167,7 +157,7 @@ class SimpleTextInputComponent extends React.Component<
     e: KeyboardEvent<HTMLInputElement>,
   ) => {
     const { onMove } = this.props;
-    this.textInput.blur();
+    this.textInput.current!.blur();
     if (onMove) {
       onMove(direction);
     }
@@ -204,6 +194,8 @@ class SimpleTextInputComponent extends React.Component<
       theme,
       onFocus,
       placeholderColor,
+      focusOnMount,
+      selectAllOnMount,
     } = this.props;
 
     return (
@@ -220,11 +212,12 @@ class SimpleTextInputComponent extends React.Component<
         }}
         className={className}
         type="text"
-        ref={(input: any) => (this.textInput = input)}
+        innerRef={this.textInput}
         onKeyDown={this.onKeyDown}
         onChange={this.onChange}
         onBlur={this.onBlur}
         onFocus={onFocus}
+        autoFocus={focusOnMount || selectAllOnMount}
         value={value}
         maxLength={maxLength}
         placeholder={placeholder}
