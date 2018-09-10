@@ -1,6 +1,6 @@
 {
   "name": "stenajs-webui-core",
-  "version": "0.4.0",
+  "version": "0.4.1",
   "description": "A library of React components made by Stena IT.",
   "sideEffects": false,
   "repository": "https://github.com/StenaIT/stenajs-webui-common",
@@ -17,7 +17,7 @@
     "build-index": "cti -e @types,typings,__test__,__tests__ -i setupTests.ts ./src",
     "build": "npm run lint && npm run clean && npm run build-lib && build-storybook",
     "build-lib-watch": "tsc -w",
-    "build-lib": "npm run clean-build && tsc",
+    "build-lib": "npm run clean-build && ./node_modules/.bin/tsc",
     "test": "react-scripts-ts test --env=jsdom",
     "test:coverage": "npm test -- --coverage",
     "eject": "react-scripts-ts eject",
