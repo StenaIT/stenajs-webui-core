@@ -6,7 +6,7 @@ import {
   KeyboardEvent,
   KeyboardEventHandler,
 } from 'react';
-import styled from 'react-emotion';
+import { css } from 'react-emotion';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 
@@ -56,16 +56,6 @@ export interface SimpleTextInputProps {
 export interface SimpleTextInputState {
   wasCancelled: boolean;
 }
-
-interface WithPlaceholderColor {
-  placeholderColor: string;
-}
-
-const StyledInput = styled<WithPlaceholderColor, 'input'>('input')`
-  ::placeholder {
-    color: ${({ placeholderColor }) => placeholderColor};
-  }
-`;
 
 class SimpleTextInputComponent extends React.Component<
   SimpleTextInputProps & WithThemeProps,
@@ -199,7 +189,7 @@ class SimpleTextInputComponent extends React.Component<
     } = this.props;
 
     return (
-      <StyledInput
+      <input
         style={{
           width,
           height: height || theme.components.SimpleTextInput.height,
@@ -210,9 +200,15 @@ class SimpleTextInputComponent extends React.Component<
           color: textColor || theme.components.SimpleTextInput.textColor,
           ...style,
         }}
-        className={className}
+        className={`${className || ''} ${css({
+          '&::placeholder': {
+            color:
+              placeholderColor ||
+              theme.components.SimpleTextInput.placeholderColor,
+          },
+        })}`}
         type="text"
-        innerRef={this.textInput}
+        ref={this.textInput}
         onKeyDown={this.onKeyDown}
         onChange={this.onChange}
         onBlur={this.onBlur}
@@ -221,9 +217,6 @@ class SimpleTextInputComponent extends React.Component<
         value={value}
         maxLength={maxLength}
         placeholder={placeholder}
-        placeholderColor={
-          placeholderColor || theme.components.SimpleTextInput.placeholderColor
-        }
         size={size}
         disabled={disabled}
       />

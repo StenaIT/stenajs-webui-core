@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { ComponentClass } from 'react';
 import styled from 'react-emotion';
 import { ComponentEnhancer, compose, defaultProps, nest } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers';
@@ -6,7 +7,7 @@ import { Marks } from './TimeSlider';
 
 export declare type __C_SLIDER = ComponentEnhancer<{}, {}>;
 
-const SliderWrapper = styled<WithThemeProps, 'div'>('div')`
+const SliderWrapper: ComponentClass<WithThemeProps> = styled('div')`
   /* Copied from rc-slider/assets/index.css , all modifications are marked "MODIFIED" */
 
   .rc-slider {
@@ -139,6 +140,7 @@ const withDefaultProps = defaultProps({ step: 1 });
 export const createSlider = <TRangeProps extends {}>(
   rangeComponent: React.ComponentType<TRangeProps>,
 ) =>
-  compose<TRangeProps, SliderProps>(withDefaultProps, withTheme)(
-    nest(SliderWrapper, rangeComponent),
-  );
+  compose<TRangeProps & WithThemeProps, SliderProps>(
+    withDefaultProps,
+    withTheme,
+  )(nest(SliderWrapper, rangeComponent));

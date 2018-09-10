@@ -19,4 +19,7 @@ const LargeTextComponent = ({
 export const LargeText = compose<
   LargeTextProps & WithThemeProps,
   LargeTextProps
->(pure, withTheme)(LargeTextComponent);
+>(
+  pure,
+  withTheme,
+)(LargeTextComponent);

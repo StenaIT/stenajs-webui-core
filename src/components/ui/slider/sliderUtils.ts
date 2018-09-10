@@ -13,7 +13,7 @@ export const convertToTimeLabel = (hours: number, minutes: number): string => {
 };
 
 export const getValue = (value: number, max: number): Time => {
-  const minutesPerValue = 60 * 24 / max;
+  const minutesPerValue = (60 * 24) / max;
   const time = value * minutesPerValue;
   return {
     hours: Math.floor(time / 60),
@@ -27,8 +27,8 @@ export const getStringValue = (value: number, max: number): string => {
 };
 
 export const convertTimeToSliderValue = (time: Time, max: number): number => {
-  const hourValue = Math.floor(max / 24 * time.hours);
-  const minuteValue = Math.floor(max / 24 / 60 * time.minutes);
+  const hourValue = Math.floor((max / 24) * time.hours);
+  const minuteValue = Math.floor((max / 24 / 60) * time.minutes);
   return hourValue + minuteValue;
 };
 

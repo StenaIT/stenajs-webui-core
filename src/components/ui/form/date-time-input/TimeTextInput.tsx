@@ -24,4 +24,7 @@ const withTimeProps = withProps<
 export const TimeTextInput = compose<
   DefaultTextInputProps,
   DefaultTextInputProps
->(withTheme, withTimeProps)(DefaultTextInput);
+>(
+  withTheme,
+  withTimeProps,
+)(DefaultTextInput);

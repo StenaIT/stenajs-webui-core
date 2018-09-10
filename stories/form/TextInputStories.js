@@ -29,6 +29,16 @@ export const addTextInputStories = () => {
       withInfo()(() => (
         <SimpleTextInput value={''} placeholder={'Enter name'} />
       )),
+    )
+    .add(
+      'with placeholder color',
+      withInfo()(() => (
+        <SimpleTextInput
+          value={''}
+          placeholder={'Enter name'}
+          placeholderColor={'red'}
+        />
+      )),
     );
 
   storiesOf('Form/TextInput/DefaultTextInput', module)

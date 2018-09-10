@@ -2,7 +2,7 @@ import {
   disabledText,
   successGreenLight,
   white,
-} from '../../../../../themes/Colors';
+} from '../../../../../themes/default-values/Colors';
 
 export interface CalendarTheme {
   width: string;

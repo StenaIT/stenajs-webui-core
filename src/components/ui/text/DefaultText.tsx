@@ -19,4 +19,7 @@ const DefaultTextComponent = ({
 export const DefaultText = compose<
   DefaultTextProps & WithThemeProps,
   DefaultTextProps
->(pure, withTheme)(DefaultTextComponent);
+>(
+  pure,
+  withTheme,
+)(DefaultTextComponent);

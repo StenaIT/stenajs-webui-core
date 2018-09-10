@@ -4,9 +4,8 @@ export interface TextColorProps {
   color?: string;
 }
 
-export const TextColor: StyledComponent<TextColorProps, {}, {}> = styled<
-  TextColorProps,
-  'div'
->('div')(({ color }) => ({
+export const TextColor: StyledComponent<TextColorProps, {}, {}> = styled('div')<
+  TextColorProps
+>(({ color }) => ({
   color: color,
 }));

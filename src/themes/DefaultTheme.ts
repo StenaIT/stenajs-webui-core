@@ -18,12 +18,11 @@ import {
   defaultSmallTextTheme,
   defaultTinyTextTheme,
 } from '../components/ui/text/TextTheme';
-import {
-  defaultColors,
-  defaultFonts,
-  defaultFontSizes,
-  defaultMetrics,
-} from './DefaultThemeValues';
+import { defaultSelectTheme } from '../enhancers/select/SelectTheme';
+import { defaultColors } from './default-values/DefaultColors';
+import { defaultFonts } from './default-values/DefaultFonts';
+import { defaultFontSizes } from './default-values/DefaultFontSizes';
+import { defaultMetrics } from './default-values/DefaultMetrics';
 import { Theme } from './Theme';
 
 export const defaultTheme: Theme = {
@@ -49,6 +48,7 @@ export const defaultTheme: Theme = {
     DateInput: defaultDateInputTheme,
     DateRangeInput: defaultDateRangeInputTheme,
     Calendar: defaultCalendarTheme,
+    Select: defaultSelectTheme,
     Slider: defaultSliderTheme,
   },
 };

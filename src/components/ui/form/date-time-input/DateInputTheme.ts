@@ -1,4 +1,4 @@
-import { separator, white } from '../../../../themes/Colors';
+import { separator, white } from '../../../../themes/default-values/Colors';
 import {
   CalendarTheme,
   defaultCalendarTheme,

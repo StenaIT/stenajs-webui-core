@@ -19,4 +19,7 @@ const SmallTextComponent = ({
 export const SmallText = compose<
   SmallTextProps & WithThemeProps,
   SmallTextProps
->(pure, withTheme)(SmallTextComponent);
+>(
+  pure,
+  withTheme,
+)(SmallTextComponent);

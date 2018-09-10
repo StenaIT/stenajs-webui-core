@@ -52,13 +52,15 @@ export interface ButtonTextProps {
   fontSize: string;
 }
 
-const ButtonText = styled<ButtonTextProps, 'span'>('span')(
-  ({ color, fontFamily, fontSize }) => ({
+const ButtonText = styled('span')<ButtonTextProps>(
+  {
     fontWeight: 100,
+    letterSpacing: '1px',
+  },
+  ({ color, fontFamily, fontSize }) => ({
     fontSize,
     color,
     fontFamily,
-    letterSpacing: '1px',
   }),
 );
 

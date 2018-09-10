@@ -1,5 +1,5 @@
 import { CSSProperties } from 'react';
-import styled, { StyledComponent } from 'react-emotion';
+import styled from 'react-emotion';
 
 export interface BackgroundProps {
   color?: string;
@@ -8,13 +8,12 @@ export interface BackgroundProps {
   style?: CSSProperties;
 }
 
-export const Background: StyledComponent<BackgroundProps, {}, {}> = styled<
-  BackgroundProps,
-  'div'
->('div')(({ color, height, hoverColor }) => ({
-  backgroundColor: color,
-  height,
-  ':hover': {
-    backgroundColor: hoverColor,
-  },
-}));
+export const Background = styled('div')<BackgroundProps>(
+  ({ color, height, hoverColor }) => ({
+    backgroundColor: color,
+    height,
+    ':hover': {
+      backgroundColor: hoverColor,
+    },
+  }),
+);

@@ -1,4 +1,4 @@
-import { defaultColors } from '../../../themes/DefaultThemeValues';
+import { defaultColors } from '../../../themes/default-values/DefaultColors';
 
 export interface FlatButtonTheme {
   textColor: string;

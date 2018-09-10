@@ -96,4 +96,7 @@ const clickHandlers = withHandlers({
 export const OverlayToggleButton = compose<
   InnerProps,
   OverlayToggleButtonProps
->(openState, clickHandlers)(OverlayToggleButtonComponent);
+>(
+  openState,
+  clickHandlers,
+)(OverlayToggleButtonComponent);

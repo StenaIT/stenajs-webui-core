@@ -19,4 +19,7 @@ const HeaderTextComponent = ({
 export const HeaderText = compose<
   HeaderTextProps & WithThemeProps,
   HeaderTextProps
->(pure, withTheme)(HeaderTextComponent);
+>(
+  pure,
+  withTheme,
+)(HeaderTextComponent);

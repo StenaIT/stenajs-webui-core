@@ -13,7 +13,7 @@ export const withTheme = <
 >(
   WrappedComponent: React.ComponentType<WrappedComponentProps>,
 ): React.ComponentType<OuterProps> => {
-  class WithThemeComponent extends React.Component<OuterProps> {
+  class WithThemeComponent extends React.Component<WrappedComponentProps> {
     renderWrappedComponent = (theme: Theme) => {
       return <WrappedComponent {...this.props} theme={theme} />;
     };
@@ -23,7 +23,7 @@ export const withTheme = <
     }
   }
 
-  return compose<OuterProps, OuterProps>(setDisplayName('withTheme()'))(
-    WithThemeComponent,
-  );
+  return compose<WrappedComponentProps, OuterProps>(
+    setDisplayName('withTheme()'),
+  )(WithThemeComponent);
 };

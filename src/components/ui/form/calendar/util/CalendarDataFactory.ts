@@ -143,7 +143,7 @@ export const calculateOverflowingMonth = (
     return { year: year + Math.floor(month / 12), month: month % 12 };
   }
   if (month < Months.JANUARY) {
-    return { year: year + Math.floor(month / 12), month: 12 + month % 12 };
+    return { year: year + Math.floor(month / 12), month: 12 + (month % 12) };
   }
   return { year, month };
 };

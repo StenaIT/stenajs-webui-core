@@ -75,6 +75,7 @@ const withSliderProps = withProps<SliderProps, InnerProps>(
 export const createTimeSlider = <TRangeProps extends {}>(
   rangeComponent: React.ComponentType<TRangeProps>,
 ) =>
-  compose<SliderProps, TimeSliderProps>(withOnSliderChange, withSliderProps)(
-    createSlider(rangeComponent),
-  );
+  compose<SliderProps, TimeSliderProps>(
+    withOnSliderChange,
+    withSliderProps,
+  )(createSlider(rangeComponent));

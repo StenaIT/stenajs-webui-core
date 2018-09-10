@@ -1,4 +1,4 @@
-import { defaultColors } from '../../../../themes/DefaultThemeValues';
+import { defaultColors } from '../../../../themes/default-values/DefaultColors';
 import { BorderStyle } from '../../decorations';
 
 export interface DefaultTextInputTheme {
@@ -16,8 +16,8 @@ export interface DefaultTextInputTheme {
 
 export const defaultDefaultTextInputTheme: DefaultTextInputTheme = {
   borderRadius: '4px',
-  borderColor: defaultColors.separator,
-  borderColorFocused: '#605988',
+  borderColor: defaultColors.inputBorder,
+  borderColorFocused: defaultColors.inputBorderFocused,
   borderStyle: 'solid',
   borderWidth: 1,
   fontSize: '13px',

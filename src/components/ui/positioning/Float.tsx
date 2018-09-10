@@ -5,10 +5,9 @@ export interface FloatProps {
   left?: boolean;
 }
 
-export const Float: StyledComponent<FloatProps, {}, {}> = styled<
-  FloatProps,
-  'div'
->('div')(props => ({
+export const Float: StyledComponent<FloatProps, {}, {}> = styled('div')<
+  FloatProps
+>(props => ({
   float: getFloat(props),
 }));
 

@@ -18,3 +18,5 @@ export const alertText = '#dbdb51';
 export const alertTextLight = '#edec8a';
 export const infoBlue = '#7a77c3';
 export const infoBlueLight = '#e6e5ff';
+export const inputBorder = '#cccdcf';
+export const inputBorderFocused = '#605988';

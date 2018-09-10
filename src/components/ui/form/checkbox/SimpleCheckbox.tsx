@@ -58,7 +58,11 @@ const withOnChangeHandler = withHandlers({
 export const SimpleCheckbox = compose<
   InnerPropsForSimpleCheckboxComponent,
   SimpleCheckboxProps
->(pure, withOnChangeHandler, withTheme)(SimpleCheckboxComponent);
+>(
+  pure,
+  withOnChangeHandler,
+  withTheme,
+)(SimpleCheckboxComponent);
 
 const getColor = (
   value?: boolean,

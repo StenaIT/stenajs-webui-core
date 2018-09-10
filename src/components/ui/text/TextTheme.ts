@@ -1,7 +1,5 @@
-import {
-  defaultFonts,
-  defaultFontSizes,
-} from '../../../themes/DefaultThemeValues';
+import { defaultFonts } from '../../../themes/default-values/DefaultFonts';
+import { defaultFontSizes } from '../../../themes/default-values/DefaultFontSizes';
 
 export interface TextTheme {
   fontSize: string;

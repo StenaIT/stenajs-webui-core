@@ -19,4 +19,7 @@ const SectionHeaderTextComponent = ({
 export const SectionHeaderText = compose<
   SectionHeaderTextProps & WithThemeProps,
   SectionHeaderTextProps
->(pure, withTheme)(SectionHeaderTextComponent);
+>(
+  pure,
+  withTheme,
+)(SectionHeaderTextComponent);

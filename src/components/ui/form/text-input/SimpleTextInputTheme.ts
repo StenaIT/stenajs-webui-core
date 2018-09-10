@@ -1,8 +1,6 @@
-import {
-  defaultColors,
-  defaultFonts,
-  defaultFontSizes,
-} from '../../../../themes/DefaultThemeValues';
+import { defaultColors } from '../../../../themes/default-values/DefaultColors';
+import { defaultFonts } from '../../../../themes/default-values/DefaultFonts';
+import { defaultFontSizes } from '../../../../themes/default-values/DefaultFontSizes';
 
 export interface SimpleTextInputTheme {
   fontSize: string;
