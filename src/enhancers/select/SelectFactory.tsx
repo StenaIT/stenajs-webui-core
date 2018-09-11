@@ -1,3 +1,4 @@
+import { merge } from 'lodash';
 import * as React from 'react';
 import { Props as AsyncProps } from 'react-select/lib/Async';
 import { Props as SelectProps } from 'react-select/lib/Select';
@@ -120,17 +121,24 @@ const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
     ...base,
     backgroundColor: selectTheme.multiSelect.backgroundColor,
   }),
+  loadingMessage: base => ({
+    ...base,
+    color: selectTheme.loadingIndicator.textColor,
+    fontFamily: selectTheme.input.fontFamily,
+    fontSize: selectTheme.input.fontSize,
+  }),
 });
 
 interface WithStyles {
   styles: StylesConfig;
 }
 
-const withStyles = withProps<WithStyles, WithSelectTheme>(
-  ({ selectTheme }) => ({
-    styles: customStyles(selectTheme),
-  }),
-);
+const withStyles = (userStyle?: StylesConfig) =>
+  withProps<WithStyles, WithSelectTheme>(({ selectTheme }) => ({
+    styles: userStyle
+      ? merge(customStyles(selectTheme), userStyle)
+      : customStyles(selectTheme),
+  }));
 
 interface WithSelectTheme {
   selectTheme: SelectTheme;
@@ -144,19 +152,21 @@ const withSelectTheme = (overridingTheme: SelectTheme | undefined) =>
 export const createSelect = <T extends {}>(
   selectComponent: React.ComponentType<SelectProps<T>>,
   theme?: SelectTheme,
+  userStyle?: StylesConfig,
 ) =>
   compose<SelectProps<T>, SelectProps<T>>(
     withTheme,
     withSelectTheme(theme),
-    withStyles,
+    withStyles(userStyle),
   )(selectComponent);
 
 export const createAsyncSelect = <T extends {}>(
   selectComponent: React.ComponentType<AsyncProps<T>>,
   theme?: SelectTheme,
+  userStyle?: StylesConfig,
 ) =>
   compose<AsyncProps<T>, AsyncProps<T>>(
     withTheme,
     withSelectTheme(theme),
-    withStyles,
+    withStyles(userStyle),
   )(selectComponent);

@@ -6,6 +6,11 @@ import { Background } from '../../src/components/ui/colors';
 import { Indent, Spacing } from '../../src/components/ui/layout';
 import { createSelect } from '../../src/enhancers/select/SelectFactory';
 import { selectThemeDark } from '../../src/enhancers/select/SelectTheme';
+import {
+  ExampleAsyncCustomTheme,
+  ExampleAsyncSelect,
+  ExampleAsyncSelectDark,
+} from '../../src/examples/select/ExampleSelect';
 
 const StyledSelect = createSelect(Select);
 const StyledSelectDark = createSelect(Select, selectThemeDark);
@@ -112,6 +117,22 @@ export const addSelectStories = () => {
                     },
                   ]}
                 />
+              </Spacing>
+            </Indent>
+          </Background>
+        </div>
+      )),
+    )
+    .add('with custom theme', withInfo()(() => <ExampleAsyncCustomTheme />))
+    .add('async select', withInfo()(() => <ExampleAsyncSelect />))
+    .add(
+      'async select dark',
+      withInfo()(() => (
+        <div style={{ width: '600px' }}>
+          <Background color={'#2e4662'}>
+            <Indent num={4}>
+              <Spacing num={4}>
+                <ExampleAsyncSelectDark />
               </Spacing>
             </Indent>
           </Background>

@@ -27,6 +27,9 @@ export interface SelectTheme {
     placeholderColor: string;
     textColor: string;
   };
+  loadingIndicator: {
+    textColor: string;
+  };
   menu: {
     disabledTextColor: string;
     disabledBackgroundColor: string | undefined;
@@ -71,6 +74,9 @@ export const defaultSelectTheme: SelectTheme = {
     placeholderColor: defaultColors.separator,
     textColor: defaultColors.primaryText,
   },
+  loadingIndicator: {
+    textColor: defaultColors.primaryText,
+  },
   menu: {
     disabledTextColor: defaultColors.disabledText,
     disabledBackgroundColor: undefined,
@@ -113,6 +119,9 @@ export const selectThemeDark: SelectTheme = {
     fontSize: defaultFontSizes.normal,
     height: '34px',
     placeholderColor: defaultColors.white,
+    textColor: defaultColors.white,
+  },
+  loadingIndicator: {
     textColor: defaultColors.white,
   },
   menu: {

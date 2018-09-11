@@ -2,7 +2,7 @@ import * as React from 'react';
 import { CSSProperties } from 'react';
 import styled from 'react-emotion';
 
-export const __C_BACKGROUND = <div/>;
+export const __C_BACKGROUND = <div />;
 
 export interface BackgroundProps {
   color?: string;
