@@ -39,6 +39,10 @@ export interface SelectTheme {
     hoverBackgroundColor: string;
     selectedItemTextColor: string;
     selectedItemBackgroundColor: string;
+    zIndex: number;
+  };
+  menuPortal: {
+    zIndex: number;
   };
   multiSelect: {
     backgroundColor: string;
@@ -86,6 +90,10 @@ export const defaultSelectTheme: SelectTheme = {
     hoverBackgroundColor: '#F2F3F5',
     selectedItemTextColor: defaultColors.primaryText,
     selectedItemBackgroundColor: '#B9D8DF',
+    zIndex: 1,
+  },
+  menuPortal: {
+    zIndex: 1,
   },
   multiSelect: {
     backgroundColor: '#B9D8DF',
@@ -133,6 +141,10 @@ export const selectThemeDark: SelectTheme = {
     hoverBackgroundColor: '#6F7E90',
     selectedItemTextColor: '#226F81',
     selectedItemBackgroundColor: '#B9D8DF',
+    zIndex: 1,
+  },
+  menuPortal: {
+    zIndex: 1,
   },
   multiSelect: {
     backgroundColor: '#B9D8DF',

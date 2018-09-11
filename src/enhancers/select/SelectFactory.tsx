@@ -106,6 +106,11 @@ const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
     ...base,
     backgroundColor: selectTheme.menu.backgroundColor,
     color: selectTheme.menu.textColor,
+    zIndex: selectTheme.menu.zIndex,
+  }),
+  menuPortal: base => ({
+    ...base,
+    zIndex: selectTheme.menuPortal.zIndex,
   }),
   multiValueRemove: (styles, { data }) => ({
     ...styles,
@@ -133,20 +138,28 @@ interface WithStyles {
   styles: StylesConfig;
 }
 
+const mergeStyles = (
+  themeStyle: StylesConfig,
+  userStyle?: StylesConfig,
+): StylesConfig => {
+  if (!userStyle) {
+    return themeStyle;
+  }
+  return merge({}, themeStyle, userStyle);
+};
+
 const withStyles = (userStyle?: StylesConfig) =>
   withProps<WithStyles, WithSelectTheme>(({ selectTheme }) => ({
-    styles: userStyle
-      ? merge(customStyles(selectTheme), userStyle)
-      : customStyles(selectTheme),
+    styles: mergeStyles(customStyles(selectTheme), userStyle),
   }));
 
 interface WithSelectTheme {
   selectTheme: SelectTheme;
 }
 
-const withSelectTheme = (overridingTheme: SelectTheme | undefined) =>
+const withSelectTheme = (overridingTheme: Partial<SelectTheme> | undefined) =>
   withProps<WithSelectTheme, WithThemeProps>(({ theme }) => ({
-    selectTheme: overridingTheme || theme.components.Select,
+    selectTheme: merge({}, theme.components.Select, overridingTheme),
   }));
 
 export const createSelect = <T extends {}>(
@@ -162,7 +175,7 @@ export const createSelect = <T extends {}>(
 
 export const createAsyncSelect = <T extends {}>(
   selectComponent: React.ComponentType<AsyncProps<T>>,
-  theme?: SelectTheme,
+  theme?: Partial<SelectTheme>,
   userStyle?: StylesConfig,
 ) =>
   compose<AsyncProps<T>, AsyncProps<T>>(
