@@ -1,0 +1,34 @@
+import { withInfo } from '@storybook/addon-info';
+import { storiesOf } from '@storybook/react';
+import * as React from 'react';
+import { Background } from '../../src/components/ui/colors';
+import { Shadow } from '../../src/components/ui/decorations';
+import { SeparatorLine } from '../../src/components/ui/decorations/SeparatorLine';
+import { Indent, Spacing } from '../../src/components/ui/layout';
+import { LargeText } from '../../src/components/ui/text';
+import { DefaultText } from '../../src/components/ui/text/DefaultText';
+
+export const addSeparatorLineStories = () => {
+  storiesOf('Decorators/SeparatorLine', module).add(
+    'default',
+    withInfo({ propTablesExclude: [DefaultText] })(() => (
+      <div style={{ width: '300px' }}>
+        <Shadow>
+          <Background color={'#ffff'}>
+            <Spacing>
+              <Indent>
+                <LargeText>Some title</LargeText>
+              </Indent>
+            </Spacing>
+            <SeparatorLine />
+            <Spacing>
+              <Indent>
+                <DefaultText>Some content.</DefaultText>
+              </Indent>
+            </Spacing>
+          </Background>
+        </Shadow>
+      </div>
+    )),
+  );
+};

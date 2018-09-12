@@ -2,6 +2,7 @@ import { defaultButtonTheme } from '../components/ui/buttons/ButtonTheme';
 import { defaultFlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';
 import { defaultSmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
 import { defaultStandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
+import { defaultSeparatorLineTheme } from '../components/ui/decorations/SeparatorLineTheme';
 import { defaultCalendarTheme } from '../components/ui/form/calendar/components/CalendarTheme';
 import { defaultSimpleCheckboxTheme } from '../components/ui/form/checkbox/SimpleCheckboxTheme';
 import { defaultDateInputTheme } from '../components/ui/form/date-time-input/DateInputTheme';
@@ -49,6 +50,7 @@ export const defaultTheme: Theme = {
     DateRangeInput: defaultDateRangeInputTheme,
     Calendar: defaultCalendarTheme,
     Select: defaultSelectTheme,
+    SeparatorLine: defaultSeparatorLineTheme,
     Slider: defaultSliderTheme,
   },
 };

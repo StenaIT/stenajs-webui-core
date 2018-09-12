@@ -4,6 +4,7 @@ import {
   SmallButtonTheme,
   StandardButtonTheme,
 } from '../../components/ui/buttons/index';
+import { SeparatorLineTheme } from '../../components/ui/decorations/SeparatorLineTheme';
 import { CalendarTheme } from '../../components/ui/form/calendar/components/index';
 import { SimpleCheckboxTheme } from '../../components/ui/form/checkbox/index';
 import {
@@ -37,5 +38,6 @@ export interface ComponentThemes {
   DateRangeInput: DateRangeInputTheme;
   Calendar: CalendarTheme;
   Select: SelectTheme;
+  SeparatorLine: SeparatorLineTheme;
   Slider: SliderTheme;
 }
