@@ -1,16 +1,15 @@
-import * as React from 'react';
-import { Theme } from '../../themes';
-import { ThemeContext } from './ThemeContext';
-import { defaultTheme } from '../../themes';
 import { merge } from 'lodash';
+import * as React from 'react';
+import { defaultTheme, OverridingTheme, Theme } from '../../themes';
+import { ThemeContext } from './ThemeContext';
 
 export interface UseThemeProps {
-  theme: Partial<Theme>;
+  theme: OverridingTheme;
   children: {};
 }
 
 export const UseTheme = ({ theme, children }: UseThemeProps) => {
-  const mergedTheme: Theme = merge<{}, Theme, Partial<Theme>>(
+  const mergedTheme: Theme = merge<{}, Theme, OverridingTheme>(
     {},
     defaultTheme,
     theme,

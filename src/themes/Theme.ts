@@ -1,3 +1,4 @@
+import { DeepPartial } from '../types/DeepPartial';
 import { ComponentThemes } from './theme-types/ComponentThemes';
 import { ThemeColors } from './theme-types/ThemeColors';
 import { ThemeFonts } from './theme-types/ThemeFonts';
@@ -11,3 +12,5 @@ export interface Theme {
   fontSizes: ThemeFontSizes;
   components: ComponentThemes;
 }
+
+export type OverridingTheme = DeepPartial<Theme>;
