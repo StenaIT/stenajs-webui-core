@@ -68,6 +68,78 @@ export const addTextInputStories = () => {
       )),
     )
     .add(
+      'with content right',
+      withInfo()(() => (
+        <DefaultTextInput
+          value={'some entered text'}
+          contentRight={<DefaultText>ms</DefaultText>}
+        />
+      )),
+    )
+    .add(
+      'with content and no content padding',
+      withInfo()(() => (
+        <DefaultTextInput
+          value={'some entered text'}
+          contentLeft={<DefaultText>W</DefaultText>}
+          contentRight={
+            <div
+              style={{
+                marginRight: '2px',
+                width: '32px',
+                height: '32px',
+                backgroundColor: 'red',
+                borderRadius: '4px',
+              }}
+            />
+          }
+          disableContentPadding
+        />
+      )),
+    )
+    .add(
+      'with content and no content padding right',
+      withInfo()(() => (
+        <DefaultTextInput
+          value={'some entered text'}
+          contentLeft={<DefaultText>W</DefaultText>}
+          contentRight={
+            <div
+              style={{
+                marginRight: '2px',
+                width: '32px',
+                height: '32px',
+                backgroundColor: 'red',
+                borderRadius: '4px',
+              }}
+            />
+          }
+          disableContentPaddingRight
+        />
+      )),
+    )
+    .add(
+      'with content and no content padding left',
+      withInfo()(() => (
+        <DefaultTextInput
+          value={'some entered text'}
+          contentRight={<DefaultText>W</DefaultText>}
+          contentLeft={
+            <div
+              style={{
+                marginRight: '2px',
+                width: '32px',
+                height: '32px',
+                backgroundColor: 'red',
+                borderRadius: '4px',
+              }}
+            />
+          }
+          disableContentPaddingLeft
+        />
+      )),
+    )
+    .add(
       'with icons with colors',
       withInfo()(() => (
         <DefaultTextInput

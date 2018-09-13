@@ -48,6 +48,12 @@ export interface DefaultTextInputProps extends SimpleTextInputProps {
   contentLeft?: ReactNode;
   /** React node to put to the right. Right icon is ignored if this is set. */
   contentRight?: ReactNode;
+  /** If true, there will be no padding between contentLeft/contentRight and the border. */
+  disableContentPadding?: boolean;
+  /** If true, there will be no padding between contentLeft and the border. */
+  disableContentPaddingLeft?: boolean;
+  /** If true, there will be no padding between contentRight and the border. */
+  disableContentPaddingRight?: boolean;
   /** Icon on the left side. */
   iconLeft?: IconProp;
   /** Icon on the right side. */
@@ -77,6 +83,9 @@ interface TextInputIconProps {
   theme: Theme;
   spaceOnRight?: boolean;
   spaceOnLeft?: boolean;
+  disableContentPadding?: boolean;
+  disableContentPaddingLeft?: boolean;
+  disableContentPaddingRight?: boolean;
 }
 
 const TextInputIcon = ({
@@ -87,22 +96,36 @@ const TextInputIcon = ({
   theme,
   spaceOnLeft,
   spaceOnRight,
+  disableContentPadding,
+  disableContentPaddingLeft,
+  disableContentPaddingRight,
 }: TextInputIconProps) => {
   if (!content && !icon) {
     return null;
   }
+
+  if (content) {
+    return (
+      <>
+        {spaceOnLeft &&
+          !(disableContentPadding || disableContentPaddingLeft) && <Space />}
+        {content}
+        {spaceOnRight &&
+          !(disableContentPadding || disableContentPaddingRight) && <Space />}
+      </>
+    );
+  }
+
   return (
     <>
       {spaceOnLeft && <Space />}
-      {content}
-      {!content &&
-        icon && (
-          <Icon
-            name={icon}
-            size={iconSize || theme.components.DefaultTextInput.iconSize}
-            color={iconColor}
-          />
-        )}
+      {icon && (
+        <Icon
+          name={icon}
+          size={iconSize || theme.components.DefaultTextInput.iconSize}
+          color={iconColor}
+        />
+      )}
       {spaceOnRight && <Space />}
     </>
   );
@@ -125,6 +148,9 @@ const DefaultTextInputComponent = ({
   iconSizeRight,
   backgroundColor,
   forceFocusHighlight,
+  disableContentPadding = false,
+  disableContentPaddingLeft = false,
+  disableContentPaddingRight = false,
   ...inputProps
 }: InnerProps) => (
   <Border
@@ -150,6 +176,9 @@ const DefaultTextInputComponent = ({
           theme={theme}
           iconColor={iconColorLeft}
           spaceOnLeft
+          disableContentPadding={disableContentPadding}
+          disableContentPaddingLeft={disableContentPaddingLeft}
+          disableContentPaddingRight={disableContentPaddingRight}
         />
         <SimpleTextInput
           {...inputProps}
@@ -169,6 +198,9 @@ const DefaultTextInputComponent = ({
           theme={theme}
           iconColor={iconColorRight}
           spaceOnRight
+          disableContentPadding={disableContentPadding}
+          disableContentPaddingLeft={disableContentPaddingLeft}
+          disableContentPaddingRight={disableContentPaddingRight}
         />
       </Row>
     </Background>
