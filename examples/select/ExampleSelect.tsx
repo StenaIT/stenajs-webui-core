@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Async } from 'react-select';
-import { createAsyncSelect } from '../../enhancers/select/SelectFactory';
-import { selectThemeDark } from '../../enhancers/select/SelectTheme';
+import { createAsyncSelect } from '../../src/enhancers/select/SelectFactory';
+import { selectThemeDark } from '../../src/enhancers/select/SelectTheme';
 
 const AsyncSelect = createAsyncSelect(Async);
 const AsyncSelectDark = createAsyncSelect(Async, selectThemeDark);

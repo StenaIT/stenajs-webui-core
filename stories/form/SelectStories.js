@@ -10,7 +10,7 @@ import {
   ExampleAsyncCustomTheme,
   ExampleAsyncSelect,
   ExampleAsyncSelectDark,
-} from '../../src/examples/select/ExampleSelect';
+} from '../../examples/select/ExampleSelect';
 
 const StyledSelect = createSelect(Select);
 const StyledSelectDark = createSelect(Select, selectThemeDark);

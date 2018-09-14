@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Row } from '../../../components/ui/layout';
+import { Row } from '../../../src/components/ui/layout/index';
 import {
   OnCellFocusEvent,
   OnCellMoveEvent,
-} from '../../../enhancers/table/WithTableNavigation';
+} from '../../../src/enhancers/table/WithTableNavigation';
 import { CellData, SetCellFunc } from '../ExampleTable';
 import { TableCell } from './TableCell';
 

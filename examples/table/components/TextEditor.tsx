@@ -3,7 +3,7 @@ import { compose, lifecycle, withHandlers, withState } from 'recompose';
 import {
   SimpleTextInput,
   SimpleTextInputProps,
-} from '../../../components/ui/form/text-input';
+} from '../../../src/components/ui/form/text-input/index';
 
 export interface TextEditorProps extends SimpleTextInputProps {
   enteredText: string;

@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { compose, withHandlers, withState } from 'recompose';
-import { Background } from '../../components/ui/colors';
-import { Indent, Space } from '../../components/ui/layout';
+import { Background } from '../../src/components/ui/colors/index';
+import { Indent, Space } from '../../src/components/ui/layout/index';
 import {
   OnCellFocusEvent,
   OnCellMoveEvent,
-} from '../../enhancers/table/WithTableNavigation';
+} from '../../src/enhancers/table/WithTableNavigation';
 import { ExampleTable } from './ExampleTable';
 
 type InnerProps = WithDataStateProps & WithOnCellFocusProps;

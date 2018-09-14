@@ -1,16 +1,16 @@
 import * as React from 'react';
 import styled from 'react-emotion';
 import { compose } from 'recompose';
-import { Border } from '../../../components/ui/decorations';
-import { withDivCopyPasteListener } from '../../../components/ui/interaction/CopyPasteListener';
-import { Row } from '../../../components/ui/layout';
-import { DefaultText } from '../../../components/ui/text';
-import { CellIdGenerator } from '../../../enhancers/table/internal/WithEditStateHandler';
+import { Border } from '../../../src/components/ui/decorations/index';
+import { withDivCopyPasteListener } from '../../../src/components/ui/interaction/CopyPasteListener';
+import { Row } from '../../../src/components/ui/layout/index';
+import { DefaultText } from '../../../src/components/ui/text/index';
+import { CellIdGenerator } from '../../../src/enhancers/table/internal/WithEditStateHandler';
 import {
   InjectedTableInnerProps,
   RequiredTableCellOuterProps,
   withTableNavigation,
-} from '../../../enhancers/table/WithTableNavigation';
+} from '../../../src/enhancers/table/WithTableNavigation';
 import { SetCellFunc } from '../ExampleTable';
 import { TextEditor } from './TextEditor';
 

@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { compose, pure, withHandlers, withState } from 'recompose';
-import { Border } from '../../components/ui/decorations';
+import { Border } from '../../src/components/ui/decorations/index';
 import {
   OnCellFocusEvent,
   OnCellMoveEvent,
-} from '../../enhancers/table/WithTableNavigation';
+} from '../../src/enhancers/table/WithTableNavigation';
 import { TableRow } from './components/TableRow';
 
 export type CellData = string | number;
