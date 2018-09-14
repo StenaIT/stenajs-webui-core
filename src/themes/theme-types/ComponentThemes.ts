@@ -15,6 +15,7 @@ import {
   DefaultTextInputTheme,
   SimpleTextInputTheme,
 } from '../../components/ui/form/text-input/index';
+import { NumericTextInputTheme } from '../../components/ui/form/text-input/NumericTextInputTheme';
 import { SliderTheme } from '../../components/ui/slider/index';
 import { TextTheme } from '../../components/ui/text/index';
 import { SelectTheme } from '../../enhancers/select/SelectTheme';
@@ -40,4 +41,5 @@ export interface ComponentThemes {
   Select: SelectTheme;
   SeparatorLine: SeparatorLineTheme;
   Slider: SliderTheme;
+  NumericTextInput: NumericTextInputTheme;
 }

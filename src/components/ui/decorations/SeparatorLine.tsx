@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export interface SeparatorLineProps {
@@ -27,6 +27,6 @@ const SeparatorLineComponent = ({
   />
 );
 
-export const SeparatorLine = compose<InnerProps, SeparatorLineProps>(withTheme)(
-  SeparatorLineComponent,
-);
+export const SeparatorLine = setDisplayName<SeparatorLineProps>(
+  'SeparatorLine',
+)(compose<InnerProps, SeparatorLineProps>(withTheme)(SeparatorLineComponent));

@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Button, ButtonProps } from './Button';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { Button, ButtonProps } from './Button';
 
 const SmallButtonComponent = ({
   theme,
@@ -14,6 +14,8 @@ const SmallButtonComponent = ({
   />
 );
 
-export const SmallButton = compose<ButtonProps & WithThemeProps, ButtonProps>(
-  withTheme,
-)(SmallButtonComponent);
+export const SmallButton = setDisplayName<ButtonProps>('SmallButton')(
+  compose<ButtonProps & WithThemeProps, ButtonProps>(withTheme)(
+    SmallButtonComponent,
+  ),
+);

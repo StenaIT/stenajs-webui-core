@@ -8,3 +8,4 @@ export * from './SmallButton';
 export * from './SmallButtonTheme';
 export * from './StandardButton';
 export * from './StandardButtonTheme';
+export * from './UpDownButtons';

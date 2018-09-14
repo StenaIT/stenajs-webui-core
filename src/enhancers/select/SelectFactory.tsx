@@ -3,7 +3,12 @@ import * as React from 'react';
 import { Props as AsyncProps } from 'react-select/lib/Async';
 import { Props as SelectProps } from 'react-select/lib/Select';
 import { StylesConfig } from 'react-select/lib/styles';
-import { ComponentEnhancer, compose, withProps } from 'recompose';
+import {
+  ComponentEnhancer,
+  compose,
+  setDisplayName,
+  withProps,
+} from 'recompose';
 import { withTheme, WithThemeProps } from '../../components/util/enhancers';
 import { SelectTheme } from './SelectTheme';
 
@@ -167,19 +172,23 @@ export const createSelect = <T extends {}>(
   theme?: SelectTheme,
   userStyle?: StylesConfig,
 ) =>
-  compose<SelectProps<T>, SelectProps<T>>(
-    withTheme,
-    withSelectTheme(theme),
-    withStyles(userStyle),
-  )(selectComponent);
+  setDisplayName<SelectProps<T>>('Select')(
+    compose<SelectProps<T>, SelectProps<T>>(
+      withTheme,
+      withSelectTheme(theme),
+      withStyles(userStyle),
+    )(selectComponent),
+  );
 
 export const createAsyncSelect = <T extends {}>(
   selectComponent: React.ComponentType<AsyncProps<T>>,
   theme?: Partial<SelectTheme>,
   userStyle?: StylesConfig,
 ) =>
-  compose<AsyncProps<T>, AsyncProps<T>>(
-    withTheme,
-    withSelectTheme(theme),
-    withStyles(userStyle),
-  )(selectComponent);
+  setDisplayName<AsyncProps<T>>('AsyncSelect')(
+    compose<AsyncProps<T>, AsyncProps<T>>(
+      withTheme,
+      withSelectTheme(theme),
+      withStyles(userStyle),
+    )(selectComponent),
+  );

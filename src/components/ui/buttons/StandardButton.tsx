@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Button, ButtonProps } from './Button';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { Button, ButtonProps } from './Button';
 
 const StandardButtonComponent = ({
   theme,
@@ -14,7 +14,8 @@ const StandardButtonComponent = ({
   />
 );
 
-export const StandardButton = compose<
-  ButtonProps & WithThemeProps,
-  ButtonProps
->(withTheme)(StandardButtonComponent);
+export const StandardButton = setDisplayName<ButtonProps>('StandardButton')(
+  compose<ButtonProps & WithThemeProps, ButtonProps>(withTheme)(
+    StandardButtonComponent,
+  ),
+);

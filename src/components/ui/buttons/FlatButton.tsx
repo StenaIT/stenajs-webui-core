@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { Button, ButtonProps } from './Button';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { Button, ButtonProps } from './Button';
 
 export const FlatButtonComponent = ({
   textColor,
@@ -22,6 +22,8 @@ export const FlatButtonComponent = ({
   />
 );
 
-export const FlatButton = compose<ButtonProps & WithThemeProps, ButtonProps>(
-  withTheme,
-)(FlatButtonComponent);
+export const FlatButton = setDisplayName<ButtonProps>('FlatButton')(
+  compose<ButtonProps & WithThemeProps, ButtonProps>(withTheme)(
+    FlatButtonComponent,
+  ),
+);

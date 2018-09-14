@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export interface SpaceProps {
@@ -32,6 +32,6 @@ export const SpaceComponent = ({
   );
 };
 
-export const Space = compose<SpaceProps & WithThemeProps, SpaceProps>(
-  withTheme,
-)(SpaceComponent);
+export const Space = setDisplayName<SpaceProps>('Space')(
+  compose<SpaceProps & WithThemeProps, SpaceProps>(withTheme)(SpaceComponent),
+);

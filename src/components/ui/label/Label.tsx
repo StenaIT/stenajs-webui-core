@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { setDisplayName } from 'recompose';
 import { Space } from '../layout';
 
 export type Position = 'top-left' | 'top-right' | 'left-top' | 'left-bottom';
@@ -34,19 +35,19 @@ const getAligning = (position: Position): Aligning => {
   return 'flex-start';
 };
 
-export const Label = ({
-  children,
-  label,
-  num,
-  position = 'top-left',
-}: LabelProps) => {
-  return (
-    <div
-      style={{ display: 'inline-flex', flexDirection: getDirection(position) }}
-    >
-      <div style={{ alignSelf: getAligning(position) }}>{label}</div>
-      <Space num={num} />
-      <div>{children}</div>
-    </div>
-  );
-};
+export const Label = setDisplayName<LabelProps>('Label')(
+  ({ children, label, num, position = 'top-left' }: LabelProps) => {
+    return (
+      <div
+        style={{
+          display: 'inline-flex',
+          flexDirection: getDirection(position),
+        }}
+      >
+        <div style={{ alignSelf: getAligning(position) }}>{label}</div>
+        <Space num={num} />
+        <div>{children}</div>
+      </div>
+    );
+  },
+);

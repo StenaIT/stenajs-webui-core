@@ -1,8 +1,11 @@
+import { withState } from '@dump247/storybook-state';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
+import { compose } from 'recompose';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 import { DefaultTextInput } from '../../src/components/ui/form/text-input/DefaultTextInput';
+import { NumericTextInput } from '../../src/components/ui/form/text-input/NumericTextInput';
 import { SimpleTextInput } from '../../src/components/ui/form/text-input/SimpleTextInput';
 import { DefaultText } from '../../src/components/ui/text';
 import { defaultColors } from '../../src/themes';
@@ -185,6 +188,104 @@ export const addTextInputStories = () => {
         >
           <DefaultTextInput value={'some entered text'} />
         </UseTheme>
+      )),
+    );
+
+  storiesOf('Form/TextInput/NumericTextInput', module)
+    .add(
+      'standard',
+      compose(
+        withState({
+          value: 5,
+        }),
+        withInfo(),
+      )(({ store }) => (
+        <NumericTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'disabled',
+      compose(
+        withState({
+          value: 5,
+        }),
+        withInfo(),
+      )(({ store }) => (
+        <NumericTextInput
+          disabled
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'hidden buttons',
+      compose(
+        withState({
+          value: 5,
+        }),
+        withInfo(),
+      )(({ store }) => (
+        <NumericTextInput
+          hideButtons
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'with left icon',
+      compose(
+        withState({
+          value: 5,
+        }),
+        withInfo(),
+      )(({ store }) => (
+        <NumericTextInput
+          iconLeft={'coffee'}
+          value={store.state.value}
+          min={1}
+          max={8}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'with content right',
+      compose(
+        withState({
+          value: 5,
+        }),
+        withInfo(),
+      )(({ store }) => (
+        <NumericTextInput
+          value={store.state.value}
+          min={1}
+          max={8}
+          contentRight={
+            <DefaultText color={defaultColors.disabledText}>sec</DefaultText>
+          }
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'with min and max',
+      compose(
+        withState({
+          value: 5,
+        }),
+        withInfo(),
+      )(({ store }) => (
+        <NumericTextInput
+          min={3}
+          max={8}
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
       )),
     );
 };

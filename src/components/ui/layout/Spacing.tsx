@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export interface SpacingProps {
@@ -28,6 +28,8 @@ export const SpacingComponent = ({
   );
 };
 
-export const Spacing = compose<SpacingProps & WithThemeProps, SpacingProps>(
-  withTheme,
-)(SpacingComponent);
+export const Spacing = setDisplayName<SpacingProps>('Spacing')(
+  compose<SpacingProps & WithThemeProps, SpacingProps>(withTheme)(
+    SpacingComponent,
+  ),
+);

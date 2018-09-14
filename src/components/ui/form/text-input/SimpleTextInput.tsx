@@ -9,6 +9,7 @@ import {
 import { css } from 'react-emotion';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
+import { InputType } from './InputType';
 
 // tslint:disable:no-any
 
@@ -37,9 +38,13 @@ export interface SimpleTextInputProps {
   selectAllOnMount?: boolean;
   /** If true, cursor will move to the end of the entered text on mount. */
   moveCursorToEndOnMount?: boolean;
+  /** Type of input */
+  inputType?: InputType;
   fontSize?: string;
   maxLength?: number;
   size?: number;
+  min?: number;
+  max?: number;
   backgroundColor?: string;
   textColor?: string;
   disabled?: boolean;
@@ -186,6 +191,9 @@ class SimpleTextInputComponent extends React.Component<
       placeholderColor,
       focusOnMount,
       selectAllOnMount,
+      inputType = 'text',
+      min,
+      max,
     } = this.props;
 
     return (
@@ -201,13 +209,22 @@ class SimpleTextInputComponent extends React.Component<
           ...style,
         }}
         className={`${className || ''} ${css({
+          '-moz-appearance': 'textfield',
           '&::placeholder': {
             color:
               placeholderColor ||
               theme.components.SimpleTextInput.placeholderColor,
           },
+          '&::-webkit-outer-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0,
+          },
+          '&::-webkit-inner-spin-button': {
+            '-webkit-appearance': 'none',
+            margin: 0,
+          },
         })}`}
-        type="text"
+        type={inputType}
         ref={this.textInput}
         onKeyDown={this.onKeyDown}
         onChange={this.onChange}
@@ -219,6 +236,8 @@ class SimpleTextInputComponent extends React.Component<
         placeholder={placeholder}
         size={size}
         disabled={disabled}
+        min={min}
+        max={max}
       />
     );
   }

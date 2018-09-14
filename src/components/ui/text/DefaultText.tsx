@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { TextBase, TextBaseSharedProps } from './TextBase';
-import { compose, pure } from 'recompose';
+import { compose, pure, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { TextBase, TextBaseSharedProps } from './TextBase';
 
 export type DefaultTextProps = TextBaseSharedProps;
 
@@ -16,10 +16,9 @@ const DefaultTextComponent = ({
   />
 );
 
-export const DefaultText = compose<
-  DefaultTextProps & WithThemeProps,
-  DefaultTextProps
->(
-  pure,
-  withTheme,
-)(DefaultTextComponent);
+export const DefaultText = setDisplayName<DefaultTextProps>('DefaultText')(
+  compose<DefaultTextProps & WithThemeProps, DefaultTextProps>(
+    pure,
+    withTheme,
+  )(DefaultTextComponent),
+);

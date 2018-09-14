@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CSSProperties } from 'react';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export type BorderStyle =
@@ -119,6 +119,8 @@ export class BorderComponent extends React.Component<
   }
 }
 
-export const Border = compose<BorderProps & WithThemeProps, BorderProps>(
-  withTheme,
-)(BorderComponent);
+export const Border = setDisplayName<BorderProps>('Border')(
+  compose<BorderProps & WithThemeProps, BorderProps>(withTheme)(
+    BorderComponent,
+  ),
+);

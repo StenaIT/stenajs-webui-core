@@ -8,6 +8,7 @@ import { defaultSimpleCheckboxTheme } from '../components/ui/form/checkbox/Simpl
 import { defaultDateInputTheme } from '../components/ui/form/date-time-input/DateInputTheme';
 import { defaultDateRangeInputTheme } from '../components/ui/form/date-time-input/DateRangeInputTheme';
 import { defaultDefaultTextInputTheme } from '../components/ui/form/text-input/DefaultTextInputTheme';
+import { defaultNumericTextInputTheme } from '../components/ui/form/text-input/NumericTextInputTheme';
 import { defaultSimpleTextInputTheme } from '../components/ui/form/text-input/SimpleTextInputTheme';
 import { defaultSliderTheme } from '../components/ui/slider/SliderTheme';
 import {
@@ -52,5 +53,6 @@ export const defaultTheme: Theme = {
     Select: defaultSelectTheme,
     SeparatorLine: defaultSeparatorLineTheme,
     Slider: defaultSliderTheme,
+    NumericTextInput: defaultNumericTextInputTheme,
   },
 };

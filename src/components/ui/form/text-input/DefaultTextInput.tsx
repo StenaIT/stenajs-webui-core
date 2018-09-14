@@ -4,6 +4,7 @@ import * as React from 'react';
 import { ComponentClass, ReactNode } from 'react';
 import {
   compose,
+  setDisplayName,
   StateHandler,
   StateHandlerMap,
   withStateHandlers,
@@ -242,8 +243,12 @@ const withFocusState = withStateHandlers<
   },
 );
 
-export const DefaultTextInput = compose<InnerProps, DefaultTextInputProps>(
-  withTheme,
-  withFocusState,
-  withFocusState,
-)(DefaultTextInputComponent);
+export const DefaultTextInput = setDisplayName<DefaultTextInputProps>(
+  'DefaultTextInput',
+)(
+  compose<InnerProps, DefaultTextInputProps>(
+    withTheme,
+    withFocusState,
+    withFocusState,
+  )(DefaultTextInputComponent),
+);

@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import { compose, pure, withHandlers } from 'recompose';
+import { compose, pure, setDisplayName, withHandlers } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 import { Clickable } from '../../interaction/Clickable';
 import { ValueOnChangeProps } from '../types';
@@ -55,14 +55,15 @@ const withOnChangeHandler = withHandlers({
   },
 });
 
-export const SimpleCheckbox = compose<
-  InnerPropsForSimpleCheckboxComponent,
-  SimpleCheckboxProps
->(
-  pure,
-  withOnChangeHandler,
-  withTheme,
-)(SimpleCheckboxComponent);
+export const SimpleCheckbox = setDisplayName<SimpleCheckboxProps>(
+  'SimpleCheckbox',
+)(
+  compose<InnerPropsForSimpleCheckboxComponent, SimpleCheckboxProps>(
+    pure,
+    withOnChangeHandler,
+    withTheme,
+  )(SimpleCheckboxComponent),
+);
 
 const getColor = (
   value?: boolean,
