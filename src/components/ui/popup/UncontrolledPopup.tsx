@@ -72,15 +72,15 @@ const withPopupProps = withProps<
   Omit<PopupProps, 'Popper'>,
   UncontrolledPopupProps & WithPopupStateHandlers & PopupState
 >(({ children, hide, show, ...rest }) => {
-  return ({
+  return {
     children:
       typeof children === 'function'
-        ? (children as PopupChildrenFunction)({onClose: hide})
+        ? (children as PopupChildrenFunction)({ onClose: hide })
         : children,
     onClickOutside: hide,
     onOpen: show,
     ...rest,
-  });
+  };
 });
 
 export const UncontrolledPopup = compose<PopupProps, UncontrolledPopupProps>(
