@@ -21,7 +21,6 @@
     "pretty": true,
     "noEmitOnError": true,
     "strict": true,
-    "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true,
     "importHelpers": true,
     "noFallthroughCasesInSwitch": true

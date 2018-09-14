@@ -11,6 +11,7 @@ export * from './interaction';
 export * from './label';
 export * from './layout';
 export * from './overlay';
+export * from './popup';
 export * from './positioning';
 export * from './progress';
 export * from './slider';

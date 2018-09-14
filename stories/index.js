@@ -1,4 +1,5 @@
 import React from 'react';
+import { addPopupStories } from './popup/PopupStories';
 import { addArrowBoxStories } from './box/ArrowBoxStories';
 import { addFlatButtonStories } from './buttons/FlatButtonStories';
 import { addSmallButtonStories } from './buttons/SmallButtonStories';
@@ -30,6 +31,7 @@ import { addTimeSliderStories } from './slider/TimeSliderStories';
 import { addTableStories } from './table/TableStories';
 import { addDefaultTextStories } from './text/TextStories';
 
+addPopupStories();
 addMultipleOptionsStories();
 addSpaceStories();
 addSliderStories();
