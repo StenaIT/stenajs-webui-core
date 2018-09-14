@@ -5,7 +5,7 @@ module.exports = (baseConfig, env, config) => {
     test: /\.(ts|tsx)$/,
     use: [
         'awesome-typescript-loader',
-        'react-docgen-typescript-loader'
+        // 'react-docgen-typescript-loader'
     ],
   });
   config.resolve.extensions.push('.ts', '.tsx');
