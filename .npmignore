@@ -2,6 +2,7 @@ src/
 stories/
 .storybook/
 coverage
+lib/examples/
 .gitignore
 prettier.config.js
 package-lock.json
