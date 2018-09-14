@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { Card } from '../../src/components/ui/card/Card';
 
 export const addCardStories = () => {
-    storiesOf('Card', module)
+    storiesOf('Card/Card', module)
         .add(
             'no header',
             withInfo({})(() => (

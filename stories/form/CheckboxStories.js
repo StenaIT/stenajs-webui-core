@@ -5,7 +5,23 @@ import { SimpleCheckbox } from '../../src';
 import { CheckboxWithLabel } from '../../src/components/ui/form/checkbox/CheckboxWithLabel';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 
-export const addSimpleCheckboxStories = () => {
+export const addCheckboxStories = () => {
+  storiesOf('Form/Checkbox/CheckboxWithLabel', module)
+    .add(
+      'not checked',
+      withInfo()(() => <CheckboxWithLabel label={'Add cake'} />),
+    )
+    .add(
+      'checked',
+      withInfo()(() => <CheckboxWithLabel label={'Add cake'} value={true} />),
+    )
+    .add(
+      'checked and disabled',
+      withInfo()(() => (
+        <CheckboxWithLabel label={'Add cake'} value={true} disabled />
+      )),
+    );
+
   storiesOf('Form/Checkbox/SimpleCheckbox', module)
     .add('not checked', withInfo()(() => <SimpleCheckbox />))
     .add('checked', withInfo()(() => <SimpleCheckbox value={true} />))
@@ -25,22 +41,6 @@ export const addSimpleCheckboxStories = () => {
         >
           <SimpleCheckbox value={true} />
         </UseTheme>
-      )),
-    );
-
-  storiesOf('Form/Checkbox/CheckboxWithLabel', module)
-    .add(
-      'not checked',
-      withInfo()(() => <CheckboxWithLabel label={'Add cake'} />),
-    )
-    .add(
-      'checked',
-      withInfo()(() => <CheckboxWithLabel label={'Add cake'} value={true} />),
-    )
-    .add(
-      'checked and disabled',
-      withInfo()(() => (
-        <CheckboxWithLabel label={'Add cake'} value={true} disabled />
       )),
     );
 };

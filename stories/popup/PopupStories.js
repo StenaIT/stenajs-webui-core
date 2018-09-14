@@ -32,7 +32,7 @@ const Popup = createPopup(Popper);
 const UncontrolledPopup = createUncontrolledPopup(Popper);
 
 export const addPopupStories = () => {
-  storiesOf('Popup', module)
+  storiesOf('Popup/Popup', module)
     .add(
       'standard',
       compose(
