@@ -1,11 +1,15 @@
 import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
-import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
+import {
+  withComponentTheme,
+  WithComponentThemeProps,
+} from '../../../util/enhancers/WithComponentTheme';
 import { Clickable } from '../../interaction/Clickable';
 import { Row } from '../../layout/Row';
 import { Space } from '../../layout/Space';
 import { DefaultText } from '../../text/DefaultText';
 import { SimpleCheckbox, SimpleCheckboxProps } from './SimpleCheckbox';
+import { SimpleCheckboxTheme } from './SimpleCheckboxTheme';
 
 export interface CheckboxWithLabelProps extends SimpleCheckboxProps {
   label?: string;
@@ -13,9 +17,10 @@ export interface CheckboxWithLabelProps extends SimpleCheckboxProps {
   disabled?: boolean;
 }
 
-class CheckboxWithLabelComponent extends React.Component<
-  CheckboxWithLabelProps & WithThemeProps
-> {
+type InnerProps = CheckboxWithLabelProps &
+  WithComponentThemeProps<SimpleCheckboxTheme>;
+
+class CheckboxWithLabelComponent extends React.Component<InnerProps> {
   onChange = () => {
     const { onChange, value } = this.props;
     if (onChange) {
@@ -39,13 +44,7 @@ class CheckboxWithLabelComponent extends React.Component<
           <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />
           <Space />
           {label && (
-            <DefaultText
-              color={
-                disabled
-                  ? theme.components.SimpleCheckbox.colorDisabled
-                  : textColor
-              }
-            >
+            <DefaultText color={disabled ? theme.iconColorDisabled : textColor}>
               {label}
             </DefaultText>
           )}
@@ -59,7 +58,7 @@ class CheckboxWithLabelComponent extends React.Component<
 export const CheckboxWithLabel = setDisplayName<CheckboxWithLabelProps>(
   'CheckboxWithLabel',
 )(
-  compose<CheckboxWithLabelProps & WithThemeProps, CheckboxWithLabelProps>(
-    withTheme,
+  compose<InnerProps, CheckboxWithLabelProps>(
+    withComponentTheme('SimpleCheckbox'),
   )(CheckboxWithLabelComponent),
 );

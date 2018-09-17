@@ -1,6 +1,12 @@
 import { format } from 'date-fns';
 import * as React from 'react';
-import { compose, defaultProps, withHandlers, withState } from 'recompose';
+import {
+  compose,
+  defaultProps,
+  setDisplayName,
+  withHandlers,
+  withState,
+} from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers';
 import { Background } from '../../colors';
 import { Border } from '../../decorations';
@@ -141,10 +147,12 @@ const withDefaultProps = defaultProps<Partial<DateInputProps>>({
   zIndex: 100,
 });
 
-export const DateInput = compose<InnerProps, DateInputProps>(
-  withDefaultProps,
-  withShowingCalendarState,
-  withShowCalendarHandlers,
-  withOnSelectDateHandler,
-  withTheme,
-)(DateInputComponent);
+export const DateInput = setDisplayName<DateInputProps>('DateInput')(
+  compose<InnerProps, DateInputProps>(
+    withDefaultProps,
+    withShowingCalendarState,
+    withShowCalendarHandlers,
+    withOnSelectDateHandler,
+    withTheme,
+  )(DateInputComponent),
+);

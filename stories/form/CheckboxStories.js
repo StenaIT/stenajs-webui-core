@@ -1,46 +1,85 @@
-import * as React from 'react';
+import { withState } from '@dump247/storybook-state';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
+import * as React from 'react';
+import { compose } from 'recompose';
 import { SimpleCheckbox } from '../../src';
+import { darkSimpleCheckboxTheme } from '../../src/components/ui/form/checkbox';
 import { CheckboxWithLabel } from '../../src/components/ui/form/checkbox/CheckboxWithLabel';
-import { UseTheme } from '../../src/components/theme/UseTheme';
 
-export const addCheckboxStories = () => {
-  storiesOf('Form/Checkbox/CheckboxWithLabel', module)
-    .add(
-      'not checked',
-      withInfo()(() => <CheckboxWithLabel label={'Add cake'} />),
-    )
-    .add(
-      'checked',
-      withInfo()(() => <CheckboxWithLabel label={'Add cake'} value={true} />),
-    )
-    .add(
-      'checked and disabled',
-      withInfo()(() => (
-        <CheckboxWithLabel label={'Add cake'} value={true} disabled />
-      )),
-    );
-
+export const addSimpleCheckboxStories = () => {
   storiesOf('Form/Checkbox/SimpleCheckbox', module)
-    .add('not checked', withInfo()(() => <SimpleCheckbox />))
-    .add('checked', withInfo()(() => <SimpleCheckbox value={true} />))
+    .add(
+      'standard',
+      compose(
+        withInfo(),
+        withState({
+          value: false,
+        }),
+      )(({ store }) => (
+        <SimpleCheckbox
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
     .add(
       'checked and disabled',
       withInfo()(() => <SimpleCheckbox value={true} disabled />),
     )
     .add(
+      'not checked and disabled',
+      withInfo()(() => <SimpleCheckbox value={false} disabled />),
+    )
+    .add(
+      'with dark theme',
+      compose(
+        withInfo(),
+        withState({
+          value: false,
+        }),
+      )(({ store }) => (
+        <SimpleCheckbox
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+          theme={darkSimpleCheckboxTheme}
+        />
+      )),
+    )
+    .add(
       'with custom theme',
-      withInfo()(() => (
-        <UseTheme
+      compose(
+        withInfo(),
+        withState({
+          value: false,
+        }),
+      )(({ store }) => (
+        <SimpleCheckbox
+          value={store.state.value}
+          onChange={value => store.set({ value })}
           theme={{
-            components: {
-              SimpleCheckbox: { colorOn: 'blue', iconOn: 'clock' },
-            },
+            borderColor: 'red',
+            iconColor: 'blue',
+            checkIcon: 'coffee',
+            borderRadius: '8px',
           }}
-        >
-          <SimpleCheckbox value={true} />
-        </UseTheme>
+        />
       )),
     );
+
+  storiesOf('Form/Checkbox/CheckboxWithLabel', module).add(
+    'standard',
+    compose(
+      withInfo(),
+      withState({
+        value: false,
+      }),
+    )(({ store }) => (
+      <CheckboxWithLabel
+        label={'Add cake'}
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+      />
+    )),
+  );
 };

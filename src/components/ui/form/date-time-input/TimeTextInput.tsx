@@ -1,5 +1,5 @@
 import { ComponentClass } from 'react';
-import { compose, withProps } from 'recompose';
+import { compose, setDisplayName, withProps } from 'recompose';
 import { isValidTimeString } from '../../../../util/time/TimeTransformer';
 import { withTheme } from '../../../util/enhancers/index';
 import { WithThemeProps } from '../../../util/enhancers/WithTheme';
@@ -21,10 +21,11 @@ const withTimeProps = withProps<
     value && !isValidTimeString(value) ? theme.colors.errorBgLight : undefined,
 }));
 
-export const TimeTextInput = compose<
-  DefaultTextInputProps,
-  DefaultTextInputProps
->(
-  withTheme,
-  withTimeProps,
-)(DefaultTextInput);
+export const TimeTextInput = setDisplayName<DefaultTextInputProps>(
+  'TimeTextInput',
+)(
+  compose<DefaultTextInputProps, DefaultTextInputProps>(
+    withTheme,
+    withTimeProps,
+  )(DefaultTextInput),
+);
