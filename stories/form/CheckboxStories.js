@@ -7,7 +7,7 @@ import { SimpleCheckbox } from '../../src';
 import { darkSimpleCheckboxTheme } from '../../src/components/ui/form/checkbox';
 import { CheckboxWithLabel } from '../../src/components/ui/form/checkbox/CheckboxWithLabel';
 
-export const addSimpleCheckboxStories = () => {
+export const addCheckboxStories = () => {
   storiesOf('Form/Checkbox/SimpleCheckbox', module)
     .add(
       'standard',
