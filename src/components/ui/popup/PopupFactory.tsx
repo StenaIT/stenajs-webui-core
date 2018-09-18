@@ -1,3 +1,4 @@
+import * as React from 'react';
 import { withProps } from 'recompose';
 import { Omit } from '../../../types';
 import { PopperInterface, Popup, PopupProps } from './Popup';
@@ -14,3 +15,5 @@ export const createUncontrolledPopup = (
 ): React.ComponentType<Omit<UncontrolledPopupProps, 'Popper'>> => {
   return withProps({ Popper })(UncontrolledPopup);
 };
+
+export const __POPUP_FACTORY = <div />;
