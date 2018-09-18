@@ -54,7 +54,6 @@
     "prettier": "1.14.2",
     "rc-slider": "^8.6.1",
     "react-docgen-typescript-loader": "^2.2.0",
-    "react-popper": "^1.0.2",
     "react-scripts-ts": "^2.15.1",
     "react-select": "^2.0.0",
     "ts-jest": "^22.4.4",
@@ -76,6 +75,7 @@
     "react-click-outside": "^3.0.1",
     "react-dom": "^16.4.1",
     "react-emotion": "9.2.8",
+    "react-popper": "^1.0.2",
     "react-spinkit": "^3.0.0",
     "recompose": "^0.27.0"
   },
