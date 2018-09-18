@@ -1,5 +1,5 @@
 import { Color } from 'csstype';
-import { Placement } from 'popper.js';
+import { Modifiers, Placement } from 'popper.js';
 import * as React from 'react';
 import * as ReactPopper from 'react-popper';
 import { ReferenceChildrenProps } from 'react-popper';
@@ -17,6 +17,10 @@ export interface PopupProps {
   backgroundColor?: Color;
   /** Content to be rendered in popup */
   children: React.ReactNode | PopupChildrenFunction;
+  /** An object containing custom settings for the
+   * [Popper.js modifiers]{@link https://popper.js.org/popper-documentation.html#modifiers}
+   */
+  modifiers?: Modifiers;
   /** If true, the popup is open (default:false) */
   open: boolean;
   /** Callback function called when a click outside the popup is made */
@@ -45,6 +49,7 @@ export class Popup extends React.Component<PopupProps> {
       open,
       onClickOutside,
       Popper,
+      modifiers,
       placement,
       shadow,
       targetMinHeight,
@@ -59,6 +64,7 @@ export class Popup extends React.Component<PopupProps> {
             backgroundColor={backgroundColor}
             children={children}
             onClickOutside={onClickOutside}
+            modifiers={modifiers}
             placement={placement}
             PopperComponent={Popper.Popper}
             shadow={shadow}

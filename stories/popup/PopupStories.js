@@ -87,6 +87,25 @@ export const addPopupStories = () => {
       )),
     )
     .add(
+      'with modifiers',
+      withInfo()(() => (
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
+          <UncontrolledPopup
+            modifiers={{
+              inner: {
+                enabled: true
+              },
+            }}
+            referenceChildren={<span>Open popup</span>}
+            targetMinHeight={'200px'}
+            targetMinWidth={'300px'}
+          >
+            <DefaultText>Content</DefaultText>
+          </UncontrolledPopup>
+        </div>
+      )),
+    )
+    .add(
       'placements',
       compose(
         withState({

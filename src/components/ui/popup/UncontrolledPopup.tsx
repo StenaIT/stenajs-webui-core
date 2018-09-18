@@ -1,5 +1,5 @@
 import { Color } from 'csstype';
-import { Placement } from 'popper.js';
+import { Modifiers, Placement } from 'popper.js';
 import * as React from 'react';
 import {
   compose,
@@ -15,6 +15,10 @@ export interface UncontrolledPopupProps {
   backgroundColor?: Color;
   /** Content to be rendered in popup */
   children: React.ReactNode | PopupChildrenFunction;
+  /** An object containing custom settings for the
+   * [Popper.js modifiers]{@link https://popper.js.org/popper-documentation.html#modifiers}
+   */
+  modifiers?: Modifiers;
   /** Placement of popup related to referenceChildren */
   placement?: Placement;
   /** The Popper imported from react-popper */

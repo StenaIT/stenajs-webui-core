@@ -1,9 +1,8 @@
-import { Placement } from 'popper.js';
+import { Modifiers, Placement } from 'popper.js';
 import * as React from 'react';
 import * as enhanceWithClickOutside from 'react-click-outside';
 import styled from 'react-emotion';
 import { Popper, PopperChildrenProps } from 'react-popper';
-import { BOX_SHADOW } from '../decorations';
 
 export interface PopperProps {
   backgroundColor?: string;
@@ -11,14 +10,17 @@ export interface PopperProps {
   onClickOutside?: () => void;
   PopperComponent: typeof Popper;
   placement?: Placement;
+  modifiers?: Modifiers;
   shadow?: boolean;
   targetMinHeight?: number;
   targetMinWidth?: number;
 }
 
+export const POPUP_BOX_SHADOW = 'rgba(0, 0, 0, 0.28) 0 2px 13px 0';
+
 const TargetContainer = styled('div')<Partial<PopperProps>>(props => ({
   backgroundColor: props.backgroundColor || '#fff',
-  boxShadow: props.shadow ? BOX_SHADOW : undefined,
+  boxShadow: props.shadow ? POPUP_BOX_SHADOW : undefined,
   minHeight: props.targetMinHeight,
   minWidth: props.targetMinWidth,
 }));
@@ -26,12 +28,13 @@ const TargetContainer = styled('div')<Partial<PopperProps>>(props => ({
 export class PurePopper extends React.Component<PopperProps> {
   public render() {
     const {
+      modifiers,
       PopperComponent,
       placement: popupPlacement = 'auto-end',
     } = this.props;
 
     return (
-      <PopperComponent placement={popupPlacement}>
+      <PopperComponent placement={popupPlacement} modifiers={modifiers}>
         {this.renderPropsChildren}
       </PopperComponent>
     );

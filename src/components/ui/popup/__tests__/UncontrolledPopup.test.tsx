@@ -46,16 +46,21 @@ describe('UncontrolledPopup', () => {
     const targetMinHeight = 3;
     const targetMinWidth = 1;
     const shadow = false;
+    const modifiers = {
+      inner: { enabled: true },
+    };
     const wrapper = shallow(
       <UncontrolledPopup
         {...props}
         backgroundColor={backgroundColor}
+        modifiers={modifiers}
         shadow={shadow}
         targetMinHeight={targetMinHeight}
         targetMinWidth={targetMinWidth}
       />,
     );
     expect(wrapper.prop('backgroundColor')).toBe(backgroundColor);
+    expect(wrapper.prop('modifiers')).toBe(modifiers);
     expect(wrapper.prop('shadow')).toBe(shadow);
     expect(wrapper.prop('targetMinHeight')).toBe(targetMinHeight);
     expect(wrapper.prop('targetMinWidth')).toBe(targetMinWidth);

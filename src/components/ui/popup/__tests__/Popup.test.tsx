@@ -50,6 +50,9 @@ describe('Popup', () => {
       const shadow = true;
       const targetMinHeight = 2;
       const targetMinWidth = 3;
+      const modifiers = {
+        inner: { enabled: true },
+      };
       const wrapper = shallow(
         <Popup
           {...props}
@@ -57,6 +60,7 @@ describe('Popup', () => {
           children={children}
           onClickOutside={onClickOutside}
           open={true}
+          modifiers={modifiers}
           placement={placement}
           shadow={shadow}
           targetMinHeight={targetMinHeight}
@@ -68,6 +72,7 @@ describe('Popup', () => {
       expect(popperWrapper.prop('backgroundColor')).toBe(backgroundColor);
       expect(popperWrapper.prop('children')).toBe(children);
       expect(popperWrapper.prop('onClickOutside')).toBe(onClickOutside);
+      expect(popperWrapper.prop('modifiers')).toBe(modifiers);
       expect(popperWrapper.prop('placement')).toBe(placement);
       expect(popperWrapper.prop('shadow')).toBe(shadow);
       expect(popperWrapper.prop('targetMinHeight')).toBe(targetMinHeight);

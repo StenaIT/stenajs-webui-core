@@ -3,7 +3,7 @@
 exports[`EnhancedPopper styles sets default styles 1`] = `
 .emotion-0 {
   background-color: #fff;
-  box-shadow: rgba(0,0,0,0.15) 0 2px 4px 0;
+  box-shadow: rgba(0,0,0,0.28) 0 2px 13px 0;
 }
 
 <div
