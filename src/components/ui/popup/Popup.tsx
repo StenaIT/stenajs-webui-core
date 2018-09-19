@@ -4,7 +4,6 @@ import * as React from 'react';
 import * as ReactPopper from 'react-popper';
 import { ReferenceChildrenProps } from 'react-popper';
 import { EnhancedPopper } from './EnhancedPopper';
-import { PopupChildrenFunction } from './UncontrolledPopup';
 
 export interface PopperInterface {
   Manager: typeof ReactPopper.Manager;
@@ -16,7 +15,7 @@ export interface PopupProps {
   /** Background color of popup */
   backgroundColor?: Color;
   /** Content to be rendered in popup */
-  children: React.ReactNode | PopupChildrenFunction;
+  children: React.ReactNode;
   /** An object containing custom settings for the
    * [Popper.js modifiers]{@link https://popper.js.org/popper-documentation.html#modifiers}
    */
