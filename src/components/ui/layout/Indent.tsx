@@ -5,15 +5,14 @@ import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 export interface IndentProps {
   num?: number;
   half?: boolean;
-  children?: {};
 }
 
-export const IndentComponent = ({
+export const IndentComponent: React.SFC<IndentProps & WithThemeProps> = ({
   num = 1,
   children,
   half,
   theme,
-}: IndentProps & WithThemeProps) => {
+}) => {
   const halfCoeff = half ? 0.5 : 1;
   const size = num * halfCoeff;
 

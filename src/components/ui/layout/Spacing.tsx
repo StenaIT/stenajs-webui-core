@@ -5,15 +5,14 @@ import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 export interface SpacingProps {
   num?: number;
   half?: boolean;
-  children?: {};
 }
 
-export const SpacingComponent = ({
+export const SpacingComponent: React.SFC<SpacingProps & WithThemeProps> = ({
   num = 1,
   half = false,
   children,
   theme,
-}: SpacingProps & WithThemeProps) => {
+}) => {
   const halfMod = half ? 0.5 : 1;
   const padding = num * halfMod;
   return (
