@@ -8,6 +8,7 @@ export interface ThemeColors {
   disabledTextLight: string;
   white: string;
   separator: string;
+  separatorLight: string;
   separatorHighlighted: string;
   successGreen: string;
   successGreenLight: string;
@@ -21,4 +22,8 @@ export interface ThemeColors {
   infoBlueLight: string;
   inputBorder: string;
   inputBorderFocused: string;
+  inputBorderFocusedAlt: string;
+  inputBorderFocusedLight: string;
+  highlightBoxBg: string;
+  highlightBoxBorder: string;
 }

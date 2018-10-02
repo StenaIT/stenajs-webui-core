@@ -22,7 +22,7 @@ export const WeekNumberCell = ({
   week,
   background,
   backgroundColor,
-  prefix = 'w',
+  prefix,
 }: WeekNumberCellProps) => (
   <Background color={backgroundColor || theme.WeekNumber.backgroundColor}>
     <Relative>

@@ -1,9 +1,9 @@
 import * as React from 'react';
-import { Row } from '../../../layout';
 import { MonthData, WeekData } from '../util/CalendarDataFactory';
 import {
   CalendarDayProps,
   DayState,
+  ExtraDayContentProps,
   OnClickDay,
   OnClickWeek,
   RenderWeekNumber,
@@ -23,6 +23,7 @@ export interface CalendarWeekProps<T> {
   onClickDay?: OnClickDay<T>;
   theme: CalendarTheme;
   renderWeekNumber?: RenderWeekNumber;
+  extraDayContent?: React.ComponentType<ExtraDayContentProps<T>>;
 }
 
 export const CalendarWeek = <T extends {}>({
@@ -35,25 +36,28 @@ export const CalendarWeek = <T extends {}>({
   onClickDay,
   theme,
   renderWeekNumber,
+  extraDayContent,
 }: CalendarWeekProps<T>) => (
-  <Row key={week.weekNumber}>
-    <div>
+  <tr key={week.weekNumber}>
+    <td>
       {renderWeekNumber ? (
         renderWeekNumber(week, theme, onClickWeek)
       ) : (
         <WeekNumberCell week={week} onClickWeek={onClickWeek} theme={theme} />
       )}
-    </div>
+    </td>
     {week.days.map(day => (
       <DayComponent
         key={day.dateString}
         day={day}
+        week={week}
         month={month}
         dayState={statePerWeekDay && statePerWeekDay[day.dayOfMonth]}
         userData={userDataPerWeekDay && userDataPerWeekDay[day.dayOfMonth]}
         onClickDay={onClickDay}
         theme={theme}
+        extraDayContent={extraDayContent}
       />
     ))}
-  </Row>
+  </tr>
 );

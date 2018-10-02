@@ -6,6 +6,7 @@ import {
   withPropsOnChange,
 } from 'recompose';
 import { ComponentThemes } from '../../../themes/theme-types/ComponentThemes';
+import { DeepPartial } from '../../../types/DeepPartial';
 import { withTheme, WithThemeProps } from './WithTheme';
 
 export interface WithComponentThemeProps<T> {
@@ -13,7 +14,7 @@ export interface WithComponentThemeProps<T> {
 }
 
 interface WithOverridingTheme<T extends keyof ComponentThemes> {
-  overridingTheme?: Partial<ComponentThemes[T]>;
+  overridingTheme?: DeepPartial<ComponentThemes[T]>;
 }
 
 export const withComponentTheme = <T extends keyof ComponentThemes>(
@@ -21,7 +22,7 @@ export const withComponentTheme = <T extends keyof ComponentThemes>(
 ) =>
   compose<
     WithComponentThemeProps<ComponentThemes[T]>,
-    WithComponentThemeProps<Partial<ComponentThemes[T]>>
+    WithComponentThemeProps<DeepPartial<ComponentThemes[T]>>
   >(
     setDisplayName('withComponentTheme()'),
     renameProp('theme', 'overridingTheme'),

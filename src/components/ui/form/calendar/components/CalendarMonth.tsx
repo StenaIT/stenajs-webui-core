@@ -1,11 +1,13 @@
 import * as React from 'react';
 import { Column, Row, Space } from '../../../layout';
+import { DefaultText } from '../../../text/DefaultText';
 import { SectionHeaderText } from '../../../text/SectionHeaderText';
 import { DayData, MonthData, WeekData } from '../util/CalendarDataFactory';
 import {
   CalendarDayProps,
   CalendarOnClicks,
   DayState,
+  ExtraDayContentProps,
   Renderers,
 } from './Calendar';
 import { CalendarTheme } from './CalendarTheme';
@@ -20,6 +22,9 @@ export interface CalendarMonthProps<T> extends CalendarOnClicks<T>, Renderers {
   userDataPerWeek?: DataPerWeek<T>;
   statePerWeek?: DataPerWeek<DayState>;
   theme: CalendarTheme;
+  headerLeftContent?: React.ReactElement<{}>;
+  headerRightContent?: React.ReactElement<{}>;
+  extraDayContent?: React.ComponentType<ExtraDayContentProps<T>>;
 }
 
 export class CalendarMonth<T> extends React.Component<CalendarMonthProps<T>> {
@@ -34,64 +39,77 @@ export class CalendarMonth<T> extends React.Component<CalendarMonthProps<T>> {
       onClickWeekDay,
       renderWeekNumber,
       renderWeekDay,
+      headerLeftContent,
+      headerRightContent,
       theme,
+      extraDayContent,
     } = this.props;
 
     return (
       <>
         <Column alignItems={'center'}>
-          <SectionHeaderText color={theme.CalendarMonth.headerTextColor}>
-            {month.name} {month.year}
-          </SectionHeaderText>
-          <Space />
-          <Row>
-            <Column
-              width={theme.width}
-              height={theme.height}
-              justifyContent={'center'}
-              alignItems={'center'}
-            />
-            {month.weeks[0].days.map((day: DayData, index: number) => (
-              <div key={day.name}>
-                {renderWeekDay ? (
-                  renderWeekDay(day.name, theme, onClickWeekDay)
-                ) : (
-                  <WeekDayCell
-                    day={day}
-                    onClickWeekDay={onClickWeekDay}
-                    theme={theme}
-                  />
-                )}
-              </div>
-            ))}
+          <Row
+            justifyContent={'space-between'}
+            alignItems={'center'}
+            width={'100%'}
+          >
+            <div>{headerLeftContent}</div>
+            <SectionHeaderText color={theme.CalendarMonth.headerTextColor}>
+              {month.name} {month.year}
+            </SectionHeaderText>
+            <div>{headerRightContent}</div>
           </Row>
-          {month.weeks.map((week: WeekData) => (
-            <CalendarWeek
-              key={week.weekNumber}
-              month={month}
-              week={week}
-              dayComponent={dayComponent}
-              statePerWeekDay={statePerWeek && statePerWeek[week.weekNumber]}
-              userDataPerWeekDay={
-                userDataPerWeek && userDataPerWeek[week.weekNumber]
-              }
-              onClickDay={onClickDay}
-              onClickWeek={onClickWeek}
-              theme={theme}
-              renderWeekNumber={renderWeekNumber}
-            />
-          ))}
+          <Space />
+          <table style={{ borderSpacing: 0, borderCollapse: 'collapse' }}>
+            <tbody>
+              <tr>
+                <td>
+                  <Column
+                    width={theme.width}
+                    height={theme.height}
+                    justifyContent={'center'}
+                    alignItems={'center'}
+                  >
+                    <DefaultText color={theme.WeekDay.textColor}>W</DefaultText>
+                  </Column>
+                </td>
+                {month.weeks[0].days.map((day: DayData, index: number) => (
+                  <td key={day.name}>
+                    {renderWeekDay ? (
+                      renderWeekDay(day.name, theme, onClickWeekDay)
+                    ) : (
+                      <WeekDayCell
+                        day={day}
+                        onClickWeekDay={onClickWeekDay}
+                        theme={theme}
+                      />
+                    )}
+                  </td>
+                ))}
+              </tr>
+              {month.weeks.map((week: WeekData) => (
+                <CalendarWeek
+                  key={week.weekNumber}
+                  month={month}
+                  week={week}
+                  dayComponent={dayComponent}
+                  statePerWeekDay={
+                    statePerWeek && statePerWeek[week.weekNumber]
+                  }
+                  userDataPerWeekDay={
+                    userDataPerWeek && userDataPerWeek[week.weekNumber]
+                  }
+                  onClickDay={onClickDay}
+                  onClickWeek={onClickWeek}
+                  theme={theme}
+                  renderWeekNumber={renderWeekNumber}
+                  extraDayContent={extraDayContent}
+                />
+              ))}
+            </tbody>
+          </table>
         </Column>
-        <Space />
       </>
     );
   }
 }
-
-const tinyMarginStyle = {
-  margin: '1px',
-};
-
-export const TinyMargin = ({ children }: { children: {} }) => (
-  <div style={tinyMarginStyle}>{children}</div>
-);

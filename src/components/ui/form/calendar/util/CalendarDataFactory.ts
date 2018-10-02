@@ -3,13 +3,16 @@ import {
   addHours,
   addWeeks,
   eachDayOfInterval,
+  endOfMonth,
   format,
   getDate,
   getISODay,
   getISOWeek,
   getMonth,
   getYear,
+  isSameDay,
   startOfISOWeek,
+  startOfMonth,
 } from 'date-fns';
 
 export enum Months {
@@ -46,6 +49,10 @@ export interface DayData {
   month: number; // 0-11
   dayOfMonth: number; // 1-31
   dayOfWeek: number; // 1-7
+  isFirstDayOfWeek: boolean;
+  isLastDayOfWeek: boolean;
+  isFirstDayOfMonth: boolean;
+  isLastDayOfMonth: boolean;
 }
 
 export interface WeekData {
@@ -54,6 +61,7 @@ export interface WeekData {
   startYear: number;
   endMonth: number;
   endYear: number;
+  isLastWeekOfMonth: boolean;
   days: Array<DayData>;
 }
 
@@ -108,25 +116,37 @@ export const getWeeksForMonth = (
   return weeks;
 };
 
-export const getWeekForDate = (firstDayOfWeek: Date): WeekData => ({
-  weekNumber: getISOWeek(firstDayOfWeek),
-  startMonth: getMonth(firstDayOfWeek),
-  startYear: getYear(firstDayOfWeek),
-  endMonth: getMonth(addDays(firstDayOfWeek, 6)),
-  endYear: getYear(addDays(firstDayOfWeek, 6)),
-  days: getDaysForWeekForDate(firstDayOfWeek),
-});
+export const getWeekForDate = (firstDayOfWeek: Date): WeekData => {
+  const isLastWeekOfMonth =
+    getMonth(addDays(firstDayOfWeek, 7)) !== getMonth(firstDayOfWeek);
+  return {
+    weekNumber: getISOWeek(firstDayOfWeek),
+    startMonth: getMonth(firstDayOfWeek),
+    startYear: getYear(firstDayOfWeek),
+    endMonth: getMonth(addDays(firstDayOfWeek, 6)),
+    endYear: getYear(addDays(firstDayOfWeek, 6)),
+    days: getDaysForWeekForDate(firstDayOfWeek),
+    isLastWeekOfMonth,
+  };
+};
 
-export const createDay = (date: Date): DayData => ({
-  date,
-  name: format(date, 'EEE'),
-  dateString: format(addHours(date, 12), 'YYYY-MM-dd'),
-  weekNumber: getISOWeek(date),
-  year: getYear(date),
-  month: getMonth(date),
-  dayOfMonth: getDate(date),
-  dayOfWeek: getISODay(date),
-});
+export const createDay = (date: Date): DayData => {
+  const dayOfWeek = getISODay(date);
+  return {
+    date,
+    name: format(date, 'EEE'),
+    dateString: format(addHours(date, 12), 'YYYY-MM-dd'),
+    weekNumber: getISOWeek(date),
+    year: getYear(date),
+    month: getMonth(date),
+    dayOfMonth: getDate(date),
+    dayOfWeek,
+    isFirstDayOfWeek: dayOfWeek === 1,
+    isLastDayOfWeek: dayOfWeek === 7,
+    isFirstDayOfMonth: isSameDay(startOfMonth(date), date),
+    isLastDayOfMonth: isSameDay(endOfMonth(date), date),
+  };
+};
 
 export const getDaysForWeekForDate = (firstDayOfWeek: Date): Array<DayData> => {
   return eachDayOfInterval({

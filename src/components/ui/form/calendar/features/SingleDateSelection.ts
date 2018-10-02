@@ -5,14 +5,19 @@ import {
   withHandlers,
   withProps,
 } from 'recompose';
+import { Omit } from '../../../../../types/Omit';
 import { CalendarProps } from '../components/Calendar';
+import { WithCalendarTheme } from '../types/WithCalendarTheme';
 import { DayData } from '../util/CalendarDataFactory';
-import { setDayStateValue } from '../util/StateModifier';
+import { addDayStateHighlights } from '../util/StateModifier';
+import { WithMonthSwitcherProps } from './month-switcher/MonthSwitcher';
 
 export type __C359812313518 = ComponentEnhancer<{}, {}>;
 
-export type SingleDateCalendarProps<T> = CalendarProps<T> &
-  OnChangePropsSingleDateSelection;
+export type SingleDateCalendarProps<T> = Omit<CalendarProps<T>, 'theme'> &
+  OnChangePropsSingleDateSelection &
+  WithCalendarTheme &
+  WithMonthSwitcherProps;
 
 export interface OnChangePropsSingleDateSelection {
   value: Date | undefined;
@@ -34,17 +39,17 @@ const addSelectionLogic = withHandlers<
   },
 });
 
-const buildSelectionState = withProps(
-  ({ value }: SingleDateCalendarProps<{}>) => {
-    const statePerMonth = value
-      ? setDayStateValue({}, value, { highlighted: true })
-      : undefined;
-    return {
-      statePerMonth,
-      date: value,
-    };
-  },
-);
+const buildSelectionState = withProps<
+  Pick<CalendarProps<{}>, 'statePerMonth'>,
+  SingleDateCalendarProps<{}>
+>(({ value, statePerMonth }) => {
+  return {
+    statePerMonth: value
+      ? addDayStateHighlights(statePerMonth, value, ['selected'])
+      : statePerMonth,
+    date: value,
+  };
+});
 
 export const withSingleDateSelection = compose(
   addSelectionLogic,

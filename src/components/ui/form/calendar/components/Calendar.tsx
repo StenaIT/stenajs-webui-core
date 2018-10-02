@@ -2,15 +2,12 @@ import { getMonth, getYear } from 'date-fns';
 import * as _ from 'lodash';
 import * as React from 'react';
 import {
-  branch,
   compose,
   InferableComponentEnhancerWithProps,
   mapProps,
-  renderComponent,
   withProps,
 } from 'recompose';
-import { Row, Spacing } from '../../../layout';
-import { DefaultText } from '../../../text';
+import { Row, Space, Spacing } from '../../../layout';
 import {
   calculateOverflowingMonth,
   DayData,
@@ -25,12 +22,17 @@ import { CalendarDay } from './renderers/CalendarDay';
 
 export type __C13581358 = InferableComponentEnhancerWithProps<{}, {}>;
 
-export interface CalendarDayProps<T = {}> {
+export interface CalendarDayProps<T = {}> extends ExtraDayContentProps<T> {
+  extraDayContent?: React.ComponentType<ExtraDayContentProps<T>>;
+  onClickDay?: OnClickDay<T>;
+}
+
+export interface ExtraDayContentProps<T = {}> {
   month: MonthData;
+  week: WeekData;
   day: DayData;
   dayState?: DayState;
   userData?: T;
-  onClickDay?: OnClickDay<T>;
   theme: CalendarTheme;
 }
 
@@ -62,7 +64,10 @@ export interface Renderers {
   renderWeekDay?: RenderWeekDay;
 }
 
-export interface CalendarProps<T> extends CalendarOnClicks<T>, Renderers {
+export interface CalendarProps<T>
+  extends CalendarHeaderContentProps,
+    CalendarOnClicks<T>,
+    Renderers {
   /** The year to show. If used, must also provide month. Overrides prop date. */
   year?: number;
   /** The month to show. If used, must also provide year. Overrides prop date. */
@@ -81,7 +86,12 @@ export interface CalendarProps<T> extends CalendarOnClicks<T>, Renderers {
    * The component to use to render a day in the calendar.
    * Must use CalendarDayProps. Use CalendarDay or create your own.
    */
-  dayComponent: React.ComponentType<CalendarDayProps<T>>;
+  dayComponent?: React.ComponentType<CalendarDayProps<T>>;
+  /**
+   * If supplied, this component will be rendered in the default day component inside a relative div.
+   * This allows for added custom content in a day cell.
+   */
+  extraDayContent?: React.ComponentType<ExtraDayContentProps<T>>;
   /** The width of a cell in the calendar. Applies to days, week numbers, headers, etc. */
   width?: string;
   /** The height of a cell in the calendar. Applies to days, week numbers, headers, etc. */
@@ -91,32 +101,47 @@ export interface CalendarProps<T> extends CalendarOnClicks<T>, Renderers {
   theme?: CalendarTheme;
 }
 
+export interface CalendarHeaderContentProps {
+  /** Content to put left of the month header text. */
+  headerLeftContent?: React.ReactElement<{}>;
+  /** Content to put right of the month header text. */
+  headerRightContent?: React.ReactElement<{}>;
+}
+
 export interface CalendarPropsWithDateSet<T> {
   year: number;
   month: number;
   numMonths?: number;
   monthsPerRow?: number;
-  dayComponent: React.ComponentType<CalendarDayProps<T>>;
+  dayComponent?: React.ComponentType<CalendarDayProps<T>>;
 }
 
 export type CalendarUserData<T> = DataPerMonth<T>;
 
-interface InnerProps<T> extends CalendarOnClicks<T>, Renderers {
+interface InnerProps<T>
+  extends CalendarProps<T>,
+    CalendarOnClicks<T>,
+    Renderers {
   year: number;
   month: number;
   monthRows: Array<Array<MonthData>>;
   userDataPerMonth?: CalendarUserData<T>;
-  dayComponent?: React.ComponentType<CalendarDayProps<T>>;
   statePerMonth?: DataPerMonth<DayState>;
   width?: string;
   height?: string;
   theme?: CalendarTheme;
 }
 
+export type DayStateHighlight =
+  | 'selected'
+  | 'range'
+  | 'today'
+  | 'error'
+  | 'disabled'
+  | string;
+
 export interface DayState {
-  highlighted?: boolean;
-  error?: boolean;
-  warning?: boolean;
+  highlights?: Array<DayStateHighlight>;
 }
 
 export type OnClickDay<T> = (day: DayData, data?: T) => void;
@@ -136,28 +161,36 @@ const CalendarComponent = <T extends {}>({
   onClickWeek,
   renderWeekDay,
   renderWeekNumber,
+  headerLeftContent,
+  headerRightContent,
+  extraDayContent,
   theme = defaultCalendarTheme,
 }: InnerProps<T>) => (
   <div>
     {monthRows.map((monthRow, rowIndex) => (
       <Spacing key={rowIndex}>
         <Row>
-          {monthRow.map(month => (
-            <CalendarMonth
-              key={month.name}
-              month={month}
-              dayComponent={dayComponent}
-              userDataPerWeek={
-                userDataPerMonth && userDataPerMonth[month.monthString]
-              }
-              statePerWeek={statePerMonth && statePerMonth[month.monthString]}
-              onClickDay={onClickDay}
-              onClickWeekDay={onClickWeekDay}
-              onClickWeek={onClickWeek}
-              theme={theme}
-              renderWeekNumber={renderWeekNumber}
-              renderWeekDay={renderWeekDay}
-            />
+          {monthRow.map((month, index) => (
+            <React.Fragment key={month.name}>
+              {index > 0 && <Space />}
+              <CalendarMonth
+                month={month}
+                dayComponent={dayComponent}
+                userDataPerWeek={
+                  userDataPerMonth && userDataPerMonth[month.monthString]
+                }
+                statePerWeek={statePerMonth && statePerMonth[month.monthString]}
+                onClickDay={onClickDay}
+                onClickWeekDay={onClickWeekDay}
+                onClickWeek={onClickWeek}
+                theme={theme}
+                renderWeekNumber={renderWeekNumber}
+                renderWeekDay={renderWeekDay}
+                headerLeftContent={headerLeftContent}
+                headerRightContent={headerRightContent}
+                extraDayContent={extraDayContent}
+              />
+            </React.Fragment>
           ))}
         </Row>
       </Spacing>
@@ -217,14 +250,8 @@ const createCalendarMonths = <T extends {}>() =>
     },
   );
 
-const renderErrorIfNoDayComponent = branch<CalendarProps<{}>>(
-  ({ dayComponent }) => !dayComponent,
-  renderComponent(() => <DefaultText>Missing dayComponent prop.</DefaultText>),
-);
-
 export const createCalendar = <T extends {}>() =>
   compose<InnerProps<T>, CalendarProps<T>>(
-    renderErrorIfNoDayComponent,
     applyDefaultDates(),
     handleOverflowingMonth(),
     createCalendarMonths(),

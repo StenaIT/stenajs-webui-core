@@ -10,10 +10,11 @@ import {
 import { withTheme, WithThemeProps } from '../../../util/enhancers';
 import { Background } from '../../colors';
 import { Border } from '../../decorations';
+import { Indent } from '../../layout/Indent';
 import { Overlay } from '../../overlay';
 import { Absolute, Relative } from '../../positioning';
 import { CalendarDay } from '../calendar/components/renderers/CalendarDay';
-import { SingleDateCalendar } from '../calendar/SingleDateCalendar';
+import { createSingleDateCalendar } from '../calendar/SingleDateCalendar';
 import { DefaultTextInput } from '../text-input';
 
 export interface DateInputProps {
@@ -53,6 +54,8 @@ type InnerProps = DateInputProps &
   DateInputPropsWithDefaultProps &
   WithThemeProps;
 
+const SingleDateCalendar = createSingleDateCalendar();
+
 const DateInputComponent = ({
   showCalendar,
   hideCalendar,
@@ -80,12 +83,14 @@ const DateInputComponent = ({
         <Absolute zIndex={zIndex}>
           <Border color={theme.components.DateInput.borderColor}>
             <Background color={theme.components.DateInput.backgroundColor}>
-              <SingleDateCalendar
-                dayComponent={CalendarDay}
-                onChange={onSelectDate}
-                value={value}
-                theme={theme.components.DateInput.calendar}
-              />
+              <Indent>
+                <SingleDateCalendar
+                  dayComponent={CalendarDay}
+                  onChange={onSelectDate}
+                  value={value}
+                  theme={theme.components.DateInput.calendar}
+                />
+              </Indent>
             </Background>
           </Border>
         </Absolute>

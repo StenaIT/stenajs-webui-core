@@ -1,15 +1,20 @@
-import * as React from 'react';
+import { withState } from '@dump247/storybook-state';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
+import { addDays } from 'date-fns';
+import * as React from 'react';
+import { compose } from 'recompose';
+import { UseTheme } from '../../src/components/theme';
+import { extranetCalendarTheme } from '../../src/components/ui/form/calendar/components';
 import {
   DateRangeCalendar,
   DateRangeCalendarWithState,
 } from '../../src/components/ui/form/calendar/DateRangeCalendar';
-import { CalendarDay } from '../../src/components/ui/form/calendar/components/renderers/CalendarDay';
 import { SingleDateCalendar } from '../../src/components/ui/form/calendar/SingleDateCalendar';
-import { compose } from 'recompose';
-import { withState } from '@dump247/storybook-state';
-import { UseTheme } from '../../src/components/theme';
+import { setDayStateValue } from '../../src/components/ui/form/calendar/util';
+import { Icon } from '../../src/components/ui/icon';
+import { Row, Space } from '../../src/components/ui/layout';
+import { Absolute } from '../../src/components/ui/positioning';
 
 const withDateRangeState = compose(
   withState({
@@ -28,14 +33,36 @@ const withSingleDateState = compose(
 );
 
 export const addCalendarStories = () => {
+  const dayStateValue = setDayStateValue(undefined, addDays(new Date(), 1), {
+    highlights: ['disabled'],
+  });
   storiesOf('Form/Calendar/SingleDateCalendar', module)
     .add(
       'standard',
       withSingleDateState(({ store }) => (
         <SingleDateCalendar
-          dayComponent={CalendarDay}
           onChange={value => store.set({ value })}
           value={store.state.value}
+        />
+      )),
+    )
+    .add(
+      'with disabled date tomorrow',
+      withSingleDateState(({ store }) => (
+        <SingleDateCalendar
+          onChange={value => store.set({ value })}
+          value={store.state.value}
+          statePerMonth={dayStateValue}
+        />
+      )),
+    )
+    .add(
+      'with month switcher below',
+      withSingleDateState(({ store }) => (
+        <SingleDateCalendar
+          onChange={value => store.set({ value })}
+          value={store.state.value}
+          monthSwitcherPlacement={'below'}
         />
       )),
     )
@@ -43,7 +70,6 @@ export const addCalendarStories = () => {
       'with multiple months',
       withSingleDateState(({ store }) => (
         <SingleDateCalendar
-          dayComponent={CalendarDay}
           onChange={value => store.set({ value })}
           numMonths={3}
           value={store.state.value}
@@ -54,7 +80,6 @@ export const addCalendarStories = () => {
       'with multiple rows',
       withSingleDateState(({ store }) => (
         <SingleDateCalendar
-          dayComponent={CalendarDay}
           onChange={value => store.set({ value })}
           numMonths={6}
           monthsPerRow={3}
@@ -63,39 +88,51 @@ export const addCalendarStories = () => {
       )),
     )
     .add(
-      'with custom theme',
+      'with custom content',
+      withSingleDateState(({ store }) => (
+        <SingleDateCalendar
+          onChange={value => store.set({ value })}
+          value={store.state.value}
+          extraDayContent={() => (
+            <Absolute top={0} right={0}>
+              <Icon name={'coffee'} />
+            </Absolute>
+          )}
+        />
+      )),
+    )
+    .add(
+      'with global custom theme',
       withSingleDateState(({ store }) => (
         <UseTheme
           theme={{
             components: {
-              Calendar: {
-                width: '70px',
-                height: '70px',
-                WeekNumber: {
-                  backgroundColor: 'blue',
-                  textColor: 'yellow',
-                },
-                WeekDay: { textColor: 'pink' },
-                CalendarDay: {
-                  textColor: '#cc3434',
-                  backgroundColor: '#eeee77',
-                  highlightedBackgroundColor: '#bbbb77',
-                  otherMonthBackgroundColor: '#fff6ba',
-                  otherMonthTextColor: '#b47673',
-                },
-                  CalendarMonth: {
-                      headerTextColor: '#8fe792'
-                  }
-              },
+              Calendar: extranetCalendarTheme,
             },
           }}
         >
           <SingleDateCalendar
-            dayComponent={CalendarDay}
             onChange={value => store.set({ value })}
             value={store.state.value}
           />
         </UseTheme>
+      )),
+    )
+    .add(
+      'with instance custom theme',
+      withSingleDateState(({ store }) => (
+        <Row>
+          <SingleDateCalendar
+            onChange={value => store.set({ value })}
+            value={store.state.value}
+            theme={extranetCalendarTheme}
+          />
+          <Space num={2} />
+          <SingleDateCalendar
+            onChange={value => store.set({ value })}
+            value={store.state.value}
+          />
+        </Row>
       )),
     );
   storiesOf('Form/Calendar/DateRangeCalendar', module)
@@ -103,7 +140,6 @@ export const addCalendarStories = () => {
       'standard',
       withDateRangeState(({ store }) => (
         <DateRangeCalendar
-          dayComponent={CalendarDay}
           onChange={() => {}}
           startDate={store.state.startDate}
           endDate={store.state.endDate}
@@ -118,7 +154,6 @@ export const addCalendarStories = () => {
       'with multiple months',
       withDateRangeState(({ store }) => (
         <DateRangeCalendar
-          dayComponent={CalendarDay}
           onChange={() => {}}
           numMonths={3}
           startDate={store.state.startDate}
@@ -134,7 +169,6 @@ export const addCalendarStories = () => {
       'with multiple rows',
       withDateRangeState(({ store }) => (
         <DateRangeCalendar
-          dayComponent={CalendarDay}
           onChange={() => {}}
           numMonths={6}
           monthsPerRow={3}
@@ -145,38 +179,70 @@ export const addCalendarStories = () => {
           setEndDate={endDate => store.set({ endDate })}
           setFocusedInput={focusedInput => store.set({ focusedInput })}
         />
+      )),
+    )
+    .add(
+      'with custom theme',
+      withDateRangeState(({ store }) => (
+        <UseTheme
+          theme={{
+            components: {
+              Calendar: extranetCalendarTheme,
+            },
+          }}
+        >
+          <DateRangeCalendar
+            onChange={() => {}}
+            numMonths={6}
+            monthsPerRow={3}
+            startDate={store.state.startDate}
+            endDate={store.state.endDate}
+            focusedInput={store.state.focusedInput}
+            setStartDate={startDate => store.set({ startDate })}
+            setEndDate={endDate => store.set({ endDate })}
+            setFocusedInput={focusedInput => store.set({ focusedInput })}
+          />
+        </UseTheme>
       )),
     );
 
   storiesOf('Form/Calendar/DateRangeCalendarWithState', module)
     .add(
       'standard',
-      withInfo()(() => (
-        <DateRangeCalendarWithState
-          dayComponent={CalendarDay}
-          onChange={() => {}}
-        />
-      )),
+      withInfo()(() => <DateRangeCalendarWithState onChange={() => {}} />),
     )
     .add(
       'with multiple months',
       withInfo()(() => (
-        <DateRangeCalendarWithState
-          dayComponent={CalendarDay}
-          onChange={() => {}}
-          numMonths={3}
-        />
+        <DateRangeCalendarWithState onChange={() => {}} numMonths={3} />
       )),
     )
     .add(
       'with multiple rows',
       withInfo()(() => (
         <DateRangeCalendarWithState
-          dayComponent={CalendarDay}
           onChange={() => {}}
           numMonths={6}
           monthsPerRow={3}
         />
+      )),
+    )
+    .add(
+      'with custom theme',
+      withInfo()(() => (
+        <UseTheme
+          theme={{
+            components: {
+              Calendar: extranetCalendarTheme,
+            },
+          }}
+        >
+          <DateRangeCalendarWithState
+            onChange={() => {}}
+            numMonths={6}
+            monthsPerRow={3}
+          />
+        </UseTheme>
       )),
     );
 };
