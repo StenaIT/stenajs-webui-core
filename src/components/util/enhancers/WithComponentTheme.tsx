@@ -9,6 +9,10 @@ import { ComponentThemes } from '../../../themes/theme-types/ComponentThemes';
 import { DeepPartial } from '../../../types/DeepPartial';
 import { withTheme, WithThemeProps } from './WithTheme';
 
+export interface ComponentThemeProps<T extends keyof ComponentThemes> {
+  theme?: DeepPartial<ComponentThemes[T]>;
+}
+
 export interface WithComponentThemeProps<T> {
   theme: T;
 }

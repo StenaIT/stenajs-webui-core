@@ -1,25 +1,31 @@
 import * as React from 'react';
+import { compose, pure, setDisplayName } from 'recompose';
+import {
+  withComponentTheme,
+  WithComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
-import { compose, pure } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { TextTheme } from './TextTheme';
 
-export type HeaderTextProps = TextBaseSharedProps;
+export type HeaderTextProps = TextBaseSharedProps &
+  WithComponentThemeProps<TextTheme>;
 
-const HeaderTextComponent = ({
+type InnerProps = HeaderTextProps & WithComponentThemeProps<TextTheme>;
+
+const HeaderTextComponent: React.SFC<InnerProps> = ({
   theme,
   ...textProps
-}: HeaderTextProps & WithThemeProps) => (
+}) => (
   <TextBase
     {...textProps}
-    fontSize={theme.components.HeaderText.fontSize}
-    fontFamily={theme.components.HeaderText.fontFamily}
+    fontSize={theme.fontSize}
+    fontFamily={theme.fontFamily}
   />
 );
 
-export const HeaderText = compose<
-  HeaderTextProps & WithThemeProps,
-  HeaderTextProps
->(
-  pure,
-  withTheme,
-)(HeaderTextComponent);
+export const HeaderText = setDisplayName<HeaderTextProps>('HeaderText')(
+  compose<InnerProps, HeaderTextProps>(
+    pure,
+    withComponentTheme('HeaderText'),
+  )(HeaderTextComponent),
+);

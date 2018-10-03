@@ -1,24 +1,32 @@
 import * as React from 'react';
 import { compose, pure, setDisplayName } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import {
+  ComponentThemeProps,
+  withComponentTheme,
+  WithComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
+import { TextTheme } from './TextTheme';
 
-export type DefaultTextProps = TextBaseSharedProps;
+export type DefaultTextProps = TextBaseSharedProps &
+  ComponentThemeProps<'DefaultText'>;
 
-const DefaultTextComponent = ({
+type InnerProps = DefaultTextProps & WithComponentThemeProps<TextTheme>;
+
+const DefaultTextComponent: React.SFC<InnerProps> = ({
   theme,
   ...textProps
-}: DefaultTextProps & WithThemeProps) => (
+}) => (
   <TextBase
     {...textProps}
-    fontSize={theme.components.DefaultText.fontSize}
-    fontFamily={theme.components.DefaultText.fontFamily}
+    fontSize={theme.fontSize}
+    fontFamily={theme.fontFamily}
   />
 );
 
 export const DefaultText = setDisplayName<DefaultTextProps>('DefaultText')(
-  compose<DefaultTextProps & WithThemeProps, DefaultTextProps>(
+  compose<InnerProps, DefaultTextProps>(
     pure,
-    withTheme,
+    withComponentTheme('DefaultText'),
   )(DefaultTextComponent),
 );

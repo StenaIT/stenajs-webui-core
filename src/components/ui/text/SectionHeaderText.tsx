@@ -1,25 +1,33 @@
 import * as React from 'react';
+import { compose, pure, setDisplayName } from 'recompose';
+import {
+  ComponentThemeProps,
+  withComponentTheme,
+  WithComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
-import { compose, pure } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { TextTheme } from './TextTheme';
 
-export type SectionHeaderTextProps = TextBaseSharedProps;
+export type SectionHeaderTextProps = TextBaseSharedProps &
+  ComponentThemeProps<'SectionHeaderText'>;
 
-const SectionHeaderTextComponent = ({
+type InnerProps = SectionHeaderTextProps & WithComponentThemeProps<TextTheme>;
+const SectionHeaderTextComponent: React.SFC<InnerProps> = ({
   theme,
   ...textProps
-}: SectionHeaderTextProps & WithThemeProps) => (
+}) => (
   <TextBase
     {...textProps}
-    fontSize={theme.components.SectionHeaderText.fontSize}
-    fontFamily={theme.components.SectionHeaderText.fontFamily}
+    fontSize={theme.fontSize}
+    fontFamily={theme.fontFamily}
   />
 );
 
-export const SectionHeaderText = compose<
-  SectionHeaderTextProps & WithThemeProps,
-  SectionHeaderTextProps
->(
-  pure,
-  withTheme,
-)(SectionHeaderTextComponent);
+export const SectionHeaderText = setDisplayName<SectionHeaderTextProps>(
+  'SectionHeaderText',
+)(
+  compose<InnerProps, SectionHeaderTextProps>(
+    pure,
+    withComponentTheme('SectionHeaderText'),
+  )(SectionHeaderTextComponent),
+);
