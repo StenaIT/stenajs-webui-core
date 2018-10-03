@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { compose, pure, setDisplayName, withHandlers } from 'recompose';
+import { DeepPartial } from '../../../../types/DeepPartial';
 import {
   withComponentTheme,
   WithComponentThemeProps,
@@ -14,6 +15,7 @@ import { SimpleCheckboxTheme } from './SimpleCheckboxTheme';
 
 export interface SimpleCheckboxProps extends ValueOnChangeProps<boolean> {
   disabled?: boolean;
+  theme?: DeepPartial<SimpleCheckboxTheme>;
 }
 
 export interface WithOnChangeHandlerPropsForSimpleCheckboxComponent {
