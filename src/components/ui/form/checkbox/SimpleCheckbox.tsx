@@ -1,6 +1,10 @@
 import * as React from 'react';
-import { compose, pure, setDisplayName, withHandlers } from 'recompose';
+import { compose, pure, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types/DeepPartial';
+import {
+  withOnToggleHandler,
+  WithOnToggleHandler,
+} from '../../../util/enhancers/withOnToggleHandler';
 import {
   withComponentTheme,
   WithInnerComponentThemeProps,
@@ -18,12 +22,8 @@ export interface SimpleCheckboxProps extends ValueOnChangeProps<boolean> {
   theme?: DeepPartial<SimpleCheckboxTheme>;
 }
 
-export interface WithOnChangeHandlerPropsForSimpleCheckboxComponent {
-  onToggle: () => void;
-}
-
 type InnerProps = SimpleCheckboxProps &
-  WithOnChangeHandlerPropsForSimpleCheckboxComponent &
+  WithOnToggleHandler &
   WithInnerComponentThemeProps<SimpleCheckboxTheme>;
 
 export const SimpleCheckboxComponent = ({
@@ -64,17 +64,9 @@ export const SimpleCheckboxComponent = ({
   );
 };
 
-const withOnChangeHandler = withHandlers({
-  onToggle: ({ onChange, value }: SimpleCheckboxProps) => () => {
-    if (onChange) {
-      onChange(!value);
-    }
-  },
-});
-
 export const SimpleCheckbox = compose<InnerProps, SimpleCheckboxProps>(
   setDisplayName('SimpleCheckbox'),
   pure,
-  withOnChangeHandler,
+  withOnToggleHandler,
   withComponentTheme('SimpleCheckbox'),
 )(SimpleCheckboxComponent);

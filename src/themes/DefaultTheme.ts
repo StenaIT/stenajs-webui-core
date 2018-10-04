@@ -7,6 +7,7 @@ import { defaultCalendarTheme } from '../components/ui/form/calendar/components/
 import { defaultSimpleCheckboxTheme } from '../components/ui/form/checkbox/SimpleCheckboxTheme';
 import { defaultDateInputTheme } from '../components/ui/form/date-time-input/DateInputTheme';
 import { defaultDateRangeInputTheme } from '../components/ui/form/date-time-input/DateRangeInputTheme';
+import { defaultRadioButtonTheme } from '../components/ui/form/radio/RadioButtonTheme';
 import { defaultDefaultTextInputTheme } from '../components/ui/form/text-input/DefaultTextInputTheme';
 import { defaultNumericTextInputTheme } from '../components/ui/form/text-input/NumericTextInputTheme';
 import { defaultSimpleTextInputTheme } from '../components/ui/form/text-input/SimpleTextInputTheme';
@@ -34,25 +35,26 @@ export const defaultTheme: Theme = {
   fontSizes: defaultFontSizes,
   components: {
     Button: defaultButtonTheme,
-    FlatButton: defaultFlatButtonTheme,
-    SmallButton: defaultSmallButtonTheme,
-    StandardButton: defaultStandardButtonTheme,
-    SimpleCheckbox: defaultSimpleCheckboxTheme,
-    SimpleTextInput: defaultSimpleTextInputTheme,
-    HeaderText: defaultHeaderTextTheme,
-    SectionHeaderText: defaultSectionHeaderTextTheme,
-    LargeText: defaultLargeTextTheme,
-    DefaultText: defaultDefaultTextTheme,
-    SmallText: defaultSmallTextTheme,
-    SmallerText: defaultSmallerTextTheme,
-    TinyText: defaultTinyTextTheme,
-    DefaultTextInput: defaultDefaultTextInputTheme,
+    Calendar: defaultCalendarTheme,
     DateInput: defaultDateInputTheme,
     DateRangeInput: defaultDateRangeInputTheme,
-    Calendar: defaultCalendarTheme,
+    DefaultText: defaultDefaultTextTheme,
+    DefaultTextInput: defaultDefaultTextInputTheme,
+    FlatButton: defaultFlatButtonTheme,
+    HeaderText: defaultHeaderTextTheme,
+    LargeText: defaultLargeTextTheme,
+    NumericTextInput: defaultNumericTextInputTheme,
+    RadioButton: defaultRadioButtonTheme,
+    SectionHeaderText: defaultSectionHeaderTextTheme,
     Select: defaultSelectTheme,
     SeparatorLine: defaultSeparatorLineTheme,
+    SimpleCheckbox: defaultSimpleCheckboxTheme,
+    SimpleTextInput: defaultSimpleTextInputTheme,
     Slider: defaultSliderTheme,
-    NumericTextInput: defaultNumericTextInputTheme,
+    SmallButton: defaultSmallButtonTheme,
+    SmallText: defaultSmallTextTheme,
+    SmallerText: defaultSmallerTextTheme,
+    StandardButton: defaultStandardButtonTheme,
+    TinyText: defaultTinyTextTheme,
   },
 };

@@ -11,6 +11,7 @@ import {
   DateInputTheme,
   DateRangeInputTheme,
 } from '../../components/ui/form/date-time-input/index';
+import { RadioButtonTheme } from '../../components/ui/form/radio/RadioButtonTheme';
 import {
   DefaultTextInputTheme,
   SimpleTextInputTheme,
@@ -22,24 +23,25 @@ import { SelectTheme } from '../../enhancers/select/SelectTheme';
 
 export interface ComponentThemes {
   Button: ButtonTheme;
-  FlatButton: FlatButtonTheme;
-  SmallButton: SmallButtonTheme;
-  StandardButton: StandardButtonTheme;
-  SimpleCheckbox: SimpleCheckboxTheme;
-  SimpleTextInput: SimpleTextInputTheme;
-  HeaderText: TextTheme;
-  SectionHeaderText: TextTheme;
-  LargeText: TextTheme;
-  DefaultText: TextTheme;
-  SmallText: TextTheme;
-  SmallerText: TextTheme;
-  TinyText: TextTheme;
-  DefaultTextInput: DefaultTextInputTheme;
+  Calendar: CalendarTheme;
   DateInput: DateInputTheme;
   DateRangeInput: DateRangeInputTheme;
-  Calendar: CalendarTheme;
+  DefaultText: TextTheme;
+  DefaultTextInput: DefaultTextInputTheme;
+  FlatButton: FlatButtonTheme;
+  HeaderText: TextTheme;
+  LargeText: TextTheme;
+  NumericTextInput: NumericTextInputTheme;
+  RadioButton: RadioButtonTheme;
+  SectionHeaderText: TextTheme;
   Select: SelectTheme;
   SeparatorLine: SeparatorLineTheme;
+  SimpleCheckbox: SimpleCheckboxTheme;
+  SimpleTextInput: SimpleTextInputTheme;
   Slider: SliderTheme;
-  NumericTextInput: NumericTextInputTheme;
+  SmallButton: SmallButtonTheme;
+  SmallText: TextTheme;
+  SmallerText: TextTheme;
+  StandardButton: StandardButtonTheme;
+  TinyText: TextTheme;
 }

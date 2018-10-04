@@ -16,7 +16,8 @@ import { Space } from '../layout/Space';
 import { ProgressIndicator } from '../progress/ProgressIndicator';
 import { ButtonTheme } from './ButtonTheme';
 
-export type ButtonPropsWithTheme = ButtonProps & ComponentThemeProps<'StandardButton'>;
+export type ButtonPropsWithTheme = ButtonProps &
+  ComponentThemeProps<'StandardButton'>;
 
 export interface ButtonProps {
   /** The color of the button. */

@@ -1,6 +1,10 @@
 import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
 import {
+  withOnToggleHandler,
+  WithOnToggleHandler,
+} from '../../../util/enhancers/withOnToggleHandler';
+import {
   withComponentTheme,
   WithInnerComponentThemeProps,
 } from '../../../util/enhancers/WithComponentTheme';
@@ -18,47 +22,41 @@ export interface CheckboxWithLabelProps extends SimpleCheckboxProps {
 }
 
 type InnerProps = CheckboxWithLabelProps &
-  WithInnerComponentThemeProps<SimpleCheckboxTheme>;
+  WithInnerComponentThemeProps<SimpleCheckboxTheme> &
+  WithOnToggleHandler;
 
-class CheckboxWithLabelComponent extends React.Component<InnerProps> {
-  onChange = () => {
-    const { onChange, value } = this.props;
-    if (onChange) {
-      onChange(!value);
-    }
-  };
-
-  render() {
-    const {
-      children,
-      label,
-      textColor,
-      disabled,
-      theme,
-      onChange, // Do not pass to SimpleCheckbox
-      ...propsToCheckbox
-    } = this.props;
-    return (
-      <Clickable onClick={disabled ? undefined : this.onChange}>
-        <Row alignItems={'center'}>
-          <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />
-          <Space />
-          {label && (
-            <DefaultText color={disabled ? theme.iconColorDisabled : textColor}>
-              {label}
-            </DefaultText>
-          )}
-          {children}
-        </Row>
-      </Clickable>
-    );
-  }
-}
+export const CheckboxWithLabelComponent: React.SFC<InnerProps> = props => {
+  const {
+    children,
+    label,
+    textColor,
+    disabled,
+    theme,
+    onToggle,
+    onChange, // Do not pass to SimpleCheckbox
+    ...propsToCheckbox
+  } = props;
+  return (
+    <Clickable onClick={disabled ? undefined : onToggle}>
+      <Row alignItems={'center'}>
+        <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />
+        <Space />
+        {label && (
+          <DefaultText color={disabled ? theme.iconColorDisabled : textColor}>
+            {label}
+          </DefaultText>
+        )}
+        {children}
+      </Row>
+    </Clickable>
+  );
+};
 
 export const CheckboxWithLabel = setDisplayName<CheckboxWithLabelProps>(
   'CheckboxWithLabel',
 )(
   compose<InnerProps, CheckboxWithLabelProps>(
     withComponentTheme('SimpleCheckbox'),
+    withOnToggleHandler,
   )(CheckboxWithLabelComponent),
 );

@@ -3,6 +3,7 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import {
   faCheckCircle,
   faCircle as farCircle,
+  faDotCircle as farDotCircle,
 } from '@fortawesome/free-regular-svg-icons';
 import {
   faAngleDoubleRight,
@@ -77,4 +78,5 @@ library.add(
   faCheckCircle,
   faRegistered,
   faThLarge,
+  farDotCircle,
 );

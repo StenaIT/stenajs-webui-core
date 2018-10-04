@@ -11,7 +11,8 @@ import { TextTheme } from './TextTheme';
 export type SectionHeaderTextProps = TextBaseSharedProps &
   ComponentThemeProps<'SectionHeaderText'>;
 
-type InnerProps = SectionHeaderTextProps & WithInnerComponentThemeProps<TextTheme>;
+type InnerProps = SectionHeaderTextProps &
+  WithInnerComponentThemeProps<TextTheme>;
 const SectionHeaderTextComponent: React.SFC<InnerProps> = ({
   theme,
   ...textProps
