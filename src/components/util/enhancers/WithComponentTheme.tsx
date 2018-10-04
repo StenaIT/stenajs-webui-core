@@ -13,7 +13,7 @@ export interface ComponentThemeProps<T extends keyof ComponentThemes> {
   theme?: DeepPartial<ComponentThemes[T]>;
 }
 
-export interface WithComponentThemeProps<T> {
+export interface WithInnerComponentThemeProps<T> {
   theme: T;
 }
 
@@ -25,14 +25,14 @@ export const withComponentTheme = <T extends keyof ComponentThemes>(
   componentName: T,
 ) =>
   compose<
-    WithComponentThemeProps<ComponentThemes[T]>,
-    WithComponentThemeProps<DeepPartial<ComponentThemes[T]>>
+    WithInnerComponentThemeProps<ComponentThemes[T]>,
+    WithInnerComponentThemeProps<DeepPartial<ComponentThemes[T]>>
   >(
     setDisplayName('withComponentTheme()'),
     renameProp('theme', 'overridingTheme'),
     withTheme,
     withPropsOnChange<
-      WithComponentThemeProps<ComponentThemes[T]>,
+      WithInnerComponentThemeProps<ComponentThemes[T]>,
       WithOverridingTheme<T> & WithThemeProps
     >(['theme', 'overridingTheme'], ({ overridingTheme, theme }) => ({
       theme: merge({}, theme.components[componentName], overridingTheme),

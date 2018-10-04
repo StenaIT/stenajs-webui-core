@@ -3,7 +3,7 @@ import { compose, pure, setDisplayName } from 'recompose';
 import {
   ComponentThemeProps,
   withComponentTheme,
-  WithComponentThemeProps,
+  WithInnerComponentThemeProps,
 } from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
 import { TextTheme } from './TextTheme';
@@ -11,7 +11,7 @@ import { TextTheme } from './TextTheme';
 export type TinyTextProps = TextBaseSharedProps &
   ComponentThemeProps<'TinyText'>;
 
-type InnerProps = TinyTextProps & WithComponentThemeProps<TextTheme>;
+type InnerProps = TinyTextProps & WithInnerComponentThemeProps<TextTheme>;
 const TinyTextComponent: React.SFC<InnerProps> = ({ theme, ...textProps }) => (
   <TextBase
     {...textProps}

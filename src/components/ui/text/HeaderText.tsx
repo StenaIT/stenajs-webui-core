@@ -2,15 +2,15 @@ import * as React from 'react';
 import { compose, pure, setDisplayName } from 'recompose';
 import {
   withComponentTheme,
-  WithComponentThemeProps,
+  WithInnerComponentThemeProps,
 } from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
 import { TextTheme } from './TextTheme';
 
 export type HeaderTextProps = TextBaseSharedProps &
-  WithComponentThemeProps<TextTheme>;
+  WithInnerComponentThemeProps<TextTheme>;
 
-type InnerProps = HeaderTextProps & WithComponentThemeProps<TextTheme>;
+type InnerProps = HeaderTextProps & WithInnerComponentThemeProps<TextTheme>;
 
 const HeaderTextComponent: React.SFC<InnerProps> = ({
   theme,

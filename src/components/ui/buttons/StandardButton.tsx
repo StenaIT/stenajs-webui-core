@@ -1,21 +1,30 @@
 import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
-import { Button, ButtonProps } from './Button';
+import {
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
+import { Button, ButtonProps, ButtonPropsWithTheme } from './Button';
+import { StandardButtonTheme } from './StandardButtonTheme';
 
-const StandardButtonComponent = ({
+type InnerProps = ButtonProps &
+  WithInnerComponentThemeProps<StandardButtonTheme>;
+
+const StandardButtonComponent: React.SFC<InnerProps> = ({
   theme,
   ...buttonProps
-}: ButtonProps & WithThemeProps) => (
+}) => (
   <Button
-    height={theme.components.StandardButton.height}
-    borderRadius={theme.components.StandardButton.borderRadius}
+    height={theme.height}
+    borderRadius={theme.borderRadius}
     {...buttonProps}
   />
 );
 
-export const StandardButton = setDisplayName<ButtonProps>('StandardButton')(
-  compose<ButtonProps & WithThemeProps, ButtonProps>(withTheme)(
-    StandardButtonComponent,
-  ),
+export const StandardButton = setDisplayName<ButtonPropsWithTheme>(
+  'StandardButton',
+)(
+  compose<InnerProps, ButtonPropsWithTheme>(
+    withComponentTheme('StandardButton'),
+  )(StandardButtonComponent),
 );

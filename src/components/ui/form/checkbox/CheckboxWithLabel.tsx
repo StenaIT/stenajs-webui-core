@@ -2,7 +2,7 @@ import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
 import {
   withComponentTheme,
-  WithComponentThemeProps,
+  WithInnerComponentThemeProps,
 } from '../../../util/enhancers/WithComponentTheme';
 import { Clickable } from '../../interaction/Clickable';
 import { Row } from '../../layout/Row';
@@ -18,7 +18,7 @@ export interface CheckboxWithLabelProps extends SimpleCheckboxProps {
 }
 
 type InnerProps = CheckboxWithLabelProps &
-  WithComponentThemeProps<SimpleCheckboxTheme>;
+  WithInnerComponentThemeProps<SimpleCheckboxTheme>;
 
 class CheckboxWithLabelComponent extends React.Component<InnerProps> {
   onChange = () => {

@@ -3,7 +3,7 @@ import { compose, pure, setDisplayName, withHandlers } from 'recompose';
 import { DeepPartial } from '../../../../types/DeepPartial';
 import {
   withComponentTheme,
-  WithComponentThemeProps,
+  WithInnerComponentThemeProps,
 } from '../../../util/enhancers/WithComponentTheme';
 import { Background } from '../../colors/Background';
 import { Border } from '../../decorations/Border';
@@ -24,7 +24,7 @@ export interface WithOnChangeHandlerPropsForSimpleCheckboxComponent {
 
 type InnerProps = SimpleCheckboxProps &
   WithOnChangeHandlerPropsForSimpleCheckboxComponent &
-  WithComponentThemeProps<SimpleCheckboxTheme>;
+  WithInnerComponentThemeProps<SimpleCheckboxTheme>;
 
 export const SimpleCheckboxComponent = ({
   theme,

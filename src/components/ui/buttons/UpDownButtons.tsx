@@ -15,7 +15,7 @@ export interface UpDownButtonsProps {
 
 export const UpDownButtons = setDisplayName<UpDownButtonsProps>(
   'UpDownButtons',
-)(({ onClickDown, onClickUp, buttonHeight, iconColor }: UpDownButtonsProps) => (
+)(({ onClickDown, onClickUp, buttonHeight, iconColor }) => (
   <Column>
     <Clickable onClick={onClickUp}>
       <Row

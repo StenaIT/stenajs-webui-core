@@ -3,7 +3,7 @@ import { compose, pure, setDisplayName } from 'recompose';
 import {
   ComponentThemeProps,
   withComponentTheme,
-  WithComponentThemeProps,
+  WithInnerComponentThemeProps,
 } from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
 import { TextTheme } from './TextTheme';
@@ -11,7 +11,7 @@ import { TextTheme } from './TextTheme';
 export type LargeTextProps = TextBaseSharedProps &
   ComponentThemeProps<'LargeText'>;
 
-type InnerProps = LargeTextProps & WithComponentThemeProps<TextTheme>;
+type InnerProps = LargeTextProps & WithInnerComponentThemeProps<TextTheme>;
 
 const LargeTextComponent = ({ theme, ...textProps }: InnerProps) => (
   <TextBase

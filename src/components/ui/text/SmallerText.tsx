@@ -3,7 +3,7 @@ import { compose, pure, setDisplayName } from 'recompose';
 import {
   ComponentThemeProps,
   withComponentTheme,
-  WithComponentThemeProps,
+  WithInnerComponentThemeProps,
 } from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
 import { TextTheme } from './TextTheme';
@@ -11,7 +11,7 @@ import { TextTheme } from './TextTheme';
 export type SmallerTextProps = TextBaseSharedProps &
   ComponentThemeProps<'SmallerText'>;
 
-type InnerProps = SmallerTextProps & WithComponentThemeProps<TextTheme>;
+type InnerProps = SmallerTextProps & WithInnerComponentThemeProps<TextTheme>;
 
 const SmallerTextComponent: React.SFC<InnerProps> = ({
   theme,
