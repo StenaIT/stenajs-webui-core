@@ -22,6 +22,10 @@ export interface DateInputProps {
   value?: Date;
   /** onChange handler for when the user selects a date. */
   onChange?: (date: Date | undefined) => void;
+  /** If true, calendar will be open when component mounts. */
+  openOnMount?: boolean;
+  /** Is invoked when user closes the calendar popup. */
+  onClose?: () => void;
   /**
    * The date format in the input field. See date-fns docs.
    * @default YYYY-MM-dd
@@ -66,6 +70,7 @@ const DateInputComponent = ({
   value,
   zIndex,
   theme,
+  openOnMount,
 }: InnerProps) => (
   <>
     <DefaultTextInput
@@ -76,6 +81,7 @@ const DateInputComponent = ({
       onChange={noop}
       size={9}
       forceFocusHighlight={showingCalendar}
+      focusOnMount={openOnMount}
     />
     {showingCalendar && (
       <Relative>
@@ -107,7 +113,7 @@ interface WithShowingCalendarStateProps {
 const withShowingCalendarState = withState(
   'showingCalendar',
   'setShowingCalendar',
-  false,
+  ({ openOnMount }: DateInputProps) => openOnMount,
 );
 
 interface WithShowCalendarHandlers {
@@ -116,15 +122,18 @@ interface WithShowCalendarHandlers {
 }
 
 const withShowCalendarHandlers = withHandlers<
-  WithShowingCalendarStateProps,
+  WithShowingCalendarStateProps & DateInputProps,
   WithShowCalendarHandlers
 >({
   showCalendar: ({ setShowingCalendar }) => () => {
     setShowingCalendar(true);
     return true;
   },
-  hideCalendar: ({ setShowingCalendar }) => () => {
+  hideCalendar: ({ setShowingCalendar, onClose }) => () => {
     setShowingCalendar(false);
+    if (onClose) {
+      onClose();
+    }
   },
 });
 
