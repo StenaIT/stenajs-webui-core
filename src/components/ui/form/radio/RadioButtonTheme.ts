@@ -4,6 +4,13 @@ import {
   defaultColors,
   defaultFontSizes,
 } from '../../../../themes/default-values';
+import {
+  faCircle as farCircle,
+  faDotCircle as farDotCircle,
+} from '@fortawesome/free-regular-svg-icons';
+import { addIcons } from '../../../icon-library/IconLibrary';
+
+addIcons(farCircle, farDotCircle);
 
 export interface RadioButtonTheme {
   disabledIconColor: Color;

@@ -1,5 +1,7 @@
+import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
 import * as React from 'react';
 import { ComponentEnhancer, compose } from 'recompose';
+import { addIcons } from '../../../../../icon-library/IconLibrary';
 import { StandardButton } from '../../../../buttons/StandardButton';
 import { Indent, Row, Space } from '../../../../layout/index';
 import { CalendarProps } from '../../components/Calendar';
@@ -8,6 +10,8 @@ import {
   MonthSwitcherStateProps,
   withMonthSwitcherLogic,
 } from './MonthSwitcherLogic';
+
+addIcons(faChevronDown, faChevronUp);
 
 export type __C121235123518 = ComponentEnhancer<{}, {}>;
 

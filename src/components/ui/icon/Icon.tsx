@@ -4,7 +4,6 @@ import * as React from 'react';
 import { compose, withProps } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers';
 import { DefaultText } from '../text';
-import './IconLibrary';
 
 export type IconSource = 'fontawesome';
 

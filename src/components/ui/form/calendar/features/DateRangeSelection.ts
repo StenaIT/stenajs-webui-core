@@ -49,7 +49,7 @@ export interface DateRangeCalendarOnChangeValue {
 
 export interface OnChangePropsDateRangeSelection {
   /** onChange handler for when the user selects a date. */
-  onChange: (value: DateRangeCalendarOnChangeValue) => void;
+  onChange?: (value: DateRangeCalendarOnChangeValue) => void;
 }
 
 type InnerProps<T> = CalendarProps<T> &

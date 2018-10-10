@@ -10,7 +10,7 @@ import {
 import { withTheme, WithThemeProps } from '../../../util/enhancers';
 import { Background } from '../../colors';
 import { Border } from '../../decorations';
-import { Column, Row, Space } from '../../layout';
+import { Column, Indent, Row, Space } from '../../layout';
 import { Overlay } from '../../overlay';
 import { Absolute, Relative } from '../../positioning';
 import { DefaultText } from '../../text';
@@ -35,13 +35,13 @@ export interface DateRangeInputProps extends OnChangePropsDateRangeSelection {
 
   /**
    * Placeholder for start date field when no date has been selected.
-   * @default Select date
+   * @default Start date
    */
   placeholderStartDate?: string;
 
   /**
    * Placeholder for end date field when no date has been selected.
-   * @default Select date
+   * @default End date
    */
   placeholderEndDate?: string;
 
@@ -138,17 +138,19 @@ const DateRangeInputComponent = ({
         <Absolute zIndex={zIndex}>
           <Border color={theme.components.DateRangeInput.borderColor}>
             <Background color={theme.components.DateRangeInput.backgroundColor}>
-              <DateRangeCalendar
-                dayComponent={CalendarDay}
-                onChange={onSelectDateRange}
-                startDate={value.startDate}
-                endDate={value.endDate}
-                setStartDate={setStartDate}
-                setEndDate={setEndDate}
-                focusedInput={focusedInput}
-                setFocusedInput={setFocusedInput}
-                theme={theme.components.DateRangeInput.calendar}
-              />
+              <Indent>
+                <DateRangeCalendar
+                  dayComponent={CalendarDay}
+                  onChange={onSelectDateRange}
+                  startDate={value.startDate}
+                  endDate={value.endDate}
+                  setStartDate={setStartDate}
+                  setEndDate={setEndDate}
+                  focusedInput={focusedInput}
+                  setFocusedInput={setFocusedInput}
+                  theme={theme.components.DateRangeInput.calendar}
+                />
+              </Indent>
             </Background>
           </Border>
         </Absolute>
@@ -271,8 +273,8 @@ const withOnSelectDateHandler = withHandlers<
 
 const withDefaultProps = defaultProps<Partial<DateRangeInputProps>>({
   displayFormat: 'YYYY-MM-dd',
-  placeholderStartDate: 'Select date',
-  placeholderEndDate: 'Select date',
+  placeholderStartDate: 'Start date',
+  placeholderEndDate: 'End date',
   zIndex: 100,
 });
 

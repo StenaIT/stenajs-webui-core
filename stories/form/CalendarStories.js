@@ -140,7 +140,6 @@ export const addCalendarStories = () => {
       'standard',
       withDateRangeState(({ store }) => (
         <DateRangeCalendar
-          onChange={() => {}}
           startDate={store.state.startDate}
           endDate={store.state.endDate}
           focusedInput={store.state.focusedInput}
@@ -154,7 +153,6 @@ export const addCalendarStories = () => {
       'with multiple months',
       withDateRangeState(({ store }) => (
         <DateRangeCalendar
-          onChange={() => {}}
           numMonths={3}
           startDate={store.state.startDate}
           endDate={store.state.endDate}
@@ -169,7 +167,6 @@ export const addCalendarStories = () => {
       'with multiple rows',
       withDateRangeState(({ store }) => (
         <DateRangeCalendar
-          onChange={() => {}}
           numMonths={6}
           monthsPerRow={3}
           startDate={store.state.startDate}
@@ -192,7 +189,6 @@ export const addCalendarStories = () => {
           }}
         >
           <DateRangeCalendar
-            onChange={() => {}}
             numMonths={6}
             monthsPerRow={3}
             startDate={store.state.startDate}

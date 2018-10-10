@@ -3,6 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import styled from 'react-emotion';
 import { compose } from 'recompose';
+import { addIcons } from '../../icon-library/IconLibrary';
 import {
   ComponentThemeProps,
   withComponentTheme,
@@ -15,6 +16,9 @@ import { Row } from '../layout/Row';
 import { Space } from '../layout/Space';
 import { ProgressIndicator } from '../progress/ProgressIndicator';
 import { ButtonTheme } from './ButtonTheme';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
+addIcons(faCheck);
 
 export type ButtonPropsWithTheme = ButtonProps &
   ComponentThemeProps<'StandardButton'>;
