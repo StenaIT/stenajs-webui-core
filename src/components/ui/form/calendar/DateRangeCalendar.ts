@@ -1,6 +1,5 @@
 import { ComponentClass } from 'react';
-import { compose, setDisplayName, withProps } from 'recompose';
-import { withTheme, WithThemeProps } from '../../../util/enhancers';
+import { compose, setDisplayName } from 'recompose';
 import { withComponentTheme } from '../../../util/enhancers/WithComponentTheme';
 import { CalendarProps, createCalendar } from './components/Calendar';
 import {
@@ -19,10 +18,7 @@ export const createDateRangeCalendar = <T extends {}>() =>
     compose<CalendarProps<T>, DateRangeCalendarProps<T>>(
       withDateRangeSelection,
       withMonthSwitcher,
-      withTheme,
-      withProps(({ theme }: WithThemeProps) => ({
-        theme: theme.components.Calendar,
-      })),
+      withComponentTheme('Calendar'),
       withTodayInDayState<T>(),
     )(createCalendar<T>()),
   );

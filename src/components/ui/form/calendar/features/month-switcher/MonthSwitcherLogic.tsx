@@ -1,17 +1,20 @@
-import {
-  ComponentEnhancer,
-  compose,
-  withHandlers,
-  withProps,
-  withState,
-} from 'recompose';
-import { applyDefaultDates, CalendarProps } from '../../components/Calendar';
+import { addMonths, subMonths } from 'date-fns';
+import { ComponentEnhancer, compose, withHandlers, withState } from 'recompose';
+import { CalendarProps } from '../../components/Calendar';
 
 export type __C31235123518 = ComponentEnhancer<{}, {}>;
 
+export interface MonthSwitcherLogicOuterProps {
+  /**
+   * The date which is in focus when opening the calendar.
+   * @default Today's date.
+   */
+  startDateInFocus?: Date;
+}
+
 export interface MonthSwitcherStateProps {
-  startMonth: number;
-  setStartMonth: (startMonth: number) => void;
+  date: Date;
+  setDate: (date: Date) => void;
 }
 
 export interface MonthSwitcherHandlerProps {
@@ -23,27 +26,22 @@ const withClickHandlers = withHandlers<
   MonthSwitcherStateProps & CalendarProps<{}>,
   MonthSwitcherHandlerProps
 >({
-  nextMonth: ({ setStartMonth, startMonth, monthsPerRow }) => () => {
-    setStartMonth(startMonth + (monthsPerRow || 1));
+  nextMonth: ({ setDate, date, monthsPerRow }) => () => {
+    setDate(addMonths(date, monthsPerRow || 1));
   },
-  prevMonth: ({ setStartMonth, startMonth, monthsPerRow }) => () => {
-    setStartMonth(startMonth - (monthsPerRow || 1));
+  prevMonth: ({ setDate, date, monthsPerRow }) => () => {
+    setDate(subMonths(date, monthsPerRow || 1));
   },
 });
 
-const withSelectedMonthState = withState(
-  'startMonth',
-  'setStartMonth',
-  ({ month }) => month,
+const withDateInFocusState = withState(
+  'date',
+  'setDate',
+  ({ startDateInFocus }: MonthSwitcherLogicOuterProps) =>
+    startDateInFocus || new Date(),
 );
 
-const withMonthProp = withProps(({ startMonth }: MonthSwitcherStateProps) => ({
-  month: startMonth,
-}));
-
 export const withMonthSwitcherLogic = compose(
-  applyDefaultDates(),
-  withSelectedMonthState,
+  withDateInFocusState,
   withClickHandlers,
-  withMonthProp,
 );

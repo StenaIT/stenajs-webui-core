@@ -14,12 +14,14 @@ import { DayData } from '../util/CalendarDataFactory';
 import { ensureStartIsFirst } from '../util/CalendarIntervalValidator';
 import { addDayStateHighlights } from '../util/StateModifier';
 import { WithMonthSwitcherProps } from './month-switcher/MonthSwitcher';
+import { MonthSwitcherLogicOuterProps } from './month-switcher/MonthSwitcherLogic';
 
 export type __C359813518 = ComponentEnhancer<{}, {}>;
 
 export type DateRangeFocusedInput = 'startDate' | 'endDate' | undefined;
 
 export type DateRangeCalendarProps<T> = Omit<CalendarProps<T>, 'theme'> &
+  MonthSwitcherLogicOuterProps &
   DateRangeCalendarState &
   OnChangePropsDateRangeSelection &
   WithCalendarTheme &

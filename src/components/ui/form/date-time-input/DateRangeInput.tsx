@@ -16,7 +16,6 @@ import { Column, Indent, Row, Space } from '../../layout';
 import { Overlay } from '../../overlay';
 import { Absolute, Relative } from '../../positioning';
 import { DefaultText } from '../../text';
-import { CalendarDay } from '../calendar/components/renderers/CalendarDay';
 import { DateRangeCalendar } from '../calendar/DateRangeCalendar';
 import {
   DateRangeCalendarOnChangeValue,
@@ -144,7 +143,11 @@ const DateRangeInputComponent = ({
             <Background color={theme.components.DateRangeInput.backgroundColor}>
               <Indent>
                 <DateRangeCalendar
-                  dayComponent={CalendarDay}
+                  startDateInFocus={
+                    focusedInput === 'startDate' || focusedInput === 'endDate'
+                      ? value[focusedInput]
+                      : undefined
+                  }
                   onChange={onSelectDateRange}
                   startDate={value.startDate}
                   endDate={value.endDate}

@@ -13,7 +13,6 @@ import { Border } from '../../decorations';
 import { Indent } from '../../layout/Indent';
 import { Overlay } from '../../overlay';
 import { Absolute, Relative } from '../../positioning';
-import { CalendarDay } from '../calendar/components/renderers/CalendarDay';
 import { createSingleDateCalendar } from '../calendar/SingleDateCalendar';
 import { DefaultTextInput } from '../text-input';
 
@@ -91,7 +90,6 @@ const DateInputComponent = ({
             <Background color={theme.components.DateInput.backgroundColor}>
               <Indent>
                 <SingleDateCalendar
-                  dayComponent={CalendarDay}
                   onChange={onSelectDate}
                   value={value}
                   theme={theme.components.DateInput.calendar}

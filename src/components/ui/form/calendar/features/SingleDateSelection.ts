@@ -11,10 +11,12 @@ import { WithCalendarTheme } from '../types/WithCalendarTheme';
 import { DayData } from '../util/CalendarDataFactory';
 import { addDayStateHighlights } from '../util/StateModifier';
 import { WithMonthSwitcherProps } from './month-switcher/MonthSwitcher';
+import { MonthSwitcherLogicOuterProps } from './month-switcher/MonthSwitcherLogic';
 
 export type __C359812313518 = ComponentEnhancer<{}, {}>;
 
 export type SingleDateCalendarProps<T> = Omit<CalendarProps<T>, 'theme'> &
+  MonthSwitcherLogicOuterProps &
   OnChangePropsSingleDateSelection &
   WithCalendarTheme &
   WithMonthSwitcherProps;
@@ -48,6 +50,7 @@ const buildSelectionState = withProps<
       ? addDayStateHighlights(statePerMonth, value, ['selected'])
       : statePerMonth,
     date: value,
+    startDateInFocus: value,
   };
 });
 

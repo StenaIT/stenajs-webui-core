@@ -198,7 +198,7 @@ const CalendarComponent = <T extends {}>({
   </div>
 );
 
-export const applyDefaultDates = <T extends {}>() =>
+const applyDefaultDates = <T extends {}>() =>
   mapProps<CalendarPropsWithDateSet<T>, CalendarProps<T>>(props => {
     const { month, year, date } = props;
     if (month && year) {
