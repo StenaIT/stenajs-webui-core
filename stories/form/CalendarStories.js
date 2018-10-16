@@ -35,15 +35,36 @@ const withSingleDateState = compose(
   withInfo(),
 );
 
+let statePerMonthWithTwoWeeksEnabled = {};
+for (let i = 1; i < 7; i++) {
+  statePerMonthWithTwoWeeksEnabled = setDayStateValue(
+    statePerMonthWithTwoWeeksEnabled,
+    addDays(new Date(), i),
+    {
+      highlights: ['enabled'],
+    },
+  );
+}
+for (let i = 10; i < 14; i++) {
+  statePerMonthWithTwoWeeksEnabled = setDayStateValue(
+    statePerMonthWithTwoWeeksEnabled,
+    addDays(new Date(), i),
+    {
+      highlights: ['enabled'],
+    },
+  );
+}
+
+const disabledTomorrow = setDayStateValue(undefined, addDays(new Date(), 1), {
+  highlights: ['disabled'],
+});
+
 const disabledTheme = {
   ...defaultCalendarTheme,
   disabledByDefault: true,
 };
 
 export const addCalendarStories = () => {
-  const dayStateValue = setDayStateValue(undefined, addDays(new Date(), 1), {
-    highlights: ['disabled'],
-  });
   storiesOf('Form/Calendar/SingleDateCalendar', module)
     .add(
       'standard',
@@ -60,7 +81,7 @@ export const addCalendarStories = () => {
         <SingleDateCalendar
           onChange={value => store.set({ value })}
           value={store.state.value}
-          statePerMonth={dayStateValue}
+          statePerMonth={disabledTomorrow}
         />
       )),
     )
@@ -71,9 +92,7 @@ export const addCalendarStories = () => {
           defaultHighlights={['disabled']}
           onChange={value => store.set({ value })}
           value={store.state.value}
-          statePerMonth={setDayStateValue(undefined, addDays(new Date(), 1), {
-            highlights: ['enabled'],
-          })}
+          statePerMonth={statePerMonthWithTwoWeeksEnabled}
         />
       )),
     )
@@ -171,6 +190,23 @@ export const addCalendarStories = () => {
       )),
     )
     .add(
+      'with default highlights',
+      withDateRangeState(({ store }) => {
+        return (
+          <DateRangeCalendar
+            startDate={store.state.startDate}
+            endDate={store.state.endDate}
+            focusedInput={store.state.focusedInput}
+            setStartDate={startDate => store.set({ startDate })}
+            setEndDate={endDate => store.set({ endDate })}
+            setFocusedInput={focusedInput => store.set({ focusedInput })}
+            defaultHighlights={['disabled']}
+            statePerMonth={statePerMonthWithTwoWeeksEnabled}
+          />
+        );
+      }),
+    )
+    .add(
       'with multiple months',
       withDateRangeState(({ store }) => (
         <DateRangeCalendar
@@ -227,6 +263,16 @@ export const addCalendarStories = () => {
     .add(
       'standard',
       withInfo()(() => <DateRangeCalendarWithState onChange={() => {}} />),
+    )
+    .add(
+      'with default highlights',
+      withInfo()(() => (
+        <DateRangeCalendarWithState
+          onChange={() => {}}
+          defaultHighlights={['disabled']}
+          statePerMonth={statePerMonthWithTwoWeeksEnabled}
+        />
+      )),
     )
     .add(
       'with multiple months',

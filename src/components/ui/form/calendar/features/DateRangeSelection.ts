@@ -126,12 +126,14 @@ const toggleDatesIfEndIsEarlierThanStart = withProps(
   },
 );
 
-const buildSelectionState = withProps(
-  ({ startDate, endDate, statePerMonth }: InnerProps<{}>) => {
-    return {
-      statePerMonth: buildDayState(statePerMonth, startDate, endDate),
-    };
-  },
+interface WithStatePerMonth {
+  statePerMonth?: DataPerMonth<DayState>;
+}
+
+const withStatePerMonth = withProps<WithStatePerMonth, InnerProps<{}>>(
+  ({ startDate, endDate, statePerMonth }) => ({
+    statePerMonth: buildDayState(statePerMonth, startDate, endDate),
+  }),
 );
 
 export const buildDayState = (
@@ -159,7 +161,7 @@ export const buildDayState = (
   if (end) {
     return addDayStateHighlights(statePerMonth, end, ['selected']);
   }
-  return undefined;
+  return statePerMonth;
 };
 
 export const withDateRangeSelectionState = compose(
@@ -172,5 +174,5 @@ export const withDateRangeSelection = compose(
   withOnClickDayHandler,
   toggleDatesIfEndIsEarlierThanStart,
   pure,
-  buildSelectionState,
+  withStatePerMonth,
 );
