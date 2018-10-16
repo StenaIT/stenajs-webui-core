@@ -1,6 +1,6 @@
 {
   "name": "stenajs-webui-core",
-  "version": "0.8.5",
+  "version": "0.8.6",
   "description": "A library of React components made by Stena IT.",
   "sideEffects": false,
   "repository": "https://github.com/StenaIT/stenajs-webui-common",

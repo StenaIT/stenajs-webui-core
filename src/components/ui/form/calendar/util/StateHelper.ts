@@ -1,15 +1,26 @@
-import { DayState } from '../components/Calendar';
+import { DayState, DayStateHighlight } from '../components/Calendar';
 
 export const dayHasHighlight = (
   dayState: DayState | undefined,
+  defaultHighlights: Array<DayStateHighlight> | undefined,
   highlight: string,
-): boolean =>
-  dayState && dayState.highlights
-    ? dayState.highlights.indexOf(highlight) >= 0
-    : false;
+): boolean => {
+  if (defaultHighlights && defaultHighlights.indexOf(highlight) >= 0) {
+    return true;
+  }
+  if (
+    dayState &&
+    dayState.highlights &&
+    dayState.highlights.indexOf(highlight) >= 0
+  ) {
+    return true;
+  }
+  return false;
+};
 
 export const dayHighlightSelect = <T>(
   dayState: DayState | undefined,
+  defaultHighlights: Array<DayStateHighlight> | undefined,
   highlightsOrBoolean: Array<string | boolean>,
   returnValues: Array<T>,
   fallbackValue?: T,
@@ -27,9 +38,10 @@ export const dayHighlightSelect = <T>(
       return returnValues[i];
     }
     if (
-      dayState &&
       typeof highlightsOrBoolean[i] === 'string' &&
-      dayHasHighlight(dayState, highlightsOrBoolean[i] as string)
+      dayHasHighlight(dayState, defaultHighlights, highlightsOrBoolean[
+        i
+      ] as string)
     ) {
       return returnValues[i];
     }

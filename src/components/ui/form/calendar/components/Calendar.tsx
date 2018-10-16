@@ -25,6 +25,7 @@ export type __C13581358 = InferableComponentEnhancerWithProps<{}, {}>;
 export interface CalendarDayProps<T = {}> extends ExtraDayContentProps<T> {
   extraDayContent?: React.ComponentType<ExtraDayContentProps<T>>;
   onClickDay?: OnClickDay<T>;
+  defaultHighlights?: Array<DayStateHighlight>;
 }
 
 export interface ExtraDayContentProps<T = {}> {
@@ -97,6 +98,9 @@ export interface CalendarProps<T>
   /** The height of a cell in the calendar. Applies to days, week numbers, headers, etc. */
   height?: string;
 
+  /** Default highlights that will be applied to all days. */
+  defaultHighlights?: Array<DayStateHighlight>;
+
   /** The theme to use. */
   theme?: CalendarTheme;
 }
@@ -164,6 +168,7 @@ const CalendarComponent = <T extends {}>({
   headerLeftContent,
   headerRightContent,
   extraDayContent,
+  defaultHighlights,
   theme = defaultCalendarTheme,
 }: InnerProps<T>) => (
   <div>
@@ -189,6 +194,7 @@ const CalendarComponent = <T extends {}>({
                 headerLeftContent={headerLeftContent}
                 headerRightContent={headerRightContent}
                 extraDayContent={extraDayContent}
+                defaultHighlights={defaultHighlights}
               />
             </React.Fragment>
           ))}

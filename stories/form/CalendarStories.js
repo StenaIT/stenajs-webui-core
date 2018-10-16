@@ -5,7 +5,10 @@ import { addDays } from 'date-fns';
 import * as React from 'react';
 import { compose } from 'recompose';
 import { UseTheme } from '../../src/components/theme';
-import { extranetCalendarTheme } from '../../src/components/ui/form/calendar/components';
+import {
+  defaultCalendarTheme,
+  extranetCalendarTheme,
+} from '../../src/components/ui/form/calendar/components';
 import {
   DateRangeCalendar,
   DateRangeCalendarWithState,
@@ -32,6 +35,11 @@ const withSingleDateState = compose(
   withInfo(),
 );
 
+const disabledTheme = {
+  ...defaultCalendarTheme,
+  disabledByDefault: true,
+};
+
 export const addCalendarStories = () => {
   const dayStateValue = setDayStateValue(undefined, addDays(new Date(), 1), {
     highlights: ['disabled'],
@@ -53,6 +61,19 @@ export const addCalendarStories = () => {
           onChange={value => store.set({ value })}
           value={store.state.value}
           statePerMonth={dayStateValue}
+        />
+      )),
+    )
+    .add(
+      'with disabled as default',
+      withSingleDateState(({ store }) => (
+        <SingleDateCalendar
+          defaultHighlights={['disabled']}
+          onChange={value => store.set({ value })}
+          value={store.state.value}
+          statePerMonth={setDayStateValue(undefined, addDays(new Date(), 1), {
+            highlights: ['enabled'],
+          })}
         />
       )),
     )

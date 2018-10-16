@@ -3,6 +3,7 @@ import { MonthData, WeekData } from '../util/CalendarDataFactory';
 import {
   CalendarDayProps,
   DayState,
+  DayStateHighlight,
   ExtraDayContentProps,
   OnClickDay,
   OnClickWeek,
@@ -24,6 +25,7 @@ export interface CalendarWeekProps<T> {
   theme: CalendarTheme;
   renderWeekNumber?: RenderWeekNumber;
   extraDayContent?: React.ComponentType<ExtraDayContentProps<T>>;
+  defaultHighlights?: Array<DayStateHighlight>;
 }
 
 export const CalendarWeek = <T extends {}>({
@@ -37,6 +39,7 @@ export const CalendarWeek = <T extends {}>({
   theme,
   renderWeekNumber,
   extraDayContent,
+  defaultHighlights,
 }: CalendarWeekProps<T>) => (
   <tr key={week.weekNumber}>
     <td>
@@ -57,6 +60,7 @@ export const CalendarWeek = <T extends {}>({
         onClickDay={onClickDay}
         theme={theme}
         extraDayContent={extraDayContent}
+        defaultHighlights={defaultHighlights}
       />
     ))}
   </tr>

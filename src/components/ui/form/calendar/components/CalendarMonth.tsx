@@ -7,6 +7,7 @@ import {
   CalendarDayProps,
   CalendarOnClicks,
   DayState,
+  DayStateHighlight,
   ExtraDayContentProps,
   Renderers,
 } from './Calendar';
@@ -25,6 +26,7 @@ export interface CalendarMonthProps<T> extends CalendarOnClicks<T>, Renderers {
   headerLeftContent?: React.ReactElement<{}>;
   headerRightContent?: React.ReactElement<{}>;
   extraDayContent?: React.ComponentType<ExtraDayContentProps<T>>;
+  defaultHighlights?: Array<DayStateHighlight>;
 }
 
 export class CalendarMonth<T> extends React.Component<CalendarMonthProps<T>> {
@@ -43,6 +45,7 @@ export class CalendarMonth<T> extends React.Component<CalendarMonthProps<T>> {
       headerRightContent,
       theme,
       extraDayContent,
+      defaultHighlights,
     } = this.props;
 
     return (
@@ -104,6 +107,7 @@ export class CalendarMonth<T> extends React.Component<CalendarMonthProps<T>> {
                   theme={theme}
                   renderWeekNumber={renderWeekNumber}
                   extraDayContent={extraDayContent}
+                  defaultHighlights={defaultHighlights}
                 />
               ))}
             </tbody>

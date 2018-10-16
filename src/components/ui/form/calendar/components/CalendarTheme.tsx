@@ -3,7 +3,7 @@ import { defaultColors } from '../../../../../themes/default-values/DefaultColor
 import { DefaultTextProps } from '../../../text/DefaultText';
 import { DayData, MonthData, WeekData } from '../util/CalendarDataFactory';
 import { dayHasHighlight, dayHighlightSelect } from '../util/StateHelper';
-import { DayState } from './Calendar';
+import { DayState, DayStateHighlight } from './Calendar';
 
 export interface CalendarTheme<TUserData = {}> {
   width: string;
@@ -28,6 +28,7 @@ export interface WeekDayTheme {
 }
 
 type CalendarStyleProvider<TUserData, TResult> = (
+  defaultHighlights: Array<DayStateHighlight> | undefined,
   dayState: DayState | undefined,
   day: DayData,
   week: WeekData,
@@ -69,6 +70,7 @@ const defaultWrapperStyleProvider = ({
   rangeBorder,
   todayBorder,
 }: DefaultWrapperColors): WrapperStyleProvider<{}> => (
+  defaultHighlights,
   dayState,
   day,
   week,
@@ -76,6 +78,7 @@ const defaultWrapperStyleProvider = ({
 ) => {
   const backgroundColor = dayHighlightSelect(
     dayState,
+    defaultHighlights,
     ['selected', 'today', 'range', day.month === month.monthInYear],
     [selectedBackground, todayBackground, rangeBackground, defaultColors.white],
     'transparent',
@@ -87,15 +90,16 @@ const defaultWrapperStyleProvider = ({
       borderWidth: '1px',
       borderColor: dayHighlightSelect(
         dayState,
+        defaultHighlights,
         ['selected', 'range', 'today'],
         [selectedBorder, rangeBorder, todayBorder],
         defaultColors.separatorLight,
       ),
       borderCollapse: 'collapse',
       borderStyle:
-        dayHasHighlight(dayState, 'selected') ||
-        dayHasHighlight(dayState, 'range') ||
-        dayHasHighlight(dayState, 'today')
+        dayHasHighlight(dayState, defaultHighlights, 'selected') ||
+        dayHasHighlight(dayState, defaultHighlights, 'range') ||
+        dayHasHighlight(dayState, defaultHighlights, 'today')
           ? 'double'
           : 'solid',
       boxSizing: 'border-box',
@@ -116,12 +120,13 @@ const defaultTextPropsProvider = ({
   disabledColor,
   inOtherMonthColor,
 }: DefaultTextColors): TextPropsProvider<{}> => {
-  return (dayState, day, week, month) => {
+  return (defaultHighlights, dayState, day, week, month) => {
     const isOtherMonth = day.month !== month.monthInYear;
     const color = dayHighlightSelect(
       dayState,
-      [isOtherMonth, 'selected', 'disabled'],
-      [inOtherMonthColor, selectedColor, disabledColor],
+      defaultHighlights,
+      [isOtherMonth, 'selected', 'enabled', 'disabled'],
+      [inOtherMonthColor, selectedColor, undefined, disabledColor],
     );
     return {
       color,

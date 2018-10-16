@@ -2,8 +2,8 @@ import * as React from 'react';
 import { Clickable } from '../../../../interaction';
 import { Column } from '../../../../layout';
 import { DefaultText } from '../../../../text';
-import { dayHasHighlight } from '../../util/StateHelper';
-import { CalendarDayProps } from '../Calendar';
+import { dayHighlightSelect } from '../../util/StateHelper';
+import { CalendarDayProps, DayState, DayStateHighlight } from '../Calendar';
 
 export const CalendarDay = <T extends {}>({
   day,
@@ -14,12 +14,20 @@ export const CalendarDay = <T extends {}>({
   onClickDay,
   theme,
   extraDayContent: ExtraDayContent,
+  defaultHighlights,
 }: CalendarDayProps<T>) => {
   return (
     <td
       style={{
         ...(theme.CalendarDay.wrapperStyle &&
-          theme.CalendarDay.wrapperStyle(dayState, day, week, month, userData)),
+          theme.CalendarDay.wrapperStyle(
+            defaultHighlights,
+            dayState,
+            day,
+            week,
+            month,
+            userData,
+          )),
         width: theme.width,
         height: theme.height,
       }}
@@ -28,6 +36,7 @@ export const CalendarDay = <T extends {}>({
         style={{
           ...(theme.CalendarDay.innerWrapperStyle &&
             theme.CalendarDay.innerWrapperStyle(
+              defaultHighlights,
               dayState,
               day,
               week,
@@ -42,6 +51,7 @@ export const CalendarDay = <T extends {}>({
           style={{
             ...(theme.CalendarDay.cellWrapperStyle &&
               theme.CalendarDay.cellWrapperStyle(
+                defaultHighlights,
                 dayState,
                 day,
                 week,
@@ -67,7 +77,7 @@ export const CalendarDay = <T extends {}>({
             onClick={
               onClickDay &&
               day.month === month.monthInYear &&
-              !dayHasHighlight(dayState, 'disabled')
+              isClickable(defaultHighlights, dayState)
                 ? () => onClickDay(day, userData)
                 : undefined
             }
@@ -82,6 +92,7 @@ export const CalendarDay = <T extends {}>({
               <DefaultText
                 {...theme.CalendarDay.textProps &&
                   theme.CalendarDay.textProps(
+                    defaultHighlights,
                     dayState,
                     day,
                     week,
@@ -98,3 +109,15 @@ export const CalendarDay = <T extends {}>({
     </td>
   );
 };
+
+const isClickable = (
+  defaultHighlights: Array<DayStateHighlight> | undefined,
+  dayState: DayState | undefined,
+): boolean =>
+  !!dayHighlightSelect<boolean>(
+    dayState,
+    defaultHighlights,
+    ['enabled', 'disabled'],
+    [true, false],
+    true,
+  );

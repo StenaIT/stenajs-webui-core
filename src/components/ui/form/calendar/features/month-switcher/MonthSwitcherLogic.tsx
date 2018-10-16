@@ -26,11 +26,11 @@ const withClickHandlers = withHandlers<
   MonthSwitcherStateProps & CalendarProps<{}>,
   MonthSwitcherHandlerProps
 >({
-  nextMonth: ({ setDate, date, monthsPerRow }) => () => {
-    setDate(addMonths(date, monthsPerRow || 1));
+  nextMonth: ({ setDate, date, monthsPerRow, numMonths }) => () => {
+    setDate(addMonths(date, monthsPerRow || numMonths || 1));
   },
-  prevMonth: ({ setDate, date, monthsPerRow }) => () => {
-    setDate(subMonths(date, monthsPerRow || 1));
+  prevMonth: ({ setDate, date, monthsPerRow, numMonths }) => () => {
+    setDate(subMonths(date, monthsPerRow || numMonths || 1));
   },
 });
 
