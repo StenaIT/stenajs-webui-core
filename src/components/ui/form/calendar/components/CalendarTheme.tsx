@@ -103,7 +103,6 @@ const defaultWrapperStyleProvider = ({
           ? 'double'
           : 'solid',
       boxSizing: 'border-box',
-      overflow: 'hidden',
     };
   }
   return undefined;

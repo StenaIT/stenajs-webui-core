@@ -134,7 +134,7 @@ export const addCalendarStories = () => {
           onChange={value => store.set({ value })}
           value={store.state.value}
           extraDayContent={() => (
-            <Absolute top={0} right={0}>
+            <Absolute top={'-10px'} right={'-10px'}>
               <Icon name={'coffee'} />
             </Absolute>
           )}
