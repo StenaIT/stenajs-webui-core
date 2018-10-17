@@ -14,6 +14,7 @@ import {
   startOfISOWeek,
   startOfMonth,
 } from 'date-fns';
+import { DateFormats } from '../../../../../util/date/DateFormats';
 
 export enum Months {
   JANUARY = 0,
@@ -90,8 +91,8 @@ export const getMonthInYear = (year: number, month: number): MonthData => {
   const monthToUse = month % 12;
   const firstDayOfMonth = new Date(yearToUse, monthToUse, 1);
   return {
-    monthString: format(firstDayOfMonth, 'YYYY-MM'),
-    name: format(firstDayOfMonth, 'MMMM'),
+    monthString: format(firstDayOfMonth, DateFormats.yearAndMonth),
+    name: format(firstDayOfMonth, DateFormats.fullMonthName),
     year: yearToUse,
     monthInYear: monthToUse,
     weeks: getWeeksForMonth(yearToUse, monthToUse),
@@ -135,7 +136,7 @@ export const createDay = (date: Date): DayData => {
   return {
     date,
     name: format(date, 'EEE'),
-    dateString: format(addHours(date, 12), 'YYYY-MM-dd'),
+    dateString: format(addHours(date, 12), DateFormats.fullDate),
     weekNumber: getISOWeek(date),
     year: getYear(date),
     month: getMonth(date),

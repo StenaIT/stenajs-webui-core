@@ -1,4 +1,5 @@
 import { format, getDate, getISOWeek } from 'date-fns';
+import { DateFormats } from '../../../../../util/date/DateFormats';
 import {
   DataPerMonth,
   DayState,
@@ -10,7 +11,7 @@ export const setDayStateValue = (
   date: Date,
   values: Partial<DayState>,
 ): DataPerMonth<DayState> => {
-  const monthString = format(date, 'YYYY-MM');
+  const monthString = format(date, DateFormats.yearAndMonth);
   const weekNumber = getISOWeek(date);
   const dayInMonth = getDate(date);
   return {
@@ -36,7 +37,7 @@ export const setDayStateValueFunction = (
   date: Date,
   setter: (dayState: DayState | undefined) => Partial<DayState>,
 ): DataPerMonth<DayState> => {
-  const monthString = format(date, 'YYYY-MM');
+  const monthString = format(date, DateFormats.yearAndMonth);
   const weekNumber = getISOWeek(date);
   const dayInMonth = getDate(date);
   return {

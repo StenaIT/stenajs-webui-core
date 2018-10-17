@@ -1,7 +1,7 @@
 import { withState } from '@dump247/storybook-state';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { addDays } from 'date-fns';
+import { addDays, getISOWeek } from 'date-fns';
 import * as React from 'react';
 import { compose } from 'recompose';
 import { UseTheme } from '../../src/components/theme';
@@ -9,6 +9,7 @@ import {
   defaultCalendarTheme,
   extranetCalendarTheme,
 } from '../../src/components/ui/form/calendar/components';
+import { WeekNumberCell } from '../../src/components/ui/form/calendar/components/renderers';
 import {
   DateRangeCalendar,
   DateRangeCalendarWithState,
@@ -76,6 +77,16 @@ export const addCalendarStories = () => {
       )),
     )
     .add(
+      'today highlighted',
+      withSingleDateState(({ store }) => (
+        <SingleDateCalendar
+          highlightToday
+          onChange={value => store.set({ value })}
+          value={store.state.value}
+        />
+      )),
+    )
+    .add(
       'with disabled date tomorrow',
       withSingleDateState(({ store }) => (
         <SingleDateCalendar
@@ -126,6 +137,37 @@ export const addCalendarStories = () => {
           value={store.state.value}
         />
       )),
+    )
+    .add(
+      'with custom week content',
+      withSingleDateState(({ store }) => {
+        const renderWeekNumber = (week, theme, onClick) => {
+          const now = new Date();
+          return (
+            <WeekNumberCell
+              week={week}
+              onClickWeek={onClick}
+              theme={theme}
+              background={
+                week.startYear === now.getFullYear() &&
+                week.weekNumber === getISOWeek(now) ? (
+                  <Icon name={'coffee'} color={'blue'} size={30} />
+                ) : (
+                  undefined
+                )
+              }
+            />
+          );
+        };
+
+        return (
+          <SingleDateCalendar
+            onChange={value => store.set({ value })}
+            value={store.state.value}
+            renderWeekNumber={renderWeekNumber}
+          />
+        );
+      }),
     )
     .add(
       'with custom content',
@@ -180,6 +222,20 @@ export const addCalendarStories = () => {
       'standard',
       withDateRangeState(({ store }) => (
         <DateRangeCalendar
+          startDate={store.state.startDate}
+          endDate={store.state.endDate}
+          focusedInput={store.state.focusedInput}
+          setStartDate={startDate => store.set({ startDate })}
+          setEndDate={endDate => store.set({ endDate })}
+          setFocusedInput={focusedInput => store.set({ focusedInput })}
+        />
+      )),
+    )
+    .add(
+      'with today highlighted',
+      withDateRangeState(({ store }) => (
+        <DateRangeCalendar
+          highlightToday
           startDate={store.state.startDate}
           endDate={store.state.endDate}
           focusedInput={store.state.focusedInput}
@@ -263,6 +319,12 @@ export const addCalendarStories = () => {
     .add(
       'standard',
       withInfo()(() => <DateRangeCalendarWithState onChange={() => {}} />),
+    )
+    .add(
+      'with today highlighted',
+      withInfo()(() => (
+        <DateRangeCalendarWithState onChange={() => {}} highlightToday />
+      )),
     )
     .add(
       'with default highlights',

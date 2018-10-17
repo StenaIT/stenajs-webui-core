@@ -101,6 +101,9 @@ export interface CalendarProps<T>
   /** Default highlights that will be applied to all days. */
   defaultHighlights?: Array<DayStateHighlight>;
 
+  /** If true, today's date will be highlighted. */
+  highlightToday?: boolean;
+
   /** The theme to use. */
   theme?: CalendarTheme;
 }

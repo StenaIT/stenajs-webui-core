@@ -8,6 +8,7 @@ import {
   withHandlers,
   withState,
 } from 'recompose';
+import { DateFormats } from '../../../../util/date/DateFormats';
 import { addIcons } from '../../../icon-library/IconLibrary';
 import { withTheme, WithThemeProps } from '../../../util/enhancers';
 import { Background } from '../../colors';
@@ -279,7 +280,7 @@ const withOnSelectDateHandler = withHandlers<
 });
 
 const withDefaultProps = defaultProps<Partial<DateRangeInputProps>>({
-  displayFormat: 'YYYY-MM-dd',
+  displayFormat: DateFormats.fullDate,
   placeholderStartDate: 'Start date',
   placeholderEndDate: 'End date',
   zIndex: 100,

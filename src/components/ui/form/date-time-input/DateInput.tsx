@@ -7,6 +7,7 @@ import {
   withHandlers,
   withState,
 } from 'recompose';
+import { DateFormats } from '../../../../util/date/DateFormats';
 import { withTheme, WithThemeProps } from '../../../util/enhancers';
 import { Background } from '../../colors';
 import { Border } from '../../decorations';
@@ -154,7 +155,7 @@ const withOnSelectDateHandler = withHandlers<
 });
 
 const withDefaultProps = defaultProps<Partial<DateInputProps>>({
-  displayFormat: 'YYYY-MM-dd',
+  displayFormat: DateFormats.fullDate,
   placeholder: 'Enter date',
   zIndex: 100,
 });

@@ -1,25 +1,15 @@
 import { withPropsOnChange } from 'recompose';
 import { CalendarProps } from '../../components/Calendar';
-import { setDayStateValueFunction } from '../../util/StateModifier';
+import { addDayStateHighlights } from '../../util/StateModifier';
 
 export const withTodayInDayState = <T>() =>
   withPropsOnChange<Pick<CalendarProps<T>, 'statePerMonth'>, CalendarProps<T>>(
     ['statePerMonth'],
-    ({ statePerMonth }) => {
+    ({ statePerMonth, highlightToday }) => {
       return {
-        statePerMonth: setDayStateValueFunction(
-          statePerMonth,
-          new Date(),
-          dayState => {
-            const prevHighlights =
-              dayState && dayState.highlights !== undefined
-                ? dayState.highlights
-                : [];
-            return {
-              highlights: [...prevHighlights, 'today'],
-            };
-          },
-        ),
+        statePerMonth: highlightToday
+          ? addDayStateHighlights(statePerMonth, new Date(), ['today'])
+          : statePerMonth,
       };
     },
   );
