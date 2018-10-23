@@ -12,6 +12,8 @@ export interface DefaultTextInputTheme {
   paddingLeft: string;
   paddingRight: string;
   iconSize: number;
+  backgroundColor: string;
+  textColor: string;
 }
 
 export const defaultDefaultTextInputTheme: DefaultTextInputTheme = {
@@ -25,4 +27,21 @@ export const defaultDefaultTextInputTheme: DefaultTextInputTheme = {
   paddingLeft: '8px',
   paddingRight: '8px',
   iconSize: 13,
+  backgroundColor: defaultColors.white,
+  textColor: defaultColors.primaryText,
+};
+
+export const defaultTextInputThemeDark: DefaultTextInputTheme = {
+  borderRadius: '4px',
+  borderColor: 'transparent',
+  borderColorFocused: defaultColors.white,
+  borderStyle: 'solid',
+  borderWidth: 1,
+  fontSize: '13px',
+  height: '34px',
+  paddingLeft: '8px',
+  paddingRight: '8px',
+  iconSize: 13,
+  backgroundColor: '#4a5d73',
+  textColor: defaultColors.white,
 };

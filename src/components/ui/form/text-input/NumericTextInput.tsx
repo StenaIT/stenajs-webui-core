@@ -1,14 +1,20 @@
 import * as React from 'react';
 import { compose, setDisplayName, withHandlers, withProps } from 'recompose';
 import { Omit } from '../../../../types/index';
-import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
+import {
+  ComponentThemeProps,
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../../util/enhancers/WithComponentTheme';
 import { UpDownButtons } from '../../buttons/UpDownButtons';
 import { Border } from '../../decorations/Border';
 import { Space } from '../../layout/Space';
 import { DefaultTextInput, DefaultTextInputProps } from './DefaultTextInput';
+import { NumericTextInputTheme } from './NumericTextInputTheme';
 
 interface NumericTextInputProps
-  extends Omit<DefaultTextInputProps, 'value' | 'onChange'> {
+  extends ComponentThemeProps<'NumericTextInput'>,
+    Omit<DefaultTextInputProps, 'value' | 'onChange' | 'theme'> {
   value: number | undefined;
   onChange: (value: number | undefined) => void;
   max?: number;
@@ -46,52 +52,57 @@ const withOnClicks = withHandlers<NumericTextInputProps, WithOnClicks>({
 
 const withUpDownButtons = withProps<
   DefaultTextInputProps,
-  WithOnClicks & WithThemeProps & NumericTextInputProps
->(
-  ({
-    onClickDown,
-    onClickUp,
-    theme,
-    borderColor,
-    contentRight,
-    hideButtons,
-    disabled,
-  }) => ({
-    contentRight: hideButtons ? (
-      contentRight
-    ) : (
-      <>
-        {contentRight && (
-          <>
-            {contentRight}
-            <Space />
-          </>
-        )}
-        <Border
-          color={borderColor || theme.components.NumericTextInput.borderColor}
-          left
-        >
-          <UpDownButtons
-            onClickUp={disabled ? undefined : onClickUp}
-            onClickDown={disabled ? undefined : onClickDown}
-            buttonHeight={theme.components.NumericTextInput.buttonHeight}
-            iconColor={theme.components.SimpleTextInput.textColor}
-          />
-        </Border>
-      </>
-    ),
-    disableContentPaddingRight: true,
-    inputType: 'number',
-  }),
-);
+  WithOnClicks &
+    WithInnerComponentThemeProps<NumericTextInputTheme> &
+    NumericTextInputProps
+>(({ onClickDown, onClickUp, theme, contentRight, hideButtons, disabled }) => ({
+  contentRight: hideButtons ? (
+    contentRight
+  ) : (
+    <>
+      {contentRight && (
+        <>
+          {contentRight}
+          <Space />
+        </>
+      )}
+      <Border color={theme.borderColor} left>
+        <UpDownButtons
+          onClickUp={disabled ? undefined : onClickUp}
+          onClickDown={disabled ? undefined : onClickDown}
+          buttonHeight={theme.buttonHeight}
+          iconColor={theme.textColor}
+        />
+      </Border>
+    </>
+  ),
+  disableContentPaddingRight: true,
+  inputType: 'number',
+}));
+
+const prepareThemeForTextInput = withProps<
+  DefaultTextInputProps,
+  DefaultTextInputProps
+>(props => {
+  const { theme } = props;
+  const {
+    buttonHeight,
+    ...defaultTextInputTheme
+  } = theme as NumericTextInputTheme;
+  return {
+    ...props,
+    theme: defaultTextInputTheme,
+  };
+});
 
 export const NumericTextInput = setDisplayName<NumericTextInputProps>(
   'NumericTextInput',
 )(
   compose<DefaultTextInputProps, NumericTextInputProps>(
     withOnClicks,
-    withTheme,
+    withComponentTheme('NumericTextInput'),
     withUpDownButtons,
+    prepareThemeForTextInput,
   )(DefaultTextInput),
 );
 

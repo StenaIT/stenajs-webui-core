@@ -110,11 +110,6 @@ const DateRangeInputComponent = ({
         placeholder={placeholderStartDate}
         onChange={noop}
         size={9}
-        border={
-          focusedInput === 'startDate' && showingCalendar
-            ? theme.components.DateRangeInput.highlightBorder
-            : undefined
-        }
       />
       <Space />
       <DefaultText>{toText}</DefaultText>
@@ -129,11 +124,6 @@ const DateRangeInputComponent = ({
         placeholder={placeholderEndDate}
         onChange={noop}
         size={9}
-        border={
-          focusedInput === 'endDate' && showingCalendar
-            ? theme.components.DateRangeInput.highlightBorder
-            : undefined
-        }
       />
     </Row>
     {showingCalendar && (

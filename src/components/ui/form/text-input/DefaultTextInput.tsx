@@ -9,13 +9,16 @@ import {
   StateHandlerMap,
   withStateHandlers,
 } from 'recompose';
-import { Theme } from '../../../../themes';
-import { withTheme } from '../../../util/enhancers';
-import { WithThemeProps } from '../../../util/enhancers/WithTheme';
+import {
+  ComponentThemeProps,
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../../util/enhancers';
 import { Background } from '../../colors';
-import { Border, BorderStyle } from '../../decorations';
+import { Border } from '../../decorations';
 import { Icon } from '../../icon';
 import { Row, Space } from '../../layout';
+import { DefaultTextInputTheme } from './DefaultTextInputTheme';
 import { SimpleTextInput, SimpleTextInputProps } from './SimpleTextInput';
 
 export type __C_DEFAULT_TEXT_INPUT_12491142 = ComponentClass<{}>;
@@ -34,17 +37,9 @@ const inputClass = css`
   }
 `;
 
-export interface DefaultTextInputProps extends SimpleTextInputProps {
-  /** The border style of the border. Ex: '1px solid black' */
-  border?: string;
-  /** The border-style of the border. Ex: 'solid' */
-  borderStyle?: BorderStyle;
-  /** The width of the border. */
-  borderWidth?: number;
-  /** The color of the border. */
-  borderColor?: string;
-  /** The radius size of the border. */
-  borderRadius?: string;
+export interface DefaultTextInputProps
+  extends SimpleTextInputProps,
+    ComponentThemeProps<'DefaultTextInput'> {
   /** React node to put to the left. Left icon is ignored if this is set. */
   contentLeft?: ReactNode;
   /** React node to put to the right. Right icon is ignored if this is set. */
@@ -72,7 +67,7 @@ export interface DefaultTextInputProps extends SimpleTextInputProps {
 }
 
 type InnerProps = DefaultTextInputProps &
-  WithThemeProps &
+  WithInnerComponentThemeProps<DefaultTextInputTheme> &
   FocusStateProps &
   FocusHandlers;
 
@@ -81,7 +76,7 @@ interface TextInputIconProps {
   icon?: IconProp;
   iconSize?: number;
   iconColor?: string;
-  theme: Theme;
+  theme: DefaultTextInputTheme;
   spaceOnRight?: boolean;
   spaceOnLeft?: boolean;
   disableContentPadding?: boolean;
@@ -121,11 +116,7 @@ const TextInputIcon = ({
     <>
       {spaceOnLeft && <Space />}
       {icon && (
-        <Icon
-          name={icon}
-          size={iconSize || theme.components.DefaultTextInput.iconSize}
-          color={iconColor}
-        />
+        <Icon name={icon} size={iconSize || theme.iconSize} color={iconColor} />
       )}
       {spaceOnRight && <Space />}
     </>
@@ -133,11 +124,7 @@ const TextInputIcon = ({
 };
 
 const DefaultTextInputComponent = ({
-  borderRadius,
-  borderStyle,
-  borderColor,
-  borderWidth,
-  theme,
+  textColor,
   focused,
   contentLeft,
   contentRight,
@@ -152,23 +139,21 @@ const DefaultTextInputComponent = ({
   disableContentPadding = false,
   disableContentPaddingLeft = false,
   disableContentPaddingRight = false,
+  theme,
   ...inputProps
 }: InnerProps) => (
   <Border
     className={borderClass}
-    borderRadius={
-      borderRadius || theme.components.DefaultTextInput.borderRadius
-    }
+    borderRadius={theme.borderRadius}
     color={
-      borderColor ||
-      (forceFocusHighlight || focused
-        ? theme.components.DefaultTextInput.borderColorFocused
-        : theme.components.DefaultTextInput.borderColor)
+      forceFocusHighlight || focused
+        ? theme.borderColorFocused
+        : theme.borderColor
     }
-    borderStyle={borderStyle || theme.components.DefaultTextInput.borderStyle}
-    width={borderWidth || theme.components.DefaultTextInput.borderWidth}
+    borderStyle={theme.borderStyle}
+    width={theme.borderWidth}
   >
-    <Background color={backgroundColor}>
+    <Background color={backgroundColor || theme.backgroundColor}>
       <Row alignItems={'center'}>
         <TextInputIcon
           content={contentLeft}
@@ -183,12 +168,13 @@ const DefaultTextInputComponent = ({
         />
         <SimpleTextInput
           {...inputProps}
-          backgroundColor={backgroundColor}
+          textColor={textColor || theme.textColor}
+          backgroundColor={backgroundColor || theme.backgroundColor}
           style={{
-            fontSize: theme.components.DefaultTextInput.fontSize,
-            height: theme.components.DefaultTextInput.height,
-            paddingLeft: theme.components.DefaultTextInput.paddingLeft,
-            paddingRight: theme.components.DefaultTextInput.paddingRight,
+            fontSize: theme.fontSize,
+            height: theme.height,
+            paddingLeft: theme.paddingLeft,
+            paddingRight: theme.paddingRight,
           }}
           className={inputClass}
         />
@@ -247,7 +233,7 @@ export const DefaultTextInput = setDisplayName<DefaultTextInputProps>(
   'DefaultTextInput',
 )(
   compose<InnerProps, DefaultTextInputProps>(
-    withTheme,
+    withComponentTheme('DefaultTextInput'),
     withFocusState,
     withFocusState,
   )(DefaultTextInputComponent),

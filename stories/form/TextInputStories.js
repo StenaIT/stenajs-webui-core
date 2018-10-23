@@ -4,9 +4,15 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { compose } from 'recompose';
 import { UseTheme } from '../../src/components/theme/UseTheme';
+import { Background } from '../../src/components/ui/colors';
+import {
+  defaultNumericTextInputThemeDark,
+  defaultTextInputThemeDark,
+} from '../../src/components/ui/form/text-input';
 import { DefaultTextInput } from '../../src/components/ui/form/text-input/DefaultTextInput';
 import { NumericTextInput } from '../../src/components/ui/form/text-input/NumericTextInput';
 import { SimpleTextInput } from '../../src/components/ui/form/text-input/SimpleTextInput';
+import { Indent, Spacing } from '../../src/components/ui/layout';
 import { DefaultText } from '../../src/components/ui/text';
 import { defaultColors } from '../../src/themes';
 
@@ -48,6 +54,41 @@ export const addTextInputStories = () => {
     .add(
       'standard',
       withInfo()(() => <DefaultTextInput value={'some entered text'} />),
+    )
+    .add(
+      'with dark theme',
+      withInfo()(() => (
+        <div style={{ width: '400px' }}>
+          <Background color={'#2e4662'}>
+            <Indent num={4}>
+              <Spacing num={4}>
+                <DefaultTextInput
+                  value={'some entered text'}
+                  theme={defaultTextInputThemeDark}
+                />
+              </Spacing>
+            </Indent>
+          </Background>
+        </div>
+      )),
+    )
+    .add(
+      'with dark theme and icons',
+      withInfo()(() => (
+        <div style={{ width: '400px' }}>
+          <Background color={'#2e4662'}>
+            <Indent num={4}>
+              <Spacing num={4}>
+                <DefaultTextInput
+                  value={'some entered text'}
+                  iconLeft={'coffee'}
+                  theme={defaultTextInputThemeDark}
+                />
+              </Spacing>
+            </Indent>
+          </Background>
+        </div>
+      )),
     )
     .add(
       'with icon left',
@@ -204,6 +245,29 @@ export const addTextInputStories = () => {
           value={store.state.value}
           onChange={value => store.set({ value })}
         />
+      )),
+    )
+    .add(
+      'with dark theme',
+      compose(
+        withState({
+          value: 5,
+        }),
+        withInfo(),
+      )(({ store }) => (
+        <div style={{ width: '400px' }}>
+          <Background color={'#2e4662'}>
+            <Indent num={4}>
+              <Spacing num={4}>
+                <NumericTextInput
+                  value={store.state.value}
+                  onChange={value => store.set({ value })}
+                  theme={defaultNumericTextInputThemeDark}
+                />
+              </Spacing>
+            </Indent>
+          </Background>
+        </div>
       )),
     )
     .add(

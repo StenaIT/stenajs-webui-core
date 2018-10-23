@@ -34,7 +34,7 @@ export const defaultRadioButtonTheme: RadioButtonTheme = {
   textSize: defaultFontSizes.normal,
 };
 
-export const darkRadioButtonTheme: RadioButtonTheme = {
+export const defaultRadioButtonThemeDark: RadioButtonTheme = {
   checkedIcon: ['far', 'dot-circle'],
   notCheckedIcon: ['far', 'circle'],
   disabledIconColor: defaultColors.disabledText,

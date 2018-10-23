@@ -29,7 +29,7 @@ export const defaultSimpleCheckboxTheme: SimpleCheckboxTheme = {
   iconSize: 10,
 };
 
-export const darkSimpleCheckboxTheme: SimpleCheckboxTheme = {
+export const defaultSimpleCheckboxThemeDark: SimpleCheckboxTheme = {
   backgroundColor: '#b7d1d9',
   backgroundColorDisabled: '#f1f1f1',
   borderColor: 'transparent',

@@ -4,7 +4,7 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { compose } from 'recompose';
 import { SimpleCheckbox } from '../../src';
-import { darkSimpleCheckboxTheme } from '../../src/components/ui/form/checkbox';
+import { defaultSimpleCheckboxThemeDark } from '../../src/components/ui/form/checkbox';
 import { CheckboxWithLabel } from '../../src/components/ui/form/checkbox/CheckboxWithLabel';
 
 export const addCheckboxStories = () => {
@@ -42,7 +42,7 @@ export const addCheckboxStories = () => {
         <SimpleCheckbox
           value={store.state.value}
           onChange={value => store.set({ value })}
-          theme={darkSimpleCheckboxTheme}
+          theme={defaultSimpleCheckboxThemeDark}
         />
       )),
     )
