@@ -16,13 +16,7 @@ type InnerProps = DefaultTextProps & WithInnerComponentThemeProps<TextTheme>;
 const DefaultTextComponent: React.SFC<InnerProps> = ({
   theme,
   ...textProps
-}) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.fontSize}
-    fontFamily={theme.fontFamily}
-  />
-);
+}) => <TextBase {...textProps} {...theme} />;
 
 export const DefaultText = setDisplayName<DefaultTextProps>('DefaultText')(
   compose<InnerProps, DefaultTextProps>(

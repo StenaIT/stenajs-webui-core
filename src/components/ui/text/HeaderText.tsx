@@ -16,13 +16,7 @@ type InnerProps = HeaderTextProps & WithInnerComponentThemeProps<TextTheme>;
 const HeaderTextComponent: React.SFC<InnerProps> = ({
   theme,
   ...textProps
-}) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.fontSize}
-    fontFamily={theme.fontFamily}
-  />
-);
+}) => <TextBase {...textProps} {...theme} />;
 
 export const HeaderText = setDisplayName<HeaderTextProps>('HeaderText')(
   compose<InnerProps, HeaderTextProps>(

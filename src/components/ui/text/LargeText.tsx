@@ -14,11 +14,7 @@ export type LargeTextProps = TextBaseSharedProps &
 type InnerProps = LargeTextProps & WithInnerComponentThemeProps<TextTheme>;
 
 const LargeTextComponent = ({ theme, ...textProps }: InnerProps) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.fontSize}
-    fontFamily={theme.fontFamily}
-  />
+  <TextBase {...textProps} {...theme} />
 );
 
 export const LargeText = setDisplayName<LargeTextProps>('LargeText')(

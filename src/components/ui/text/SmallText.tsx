@@ -13,11 +13,7 @@ export type SmallTextProps = TextBaseSharedProps &
 
 type InnerProps = SmallTextProps & WithInnerComponentThemeProps<TextTheme>;
 const SmallTextComponent: React.SFC<InnerProps> = ({ theme, ...textProps }) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.fontSize}
-    fontFamily={theme.fontFamily}
-  />
+  <TextBase {...textProps} {...theme} />
 );
 
 export const SmallText = setDisplayName<SmallTextProps>('SmallText')(

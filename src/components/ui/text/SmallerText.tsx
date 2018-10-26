@@ -16,13 +16,7 @@ type InnerProps = SmallerTextProps & WithInnerComponentThemeProps<TextTheme>;
 const SmallerTextComponent: React.SFC<InnerProps> = ({
   theme,
   ...textProps
-}) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.fontSize}
-    fontFamily={theme.fontFamily}
-  />
-);
+}) => <TextBase {...textProps} {...theme} />;
 
 export const SmallerText = setDisplayName<SmallerTextProps>('SmallerText')(
   compose<InnerProps, SmallerTextProps>(

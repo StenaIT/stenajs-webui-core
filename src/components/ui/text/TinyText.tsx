@@ -13,11 +13,7 @@ export type TinyTextProps = TextBaseSharedProps &
 
 type InnerProps = TinyTextProps & WithInnerComponentThemeProps<TextTheme>;
 const TinyTextComponent: React.SFC<InnerProps> = ({ theme, ...textProps }) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.fontSize}
-    fontFamily={theme.fontFamily}
-  />
+  <TextBase {...textProps} {...theme} />
 );
 
 export const TinyText = setDisplayName<TinyTextProps>('TinyText')(
