@@ -99,7 +99,6 @@ export class BorderComponent extends React.Component<
           borderBottomStyle: all || bottom ? 'solid' : undefined,
           borderLeftStyle: all || left ? 'solid' : undefined,
           borderRightStyle: all || right ? 'solid' : undefined,
-          height: 'fit-content',
           flex,
           overflow,
           ...(borderTopLeftRadius ? { borderTopLeftRadius } : undefined),
