@@ -65,7 +65,7 @@ export class ClickableComponent extends React.Component<ClickableInnerProps> {
         title={tooltip}
         style={{
           cursor: hasClickHandler && !disablePointer ? 'pointer' : undefined,
-          display: 'table',
+          display: 'inline-block',
           userSelect: 'none',
           opacity,
           ...style,
