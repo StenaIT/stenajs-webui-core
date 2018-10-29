@@ -26,7 +26,7 @@ export type __C_DEFAULT_TEXT_INPUT_12491142 = ComponentClass<{}>;
 // TODO Move to theme.
 
 const borderClass = css`
-  display: table;
+  display: inline-block;
   overflow: hidden;
 `;
 

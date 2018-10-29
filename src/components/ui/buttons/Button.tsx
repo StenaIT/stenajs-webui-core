@@ -1,4 +1,5 @@
 import { IconProp } from '@fortawesome/fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import styled from 'react-emotion';
@@ -16,7 +17,6 @@ import { Row } from '../layout/Row';
 import { Space } from '../layout/Space';
 import { ProgressIndicator } from '../progress/ProgressIndicator';
 import { ButtonTheme } from './ButtonTheme';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
 
 addIcons(faCheck);
 
@@ -187,7 +187,9 @@ class ButtonComponent extends React.PureComponent<InnerProps> {
     const { disabled, onClick } = this.props;
 
     if (disabled) {
-      return <div style={{ display: 'table' }}>{this.renderButton()}</div>;
+      return (
+        <div style={{ display: 'inline-block' }}>{this.renderButton()}</div>
+      );
     }
 
     return (
