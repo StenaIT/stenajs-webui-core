@@ -1,19 +1,16 @@
 import * as React from 'react';
 import { compose, pure, withHandlers, withState } from 'recompose';
 import { Border } from '../../src/components/ui/decorations/index';
-import {
-  OnCellFocusEvent,
-  OnCellMoveEvent,
-} from '../../src/enhancers/table/WithTableNavigation';
+import { OnCellFocusEvent, OnCellMoveEvent, } from '../../src/enhancers/table/WithTableNavigation';
+import { CellData, SetCellFunc } from './components';
 import { TableRow } from './components/TableRow';
 
-export type CellData = string | number;
 type Data = Array<Array<CellData>>;
 const initialData: Data = [];
 for (let y = 0; y < 20; y++) {
   initialData[y] = [];
   for (let x = 0; x < 20; x++) {
-    initialData[y][x] = x * y;
+    initialData[y][x] = `${x * y}`;
   }
 }
 
@@ -58,8 +55,6 @@ const withDataState = compose<{}, WithDataStateProps>(
   withState('data', 'setData', initialData),
 );
 
-export type SetCellFunc = (col: number, row: number, value: string) => void;
-
 export interface WithSetCellHandlerProps {
   setCell: SetCellFunc;
 }
@@ -69,7 +64,7 @@ const withSetCellHandler = withHandlers<
   WithDataStateProps,
   WithSetCellHandlerProps
 >({
-  setCell: ({ setData, data }) => (col: number, row: number, value: string) => {
+  setCell: ({ setData, data }) => (col: number, row: number, value: CellData) => {
     data[row][col] = value;
     setData([...data]);
   },

@@ -24,7 +24,8 @@ This is cause by the combination of --noUnusedLocals and --declaration.
 export type __C9134T = ComponentEnhancer<{}, {}>;
 
 export const withTableNavigation = <
-  OuterProps extends RequiredTableCellOuterProps
+  T,
+  OuterProps extends RequiredTableCellOuterProps<T>
 >(
   type: AllowedType,
   getCellId: CellIdGenerator,
@@ -32,7 +33,7 @@ export const withTableNavigation = <
   compose(
     withEditingState,
     withOnFocus,
-    withEditingHandlers<OuterProps>(getCellId),
+    withEditingHandlers<T, OuterProps>(getCellId),
     withNavigatableKeyDownHandler({ type }),
   );
 
@@ -50,12 +51,12 @@ export interface OnCellFocusEvent {
   columnIndex: number;
 }
 
-export interface RequiredTableCellOuterProps extends WithIsEditableProps {
+export interface RequiredTableCellOuterProps<T = string | number> extends WithIsEditableProps {
   columnIndex: number;
   rowIndex: number;
   numColumns: number;
   numRows: number;
-  value: string | number;
+  value: T;
   onCellMove?: (event: OnCellMoveEvent) => void;
   onCellFocus?: (event: OnCellFocusEvent) => void;
 }

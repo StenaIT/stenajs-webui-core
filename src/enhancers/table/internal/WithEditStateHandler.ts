@@ -28,28 +28,18 @@ export interface CellIndices {
   rowIndex: number;
 }
 
-export interface OuterTableProps {
-  columnIndex: number;
-  rowIndex: number;
-  numColumns: number;
-  numRows: number;
-  value: string | number;
-}
-
 export interface InjectedOnFocusProps {
   onFocus?: FocusEventHandler<HTMLDivElement>;
 }
 
-export const withOnFocus = withHandlers<
-  RequiredTableCellOuterProps,
-  InjectedOnFocusProps
->({
-  onFocus: ({ columnIndex, rowIndex, onCellFocus }) => () => {
-    if (onCellFocus) {
-      onCellFocus({ columnIndex, rowIndex });
-    }
-  },
-});
+export const withOnFocus = (<T>() =>
+  withHandlers<RequiredTableCellOuterProps<T>, InjectedOnFocusProps>({
+    onFocus: ({ columnIndex, rowIndex, onCellFocus }) => () => {
+      if (onCellFocus) {
+        onCellFocus({ columnIndex, rowIndex });
+      }
+    },
+  }))();
 
 export interface WithEditingStateProps {
   isEditing: boolean;
@@ -86,7 +76,8 @@ export interface EditingHandlers {
 }
 
 export const withEditingHandlers = <
-  OuterProps extends RequiredTableCellOuterProps
+  T,
+  OuterProps extends RequiredTableCellOuterProps<T>
 >(
   getCellId: CellIdGenerator,
 ) =>

@@ -4,8 +4,7 @@ import {
   OnCellFocusEvent,
   OnCellMoveEvent,
 } from '../../../src/enhancers/table/WithTableNavigation';
-import { CellData, SetCellFunc } from '../ExampleTable';
-import { TableCell } from './TableCell';
+import { CellData, SetCellFunc, TableCell } from './TableCell';
 
 export interface TableRowProps {
   row: Array<CellData>;

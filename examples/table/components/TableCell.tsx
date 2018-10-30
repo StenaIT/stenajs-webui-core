@@ -11,10 +11,12 @@ import {
   RequiredTableCellOuterProps,
   withTableNavigation,
 } from '../../../src/enhancers/table/WithTableNavigation';
-import { SetCellFunc } from '../ExampleTable';
 import { TextEditor } from './TextEditor';
 
-export interface TableCellProps extends RequiredTableCellOuterProps {
+export type CellData = string;
+export type SetCellFunc = (col: number, row: number, value: CellData) => void;
+
+export interface TableCellProps extends RequiredTableCellOuterProps<CellData> {
   setCell: SetCellFunc;
 }
 
@@ -66,15 +68,15 @@ const TableCellComponent = ({
         tabIndex={0}
         onFocus={onFocus}
         style={{ width: '100%', height: '100%' }}
-        onCopy={String(value)}
-        onPaste={(val: string) => {
-          setCell(columnIndex, rowIndex, val);
+        onCopy={() => String(value)}
+        onPaste={(pasted: string) => {
+          setCell(columnIndex, rowIndex,  pasted);
         }}
       >
         {isEditing ? (
           <TextEditor
             enteredText={enteredText}
-            value={String(value)}
+            value={value}
             focusOnMount
             selectAllOnMount={!enteredText}
             width={'100%'}
@@ -86,7 +88,7 @@ const TableCellComponent = ({
               onDone();
             }}
           />
-        ) : value === 5 ? (
+        ) : value === '5' ? (
           <DefaultText color={'blue'} bold>
             {value}
           </DefaultText>
@@ -101,6 +103,6 @@ const TableCellComponent = ({
 export const TableCell = compose<
   TableCellProps & InjectedTableInnerProps,
   TableCellProps
->(withTableNavigation<TableCellProps>('numeric', getCellId))(
+>(withTableNavigation<CellData, TableCellProps>('numeric', getCellId))(
   TableCellComponent,
 );
