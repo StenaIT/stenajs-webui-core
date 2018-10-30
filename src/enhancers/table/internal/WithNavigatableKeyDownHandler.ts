@@ -1,5 +1,6 @@
 import { KeyboardEventHandler } from 'react';
 import { InferableComponentEnhancerWithProps, withHandlers } from 'recompose';
+import { OuterTableProps } from './WithEditStateHandler';
 
 /*
 InferableComponentEnhancerWithProps must be imported and used.
@@ -14,7 +15,7 @@ export type NavigatableKeyDownHandlerOnMove = (
   direction: NavigationMoveDirection,
 ) => void;
 
-export interface WithKeyDownHandlerOuterProps {
+export interface WithKeyDownHandlerOuterProps<T> extends OuterTableProps<T> {
   onMove: NavigatableKeyDownHandlerOnMove;
   onStartEdit: (enteredText?: string) => void;
   isEditing: boolean;
@@ -29,16 +30,16 @@ export interface WithKeyDownHandlerOptions {
   type?: AllowedType;
 }
 
-export const withNavigatableKeyDownHandler = ({
+export const withNavigatableKeyDownHandler = <T>({
   type,
 }: WithKeyDownHandlerOptions) =>
-  withHandlers<WithKeyDownHandlerOuterProps, WithKeyDownHandlerInnerProps>({
+  withHandlers<WithKeyDownHandlerOuterProps<T>, WithKeyDownHandlerInnerProps>({
     onKeyDown: ({
       onMove,
       onStartEdit,
       isEditing,
       isEditable,
-    }: WithKeyDownHandlerOuterProps): KeyboardEventHandler<
+    }: WithKeyDownHandlerOuterProps<T>): KeyboardEventHandler<
       HTMLDivElement
     > => e => {
       if (!isEditing) {

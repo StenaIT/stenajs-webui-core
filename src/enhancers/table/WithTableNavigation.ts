@@ -51,7 +51,7 @@ export interface OnCellFocusEvent {
   columnIndex: number;
 }
 
-export interface RequiredTableCellOuterProps<T = string | number> extends WithIsEditableProps {
+export interface RequiredTableCellOuterProps<T> extends WithIsEditableProps {
   columnIndex: number;
   rowIndex: number;
   numColumns: number;
@@ -61,8 +61,8 @@ export interface RequiredTableCellOuterProps<T = string | number> extends WithIs
   onCellFocus?: (event: OnCellFocusEvent) => void;
 }
 
-export type InjectedTableInnerProps = WithKeyDownHandlerInnerProps &
-  WithKeyDownHandlerOuterProps &
+export type InjectedTableInnerProps<T> = WithKeyDownHandlerInnerProps &
+  WithKeyDownHandlerOuterProps<T> &
   EditingHandlers &
   WithEditingStateProps &
   InjectedOnFocusProps;

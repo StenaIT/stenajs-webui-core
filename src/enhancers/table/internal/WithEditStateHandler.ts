@@ -28,6 +28,14 @@ export interface CellIndices {
   rowIndex: number;
 }
 
+export interface OuterTableProps<T> {
+  columnIndex: number;
+  rowIndex: number;
+  numColumns: number;
+  numRows: number;
+  value: T;
+}
+
 export interface InjectedOnFocusProps {
   onFocus?: FocusEventHandler<HTMLDivElement>;
 }
