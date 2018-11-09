@@ -2,18 +2,17 @@ import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import Select from 'react-select';
-import { Background } from '../../src/components/ui/colors';
-import { Indent, Spacing } from '../../src/components/ui/layout';
-import { createSelect } from '../../src/enhancers/select/SelectFactory';
-import { selectThemeDark } from '../../src/enhancers/select/SelectTheme';
 import {
   ExampleAsyncCustomTheme,
   ExampleAsyncSelect,
   ExampleAsyncSelectDark,
 } from '../../examples/select/ExampleSelect';
+import { Background } from '../../src/components/ui/colors';
+import { Indent, Spacing } from '../../src/components/ui/layout';
+import { createSelect } from '../../src/enhancers/select/SelectFactory';
+import { selectThemeDark } from '../../src/enhancers/select/SelectTheme';
 
 const StyledSelect = createSelect(Select);
-const StyledSelectDark = createSelect(Select, selectThemeDark);
 
 export const addSelectStories = () => {
   storiesOf('Form/Select', module)
@@ -71,7 +70,7 @@ export const addSelectStories = () => {
           <Background color={'#2e4662'}>
             <Indent num={4}>
               <Spacing num={4}>
-                <StyledSelectDark
+                <StyledSelect
                   options={[
                     {
                       value: 'Mattias',
@@ -86,6 +85,7 @@ export const addSelectStories = () => {
                       label: 'Dennis the menace',
                     },
                   ]}
+                  theme={selectThemeDark}
                 />
               </Spacing>
             </Indent>
@@ -100,7 +100,7 @@ export const addSelectStories = () => {
           <Background color={'#2e4662'}>
             <Indent num={4}>
               <Spacing num={4}>
-                <StyledSelectDark
+                <StyledSelect
                   isMulti
                   options={[
                     {
@@ -116,6 +116,7 @@ export const addSelectStories = () => {
                       label: 'Dennis the menace',
                     },
                   ]}
+                  theme={selectThemeDark}
                 />
               </Spacing>
             </Indent>
@@ -123,7 +124,6 @@ export const addSelectStories = () => {
         </div>
       )),
     )
-    .add('with custom theme', withInfo()(() => <ExampleAsyncCustomTheme />))
     .add('async select', withInfo()(() => <ExampleAsyncSelect />))
     .add(
       'async select dark',
@@ -136,6 +136,34 @@ export const addSelectStories = () => {
               </Spacing>
             </Indent>
           </Background>
+        </div>
+      )),
+    )
+    .add(
+      'with custom react-select style',
+      withInfo()(() => <ExampleAsyncCustomTheme />),
+    )
+    .add(
+      'with custom instance theme',
+      withInfo()(() => (
+        <div style={{ width: '400px' }}>
+          <StyledSelect
+            theme={{ input: { height: '20px', borderRadius: '10px' } }}
+            options={[
+              {
+                value: 'Mattias',
+                label: 'Mattias',
+              },
+              {
+                value: 'Johan',
+                label: 'Johan',
+              },
+              {
+                value: 'Dennis the menace',
+                label: 'Dennis the menace',
+              },
+            ]}
+          />
         </div>
       )),
     );

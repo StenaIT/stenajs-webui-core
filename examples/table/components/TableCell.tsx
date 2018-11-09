@@ -53,7 +53,7 @@ const TableCellComponent = ({
   enteredText,
   setCell,
   onFocus,
-}: TableCellProps & InjectedTableInnerProps) => (
+}: TableCellProps & InjectedTableInnerProps<{}>) => (
   <Border color={'#eee'} top left>
     <Row
       justifyContent={'center'}
@@ -101,7 +101,7 @@ const TableCellComponent = ({
 );
 
 export const TableCell = compose<
-  TableCellProps & InjectedTableInnerProps,
+  TableCellProps & InjectedTableInnerProps<{}>,
   TableCellProps
 >(withTableNavigation<CellData, TableCellProps>('numeric', getCellId))(
   TableCellComponent,

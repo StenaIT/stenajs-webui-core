@@ -21,6 +21,7 @@ export interface SelectTheme {
     backgroundColor: string;
     borderColor: string;
     borderColorFocused: string;
+    borderRadius: string;
     fontFamily: string;
     fontSize: string;
     height: string;
@@ -77,6 +78,7 @@ export const defaultSelectTheme: SelectTheme = {
     height: '34px',
     placeholderColor: defaultColors.separator,
     textColor: defaultColors.primaryText,
+    borderRadius: '4px',
   },
   loadingIndicator: {
     textColor: defaultColors.primaryText,
@@ -128,6 +130,7 @@ export const selectThemeDark: SelectTheme = {
     height: '34px',
     placeholderColor: defaultColors.white,
     textColor: defaultColors.white,
+    borderRadius: '4px',
   },
   loadingIndicator: {
     textColor: defaultColors.white,

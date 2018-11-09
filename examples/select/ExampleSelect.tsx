@@ -4,8 +4,7 @@ import { createAsyncSelect } from '../../src/enhancers/select/SelectFactory';
 import { selectThemeDark } from '../../src/enhancers/select/SelectTheme';
 
 const AsyncSelect = createAsyncSelect(Async);
-const AsyncSelectDark = createAsyncSelect(Async, selectThemeDark);
-const AsyncSelectCustomTheme = createAsyncSelect(Async, undefined, {
+const AsyncSelectCustomTheme = createAsyncSelect(Async, {
   control: base => ({ ...base, backgroundColor: 'red' }),
 });
 
@@ -41,11 +40,12 @@ export const ExampleAsyncSelect = () => (
 );
 
 export const ExampleAsyncSelectDark = () => (
-  <AsyncSelectDark
+  <AsyncSelect
     loadOptions={getOptions}
     defaultOptions={[]}
     cacheOptions
     isSearchable
+    theme={selectThemeDark}
   />
 );
 

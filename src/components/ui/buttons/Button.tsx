@@ -66,7 +66,7 @@ export interface ButtonTextProps extends ComponentThemeProps<'Button'> {
 
 const ButtonText = styled('span')<ButtonTextProps>(
   {
-    fontWeight: 100,
+    fontWeight: 600,
     letterSpacing: '1px',
   },
   ({ color, fontFamily, fontSize }) => ({
