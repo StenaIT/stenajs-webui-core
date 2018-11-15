@@ -1,7 +1,7 @@
 import { merge } from 'lodash';
 import * as React from 'react';
-import { Props as AsyncProps } from 'react-select/lib/Async';
-import { Props as SelectProps } from 'react-select/lib/Select';
+import { Props as ReactSelectInternalAsyncProps } from 'react-select/lib/Async';
+import { Props as ReactSelectInternalSelectProps } from 'react-select/lib/Select';
 import { StylesConfig } from 'react-select/lib/styles';
 import {
   ComponentEnhancer,
@@ -14,9 +14,20 @@ import {
   withComponentTheme,
   WithInnerComponentThemeProps,
 } from '../../components/util/enhancers';
+import { Omit } from '../../types/Omit';
+import { omitProps } from '../omit/OmitProps';
 import { SelectTheme } from './SelectTheme';
 
 export type __C_STYLED_REACT_SELECT_FACTORY = ComponentEnhancer<{}, {}>;
+
+type SelectComponentProps<T> = Omit<ReactSelectInternalSelectProps<T>, 'theme'>;
+type AsyncComponentProps<T> = Omit<ReactSelectInternalAsyncProps<T>, 'theme'>;
+type ReactSelectComponentSelect<T extends {}> = React.ComponentType<
+  ReactSelectInternalAsyncProps<T>
+>;
+type ReactSelectComponentAsync<T extends {}> = React.ComponentType<
+  ReactSelectInternalSelectProps<T>
+>;
 
 const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
   option: (base, { isDisabled, isFocused, isSelected }) => ({
@@ -166,23 +177,35 @@ const withStyles = (userStyle?: StylesConfig) =>
   );
 
 export const createSelect = <T extends {}>(
-  selectComponent: React.ComponentType<SelectProps<T>>,
+  selectComponent: ReactSelectComponentAsync<T>,
   userStyle?: StylesConfig,
 ) =>
-  setDisplayName<SelectProps<T> & ComponentThemeProps<'Select'>>('Select')(
-    compose<SelectProps<T>, SelectProps<T> & ComponentThemeProps<'Select'>>(
+  setDisplayName<SelectComponentProps<T> & ComponentThemeProps<'Select'>>(
+    'Select',
+  )(
+    compose<
+      SelectComponentProps<T>,
+      SelectComponentProps<T> & ComponentThemeProps<'Select'>
+    >(
       withComponentTheme('Select'),
       withStyles(userStyle),
+      omitProps(['theme']),
     )(selectComponent),
   );
 
 export const createAsyncSelect = <T extends {}>(
-  selectComponent: React.ComponentType<AsyncProps<T>>,
+  selectComponent: ReactSelectComponentSelect<T>,
   userStyle?: StylesConfig,
 ) =>
-  setDisplayName<AsyncProps<T> & ComponentThemeProps<'Select'>>('AsyncSelect')(
-    compose<AsyncProps<T>, AsyncProps<T> & ComponentThemeProps<'Select'>>(
+  setDisplayName<AsyncComponentProps<T> & ComponentThemeProps<'Select'>>(
+    'AsyncSelect',
+  )(
+    compose<
+      AsyncComponentProps<T>,
+      AsyncComponentProps<T> & ComponentThemeProps<'Select'>
+    >(
       withComponentTheme('Select'),
       withStyles(userStyle),
+      omitProps(['theme']),
     )(selectComponent),
   );
