@@ -20,13 +20,21 @@ import { SelectTheme } from './SelectTheme';
 
 export type __C_STYLED_REACT_SELECT_FACTORY = ComponentEnhancer<{}, {}>;
 
-export type SelectComponentProps<T> = Omit<ReactSelectInternalSelectProps<T>, 'theme'>;
-export type AsyncComponentProps<T> = Omit<ReactSelectInternalAsyncProps<T>, 'theme'>;
+export type SelectComponentProps<T> = Omit<
+  ReactSelectInternalSelectProps<T>,
+  'theme'
+> &
+  ComponentThemeProps<'Select'>;
+export type AsyncComponentProps<T> = Omit<
+  ReactSelectInternalAsyncProps<T>,
+  'theme'
+> &
+  ComponentThemeProps<'Select'>;
 type ReactSelectComponentSelect<T extends {}> = React.ComponentType<
-  ReactSelectInternalAsyncProps<T>
+  ReactSelectInternalSelectProps<T>
 >;
 type ReactSelectComponentAsync<T extends {}> = React.ComponentType<
-  ReactSelectInternalSelectProps<T>
+  ReactSelectInternalAsyncProps<T>
 >;
 
 const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
@@ -177,16 +185,11 @@ const withStyles = (userStyle?: StylesConfig) =>
   );
 
 export const createSelect = <T extends {}>(
-  selectComponent: ReactSelectComponentAsync<T>,
+  selectComponent: ReactSelectComponentSelect<T>,
   userStyle?: StylesConfig,
 ) =>
-  setDisplayName<SelectComponentProps<T> & ComponentThemeProps<'Select'>>(
-    'Select',
-  )(
-    compose<
-      SelectComponentProps<T>,
-      SelectComponentProps<T> & ComponentThemeProps<'Select'>
-    >(
+  setDisplayName<SelectComponentProps<T>>('Select')(
+    compose<ReactSelectInternalSelectProps<T>, SelectComponentProps<T>>(
       withComponentTheme('Select'),
       withStyles(userStyle),
       omitProps(['theme']),
@@ -194,16 +197,11 @@ export const createSelect = <T extends {}>(
   );
 
 export const createAsyncSelect = <T extends {}>(
-  selectComponent: ReactSelectComponentSelect<T>,
+  selectComponent: ReactSelectComponentAsync<T>,
   userStyle?: StylesConfig,
 ) =>
-  setDisplayName<AsyncComponentProps<T> & ComponentThemeProps<'Select'>>(
-    'AsyncSelect',
-  )(
-    compose<
-      AsyncComponentProps<T>,
-      AsyncComponentProps<T> & ComponentThemeProps<'Select'>
-    >(
+  setDisplayName<AsyncComponentProps<T>>('AsyncSelect')(
+    compose<ReactSelectInternalAsyncProps<T>, AsyncComponentProps<T>>(
       withComponentTheme('Select'),
       withStyles(userStyle),
       omitProps(['theme']),

@@ -1,7 +1,11 @@
 import * as React from 'react';
 import { Async } from 'react-select';
 import { createAsyncSelect } from '../../src/enhancers/select/SelectFactory';
-import { selectThemeDark } from '../../src/enhancers/select/SelectTheme';
+import {
+  SelectTheme,
+  selectThemeDark,
+} from '../../src/enhancers/select/SelectTheme';
+import { DeepPartial } from '../../src/types/DeepPartial';
 
 const AsyncSelect = createAsyncSelect(Async);
 const AsyncSelectCustomTheme = createAsyncSelect(Async, {
@@ -48,6 +52,24 @@ export const ExampleAsyncSelectDark = () => (
     theme={selectThemeDark}
   />
 );
+
+export const ExampleAsyncSelectCustomTheme = () => {
+  const customTheme: DeepPartial<SelectTheme> = {
+    input: {
+      borderColor: 'red',
+      borderRadius: '10px',
+    },
+  };
+  return (
+    <AsyncSelect
+      loadOptions={getOptions}
+      defaultOptions={[]}
+      cacheOptions
+      isSearchable
+      theme={customTheme}
+    />
+  );
+};
 
 export const ExampleAsyncCustomTheme = () => (
   <AsyncSelectCustomTheme

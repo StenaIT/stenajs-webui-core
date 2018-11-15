@@ -1,9 +1,5 @@
 import { omit } from 'lodash/fp';
-import { compose, mapProps } from 'recompose';
-import { Omit } from '../../types/Omit';
+import { mapProps } from 'recompose';
 
-export const omitProps = <TProps, TOmitted>(keys: Array<keyof TProps>) =>
-  compose<Omit<TProps, TOmitted>, TProps>(
-    mapProps,
-    omit(keys),
-  );
+export const omitProps = (keys: Array<string>) =>
+  mapProps(props => omit(keys, props));
