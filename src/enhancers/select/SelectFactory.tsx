@@ -20,8 +20,8 @@ import { SelectTheme } from './SelectTheme';
 
 export type __C_STYLED_REACT_SELECT_FACTORY = ComponentEnhancer<{}, {}>;
 
-type SelectComponentProps<T> = Omit<ReactSelectInternalSelectProps<T>, 'theme'>;
-type AsyncComponentProps<T> = Omit<ReactSelectInternalAsyncProps<T>, 'theme'>;
+export type SelectComponentProps<T> = Omit<ReactSelectInternalSelectProps<T>, 'theme'>;
+export type AsyncComponentProps<T> = Omit<ReactSelectInternalAsyncProps<T>, 'theme'>;
 type ReactSelectComponentSelect<T extends {}> = React.ComponentType<
   ReactSelectInternalAsyncProps<T>
 >;
