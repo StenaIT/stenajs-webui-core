@@ -12,6 +12,7 @@ export interface PopperProps {
   placement?: Placement;
   modifiers?: Modifiers;
   shadow?: boolean;
+  style?: React.CSSProperties;
   targetMinHeight?: number;
   targetMinWidth?: number;
 }
@@ -49,7 +50,7 @@ export class PurePopper extends React.Component<PopperProps> {
 
   private renderPropsChildren = ({
     ref,
-    style,
+    style: popperChildrenStyle,
     placement,
     arrowProps,
   }: PopperChildrenProps) => {
@@ -57,11 +58,16 @@ export class PurePopper extends React.Component<PopperProps> {
       backgroundColor,
       children,
       shadow = true,
+      style,
       targetMinHeight,
       targetMinWidth,
     } = this.props;
     return (
-      <div ref={ref} style={style} data-placement={placement}>
+      <div
+        ref={ref}
+        style={{ ...popperChildrenStyle, ...style }}
+        data-placement={placement}
+      >
         <TargetContainer
           backgroundColor={backgroundColor}
           shadow={shadow}

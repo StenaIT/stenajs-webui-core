@@ -27,6 +27,8 @@ export interface UncontrolledPopupProps {
   referenceChildren: React.ReactNode;
   /** If false, shadow will be removed from popup (default: true) */
   shadow?: boolean;
+  /** Custom styling) */
+  style?: React.CSSProperties;
   /** Set min height on popup */
   targetMinHeight?: number;
   /** Set min width on popup */
@@ -59,7 +61,7 @@ const withToggleStateHandlers = withStateHandlers<
     open: false,
   }),
   {
-    hide: state => () => {
+    hide: () => () => {
       return {
         open: false,
       };
