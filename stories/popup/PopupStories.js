@@ -52,7 +52,31 @@ export const addPopupStories = () => {
           referenceChildren={<DefaultText>Open popup</DefaultText>}
           targetMinHeight={'200px'}
           targetMinWidth={'300px'}
-          style={{zIndex: 11}}
+        >
+          <DefaultText>Content</DefaultText>
+        </Popup>
+      )),
+    )
+    .add(
+      'custom styling',
+      compose(
+        withState({
+          value: undefined,
+        }),
+        withInfo(),
+      )(({ store }) => (
+        <Popup
+          onOpen={() => {
+            store.set({ open: true });
+          }}
+          onClickOutside={() => {
+            store.set({ open: false });
+          }}
+          open={store.state.open}
+          referenceChildren={<DefaultText>Open popup</DefaultText>}
+          targetMinHeight={'200px'}
+          targetMinWidth={'300px'}
+          style={{border: 'solid blue', color: 'red'}}
         >
           <DefaultText>Content</DefaultText>
         </Popup>
@@ -82,7 +106,19 @@ export const addPopupStories = () => {
           referenceChildren={<span>Open popup</span>}
           targetMinHeight={'200px'}
           targetMinWidth={'300px'}
-          style={{zIndex: 11}}
+        >
+          <DefaultText>Content</DefaultText>
+        </UncontrolledPopup>
+      )),
+    )
+    .add(
+      'uncontrolled custom styled',
+      withInfo()(() => (
+        <UncontrolledPopup
+          referenceChildren={<span>Open popup</span>}
+          targetMinHeight={'200px'}
+          targetMinWidth={'300px'}
+          style={{border: 'solid blue', color: 'red'}}
         >
           <DefaultText>Content</DefaultText>
         </UncontrolledPopup>
