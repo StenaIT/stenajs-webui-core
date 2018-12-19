@@ -34,6 +34,8 @@ export interface PopupProps {
   referenceChildren: React.ReactNode;
   /** If false, shadow will be removed from popup (default: true) */
   shadow?: boolean;
+  /** Custom styling) */
+  style?: React.CSSProperties;
   /** Set min height on popup */
   targetMinHeight?: number;
   /** Set min width on popup */
@@ -51,6 +53,7 @@ export class Popup extends React.Component<PopupProps> {
       modifiers,
       placement,
       shadow,
+      style,
       targetMinHeight,
       targetMinWidth,
     } = this.props;
@@ -67,6 +70,7 @@ export class Popup extends React.Component<PopupProps> {
             placement={placement}
             PopperComponent={Popper.Popper}
             shadow={shadow}
+            style={style}
             targetMinHeight={targetMinHeight}
             targetMinWidth={targetMinWidth}
           />

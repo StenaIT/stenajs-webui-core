@@ -52,6 +52,7 @@ export const addPopupStories = () => {
           referenceChildren={<DefaultText>Open popup</DefaultText>}
           targetMinHeight={'200px'}
           targetMinWidth={'300px'}
+          style={{zIndex: 11}}
         >
           <DefaultText>Content</DefaultText>
         </Popup>
@@ -81,6 +82,7 @@ export const addPopupStories = () => {
           referenceChildren={<span>Open popup</span>}
           targetMinHeight={'200px'}
           targetMinWidth={'300px'}
+          style={{zIndex: 11}}
         >
           <DefaultText>Content</DefaultText>
         </UncontrolledPopup>
