@@ -48,6 +48,16 @@ export const addTextInputStories = () => {
           placeholderColor={'red'}
         />
       )),
+    )
+    .add(
+      'disabled',
+      withInfo()(() => (
+        <SimpleTextInput
+          value={''}
+          placeholder={'Enter name'}
+          disabled={true}
+        />
+      )),
     );
 
   storiesOf('Form/TextInput/DefaultTextInput', module)
@@ -230,7 +240,14 @@ export const addTextInputStories = () => {
           <DefaultTextInput value={'some entered text'} />
         </UseTheme>
       )),
-    );
+    )
+    .add(
+      'disabled',
+      withInfo()(() => (
+        <DefaultTextInput value={''} placeholder={'Enter name'} disabled={true} />
+      )),
+    )
+  ;
 
   storiesOf('Form/TextInput/NumericTextInput', module)
     .add(

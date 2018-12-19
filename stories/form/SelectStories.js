@@ -166,5 +166,29 @@ export const addSelectStories = () => {
           />
         </div>
       )),
-    );
+    )
+    .add(
+      'disabled',
+      withInfo()(() => (
+        <div style={{ width: '400px' }}>
+          <StyledSelect
+            options={[
+              {
+                value: 'Mattias',
+                label: 'Mattias',
+              },
+              {
+                value: 'Johan',
+                label: 'Johan',
+              },
+              {
+                value: 'Dennis the menace',
+                label: 'Dennis the menace',
+              },
+            ]}
+            isDisabled={true}
+          />
+        </div>
+      )),
+    ) ;
 };
