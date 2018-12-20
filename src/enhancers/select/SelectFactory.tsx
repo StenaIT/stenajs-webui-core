@@ -63,7 +63,7 @@ const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
     // none of react-selects styles are passed to <View />
     fontFamily: selectTheme.input.fontFamily,
     fontSize: selectTheme.input.fontSize,
-    minHeight: selectTheme.input.height,
+    minHeight: selectTheme.input.minHeight,
     height: selectTheme.input.height,
     backgroundColor: isDisabled
       ? selectTheme.input.disabledBackgroundColor

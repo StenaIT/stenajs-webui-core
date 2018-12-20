@@ -26,6 +26,7 @@ export interface SelectTheme {
     fontFamily: string;
     fontSize: string;
     height: string;
+    minHeight: string;
     placeholderColor: string;
     textColor: string;
   };
@@ -78,6 +79,7 @@ export const defaultSelectTheme: SelectTheme = {
     fontFamily: defaultFonts.primary,
     fontSize: defaultFontSizes.normal,
     height: '34px',
+    minHeight: '34px',
     placeholderColor: defaultColors.separator,
     textColor: defaultColors.primaryText,
     borderRadius: '4px',
@@ -131,6 +133,7 @@ export const selectThemeDark: SelectTheme = {
     fontFamily: defaultFonts.primary,
     fontSize: defaultFontSizes.normal,
     height: '34px',
+    minHeight: '34px',
     placeholderColor: defaultColors.white,
     textColor: defaultColors.white,
     borderRadius: '4px',
