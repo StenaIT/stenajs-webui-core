@@ -5,6 +5,7 @@ export const primaryBgLight = '#FEFEFE';
 export const primaryBgDark = '#226F81';
 export const disabledText = '#b6b6b6';
 export const disabledTextLight = '#dddddd';
+export const disabledBackground = '#F3F3F5';
 export const white = '#ffffff';
 export const separator = '#cccdcf';
 export const separatorLight = '#F2F3F5';

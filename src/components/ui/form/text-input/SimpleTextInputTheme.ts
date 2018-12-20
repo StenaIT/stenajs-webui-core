@@ -14,7 +14,7 @@ export interface SimpleTextInputTheme {
 }
 
 export const defaultSimpleTextInputTheme: SimpleTextInputTheme = {
-  disabledBackgroundColor: defaultColors.separatorLight,
+  disabledBackgroundColor: defaultColors.disabledBackground,
   disabledTextColor: defaultColors.disabledText,
   fontSize: defaultFontSizes.normal,
   fontFamily: defaultFonts.input,

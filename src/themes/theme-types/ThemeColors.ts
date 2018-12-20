@@ -6,6 +6,7 @@ export interface ThemeColors {
   primaryBgDark: string;
   disabledText: string;
   disabledTextLight: string;
+  disabledBackground: string;
   white: string;
   separator: string;
   separatorLight: string;
