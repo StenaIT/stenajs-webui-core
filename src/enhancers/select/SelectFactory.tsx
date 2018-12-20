@@ -58,14 +58,16 @@ const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
           : undefined,
     cursor: isDisabled ? 'not-allowed' : 'default',
   }),
-  control: (base, { isFocused }) => ({
+  control: (base, { isFocused, isDisabled }) => ({
     ...base,
     // none of react-selects styles are passed to <View />
     fontFamily: selectTheme.input.fontFamily,
     fontSize: selectTheme.input.fontSize,
     minHeight: selectTheme.input.minHeight,
     height: selectTheme.input.height,
-    backgroundColor: selectTheme.input.backgroundColor,
+    backgroundColor: isDisabled
+      ? selectTheme.input.disabledBackgroundColor
+      : selectTheme.input.backgroundColor,
     boxShadow: '0',
     borderRadius: selectTheme.input.borderRadius,
     borderColor: isFocused

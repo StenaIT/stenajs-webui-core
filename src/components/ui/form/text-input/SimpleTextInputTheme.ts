@@ -3,6 +3,8 @@ import { defaultFonts } from '../../../../themes/default-values/DefaultFonts';
 import { defaultFontSizes } from '../../../../themes/default-values/DefaultFontSizes';
 
 export interface SimpleTextInputTheme {
+  disabledBackgroundColor: string;
+  disabledTextColor: string;
   fontSize: string;
   fontFamily: string;
   textColor: string;
@@ -12,6 +14,8 @@ export interface SimpleTextInputTheme {
 }
 
 export const defaultSimpleTextInputTheme: SimpleTextInputTheme = {
+  disabledBackgroundColor: defaultColors.disabledBackground,
+  disabledTextColor: defaultColors.disabledText,
   fontSize: defaultFontSizes.normal,
   fontFamily: defaultFonts.input,
   textColor: defaultColors.primaryText,

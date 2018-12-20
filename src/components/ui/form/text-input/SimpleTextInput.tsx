@@ -223,6 +223,14 @@ class SimpleTextInputComponent extends React.Component<
             '-webkit-appearance': 'none',
             margin: 0,
           },
+          '&:disabled': {
+            backgroundColor: `${
+              theme.components.SimpleTextInput.disabledBackgroundColor
+            } !important`,
+            color: `${
+              theme.components.SimpleTextInput.disabledTextColor
+            } !important`,
+          },
         })}`}
         type={inputType}
         ref={this.textInput}

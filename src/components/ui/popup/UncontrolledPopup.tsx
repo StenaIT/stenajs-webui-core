@@ -27,7 +27,7 @@ export interface UncontrolledPopupProps {
   referenceChildren: React.ReactNode;
   /** If false, shadow will be removed from popup (default: true) */
   shadow?: boolean;
-  /** Custom styling) */
+  /** Custom styling */
   style?: React.CSSProperties;
   /** Set min height on popup */
   targetMinHeight?: number;

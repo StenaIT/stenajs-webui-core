@@ -22,6 +22,7 @@ export interface SelectTheme {
     borderColor: string;
     borderColorFocused: string;
     borderRadius: string;
+    disabledBackgroundColor: string;
     fontFamily: string;
     fontSize: string;
     height: string;
@@ -74,6 +75,7 @@ export const defaultSelectTheme: SelectTheme = {
     backgroundColor: defaultColors.white,
     borderColor: defaultColors.inputBorder,
     borderColorFocused: defaultColors.inputBorderFocused,
+    disabledBackgroundColor: defaultColors.disabledBackground,
     fontFamily: defaultFonts.primary,
     fontSize: defaultFontSizes.normal,
     height: '34px',
@@ -127,6 +129,7 @@ export const selectThemeDark: SelectTheme = {
     backgroundColor: '#4a5d73',
     borderColor: 'transparent',
     borderColorFocused: '#92a3b5',
+    disabledBackgroundColor: defaultColors.disabledBackground,
     fontFamily: defaultFonts.primary,
     fontSize: defaultFontSizes.normal,
     height: '34px',
