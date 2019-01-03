@@ -1,6 +1,6 @@
 import { Modifiers, Placement } from 'popper.js';
 import * as React from 'react';
-import * as enhanceWithClickOutside from 'react-click-outside';
+import enhanceWithClickOutside from 'react-click-outside';
 import styled from 'react-emotion';
 import { Popper, PopperChildrenProps } from 'react-popper';
 
