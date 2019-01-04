@@ -37,7 +37,7 @@ export const withTableNavigation = <
     withNavigatableKeyDownHandler({ type }),
   );
 
-export interface OnCellMoveEvent {
+export interface TableOnCellMoveEvent {
   fromRowIndex: number;
   fromColumnIndex: number;
   rowChange: boolean;
@@ -57,7 +57,7 @@ export interface RequiredTableCellOuterProps<T> extends WithIsEditableProps {
   numColumns: number;
   numRows: number;
   value: T;
-  onCellMove?: (event: OnCellMoveEvent) => void;
+  onCellMove?: (event: TableOnCellMoveEvent) => void;
   onCellFocus?: (event: OnCellFocusEvent) => void;
 }
 

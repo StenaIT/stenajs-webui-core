@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Row } from '../../../src/components/ui/layout/index';
 import {
   OnCellFocusEvent,
-  OnCellMoveEvent,
+  TableOnCellMoveEvent,
 } from '../../../src/features/table/WithTableNavigation';
 import { CellData, SetCellFunc, TableCell } from './TableCell';
 
@@ -12,7 +12,7 @@ export interface TableRowProps {
   numRows: number;
   setCell: SetCellFunc;
   onCellFocus: (event: OnCellFocusEvent) => void;
-  onCellMove: (event: OnCellMoveEvent) => void;
+  onCellMove: (event: TableOnCellMoveEvent) => void;
 }
 export const TableRow = ({
   row,

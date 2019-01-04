@@ -4,7 +4,7 @@ import { Background } from '../../src/components/ui/colors/index';
 import { Indent, Space } from '../../src/components/ui/layout/index';
 import {
   OnCellFocusEvent,
-  OnCellMoveEvent,
+  TableOnCellMoveEvent,
 } from '../../src/features/table/WithTableNavigation';
 import { ExampleTable } from './ExampleTable';
 
@@ -32,9 +32,9 @@ const TableExampleComponent = ({
 );
 
 interface WithDataStateProps {
-  moveEvent: OnCellMoveEvent;
+  moveEvent: TableOnCellMoveEvent;
   focusEvent: OnCellFocusEvent;
-  setMoveEvent: (moveEvent: OnCellMoveEvent) => void;
+  setMoveEvent: (moveEvent: TableOnCellMoveEvent) => void;
   setFocusEvent: (focusEvent: OnCellFocusEvent) => void;
 }
 
@@ -45,7 +45,7 @@ const withDataState = compose<{}, WithDataStateProps>(
 
 interface WithOnCellFocusProps {
   onCellFocus: (event: OnCellFocusEvent) => void;
-  onCellMove: (event: OnCellMoveEvent) => void;
+  onCellMove: (event: TableOnCellMoveEvent) => void;
 }
 
 const withOnCellFocus = withHandlers<WithDataStateProps, WithOnCellFocusProps>({

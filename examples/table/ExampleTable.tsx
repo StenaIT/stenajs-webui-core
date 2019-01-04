@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { compose, pure, withHandlers, withState } from 'recompose';
 import { Border } from '../../src/components/ui/decorations/index';
-import { OnCellFocusEvent, OnCellMoveEvent, } from '../../src/features/table/WithTableNavigation';
+import { OnCellFocusEvent, TableOnCellMoveEvent, } from '../../src/features/table/WithTableNavigation';
 import { CellData, SetCellFunc } from './components';
 import { TableRow } from './components/TableRow';
 
@@ -16,7 +16,7 @@ for (let y = 0; y < 20; y++) {
 
 export interface ExampleTableProps {
   onCellFocus: (event: OnCellFocusEvent) => void;
-  onCellMove: (event: OnCellMoveEvent) => void;
+  onCellMove: (event: TableOnCellMoveEvent) => void;
 }
 
 type InnerProps = WithSetCellHandlerProps &

@@ -6,7 +6,6 @@ import {
   withHandlers,
   withState,
 } from 'recompose';
-import { MoveDirection } from '../../../components/ui/form/text-input/index';
 import { wrapBounds } from '../../../util/bounds/NumberBoundsWrapper';
 import { RequiredTableCellOuterProps } from '../WithTableNavigation';
 import {
@@ -23,7 +22,7 @@ export type __C81458 = ComponentEnhancer<{}, {}> &
 
 export type CellIdGenerator = (col: number, row: number) => string;
 
-export interface CellIndices {
+export interface TableCellIndices {
   columnIndex: number;
   rowIndex: number;
 }
@@ -165,8 +164,8 @@ export const withEditingHandlers = <
 const getIndices = (
   columnIndex: number,
   rowIndex: number,
-  direction: MoveDirection,
-): CellIndices => {
+  direction: NavigationMoveDirection,
+): TableCellIndices => {
   if (direction === 'up') {
     return {
       columnIndex,

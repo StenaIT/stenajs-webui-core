@@ -13,7 +13,7 @@ import { InputType } from './InputType';
 
 // tslint:disable:no-any
 
-export type MoveDirection = 'right' | 'left' | 'down' | 'up';
+type MoveDirection = 'right' | 'left' | 'down' | 'up';
 
 export interface SimpleTextInputProps {
   /** The current value shown in the text input. */

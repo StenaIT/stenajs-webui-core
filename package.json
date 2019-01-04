@@ -1,6 +1,6 @@
 {
   "name": "stenajs-webui-core",
-  "version": "0.8.23",
+  "version": "0.9.0-alpha",
   "description": "A library of React components made by Stena IT.",
   "sideEffects": false,
   "repository": "https://github.com/StenaIT/stenajs-webui-common",
@@ -12,7 +12,7 @@
     "prepublishOnly": "yarn && yarn build-index && yarn lint && CI=true yarn test && yarn build-lib",
     "deploy-storybook": "storybook-to-ghpages",
     "clean": "rimraf lib && rimraf storybok-static",
-    "build-index": "cti -e @types,typings,__test__,__tests__ -i setupTests.ts ./src",
+    "build-index": "cti -e @types,typings,__test__,__tests__ -i setupTests.ts,react-app-env.d.ts ./src",
     "build": "rimraf lib && ./node_modules/.bin/tsc && build-storybook",
     "build-lib-watch": "tsc -w",
     "build-lib": "rimraf lib && ./node_modules/.bin/tsc",

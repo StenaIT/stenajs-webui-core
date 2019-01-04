@@ -2,4 +2,5 @@
 
 export * from './bounds';
 export * from './date';
+export * from './enhancers';
 export * from './time';
