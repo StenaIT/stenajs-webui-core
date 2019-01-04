@@ -1,20 +1,17 @@
-import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { Spacing } from '../../src/components/ui/layout/Spacing';
+import * as React from 'react';
 import { UseTheme } from '../../src/components/theme/UseTheme';
-import {DefaultText} from "../../src/components/ui/text/DefaultText";
-import {Background} from "../../src/components/ui/colors/Background";
-import {Space} from "../../src/components/ui/layout/Space";
+import { Indent } from '../../src/components/ui/layout/Indent';
 
-export const addSpacingStories = () => {
-  storiesOf('Layout/Spacing', module)
+export const addIndentStories = () => {
+  storiesOf('Layout/Indent', module)
     .add(
       'standard',
       withInfo()(() => (
         <div style={{ display: 'table' }}>
           <div style={{ border: '1px solid black' }}>
-            <Spacing>
+            <Indent>
               <div
                 style={{
                   backgroundColor: 'red',
@@ -22,7 +19,7 @@ export const addSpacingStories = () => {
                   height: '20px',
                 }}
               />
-            </Spacing>
+            </Indent>
           </div>
         </div>
       )),
@@ -32,7 +29,7 @@ export const addSpacingStories = () => {
       withInfo()(() => (
         <div style={{ display: 'table' }}>
           <div style={{ border: '1px solid black' }}>
-            <Spacing num={2}>
+            <Indent num={2}>
               <div
                 style={{
                   backgroundColor: 'red',
@@ -40,18 +37,18 @@ export const addSpacingStories = () => {
                   height: '20px',
                 }}
               />
-            </Spacing>
+            </Indent>
           </div>
         </div>
       )),
     )
     .add(
-      'with num=2 and custom theme',
-      withInfo({ propTablesExclude: [UseTheme] })(() => (
-        <UseTheme theme={{ metrics: { spacing: 20 } }}>
+      'with custom theme',
+      withInfo()(() => (
+        <UseTheme theme={{ metrics: { indent: 30 } }}>
           <div style={{ display: 'table' }}>
             <div style={{ border: '1px solid black' }}>
-              <Spacing num={2}>
+              <Indent>
                 <div
                   style={{
                     backgroundColor: 'red',
@@ -59,7 +56,7 @@ export const addSpacingStories = () => {
                     height: '20px',
                   }}
                 />
-              </Spacing>
+              </Indent>
             </div>
           </div>
         </UseTheme>

@@ -18,7 +18,12 @@ export const addLabelStories = () => {
     .add(
       'with left top',
       withInfo()(() => (
-        <Label color={'#a2a2a2'} label={<HeaderText>big label</HeaderText>} position={'left-top'} underline={true}>
+        <Label
+          color={'#a2a2a2'}
+          label={<HeaderText>big label</HeaderText>}
+          position={'left-top'}
+          underline={true}
+        >
           <div>Text next to label!</div>
           <div>Second text next to label!</div>
           <div>Third text next to label!</div>
@@ -28,7 +33,11 @@ export const addLabelStories = () => {
     .add(
       'with left bottom',
       withInfo()(() => (
-        <Label label={<DefaultText>label</DefaultText>} num={2} position={'left-bottom'}>
+        <Label
+          label={<DefaultText>label</DefaultText>}
+          num={2}
+          position={'left-bottom'}
+        >
           <div>Text next to label!</div>
           <div>Second text next to label!</div>
           <div>Third text next to label!</div>
@@ -38,7 +47,12 @@ export const addLabelStories = () => {
     .add(
       'with top right',
       withInfo()(() => (
-        <Label color={'#a2a2a2'} label={<HeaderText>big label</HeaderText>} num={3} position={'top-right'}>
+        <Label
+          color={'#a2a2a2'}
+          label={<HeaderText>big label</HeaderText>}
+          num={3}
+          position={'top-right'}
+        >
           <div>Text under label!</div>
         </Label>
       )),

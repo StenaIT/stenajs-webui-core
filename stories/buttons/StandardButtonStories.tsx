@@ -1,9 +1,8 @@
+import { withInfo } from '@storybook/addon-info';
+import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import {withInfo} from '@storybook/addon-info';
-import {storiesOf} from '@storybook/react';
-import {UseTheme} from '../../src/components/theme/UseTheme';
-import {StandardButton} from '../../src/components/ui/buttons/StandardButton';
-import {Border} from "../../src/components/ui/decorations/Border";
+import { UseTheme } from '../../src/components/theme/UseTheme';
+import { StandardButton } from '../../src/components/ui/buttons/StandardButton';
 
 export const addStandardButtonStories = () => {
   storiesOf('Buttons/StandardButton', module)
@@ -22,19 +21,23 @@ export const addStandardButtonStories = () => {
     )
     .add(
       'with icon right',
-      withInfo()(() => <StandardButton label={'Submit'} rightIcon={'coffee'} />),
+      withInfo()(() => (
+        <StandardButton label={'Submit'} rightIcon={'coffee'} />
+      )),
     )
     .add(
       'with borderRadius',
-      withInfo()(() => <StandardButton label={'Submit'} borderRadius={'10px'}/>),
+      withInfo()(() => (
+        <StandardButton label={'Submit'} borderRadius={'10px'} />
+      )),
     )
     .add(
       'with loading',
-      withInfo()(() => <StandardButton label={'Submit'} loading/>),
+      withInfo()(() => <StandardButton label={'Submit'} loading />),
     )
     .add(
       'with success',
-      withInfo()(() => <StandardButton label={'Submit'} success/>),
+      withInfo()(() => <StandardButton label={'Submit'} success />),
     )
     .add(
       'with custom theme background red',

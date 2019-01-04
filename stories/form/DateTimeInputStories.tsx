@@ -1,12 +1,12 @@
-import * as React from 'react';
+import { withState } from '@dump247/storybook-state';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { TimeTextInput } from '../../src/components/ui/form/date-time-input/TimeTextInput';
+import { addDays, addMonths } from 'date-fns';
+import * as React from 'react';
+import { compose } from 'recompose';
 import { DateInput } from '../../src/components/ui/form/date-time-input/DateInput';
 import { DateRangeInput } from '../../src/components/ui/form/date-time-input/DateRangeInput';
-import { addMonths, addDays } from 'date-fns';
-import { withState } from '@dump247/storybook-state';
-import { compose } from 'recompose';
+import { TimeTextInput } from '../../src/components/ui/form/date-time-input/TimeTextInput';
 
 export const addDateTimeInputStories = () => {
   storiesOf('Form/DateTimeInput/TimeTextInput', module)

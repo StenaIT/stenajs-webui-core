@@ -1,11 +1,10 @@
-import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
+import * as React from 'react';
+import { Background } from '../../src/components/ui/colors/Background';
 import { Row } from '../../src/components/ui/layout/Row';
 import { Space } from '../../src/components/ui/layout/Space';
-import { Background } from '../../src/components/ui/colors/Background';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
-import {Column} from "../../src/components/ui/layout/Column";
 
 export const addRowStories = () => {
   storiesOf('Layout/Row', module)

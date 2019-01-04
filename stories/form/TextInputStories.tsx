@@ -244,10 +244,13 @@ export const addTextInputStories = () => {
     .add(
       'disabled',
       withInfo()(() => (
-        <DefaultTextInput value={''} placeholder={'Enter name'} disabled={true} />
+        <DefaultTextInput
+          value={''}
+          placeholder={'Enter name'}
+          disabled={true}
+        />
       )),
-    )
-  ;
+    );
 
   storiesOf('Form/TextInput/NumericTextInput', module)
     .add(

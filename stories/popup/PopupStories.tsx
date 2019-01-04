@@ -76,7 +76,7 @@ export const addPopupStories = () => {
           referenceChildren={<DefaultText>Open popup</DefaultText>}
           targetMinHeight={'200px'}
           targetMinWidth={'300px'}
-          style={{border: 'solid blue', color: 'red'}}
+          style={{ border: 'solid blue', color: 'red' }}
         >
           <DefaultText>Content</DefaultText>
         </Popup>
@@ -118,7 +118,7 @@ export const addPopupStories = () => {
           referenceChildren={<span>Open popup</span>}
           targetMinHeight={'200px'}
           targetMinWidth={'300px'}
-          style={{border: 'solid blue', color: 'red'}}
+          style={{ border: 'solid blue', color: 'red' }}
         >
           <DefaultText>Content</DefaultText>
         </UncontrolledPopup>
@@ -131,7 +131,7 @@ export const addPopupStories = () => {
           <UncontrolledPopup
             modifiers={{
               inner: {
-                enabled: true
+                enabled: true,
               },
             }}
             referenceChildren={<span>Open popup</span>}

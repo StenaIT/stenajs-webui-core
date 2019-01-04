@@ -1,10 +1,9 @@
-import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
+import * as React from 'react';
+import { Border } from '../../src/components/ui/decorations/Border';
 import { Column } from '../../src/components/ui/layout/Column';
 import { Space } from '../../src/components/ui/layout/Space';
-import { Border } from '../../src/components/ui/decorations/Border';
-import {UseTheme} from "../../src/components/theme/UseTheme";
 
 export const addColumnStories = () => {
   storiesOf('Layout/Column', module)

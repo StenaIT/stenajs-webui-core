@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { BoatProgressIndicator } from '../../src/components/ui/progress/BoatProgressIndicator';
-import { Spacing } from '../../src/components/ui/layout/Spacing';
+import * as React from 'react';
 import { Indent } from '../../src/components/ui/layout/Indent';
+import { Spacing } from '../../src/components/ui/layout/Spacing';
+import { BoatProgressIndicator } from '../../src/components/ui/progress/BoatProgressIndicator';
 
 export const addBoatProgressIndicatorStories = () => {
   storiesOf('Progress/BoatProgressIndicator', module).add(

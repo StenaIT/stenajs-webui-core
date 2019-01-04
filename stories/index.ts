@@ -1,4 +1,3 @@
-import React from 'react';
 import { addBoxStories } from './box';
 import { addButtonsStories } from './buttons';
 import { addCardStories } from './card/CardStories';

@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
+import * as React from 'react';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 import { SmallButton } from '../../src/components/ui/buttons/SmallButton';
 

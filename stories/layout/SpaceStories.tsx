@@ -1,10 +1,10 @@
-import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { Space } from '../../src/components/ui/layout/Space';
+import * as React from 'react';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 import { Column } from '../../src/components/ui/layout/Column';
 import { Row } from '../../src/components/ui/layout/Row';
+import { Space } from '../../src/components/ui/layout/Space';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
 
 export const addSpaceStories = () => {
@@ -95,7 +95,7 @@ export const addSpaceStories = () => {
         <div style={{ display: 'table' }}>
           <Row>
             <DefaultText>Username:</DefaultText>
-            <Space horizontal={true}/>
+            <Space horizontal={true} />
             <DefaultText>mattias800</DefaultText>
           </Row>
         </div>

@@ -1,7 +1,6 @@
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { BoxShadow } from '../../src/components/ui/decorations/BoxShadow';
 import { Shadow } from '../../src/components/ui/decorations/Shadow';
 
 export const addShadowStories = () => {

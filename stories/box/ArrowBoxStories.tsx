@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
+import * as React from 'react';
 import { ArrowBox } from '../../src/components/ui/box/ArrowBox';
-import { Spacing } from '../../src/components/ui/layout/Spacing';
 import { Indent } from '../../src/components/ui/layout/Indent';
+import { Spacing } from '../../src/components/ui/layout/Spacing';
 
 export const addArrowBoxStories = () => {
   storiesOf('Box/ArrowBox', module)

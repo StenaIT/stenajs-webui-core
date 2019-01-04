@@ -190,5 +190,5 @@ export const addSelectStories = () => {
           />
         </div>
       )),
-    ) ;
+    );
 };
