@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { compose, pure, withHandlers, withState } from 'recompose';
 import { Border } from '../../src/components/ui/decorations/index';
-import { OnCellFocusEvent, OnCellMoveEvent, } from '../../src/enhancers/table/WithTableNavigation';
+import { OnCellFocusEvent, OnCellMoveEvent, } from '../../src/features/table/WithTableNavigation';
 import { CellData, SetCellFunc } from './components';
 import { TableRow } from './components/TableRow';
 

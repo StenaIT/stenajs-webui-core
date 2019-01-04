@@ -1,10 +1,10 @@
 import * as React from 'react';
 import { Async } from 'react-select';
-import { createAsyncSelect } from '../../src/enhancers/select/SelectFactory';
+import { createAsyncSelect } from '../../src/features/select/SelectFactory';
 import {
   SelectTheme,
   selectThemeDark,
-} from '../../src/enhancers/select/SelectTheme';
+} from '../../src/features/select/SelectTheme';
 import { DeepPartial } from '../../src/types/DeepPartial';
 
 const AsyncSelect = createAsyncSelect(Async);

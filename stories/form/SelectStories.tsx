@@ -9,8 +9,8 @@ import {
 } from '../../examples/select/ExampleSelect';
 import { Background } from '../../src/components/ui/colors';
 import { Indent, Spacing } from '../../src/components/ui/layout';
-import { createSelect } from '../../src/enhancers/select/SelectFactory';
-import { selectThemeDark } from '../../src/enhancers/select/SelectTheme';
+import { createSelect } from '../../src/features/select/SelectFactory';
+import { selectThemeDark } from '../../src/features/select/SelectTheme';
 
 const StyledSelect = createSelect(Select);
 

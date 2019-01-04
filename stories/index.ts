@@ -11,6 +11,7 @@ import { addLayoutStories } from './layout';
 import { addPopupStories } from './popup/PopupStories';
 import { addProgressStories } from './progress';
 import { addSliderStories } from './slider';
+import { addGridHooksStories } from './table/GridHooksStories';
 import { addTableStories } from './table/TableStories';
 import { addTextStories } from './text';
 
@@ -20,6 +21,7 @@ addCardStories();
 addColorsStories();
 addDecorationsStories();
 addFormStories();
+addGridHooksStories();
 addInteractionStories();
 addLabelStories();
 addLayoutStories();

@@ -1,4 +1,4 @@
 // created from 'create-ts-index'
 
-export * from './internal';
+export * from './internal/index';
 export * from './WithTableNavigation';

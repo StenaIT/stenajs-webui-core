@@ -6,7 +6,7 @@ import {
   withHandlers,
   withState,
 } from 'recompose';
-import { MoveDirection } from '../../../components/ui/form/text-input';
+import { MoveDirection } from '../../../components/ui/form/text-input/index';
 import { wrapBounds } from '../../../util/bounds/NumberBoundsWrapper';
 import { RequiredTableCellOuterProps } from '../WithTableNavigation';
 import {

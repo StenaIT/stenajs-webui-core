@@ -5,7 +5,7 @@ import { Indent, Space } from '../../src/components/ui/layout/index';
 import {
   OnCellFocusEvent,
   OnCellMoveEvent,
-} from '../../src/enhancers/table/WithTableNavigation';
+} from '../../src/features/table/WithTableNavigation';
 import { ExampleTable } from './ExampleTable';
 
 type InnerProps = WithDataStateProps & WithOnCellFocusProps;

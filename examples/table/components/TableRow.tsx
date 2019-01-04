@@ -3,7 +3,7 @@ import { Row } from '../../../src/components/ui/layout/index';
 import {
   OnCellFocusEvent,
   OnCellMoveEvent,
-} from '../../../src/enhancers/table/WithTableNavigation';
+} from '../../../src/features/table/WithTableNavigation';
 import { CellData, SetCellFunc, TableCell } from './TableCell';
 
 export interface TableRowProps {

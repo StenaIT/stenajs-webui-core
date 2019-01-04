@@ -79,7 +79,7 @@ export interface CalendarProps<T>
   numMonths?: number;
   /** Split the months into rows. */
   monthsPerRow?: number;
-  /** User data to pass down to renderers. */
+  /** User value to pass down to renderers. */
   userDataPerMonth?: DataPerMonth<T>;
   /** Internal state to pass down to renderers. Do not use it, this is used by the framework. */
   statePerMonth?: DataPerMonth<DayState>;

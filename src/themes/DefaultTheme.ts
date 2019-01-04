@@ -21,7 +21,7 @@ import {
   defaultSmallTextTheme,
   defaultTinyTextTheme,
 } from '../components/ui/text/TextTheme';
-import { defaultSelectTheme } from '../enhancers/select/SelectTheme';
+import { defaultSelectTheme } from '../features/select/SelectTheme';
 import { defaultColors } from './default-values/DefaultColors';
 import { defaultFonts } from './default-values/DefaultFonts';
 import { defaultFontSizes } from './default-values/DefaultFontSizes';

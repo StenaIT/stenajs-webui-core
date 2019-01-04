@@ -13,9 +13,9 @@ import {
   ComponentThemeProps,
   withComponentTheme,
   WithInnerComponentThemeProps,
-} from '../../components/util/enhancers';
+} from '../../components/util/enhancers/index';
 import { Omit } from '../../types/Omit';
-import { omitProps } from '../omit/OmitProps';
+import { omitProps } from '../../util/enhancers/omit/OmitProps';
 import { SelectTheme } from './SelectTheme';
 
 export type __C_STYLED_REACT_SELECT_FACTORY = ComponentEnhancer<{}, {}>;

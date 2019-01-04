@@ -5,12 +5,12 @@ import { Border } from '../../../src/components/ui/decorations/index';
 import { withDivCopyPasteListener } from '../../../src/components/ui/interaction/CopyPasteListener';
 import { Row } from '../../../src/components/ui/layout/index';
 import { DefaultText } from '../../../src/components/ui/text/index';
-import { CellIdGenerator } from '../../../src/enhancers/table/internal/WithEditStateHandler';
+import { CellIdGenerator } from '../../../src/features/table/internal/WithEditStateHandler';
 import {
   InjectedTableInnerProps,
   RequiredTableCellOuterProps,
   withTableNavigation,
-} from '../../../src/enhancers/table/WithTableNavigation';
+} from '../../../src/features/table/WithTableNavigation';
 import { TextEditor } from './TextEditor';
 
 export type CellData = string;
