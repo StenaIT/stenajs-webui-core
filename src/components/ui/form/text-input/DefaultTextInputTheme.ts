@@ -7,6 +7,7 @@ export interface DefaultTextInputTheme {
   borderColorFocused: string;
   borderStyle: BorderStyle;
   borderWidth: number;
+  disabledBackgroundColor: string;
   fontSize: string;
   height: string;
   paddingLeft: string;
@@ -22,6 +23,7 @@ export const defaultDefaultTextInputTheme: DefaultTextInputTheme = {
   borderColorFocused: defaultColors.inputBorderFocused,
   borderStyle: 'solid',
   borderWidth: 1,
+  disabledBackgroundColor: defaultColors.disabledBackground,
   fontSize: '13px',
   height: '34px',
   paddingLeft: '8px',
@@ -37,6 +39,7 @@ export const defaultTextInputThemeDark: DefaultTextInputTheme = {
   borderColorFocused: defaultColors.white,
   borderStyle: 'solid',
   borderWidth: 1,
+  disabledBackgroundColor: defaultColors.disabledBackground,
   fontSize: '13px',
   height: '34px',
   paddingLeft: '8px',

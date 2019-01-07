@@ -140,6 +140,7 @@ const DefaultTextInputComponent = ({
   disableContentPaddingLeft = false,
   disableContentPaddingRight = false,
   theme,
+  disabled,
   ...inputProps
 }: InnerProps) => (
   <Border
@@ -153,7 +154,13 @@ const DefaultTextInputComponent = ({
     borderStyle={theme.borderStyle}
     width={theme.borderWidth}
   >
-    <Background color={backgroundColor || theme.backgroundColor}>
+    <Background
+      color={
+        disabled
+          ? theme.disabledBackgroundColor
+          : backgroundColor || theme.backgroundColor
+      }
+    >
       <Row alignItems={'center'}>
         <TextInputIcon
           content={contentLeft}
@@ -168,6 +175,7 @@ const DefaultTextInputComponent = ({
         />
         <SimpleTextInput
           {...inputProps}
+          disabled={disabled}
           textColor={textColor || theme.textColor}
           backgroundColor={backgroundColor || theme.backgroundColor}
           style={{

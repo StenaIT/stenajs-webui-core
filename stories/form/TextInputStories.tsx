@@ -250,6 +250,17 @@ export const addTextInputStories = () => {
           disabled={true}
         />
       )),
+    )
+    .add(
+      'disabled with content',
+      withInfo()(() => (
+        <DefaultTextInput
+          disabled={true}
+          value={'some entered text'}
+          contentRight={<DefaultText>ms</DefaultText>}
+          iconLeft={'coffee'}
+        />
+      )),
     );
 
   storiesOf('Form/TextInput/NumericTextInput', module)
