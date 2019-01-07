@@ -1,32 +1,8 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    "outDir": "lib/",
-    "module": "commonjs",
-    "target": "es5",
-    "lib": ["es5", "es6", "es7", "es2017", "dom"],
-    "jsx": "react",
-    "moduleResolution": "node",
-    "sourceMap": true,
-    "allowJs": false,
-    "rootDirs": ["src"],
-    "baseUrl": "src",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "allowSyntheticDefaultImports": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true,
     "declaration": true,
-    "pretty": true,
-    "noEmitOnError": true,
-    "strict": true,
-    "experimentalDecorators": true,
-    "importHelpers": true,
-    "noFallthroughCasesInSwitch": true
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build", "scripts",
-    "src/setupTests.ts", "**/__tests__/**"]
+    "isolatedModules": false,
+    "noEmit": false
+  }
 }
