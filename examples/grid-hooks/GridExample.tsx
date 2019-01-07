@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { useCallback, useState } from 'react';
 import styled from 'react-emotion';
-import { Colors } from '../../../freight-ca-web/app/src/ca/config/ui/Colors';
 import { Background } from '../../src/components/ui/colors/Background';
 import { DefaultTextInput } from '../../src/components/ui/form/text-input/DefaultTextInput';
 import { Indent } from '../../src/components/ui/layout/Indent';
@@ -27,7 +26,7 @@ const FocusedBox = styled('div')(
   ({ isEditable }: FocusedBoxProps) => ({
     ':focus': {
       outline: `${
-        isEditable ? Colors.selectedCellBorder : Colors.disabledLight
+        isEditable ? '#605988' : '#cbcbcb'
       } solid 2px`,
     },
   }),
@@ -74,7 +73,7 @@ export const GridExample = () => {
     <Spacing>
       <Indent>
         <div style={{ display: 'inline-block' }}>
-          <Background color={Colors.white}>
+          <Background color={'#fff'}>
             {rows.map((row, i) => (
               <Row key={i}>
                 {row.map((item, j) => (

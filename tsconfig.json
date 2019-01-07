@@ -15,7 +15,8 @@
     "sourceMap": true,
     "allowJs": false,
     "rootDirs": [
-      "src"
+      "src",
+      "examples"
     ],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -37,7 +38,8 @@
     "noEmit": true
   },
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "examples/**/*"
   ],
   "exclude": [
     "node_modules",

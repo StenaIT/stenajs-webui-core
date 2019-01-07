@@ -2,8 +2,8 @@ import * as React from 'react';
 import { compose, pure, withHandlers, withState } from 'recompose';
 import { Border } from '../../src/components/ui/decorations/index';
 import { OnCellFocusEvent, TableOnCellMoveEvent, } from '../../src/features/table/WithTableNavigation';
-import { CellData, SetCellFunc } from './components';
 import { TableRow } from './components/TableRow';
+import { CellData, SetCellFunc } from './components/TableCell';
 
 type Data = Array<Array<CellData>>;
 const initialData: Data = [];
