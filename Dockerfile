@@ -2,6 +2,11 @@ FROM node:8 AS build-env
 
 WORKDIR /source
 
+# Copy package.json and lockfile to use docker cache more efficiently
+COPY package.json yarn.lock ./
+
+RUN yarn --pure-lockfile
+
 # Copy and build everything else
 COPY . ./
 

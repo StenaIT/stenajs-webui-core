@@ -4,6 +4,8 @@ import {
   getNextPositionWrappedOrClamped,
   MoveDirection,
 } from '../util/DirectionCalculator';
+import { ensureDomIdIsCorrect } from '../util/DomIdValidator';
+import { useGridNavigationOptionsFromContext } from './UseGridNavigationOptionsFromContext';
 
 export interface UseGridNavigationOptions {
   /**
@@ -15,17 +17,17 @@ export interface UseGridNavigationOptions {
    */
   colIndex: number;
   /**
-   * Total number of rows in table.
+   * Total number of rows in table. Must be set in cell hook or in GridHooksTable prop.
    */
-  numRows: number;
+  numRows?: number;
   /**
-   * Total number of columns in table.
+   * Total number of columns in table. Must be set in cell hook or in GridHooksTable prop.
    */
-  numCols: number;
+  numCols?: number;
   /**
-   * An ID for the table, must be unique for every table in page.
+   * An ID for the table, must be unique for every table in page. Must be set in cell hook or in GridHooksTable prop.
    */
-  tableId: string;
+  tableId?: string;
   /**
    * If true, navigation will wrap around the table. If false, navigation stops at table edge.
    */
@@ -36,7 +38,17 @@ export interface UseGridNavigationOptions {
   onCellMove?: CellMoveHandler;
 }
 
-export interface UseGridNavigationObject {
+export interface ValidatedUseGridNavigationOptions {
+  rowIndex: number;
+  colIndex: number;
+  numRows: number;
+  numCols: number;
+  tableId: string;
+  wrap?: boolean;
+  onCellMove?: CellMoveHandler;
+}
+
+export interface UseGridNavigationResult {
   requiredProps: GridNavigationRequiredProps;
   moveHandler: MoveHandler;
 }
@@ -61,15 +73,19 @@ export interface OnCellMoveEvent {
   colIndex: number;
 }
 
-export const useGridNavigation = ({
-  rowIndex,
-  colIndex,
-  numRows,
-  numCols,
-  tableId,
-  wrap = false,
-  onCellMove,
-}: UseGridNavigationOptions): UseGridNavigationObject => {
+export const useGridNavigation = (
+  options: UseGridNavigationOptions,
+): UseGridNavigationResult => {
+  const {
+    rowIndex,
+    colIndex,
+    numRows,
+    numCols,
+    tableId,
+    wrap = false,
+    onCellMove,
+  } = useGridNavigationOptionsFromContext(options);
+
   const moveHandler = useMemo(
     () =>
       createMoveHandler(
@@ -83,9 +99,11 @@ export const useGridNavigation = ({
       ),
     [tableId, rowIndex, colIndex, numRows, numCols, onCellMove],
   );
+
   const onKeyDown = useMemo(() => createKeyDownHandler(moveHandler), [
     moveHandler,
   ]);
+
   const id = useMemo(() => createCellId(tableId, rowIndex, colIndex), [
     tableId,
     rowIndex,
@@ -144,7 +162,7 @@ const createCellId = (
   tableId: string,
   rowIndex: number,
   colIndex: number,
-): string => `table-${tableId}-${rowIndex}-${colIndex}`;
+): string => ensureDomIdIsCorrect(`table-${tableId}-${rowIndex}-${colIndex}`);
 
 const createKeyDownHandler = (moveHandler: MoveHandler) => (
   e: KeyboardEvent,

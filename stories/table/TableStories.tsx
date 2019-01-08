@@ -6,7 +6,7 @@ import { TableExample } from '../../examples/table/TableExample';
 
 export const addTableStories = () => {
   storiesOf('Table/Table', module).add(
-    'default',
+    'standard',
     compose(withInfo())(() => <TableExample />),
   );
 };

@@ -11,11 +11,12 @@ import {
   useGridNavigation,
   UseGridNavigationOptions,
 } from './UseGridNavigation';
+import { useGridNavigationOptionsFromContext } from './UseGridNavigationOptionsFromContext';
 
 export type UseGridCellOptions<TValue> = UseGridNavigationOptions &
   UseEditableCellOptions<TValue>;
 
-export interface GridHookObject<TValue> {
+export interface UseGridCellResult<TValue> {
   /**
    * The current value in the editor. Pass this as value to form field components.
    */
@@ -71,11 +72,12 @@ export interface GridCellRequiredProps
 export const useGridCell = <TValue>(
   value: TValue,
   options: UseGridCellOptions<TValue>,
-): GridHookObject<TValue> => {
+): UseGridCellResult<TValue> => {
+  const { tableId } = useGridNavigationOptionsFromContext(options);
   const nav = useGridNavigation(options);
   const edit = useEditableCell(value, options);
 
-  const pos = useMemo(
+  const cellCoordinates = useMemo(
     () => ({
       rowIndex: options.rowIndex,
       colIndex: options.colIndex,
@@ -86,7 +88,7 @@ export const useGridCell = <TValue>(
   const stopEditing = useCallback(
     () => {
       edit.setIsEditing(false);
-      focusOnCell(options.tableId, pos);
+      focusOnCell(tableId, cellCoordinates);
       if (options.onChange) {
         options.onChange(edit.revertableValue.value);
       }
@@ -94,9 +96,9 @@ export const useGridCell = <TValue>(
     [
       edit.setIsEditing,
       edit.revertableValue.value,
-      options.tableId,
+      tableId,
       options.onChange,
-      pos,
+      cellCoordinates,
     ],
   );
 
@@ -104,9 +106,9 @@ export const useGridCell = <TValue>(
     () => {
       edit.revertableValue.revert();
       edit.setIsEditing(false);
-      focusOnCell(options.tableId, pos);
+      focusOnCell(tableId, cellCoordinates);
     },
-    [edit.setIsEditing, edit.revertableValue.revert, options.tableId, pos],
+    [edit.setIsEditing, edit.revertableValue.revert, tableId, cellCoordinates],
   );
 
   const stopEditingAndMove = useCallback(

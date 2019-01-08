@@ -31,7 +31,7 @@ export interface UseEditableCellOptions<TValue> {
   onChange?: (value: TValue | undefined) => void;
 }
 
-export interface UseEditableCellObject<TValue> {
+export interface UseEditableCellResult<TValue> {
   onKeyDown: KeyboardEventHandler;
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
@@ -75,7 +75,7 @@ export const useEditableCell = <TValue>(
     allowedInputType = 'all',
     onStartEditing,
   }: UseEditableCellOptions<TValue>,
-): UseEditableCellObject<TValue> => {
+): UseEditableCellResult<TValue> => {
   const [isEditing, setIsEditing] = useState(false);
   const [lastKeyEvent, setLastKeyEvent] = useState<KeyDownEvent | undefined>(
     undefined,

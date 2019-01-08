@@ -11,7 +11,3 @@ echo ${VERSION}
 export BUILD_ARG1="VERSION=\"${VERSION}\""
 
 docker:build
-docker:push
-
-# clean-up by removing pushed image (matching by the commit id)
-docker:removeImage $(docker:imageId $COMMIT)
