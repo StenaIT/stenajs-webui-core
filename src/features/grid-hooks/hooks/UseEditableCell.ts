@@ -28,7 +28,7 @@ export interface UseEditableCellOptions<TValue> {
    * Callback that is invoked when editing a cell is finished with a value result.
    * @param value
    */
-  onChange: (value: TValue | undefined) => void;
+  onChange?: (value: TValue | undefined) => void;
 }
 
 export interface UseEditableCellObject<TValue> {
@@ -81,7 +81,14 @@ export const useEditableCell = <TValue>(
     undefined,
   );
 
-  const startEditing = useCallback(() => setIsEditing(true), [setIsEditing]);
+  const startEditing = useCallback(
+    () => {
+      if (isEditable) {
+        setIsEditing(true);
+      }
+    },
+    [isEditable, setIsEditing],
+  );
 
   const revertableValue = useRevertableValue<TValue>(value);
 
