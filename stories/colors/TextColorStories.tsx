@@ -6,24 +6,19 @@ import { DefaultText } from '../../src/components/ui/text/DefaultText';
 
 export const addTextColorStories = () => {
   storiesOf('Colors/TextColor', module)
-    .add(
-      'standard',
-      withInfo()(() => (
-        <TextColor color={'blue'}>
-          <DefaultText>That is some blue text, right there!</DefaultText>
+    .addDecorator(withInfo())
+    .add('standard', () => (
+      <TextColor color={'blue'}>
+        <DefaultText>That is some blue text, right there!</DefaultText>
+      </TextColor>
+    ))
+    .add('nested text colors', () => (
+      <TextColor color={'blue'}>
+        <DefaultText>That is some blue text, right there!</DefaultText>
+        <TextColor color={'red'}>
+          <DefaultText>This is an error message</DefaultText>
         </TextColor>
-      )),
-    )
-    .add(
-      'nested text colors',
-      withInfo()(() => (
-        <TextColor color={'blue'}>
-          <DefaultText>That is some blue text, right there!</DefaultText>
-          <TextColor color={'red'}>
-            <DefaultText>This is an error message</DefaultText>
-          </TextColor>
-          <DefaultText>And some more text.</DefaultText>
-        </TextColor>
-      )),
-    );
+        <DefaultText>And some more text.</DefaultText>
+      </TextColor>
+    ));
 };

@@ -46,12 +46,12 @@ const min = 0;
 type InnerProps = TimeSliderProps & WithOnSliderChange;
 
 interface WithOnSliderChange {
-  onSliderChange(sliderValue: Array<number>): void;
+  onChange(sliderValue: Array<number>): void;
 }
 
 const withOnSliderChange = withHandlers<TimeSliderProps, WithOnSliderChange>({
-  onSliderChange: ({ onChange }) => sliderValue => {
-    onChange(sliderValue.map(time => getValue(time, max)));
+  onChange: ({ onChange: onSliderChange}) => sliderValue => {
+    onSliderChange(sliderValue.map(time => getValue(time, max)));
   },
 });
 
@@ -61,12 +61,12 @@ const withSliderProps = withProps<SliderProps, InnerProps>(
     step = TEN_MINUTES_STEP,
     marksInterval,
     value,
-    onSliderChange,
+    onChange,
   }) => ({
     marks: generateMarks(showMarks, step, max, marksInterval),
     max: max,
     min: min,
-    onChange: onSliderChange,
+    onChange,
     value: convertTimesToSliderValue(value, max),
     step: step,
   }),

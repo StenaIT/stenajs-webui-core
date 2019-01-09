@@ -42,8 +42,17 @@ export const RadioButtonComponent: React.SFC<InnerProps> = ({
   );
 };
 
-export const RadioButton = setDisplayName<RadioButtonProps>('RadioButton')(
-  compose<InnerProps, RadioButtonProps>(
+interface ThemeProp {
+  theme?: RadioButtonTheme;
+}
+
+export const RadioButton = setDisplayName<
+  RadioButtonProps & ThemeProp
+>('RadioButton')(
+  compose<
+    InnerProps,
+    RadioButtonProps & ThemeProp
+  >(
     pure,
     withOnToggleHandler,
     withComponentTheme('RadioButton'),

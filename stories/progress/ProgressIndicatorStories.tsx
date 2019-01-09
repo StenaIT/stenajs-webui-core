@@ -5,6 +5,7 @@ import { ProgressIndicator } from '../../src/components/ui/progress/ProgressIndi
 
 export const addProgressIndicatorStories = () => {
   storiesOf('Progress/ProgressIndicator', module)
-    .add('standard', withInfo()(() => <ProgressIndicator />))
-    .add('small', withInfo()(() => <ProgressIndicator small />));
+    .addDecorator(withInfo())
+    .add('standard', () => <ProgressIndicator />)
+    .add('small', () => <ProgressIndicator small />);
 };

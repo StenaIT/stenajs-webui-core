@@ -16,7 +16,8 @@
     "allowJs": false,
     "rootDirs": [
       "src",
-      "examples"
+      "examples",
+      "stories"
     ],
     "forceConsistentCasingInFileNames": true,
     "noImplicitReturns": true,
@@ -39,7 +40,8 @@
   },
   "include": [
     "src/**/*",
-    "examples/**/*"
+    "examples/**/*",
+    "stories/**/*"
   ],
   "exclude": [
     "node_modules",

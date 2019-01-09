@@ -1,44 +1,41 @@
-import { withState } from '@dump247/storybook-state';
+import { Store, withState } from '@dump247/storybook-state';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import { compose } from 'recompose';
 import { RadioButton } from '../../src/components/ui/form/radio/RadioButton';
-import { defaultRadioButtonThemeDark } from '../../src/components/ui/form/radio/RadioButtonTheme';
+import {
+  defaultRadioButtonTheme,
+  defaultRadioButtonThemeDark,
+} from '../../src/components/ui/form/radio/RadioButtonTheme';
 import { RadioButtonWithLabel } from '../../src/components/ui/form/radio/RadioButtonWithLabel';
+
+interface State {
+  value: boolean;
+}
 
 export const addRadioButtonStories = () => {
   storiesOf('Form/RadioButton/RadioButton', module)
+    .addDecorator(withInfo())
     .add(
       'standard',
-      compose(
-        withInfo(),
-        withState({
-          value: false,
-        }),
-      )(({ store }) => (
+      withState<State>({
+        value: false,
+      })(({ store }: { store: Store<State> }) => (
         <RadioButton
           value={store.state.value}
           onChange={value => store.set({ value })}
         />
       )),
     )
-    .add(
-      'checked and disabled',
-      withInfo()(() => <RadioButton value={true} disabled />),
-    )
-    .add(
-      'not checked and disabled',
-      withInfo()(() => <RadioButton value={false} disabled />),
-    )
+    .add('checked and disabled', () => <RadioButton value={true} disabled />)
+    .add('not checked and disabled', () => (
+      <RadioButton value={false} disabled />
+    ))
     .add(
       'with dark theme',
-      compose(
-        withInfo(),
-        withState({
-          value: false,
-        }),
-      )(({ store }) => (
+      withState<State>({
+        value: false,
+      })(({ store }: { store: Store<State> }) => (
         <RadioButton
           value={store.state.value}
           onChange={value => store.set({ value })}
@@ -48,16 +45,14 @@ export const addRadioButtonStories = () => {
     )
     .add(
       'with custom theme',
-      compose(
-        withInfo(),
-        withState({
-          value: false,
-        }),
-      )(({ store }) => (
+      withState<State>({
+        value: false,
+      })(({ store }: { store: Store<State> }) => (
         <RadioButton
           value={store.state.value}
           onChange={value => store.set({ value })}
           theme={{
+            ...defaultRadioButtonTheme,
             iconColor: 'darkgreen',
             iconSize: 40,
           }}
@@ -66,14 +61,12 @@ export const addRadioButtonStories = () => {
     );
 
   storiesOf('Form/RadioButton/RadioButtonWithLabel', module)
+    .addDecorator(withInfo())
     .add(
       'standard',
-      compose(
-        withInfo(),
-        withState({
-          value: false,
-        }),
-      )(({ store }) => (
+      withState<State>({
+        value: false,
+      })(({ store }: { store: Store<State> }) => (
         <RadioButtonWithLabel
           label={'Add cake'}
           value={store.state.value}
@@ -83,17 +76,15 @@ export const addRadioButtonStories = () => {
     )
     .add(
       'with custom theme',
-      compose(
-        withInfo(),
-        withState({
-          value: false,
-        }),
-      )(({ store }) => (
+      withState<State>({
+        value: false,
+      })(({ store }: { store: Store<State> }) => (
         <RadioButtonWithLabel
           label={'Add cake'}
           value={store.state.value}
           onChange={value => store.set({ value })}
           theme={{
+            ...defaultRadioButtonTheme,
             iconColor: 'pink',
             iconSize: 40,
             textColor: 'lightblue',

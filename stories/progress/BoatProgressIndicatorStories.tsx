@@ -6,9 +6,9 @@ import { Spacing } from '../../src/components/ui/layout/Spacing';
 import { BoatProgressIndicator } from '../../src/components/ui/progress/BoatProgressIndicator';
 
 export const addBoatProgressIndicatorStories = () => {
-  storiesOf('Progress/BoatProgressIndicator', module).add(
-    'standard',
-    withInfo({ propTablesExclude: [Spacing, Indent] })(() => (
+  storiesOf('Progress/BoatProgressIndicator', module)
+    .addDecorator(withInfo({ propTablesExclude: [Spacing, Indent] }))
+    .add('standard', () => (
       <div style={{ backgroundColor: '#cccccc', display: 'table' }}>
         <Spacing>
           <Indent>
@@ -16,6 +16,5 @@ export const addBoatProgressIndicatorStories = () => {
           </Indent>
         </Spacing>
       </div>
-    )),
-  );
+    ));
 };

@@ -9,9 +9,9 @@ import { LargeText } from '../../src/components/ui/text';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
 
 export const addSeparatorLineStories = () => {
-  storiesOf('Decorators/SeparatorLine', module).add(
-    'default',
-    withInfo({ propTablesExclude: [DefaultText] })(() => (
+  storiesOf('Decorators/SeparatorLine', module)
+    .addDecorator(withInfo({ propTablesExclude: [DefaultText] }))
+    .add('default', () => (
       <div style={{ width: '300px' }}>
         <BoxShadow>
           <Background color={'#ffff'}>
@@ -29,6 +29,5 @@ export const addSeparatorLineStories = () => {
           </Background>
         </BoxShadow>
       </div>
-    )),
-  );
+    ));
 };

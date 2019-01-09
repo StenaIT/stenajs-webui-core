@@ -6,20 +6,15 @@ import { DefaultText } from '../../src/components/ui/text/DefaultText';
 
 export const addClickableStories = () => {
   storiesOf('Interaction/Clickable', module)
-    .add(
-      'default',
-      withInfo()(() => (
-        <Clickable onClick={() => alert('Clicked!')}>
-          <DefaultText underline>Click me!</DefaultText>
-        </Clickable>
-      )),
-    )
-    .add(
-      'with opacity when mouse hovers over clickable',
-      withInfo()(() => (
-        <Clickable opacityOnHover onClick={() => alert('Clicked!')}>
-          <DefaultText underline>Hover over me!</DefaultText>
-        </Clickable>
-      )),
-    );
+    .addDecorator(withInfo())
+    .add('default', () => (
+      <Clickable onClick={() => alert('Clicked!')}>
+        <DefaultText underline>Click me!</DefaultText>
+      </Clickable>
+    ))
+    .add('with opacity when mouse hovers over clickable', () => (
+      <Clickable opacityOnHover onClick={() => alert('Clicked!')}>
+        <DefaultText underline>Hover over me!</DefaultText>
+      </Clickable>
+    ));
 };

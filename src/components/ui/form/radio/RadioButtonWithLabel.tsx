@@ -48,10 +48,11 @@ export const RadioButtonWithLabelComponent: React.SFC<InnerProps> = ({
   );
 };
 
-export const RadioButtonWithLabel = setDisplayName<RadioButtonWithLabelProps>(
-  'RadioButtonWithLabel',
-)(
-  compose<InnerProps, RadioButtonWithLabelProps>(
+type ThemeProp = { theme?: RadioButtonTheme };
+export const RadioButtonWithLabel = setDisplayName<
+  RadioButtonWithLabelProps & ThemeProp
+>('RadioButtonWithLabel')(
+  compose<InnerProps, RadioButtonWithLabelProps & ThemeProp>(
     withOnToggleHandler,
     withComponentTheme('RadioButton'),
   )(RadioButtonWithLabelComponent),

@@ -6,9 +6,9 @@ import { Indent, Spacing } from '../../src/components/ui/layout';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
 
 export const addBackgroundStories = () => {
-  storiesOf('Colors/Background', module).add(
-    'standard',
-    withInfo()(() => (
+  storiesOf('Colors/Background', module)
+    .addDecorator(withInfo())
+    .add('standard', () => (
       <Background color={'#7fc2ff'}>
         <Spacing>
           <Indent>
@@ -16,6 +16,5 @@ export const addBackgroundStories = () => {
           </Indent>
         </Spacing>
       </Background>
-    )),
-  );
+    ));
 };
