@@ -1,16 +1,16 @@
-import { withState } from '@dump247/storybook-state';
+import { Store, withState } from '@dump247/storybook-state';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
+import { Placement } from 'popper.js';
 import * as React from 'react';
 import * as Popper from 'react-popper';
-import { compose } from 'recompose';
 import {
   createPopup,
   createUncontrolledPopup,
 } from '../../src/components/ui/popup/PopupFactory';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
 
-const placements = [
+const placements: Placement[] = [
   'auto-start',
   'auto',
   'auto-end',
@@ -31,16 +31,22 @@ const placements = [
 const Popup = createPopup(Popper);
 const UncontrolledPopup = createUncontrolledPopup(Popper);
 
+interface OpenState {
+  open: boolean;
+}
+
+interface PlacementState {
+  placement: number;
+}
+
 export const addPopupStories = () => {
   storiesOf('Popup/Popup', module)
+    .addDecorator(withInfo())
     .add(
       'standard',
-      compose(
-        withState({
-          value: undefined,
-        }),
-        withInfo(),
-      )(({ store }) => (
+      withState<OpenState>({
+        open: false,
+      })(({ store }: { store: Store<OpenState> }) => (
         <Popup
           onOpen={() => {
             store.set({ open: true });
@@ -50,21 +56,18 @@ export const addPopupStories = () => {
           }}
           open={store.state.open}
           referenceChildren={<DefaultText>Open popup</DefaultText>}
-          targetMinHeight={'200px'}
-          targetMinWidth={'300px'}
+          targetMinHeight={200}
+          targetMinWidth={300}
         >
           <DefaultText>Content</DefaultText>
         </Popup>
       )),
     )
     .add(
-      'custom styling',
-      compose(
-        withState({
-          value: undefined,
-        }),
-        withInfo(),
-      )(({ store }) => (
+      'standard',
+      withState<OpenState>({
+        open: false,
+      })(({ store }: { store: Store<OpenState> }) => (
         <Popup
           onOpen={() => {
             store.set({ open: true });
@@ -74,83 +77,68 @@ export const addPopupStories = () => {
           }}
           open={store.state.open}
           referenceChildren={<DefaultText>Open popup</DefaultText>}
-          targetMinHeight={'200px'}
-          targetMinWidth={'300px'}
+          targetMinHeight={200}
+          targetMinWidth={300}
           style={{ border: 'solid blue', color: 'red' }}
         >
           <DefaultText>Content</DefaultText>
         </Popup>
       )),
     )
-    .add(
-      'render props',
-      withInfo()(() => (
-        <UncontrolledPopup
-          referenceChildren={<DefaultText>Open popup</DefaultText>}
-          targetMinHeight={'200px'}
-          targetMinWidth={'300px'}
-        >
-          {({ onClose }) => (
-            <div>
-              <DefaultText>Content</DefaultText>
-              <div onClick={onClose}>Close</div>
-            </div>
-          )}
-        </UncontrolledPopup>
-      )),
-    )
-    .add(
-      'uncontrolled',
-      withInfo()(() => (
-        <UncontrolledPopup
-          referenceChildren={<span>Open popup</span>}
-          targetMinHeight={'200px'}
-          targetMinWidth={'300px'}
-        >
-          <DefaultText>Content</DefaultText>
-        </UncontrolledPopup>
-      )),
-    )
-    .add(
-      'uncontrolled custom styled',
-      withInfo()(() => (
-        <UncontrolledPopup
-          referenceChildren={<span>Open popup</span>}
-          targetMinHeight={'200px'}
-          targetMinWidth={'300px'}
-          style={{ border: 'solid blue', color: 'red' }}
-        >
-          <DefaultText>Content</DefaultText>
-        </UncontrolledPopup>
-      )),
-    )
-    .add(
-      'with modifiers',
-      withInfo()(() => (
-        <div style={{ display: 'flex', justifyContent: 'center' }}>
-          <UncontrolledPopup
-            modifiers={{
-              inner: {
-                enabled: true,
-              },
-            }}
-            referenceChildren={<span>Open popup</span>}
-            targetMinHeight={'200px'}
-            targetMinWidth={'300px'}
-          >
+    .add('render props', () => (
+      <UncontrolledPopup
+        referenceChildren={<DefaultText>Open popup</DefaultText>}
+        targetMinHeight={200}
+        targetMinWidth={300}
+      >
+        {({ onClose }) => (
+          <div>
             <DefaultText>Content</DefaultText>
-          </UncontrolledPopup>
-        </div>
-      )),
-    )
+            <div onClick={onClose}>Close</div>
+          </div>
+        )}
+      </UncontrolledPopup>
+    ))
+    .add('uncontrolled', () => (
+      <UncontrolledPopup
+        referenceChildren={<span>Open popup</span>}
+        targetMinHeight={200}
+        targetMinWidth={300}
+      >
+        <DefaultText>Content</DefaultText>
+      </UncontrolledPopup>
+    ))
+    .add('uncontrolled custom styled', () => (
+      <UncontrolledPopup
+        referenceChildren={<span>Open popup</span>}
+        targetMinHeight={200}
+        targetMinWidth={300}
+        style={{ border: 'solid blue', color: 'red' }}
+      >
+        <DefaultText>Content</DefaultText>
+      </UncontrolledPopup>
+    ))
+    .add('with modifiers', () => (
+      <div style={{ display: 'flex', justifyContent: 'center' }}>
+        <UncontrolledPopup
+          modifiers={{
+            inner: {
+              enabled: true,
+            },
+          }}
+          referenceChildren={<span>Open popup</span>}
+          targetMinHeight={200}
+          targetMinWidth={300}
+        >
+          <DefaultText>Content</DefaultText>
+        </UncontrolledPopup>
+      </div>
+    ))
     .add(
       'placements',
-      compose(
-        withState({
-          placement: 0,
-        }),
-        withInfo(),
-      )(({ store }) => (
+      withState({
+        placement: 0,
+      })(({ store }: { store: Store<PlacementState> }) => (
         <div style={{ display: 'flex', justifyContent: 'center' }}>
           <UncontrolledPopup
             placement={placements[store.state.placement]}
@@ -165,8 +153,8 @@ export const addPopupStories = () => {
                 <DefaultText>Open popup</DefaultText>
               </span>
             }
-            targetMinHeight={'200px'}
-            targetMinWidth={'300px'}
+            targetMinHeight={200}
+            targetMinWidth={300}
           >
             <DefaultText>{placements[store.state.placement]}</DefaultText>
           </UncontrolledPopup>

@@ -11,116 +11,90 @@ import { TinyText } from '../../src/components/ui/text/TinyText';
 
 export const addDefaultTextStories = () => {
   storiesOf('Text/DefaultText', module)
-    .add(
-      'standard',
-      withInfo()(() => (
-        <DefaultText>That is some nice text, right there!</DefaultText>
-      )),
-    )
-    .add(
-      'with underline',
-      withInfo()(() => (
-        <DefaultText underline>
-          That is some nice text, right there!
-        </DefaultText>
-      )),
-    )
-    .add(
-      'with underline on hover',
-      withInfo()(() => (
-        <DefaultText hoverUnderline>
-          That is some nice text, right there!
-        </DefaultText>
-      )),
-    )
-    .add(
-      'with selection disabled',
-      withInfo()(() => (
-        <DefaultText disableSelect>This text can not be selected</DefaultText>
-      )),
-    )
-    .add(
-      'with font weights',
-      withInfo()(() => (
+    .addDecorator(withInfo())
+    .add('standard', () => (
+      <DefaultText>That is some nice text, right there!</DefaultText>
+    ))
+    .add('with underline', () => (
+      <DefaultText underline>That is some nice text, right there!</DefaultText>
+    ))
+    .add('with underline on hover', () => (
+      <DefaultText hoverUnderline>
+        That is some nice text, right there!
+      </DefaultText>
+    ))
+    .add('with selection disabled', () => (
+      <DefaultText disableSelect>This text can not be selected</DefaultText>
+    ))
+    .add('with font weights', () => (
+      <div>
         <div>
-          <div>
-            <DefaultText weight={'normal'}>This text is normal.</DefaultText>
-          </div>
-          <div>
-            <DefaultText weight={'bold'}>This text is bold.</DefaultText>
-          </div>
-          <div>
-            <DefaultText weight={'light'}>This text is light.</DefaultText>
-          </div>
+          <DefaultText weight={'normal'}>This text is normal.</DefaultText>
         </div>
-      )),
-    )
-    .add(
-      'with custom font weights',
-      withInfo()(() => (
-        <UseTheme
-          theme={{
-            components: {
-              DefaultText: {
-                fontWeightNormal: 500,
-                fontWeightLight: 200,
-                fontWeightBold: 900,
-              },
+        <div>
+          <DefaultText weight={'bold'}>This text is bold.</DefaultText>
+        </div>
+        <div>
+          <DefaultText weight={'light'}>This text is light.</DefaultText>
+        </div>
+      </div>
+    ))
+    .add('with custom font weights', () => (
+      <UseTheme
+        theme={{
+          components: {
+            DefaultText: {
+              fontWeightNormal: 500,
+              fontWeightLight: 200,
+              fontWeightBold: 900,
             },
-          }}
-        >
-          <div>
-            <DefaultText weight={'normal'}>This text is normal.</DefaultText>
-          </div>
-          <div>
-            <DefaultText weight={'bold'}>This text is bold.</DefaultText>
-          </div>
-          <div>
-            <DefaultText weight={'light'}>This text is light.</DefaultText>
-          </div>
-        </UseTheme>
-      )),
-    );
+          },
+        }}
+      >
+        <div>
+          <DefaultText weight={'normal'}>This text is normal.</DefaultText>
+        </div>
+        <div>
+          <DefaultText weight={'bold'}>This text is bold.</DefaultText>
+        </div>
+        <div>
+          <DefaultText weight={'light'}>This text is light.</DefaultText>
+        </div>
+      </UseTheme>
+    ));
 
-  storiesOf('Text/HeaderText', module).add(
-    'standard',
-    withInfo()(() => (
+  storiesOf('Text/HeaderText', module)
+    .addDecorator(withInfo())
+    .add('standard', () => (
       <HeaderText>That is some nice text, right there!</HeaderText>
-    )),
-  );
+    ));
 
   storiesOf('Text/LargeText', module)
-    .add(
-      'standard',
-      withInfo()(() => (
+    .addDecorator(withInfo())
+    .add('standard', () => (
+      <LargeText>That is some nice text, right there!</LargeText>
+    ))
+    .add('with custom global theme', () => (
+      <UseTheme theme={{ components: { LargeText: { fontSize: '22px' } } }}>
         <LargeText>That is some nice text, right there!</LargeText>
-      )),
-    )
-    .add(
-      'with custom global theme',
-      withInfo()(() => (
-        <UseTheme theme={{ components: { LargeText: { fontSize: '22px' } } }}>
-          <LargeText>That is some nice text, right there!</LargeText>
-        </UseTheme>
-      )),
-    );
+      </UseTheme>
+    ));
 
-  storiesOf('Text/SmallText', module).add(
-    'standard',
-    withInfo()(() => (
+  storiesOf('Text/SmallText', module)
+    .addDecorator(withInfo())
+    .add('standard', () => (
       <SmallText>That is some nice text, right there!</SmallText>
-    )),
-  );
+    ));
 
-  storiesOf('Text/SmallerText', module).add(
-    'standard',
-    withInfo()(() => (
+  storiesOf('Text/SmallerText', module)
+    .addDecorator(withInfo())
+    .add('standard', () => (
       <SmallerText>That is some nice text, right there!</SmallerText>
-    )),
-  );
+    ));
 
-  storiesOf('Text/TinyText', module).add(
-    'standard',
-    withInfo()(() => <TinyText>That is some nice text, right there!</TinyText>),
-  );
+  storiesOf('Text/TinyText', module)
+    .addDecorator(withInfo())
+    .add('standard', () => (
+      <TinyText>That is some nice text, right there!</TinyText>
+    ));
 };

@@ -6,27 +6,39 @@ import { Spacing } from '../../src/components/ui/layout/Spacing';
 
 export const addSpacingStories = () => {
   storiesOf('Layout/Spacing', module)
-    .add(
-      'standard',
-      withInfo()(() => (
-        <div style={{ display: 'table' }}>
-          <div style={{ border: '1px solid black' }}>
-            <Spacing>
-              <div
-                style={{
-                  backgroundColor: 'red',
-                  width: '50px',
-                  height: '20px',
-                }}
-              />
-            </Spacing>
-          </div>
+    .addDecorator(withInfo({ propTables: false }))
+    .add('standard', () => (
+      <div style={{ display: 'table' }}>
+        <div style={{ border: '1px solid black' }}>
+          <Spacing>
+            <div
+              style={{
+                backgroundColor: 'red',
+                width: '50px',
+                height: '20px',
+              }}
+            />
+          </Spacing>
         </div>
-      )),
-    )
-    .add(
-      'with num=2',
-      withInfo()(() => (
+      </div>
+    ))
+    .add('with num=2', () => (
+      <div style={{ display: 'table' }}>
+        <div style={{ border: '1px solid black' }}>
+          <Spacing num={2}>
+            <div
+              style={{
+                backgroundColor: 'red',
+                width: '50px',
+                height: '20px',
+              }}
+            />
+          </Spacing>
+        </div>
+      </div>
+    ))
+    .add('with num=2 and custom theme', () => (
+      <UseTheme theme={{ metrics: { spacing: 20 } }}>
         <div style={{ display: 'table' }}>
           <div style={{ border: '1px solid black' }}>
             <Spacing num={2}>
@@ -40,26 +52,6 @@ export const addSpacingStories = () => {
             </Spacing>
           </div>
         </div>
-      )),
-    )
-    .add(
-      'with num=2 and custom theme',
-      withInfo({ propTablesExclude: [UseTheme] })(() => (
-        <UseTheme theme={{ metrics: { spacing: 20 } }}>
-          <div style={{ display: 'table' }}>
-            <div style={{ border: '1px solid black' }}>
-              <Spacing num={2}>
-                <div
-                  style={{
-                    backgroundColor: 'red',
-                    width: '50px',
-                    height: '20px',
-                  }}
-                />
-              </Spacing>
-            </div>
-          </div>
-        </UseTheme>
-      )),
-    );
+      </UseTheme>
+    ));
 };

@@ -6,53 +6,32 @@ import { StandardButton } from '../../src/components/ui/buttons/StandardButton';
 
 export const addStandardButtonStories = () => {
   storiesOf('Buttons/StandardButton', module)
-    .add('default', withInfo()(() => <StandardButton label={'Submit'} />))
-    .add(
-      'disabled',
-      withInfo()(() => <StandardButton label={'Submit'} disabled />),
-    )
-    .add(
-      'with icon and no text',
-      withInfo()(() => <StandardButton leftIcon={'coffee'} />),
-    )
-    .add(
-      'with icon left',
-      withInfo()(() => <StandardButton label={'Submit'} leftIcon={'coffee'} />),
-    )
-    .add(
-      'with icon right',
-      withInfo()(() => (
-        <StandardButton label={'Submit'} rightIcon={'coffee'} />
-      )),
-    )
-    .add(
-      'with borderRadius',
-      withInfo()(() => (
-        <StandardButton label={'Submit'} borderRadius={'10px'} />
-      )),
-    )
-    .add(
-      'with loading',
-      withInfo()(() => <StandardButton label={'Submit'} loading />),
-    )
-    .add(
-      'with success',
-      withInfo()(() => <StandardButton label={'Submit'} success />),
-    )
-    .add(
-      'with custom theme background red',
-      withInfo({ propTablesExclude: [UseTheme] })(() => (
-        <UseTheme
-          theme={{
-            components: {
-              Button: {
-                bgColor: 'red',
-              },
+    .addDecorator(withInfo())
+    .add('default', () => <StandardButton label={'Submit'} />)
+    .add('disabled', () => <StandardButton label={'Submit'} disabled />)
+    .add('with icon and no text', () => <StandardButton leftIcon={'coffee'} />)
+    .add('with icon left', () => (
+      <StandardButton label={'Submit'} leftIcon={'coffee'} />
+    ))
+    .add('with icon right', () => (
+      <StandardButton label={'Submit'} rightIcon={'coffee'} />
+    ))
+    .add('with borderRadius', () => (
+      <StandardButton label={'Submit'} borderRadius={'10px'} />
+    ))
+    .add('with loading', () => <StandardButton label={'Submit'} loading />)
+    .add('with success', () => <StandardButton label={'Submit'} success />)
+    .add('with custom theme background red', () => (
+      <UseTheme
+        theme={{
+          components: {
+            Button: {
+              bgColor: 'red',
             },
-          }}
-        >
-          <StandardButton label={'Submit'} />
-        </UseTheme>
-      )),
-    );
+          },
+        }}
+      >
+        <StandardButton label={'Submit'} />
+      </UseTheme>
+    ));
 };
