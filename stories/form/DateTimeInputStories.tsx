@@ -6,6 +6,7 @@ import * as React from 'react';
 import { DateRangeCalendarOnChangeValue } from '../../src/components/ui/form/calendar/features';
 import { DateInput } from '../../src/components/ui/form/date-time-input/DateInput';
 import { DateRangeInput } from '../../src/components/ui/form/date-time-input/DateRangeInput';
+import { DateTextInput } from '../../src/components/ui/form/date-time-input/DateTextInput';
 import { TimeTextInput } from '../../src/components/ui/form/date-time-input/TimeTextInput';
 
 interface TimeTextInputState {
@@ -18,6 +19,10 @@ interface DateInputState {
 
 interface DateRangeState {
   value: DateRangeCalendarOnChangeValue;
+}
+
+interface DateTextInputState {
+  value?: string;
 }
 
 export const addDateTimeInputStories = () => {
@@ -78,4 +83,81 @@ export const addDateTimeInputStories = () => {
         value={{ startDate: new Date(), endDate: addDays(new Date(), 5) }}
       />
     ));
+
+  storiesOf('Form/DateTimeInput/DateTextInput', module)
+    .addDecorator(withInfo())
+    .add(
+      'standard',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <DateTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'english date format',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <DateTextInput
+          dateFormat={'dd/MM/yyyy'}
+          placeholder={'DD/MM/YYYY'}
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'netherlands date format',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <DateTextInput
+          dateFormat={'dd-MM-yyyy'}
+          placeholder={'DD-MM-YYYY'}
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'without calender',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <DateTextInput
+          useCalenderIcon={false}
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'with disabled calender icon',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <DateTextInput
+          disableCalender={true}
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'disabled',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <DateTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+          disabled={true}
+        />
+      )),
+    )
+    ;
 };
