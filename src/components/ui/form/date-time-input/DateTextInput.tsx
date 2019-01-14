@@ -16,20 +16,41 @@ import { DefaultTextInput, DefaultTextInputProps } from '../text-input';
 interface DateTextInputProps extends DefaultTextInputProps {
   dateFormat?: string;
   disableCalender?: boolean;
-  hideCalender?: boolean;
+  useCalenderIcon?: boolean;
   onChange: (value: string) => void;
   placeholder?: string;
   zIndex?: number;
 }
 
 export const DateTextInput: React.FC<DateTextInputProps> = ({
+  /** Valid date format
+   * @default YYYY-MM-DD */
   dateFormat = 'yyyy-MM-dd',
+
+  /** Make the icon not clickable
+   * @default false */
   disableCalender = false,
-  hideCalender = false,
+
+  /** Show or hide the calender icon
+   * @default true */
+  useCalenderIcon = true,
+
+  /** Onchange callback, returns the current value */
   onChange,
+
+  /** Placeholder for the input
+   * @default YYYY-MM-DD */
   placeholder = 'YYYY-MM-DD',
+
+  /** The current date value */
   value,
+
+  /** The width of the component
+   * @default 100px */
   width = '100px',
+
+  /**  Z-index of the calendar overlay
+   * @default 100 */
   zIndex = 100,
 }) => {
   const [open, setOpen] = useState(false);
@@ -47,7 +68,7 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
   const calendar = disableCalender ? (
     <Icon name={faCalendarAlt} />
   ) : (
-    !hideCalender && (
+    useCalenderIcon && (
       <Clickable onClick={toggleCalendar}>
         <Icon name={faCalendarAlt} />
       </Clickable>

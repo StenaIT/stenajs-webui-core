@@ -129,14 +129,14 @@ export const addDateTimeInputStories = () => {
         value: undefined,
       })(({ store }: { store: Store<DateTextInputState> }) => (
         <DateTextInput
-          hideCalender={true}
+          useCalenderIcon={false}
           value={store.state.value}
           onChange={value => store.set({ value })}
         />
       )),
     )
     .add(
-      'with unclickable calender',
+      'with disabled calender icon',
       withState<DateTextInputState>({
         value: undefined,
       })(({ store }: { store: Store<DateTextInputState> }) => (
