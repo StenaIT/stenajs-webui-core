@@ -14,27 +14,17 @@ import { SingleDateCalendar } from '../calendar';
 import { DefaultTextInput, DefaultTextInputProps } from '../text-input';
 
 interface DateTextInputProps extends DefaultTextInputProps {
-  /** Valid date format
-   * @default YYYY-MM-DD */
+  /** Valid date format, @default YYYY-MM-DD */
   dateFormat?: string;
-
-  /** Make the icon not clickable
-   * @default false */
+  /** Make the icon not clickable, @default false */
   disableCalender?: boolean;
-
-  /** Show or hide the calender icon
-   * @default true */
+  /** Show or hide the calender icon, @default true */
   useCalenderIcon?: boolean;
-
   /** Onchange callback, returns the current value */
   onChange: (value: string) => void;
-
-  /** Placeholder for the input
-   * @default YYYY-MM-DD */
+  /** Placeholder for the input, @default YYYY-MM-DD */
   placeholder?: string;
-
-  /**  Z-index of the calendar overlay
-   * @default 100 */
+  /**  Z-index of the calendar overlay, @default 100 */
   zIndex?: number;
 }
 
