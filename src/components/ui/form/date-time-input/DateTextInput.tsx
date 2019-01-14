@@ -14,44 +14,40 @@ import { SingleDateCalendar } from '../calendar';
 import { DefaultTextInput, DefaultTextInputProps } from '../text-input';
 
 interface DateTextInputProps extends DefaultTextInputProps {
+  /** Valid date format
+   * @default YYYY-MM-DD */
   dateFormat?: string;
+
+  /** Make the icon not clickable
+   * @default false */
   disableCalender?: boolean;
+
+  /** Show or hide the calender icon
+   * @default true */
   useCalenderIcon?: boolean;
+
+  /** Onchange callback, returns the current value */
   onChange: (value: string) => void;
+
+  /** Placeholder for the input
+   * @default YYYY-MM-DD */
   placeholder?: string;
+
+  /**  Z-index of the calendar overlay
+   * @default 100 */
   zIndex?: number;
 }
 
 export const DateTextInput: React.FC<DateTextInputProps> = ({
-  /** Valid date format
-   * @default YYYY-MM-DD */
   dateFormat = 'yyyy-MM-dd',
-
-  /** Make the icon not clickable
-   * @default false */
   disableCalender = false,
-
-  /** Show or hide the calender icon
-   * @default true */
   useCalenderIcon = true,
-
-  /** Onchange callback, returns the current value */
   onChange,
-
-  /** Placeholder for the input
-   * @default YYYY-MM-DD */
   placeholder = 'YYYY-MM-DD',
-
-  /** The current date value */
   value,
-
-  /** The width of the component
-   * @default 100px */
   width = '100px',
-
-  /**  Z-index of the calendar overlay
-   * @default 100 */
   zIndex = 100,
+  ...props
 }) => {
   const [open, setOpen] = useState(false);
 
@@ -65,7 +61,7 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
     onChange(date);
   };
 
-  const calendar = disableCalender ? (
+  const calendar = disableCalender || props.disabled ? (
     <Icon name={faCalendarAlt} />
   ) : (
     useCalenderIcon && (
@@ -90,15 +86,16 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
   return (
     <>
       <DefaultTextInput
-        contentLeft={calendar}
-        placeholder={placeholder}
-        value={value}
-        onChange={updateValue}
+        {...props}
         backgroundColor={
           (userInputCorrectLength && !dateIsValid) || validInput
             ? theme.colors.errorBgLight
             : undefined
         }
+        contentLeft={calendar}
+        onChange={updateValue}
+        placeholder={placeholder}
+        value={value}
         width={width}
       />
       {open && (

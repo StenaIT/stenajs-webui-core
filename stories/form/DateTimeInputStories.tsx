@@ -147,5 +147,17 @@ export const addDateTimeInputStories = () => {
         />
       )),
     )
+    .add(
+      'disabled',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <DateTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+          disabled={true}
+        />
+      )),
+    )
     ;
 };
