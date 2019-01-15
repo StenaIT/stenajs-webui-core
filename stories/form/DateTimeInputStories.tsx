@@ -95,7 +95,18 @@ export const addDateTimeInputStories = () => {
           showPlaceHolder={false}
         />
       )),
-    );
+    ).add(
+    'disabled',
+    withState<TimeTextInputState>({
+      value: undefined,
+    })(({ store }: { store: Store<TimeTextInputState> }) => (
+      <TimeTextInput
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        disabled={true}
+      />
+    )),
+  );
 
   storiesOf('Form/DateTimeInput/DateInput', module)
     .addDecorator(withInfo())
