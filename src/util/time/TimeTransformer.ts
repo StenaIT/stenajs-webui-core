@@ -23,6 +23,8 @@ const formatHours = (hours: string): string => {
       return `0${h}`;
     case 2:
       return hours;
+    default:
+      throw new Error('Invalid hour string');
   }
 
   return hours;
@@ -48,6 +50,8 @@ const formatMinutes = (minutes: string): string => {
       return `${m}0`;
     case 2:
       return minutes;
+    default:
+      throw new Error('Invalid minute string');
   }
   return minutes;
 };
@@ -102,6 +106,8 @@ export const formattingTimeString = (time: string): TimeFormattingResult => {
           time: `${time.substr(0, 2)}:${time.substr(2, 2)}`,
           success: true,
         };
+      default:
+        return { time, success: false };
     }
   }
 
