@@ -1,70 +1,117 @@
-export const transformNumberTimeToString = (
-  time: number | undefined | null,
-): string | undefined => {
-  if (time == null) {
-    return undefined;
+export interface TimeFormattingResult {
+  time: string;
+  success: boolean;
+}
+
+const formatHours = (hours: string): string => {
+  if (hours === '') {
+    return '00';
   }
-  const timeStr = time.toString();
-  if (timeStr.length === 3) {
-    return `${timeStr.substr(0, 1)}:${timeStr.substr(1, 2)}`;
+
+  const h = parseInt(hours, 10);
+
+  if (isNaN(h)) {
+    throw new Error('Hours is not a number');
   }
-  if (timeStr.length === 4) {
-    return `${timeStr.substr(0, 2)}:${timeStr.substr(2, 2)}`;
+
+  if (h < 0 || h > 23) {
+    throw new Error('Hours is an invalid number');
   }
-  if (timeStr.length === 2) {
-    return `0:${timeStr}`;
+
+  switch (hours.length) {
+    case 1:
+      return `0${h}`;
+    case 2:
+      return hours;
   }
-  if (timeStr.length === 1) {
-    return `0:0${timeStr}`;
-  }
-  throw new Error('Invalid time number.');
+
+  return hours;
 };
 
-export const transformTimeStringToNumber = (
-  time: string | undefined | null,
-): number | null => {
-  if (time == null) {
-    throw new Error('Time is not set.');
-  }
-  if (time === '') {
-    throw new Error('Time is empty.');
-  }
-  const parts = time.split(':');
-  if (parts.length !== 2) {
-    throw new Error('Invalid time.');
+const formatMinutes = (minutes: string): string => {
+  if (minutes === '') {
+    return '00';
   }
 
-  if (parts[1].length !== 2) {
-    throw new Error('Invalid time.');
+  const m = parseInt(minutes, 10);
+
+  if (isNaN(m)) {
+    throw new Error('Minutes is not a number');
   }
 
-  if (parts[0].length < 1 || parts[0].length > 2) {
-    throw new Error('Invalid time.');
+  if (m < 0 || m > 23) {
+    throw new Error('Minutes is an invalid number');
   }
 
-  const hours = parseInt(parts[0], 10);
-  const minutes = parseInt(parts[1], 10);
-
-  if (isNaN(hours)) {
-    throw new Error('Invalid time.');
+  switch (minutes.length) {
+    case 1:
+      return `${m}0`;
+    case 2:
+      return minutes;
   }
-  if (isNaN(minutes)) {
-    throw new Error('Invalid time.');
-  }
-  if (hours < 0 || hours > 23) {
-    throw new Error('Invalid time.');
-  }
-  if (minutes < 0 || minutes > 59) {
-    throw new Error('Invalid time.');
-  }
-  return hours * 100 + minutes;
+  return minutes;
 };
 
-export const isValidTimeString = (time: string | undefined): boolean => {
-  try {
-    transformTimeStringToNumber(time);
-    return true;
-  } catch (e) {
-    return false;
+export const formattingTimeString = (time: string): TimeFormattingResult => {
+  if (!validUserInput(time)) {
+    return { time, success: false };
   }
+
+  const arr = time && time.split(/-|:|,|;|[/]|[.]| /); // consider all these chars as user input separator
+  if (arr && arr.length === 2) {
+    try {
+      const hours = formatHours(arr[0]);
+      const minutes = formatMinutes(arr[1]);
+      return { time: `${hours}:${minutes}`, success: true };
+    } catch {
+      return { time, success: false };
+    }
+  } else if (arr && arr.length === 1) {
+    let hours = 0;
+    let minutes = 0;
+    switch (time.length) {
+      case 1:
+        return { time: `0${time}:00`, success: true };
+      case 2:
+        const timeNumber = parseInt(arr[0], 10);
+        if (timeNumber >= 0 && timeNumber < 24) {
+          return { time: `${time}:00`, success: true };
+        } else if (timeNumber >= 24 && timeNumber < 59) {
+          return { time: `00:${time}`, success: true };
+        }
+        return { time, success: false };
+      case 3:
+        minutes = parseInt(time.substr(1, 2), 10);
+        if (minutes >= 0 && minutes <= 59) {
+          return {
+            time: `0${time.substr(0, 1)}:${time.substr(1, 2)}`,
+            success: true,
+          };
+        }
+        return { time, success: false };
+      case 4:
+        hours = parseInt(time.substr(0, 2), 10);
+        minutes = parseInt(time.substr(2, 2), 10);
+        if (hours < 0 || hours > 23) {
+          return { time, success: false };
+        }
+        if (minutes < 0 || minutes > 59) {
+          return { time, success: false };
+        }
+        return {
+          time: `${time.substr(0, 2)}:${time.substr(2, 2)}`,
+          success: true,
+        };
+    }
+  }
+
+  return { time, success: false };
+};
+
+export const validUserInput = (input: string | undefined): boolean => {
+  if (input) {
+    return /^[-:.,/; 0-9]+$/.test(input);
+  }
+
+  return true;
 };

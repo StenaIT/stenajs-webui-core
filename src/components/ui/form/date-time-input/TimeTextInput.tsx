@@ -1,35 +1,64 @@
-import { faClock } from '@fortawesome/free-solid-svg-icons';
-import { ComponentClass } from 'react';
-import { compose, setDisplayName, withProps } from 'recompose';
-import { isValidTimeString } from '../../../../util/time/TimeTransformer';
-import { addIcons } from '../../../icon-library/IconLibrary';
-import { withTheme } from '../../../util/enhancers/index';
-import { WithThemeProps } from '../../../util/enhancers/WithTheme';
+import { faClock } from '@fortawesome/free-regular-svg-icons/faClock';
+import { useState } from 'react';
+import * as React from 'react';
+import { formattingTimeString, validUserInput } from '../../../../util/time';
+import { useTheme } from '../../../theme/UseThemeHook';
+import { Icon } from '../../icon';
 import {
   DefaultTextInput,
   DefaultTextInputProps,
 } from '../text-input/DefaultTextInput';
 
-addIcons(faClock);
+interface TimeTextInputProps extends DefaultTextInputProps {
+  /** Onchange callback, returns the current value */
+  onChange: (value: string) => void;
+  /** Show/Hide placeholder */
+  showPlaceHolder?: boolean;
+  /**Show/Hide icon */
+  useIcon?: boolean;
+}
 
-export type __C124912 = ComponentClass<{}>;
+export const TimeTextInput: React.FC<TimeTextInputProps> = ({
+  onChange,
+  showPlaceHolder = true,
+  useIcon = true,
+  value,
+  width = '50px',
+  ...props
+}) => {
+  const [valid, setValid] = useState(validUserInput(value));
+  const timeFormat = 'hh:mm';
 
-const withTimeProps = withProps<
-  DefaultTextInputProps,
-  DefaultTextInputProps & WithThemeProps
->(({ value, theme }) => ({
-  placeholder: 'h:mm',
-  iconLeft: 'clock',
-  size: 4,
-  backgroundColor:
-    value && !isValidTimeString(value) ? theme.colors.errorBgLight : undefined,
-}));
+  const theme = useTheme();
 
-export const TimeTextInput = setDisplayName<DefaultTextInputProps>(
-  'TimeTextInput',
-)(
-  compose<DefaultTextInputProps, DefaultTextInputProps>(
-    withTheme,
-    withTimeProps,
-  )(DefaultTextInput),
-);
+  const onBlur = () => {
+    if (value) {
+      const formattedResult = formattingTimeString(value);
+      setValid(formattedResult.success);
+      if (formattedResult.success) {
+        onChange(formattedResult.time);
+      }
+    }
+  };
+
+  const updateValue = (time: string) => {
+    const validInput = validUserInput(time);
+
+    setValid(validInput && time.length <= timeFormat.length);
+
+    onChange(time);
+  };
+
+  return (
+    <DefaultTextInput
+      {...props}
+      backgroundColor={valid ? undefined : theme.colors.errorBgLight}
+      contentLeft={useIcon && <Icon name={faClock} />}
+      value={value}
+      placeholder={showPlaceHolder ? timeFormat : undefined}
+      onChange={updateValue}
+      onBlur={onBlur}
+      width={width}
+    />
+  );
+};

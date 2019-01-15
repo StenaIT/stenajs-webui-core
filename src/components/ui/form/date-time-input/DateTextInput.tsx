@@ -51,15 +51,16 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
     onChange(date);
   };
 
-  const calendar = disableCalender || props.disabled ? (
-    <Icon name={faCalendarAlt} />
-  ) : (
-    useCalenderIcon && (
-      <Clickable onClick={toggleCalendar}>
-        <Icon name={faCalendarAlt} />
-      </Clickable>
-    )
-  );
+  const calendar =
+    disableCalender || props.disabled ? (
+      <Icon name={faCalendarAlt} />
+    ) : (
+      useCalenderIcon && (
+        <Clickable onClick={toggleCalendar}>
+          <Icon name={faCalendarAlt} />
+        </Clickable>
+      )
+    );
 
   const onCalendarSelectDate = (date: Date | undefined) => {
     if (date) {
