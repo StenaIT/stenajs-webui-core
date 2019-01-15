@@ -14,7 +14,7 @@ interface TimeTextInputProps extends DefaultTextInputProps {
   onChange: (value: string) => void;
   /** Show/Hide placeholder */
   showPlaceHolder?: boolean;
-  /**Show/Hide icon */
+  /** Show/Hide icon */
   useIcon?: boolean;
 }
 

@@ -46,13 +46,10 @@ interface ThemeProp {
   theme?: RadioButtonTheme;
 }
 
-export const RadioButton = setDisplayName<
-  RadioButtonProps & ThemeProp
->('RadioButton')(
-  compose<
-    InnerProps,
-    RadioButtonProps & ThemeProp
-  >(
+export const RadioButton = setDisplayName<RadioButtonProps & ThemeProp>(
+  'RadioButton',
+)(
+  compose<InnerProps, RadioButtonProps & ThemeProp>(
     pure,
     withOnToggleHandler,
     withComponentTheme('RadioButton'),

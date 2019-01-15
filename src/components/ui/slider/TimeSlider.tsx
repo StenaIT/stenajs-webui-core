@@ -50,7 +50,7 @@ interface WithOnSliderChange {
 }
 
 const withOnSliderChange = withHandlers<TimeSliderProps, WithOnSliderChange>({
-  onChange: ({ onChange: onSliderChange}) => sliderValue => {
+  onChange: ({ onChange: onSliderChange }) => sliderValue => {
     onSliderChange(sliderValue.map(time => getValue(time, max)));
   },
 });
