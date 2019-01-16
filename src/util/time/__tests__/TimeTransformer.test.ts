@@ -1,4 +1,4 @@
-import { formattingTimeString, validUserInput } from '../TimeTransformer';
+import { formatTimeString, validUserInput } from '../TimeTransformer';
 
 describe('TimeTransformer', () => {
   describe('validUserInput', () => {
@@ -37,117 +37,117 @@ describe('TimeTransformer', () => {
     });
   });
 
-  describe('formattingTimeString', () => {
+  describe('formatTimeString', () => {
     it('letter input', () => {
-      expect(formattingTimeString('9a')).toEqual({
+      expect(formatTimeString('9a')).toEqual({
         time: '9a',
         success: false,
       });
     });
     it('too many digits', () => {
-      expect(formattingTimeString('901:01')).toEqual({
+      expect(formatTimeString('901:01')).toEqual({
         time: '901:01',
         success: false,
       });
     });
     it('1 digit input', () => {
-      expect(formattingTimeString('9')).toEqual({
+      expect(formatTimeString('9')).toEqual({
         time: '09:00',
         success: true,
       });
     });
     it('2 digit input (hours)', () => {
-      expect(formattingTimeString('09')).toEqual({
+      expect(formatTimeString('09')).toEqual({
         time: '09:00',
         success: true,
       });
     });
     it('2 digit input (minutes)', () => {
-      expect(formattingTimeString('30')).toEqual({
+      expect(formatTimeString('30')).toEqual({
         time: '00:30',
         success: true,
       });
     });
     it('2 digit input (invalid)', () => {
-      expect(formattingTimeString('88')).toEqual({
+      expect(formatTimeString('88')).toEqual({
         time: '88',
         success: false,
       });
     });
     it('3 digit input', () => {
-      expect(formattingTimeString('915')).toEqual({
+      expect(formatTimeString('915')).toEqual({
         time: '09:15',
         success: true,
       });
     });
     it('3 digit input (invalid)', () => {
-      expect(formattingTimeString('981')).toEqual({
+      expect(formatTimeString('981')).toEqual({
         time: '981',
         success: false,
       });
     });
     it('4 digit input', () => {
-      expect(formattingTimeString('0915')).toEqual({
+      expect(formatTimeString('0915')).toEqual({
         time: '09:15',
         success: true,
       });
     });
     it('4 digit input (invalid hours)', () => {
-      expect(formattingTimeString('2515')).toEqual({
+      expect(formatTimeString('2515')).toEqual({
         time: '2515',
         success: false,
       });
     });
     it('4 digit input (invalid minutes)', () => {
-      expect(formattingTimeString('0960')).toEqual({
+      expect(formatTimeString('0960')).toEqual({
         time: '0960',
         success: false,
       });
     });
     it('Correct : separator', () => {
-      expect(formattingTimeString('09:15')).toEqual({
+      expect(formatTimeString('09:15')).toEqual({
         time: '09:15',
         success: true,
       });
     });
     it('Blank space separator', () => {
-      expect(formattingTimeString('09 15')).toEqual({
+      expect(formatTimeString('09 15')).toEqual({
         time: '09:15',
         success: true,
       });
     });
     it('Dot separator', () => {
-      expect(formattingTimeString('09.15')).toEqual({
+      expect(formatTimeString('09.15')).toEqual({
         time: '09:15',
         success: true,
       });
     });
     it('Hours missing digit', () => {
-      expect(formattingTimeString('9:15')).toEqual({
+      expect(formatTimeString('9:15')).toEqual({
         time: '09:15',
         success: true,
       });
     });
     it('Minute missing digit', () => {
-      expect(formattingTimeString('09:1')).toEqual({
+      expect(formatTimeString('09:1')).toEqual({
         time: '09:10',
         success: true,
       });
     });
     it('Minutes and hours missing digit', () => {
-      expect(formattingTimeString('9:1')).toEqual({
+      expect(formatTimeString('9:1')).toEqual({
         time: '09:10',
         success: true,
       });
     });
     it('Starting with separator', () => {
-      expect(formattingTimeString(':1')).toEqual({
+      expect(formatTimeString(':1')).toEqual({
         time: '00:10',
         success: true,
       });
     });
     it('Ends with separator', () => {
-      expect(formattingTimeString('1:')).toEqual({
+      expect(formatTimeString('1:')).toEqual({
         time: '01:00',
         success: true,
       });

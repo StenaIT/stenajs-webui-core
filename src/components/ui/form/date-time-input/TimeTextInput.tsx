@@ -1,7 +1,7 @@
 import { faClock } from '@fortawesome/free-regular-svg-icons/faClock';
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import * as React from 'react';
-import { formattingTimeString, validUserInput } from '../../../../util/time';
+import { formatTimeString, validUserInput } from '../../../../util/time';
 import { useTheme } from '../../../theme/UseThemeHook';
 import { Icon } from '../../icon';
 import {
@@ -31,23 +31,29 @@ export const TimeTextInput: React.FC<TimeTextInputProps> = ({
 
   const theme = useTheme();
 
-  const onBlur = () => {
-    if (value) {
-      const formattedResult = formattingTimeString(value);
-      setValid(formattedResult.success);
-      if (formattedResult.success) {
-        onChange(formattedResult.time);
+  const onBlur = useCallback(
+    () => {
+      if (value) {
+        const formattedResult = formatTimeString(value);
+        setValid(formattedResult.success);
+        if (formattedResult.success) {
+          onChange(formattedResult.time);
+        }
       }
-    }
-  };
+    },
+    [value, onChange],
+  );
 
-  const updateValue = (time: string) => {
-    const validInput = validUserInput(time);
+  const updateValue = useCallback(
+    (time: string) => {
+      const validInput = validUserInput(time);
 
-    setValid(validInput && time.length <= timeFormat.length);
+      setValid(validInput && time.length <= timeFormat.length);
 
-    onChange(time);
-  };
+      onChange(time);
+    },
+    [onChange],
+  );
 
   return (
     <DefaultTextInput

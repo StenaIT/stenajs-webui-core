@@ -1,4 +1,4 @@
-export interface TimeFormattingResult {
+export interface formatTimeStringResult {
   time: string;
   success: boolean;
 }
@@ -41,7 +41,7 @@ const formatMinutes = (minutes: string): string => {
     throw new Error('Minutes is not a number');
   }
 
-  if (m < 0 || m > 23) {
+  if (m < 0 || m > 59) {
     throw new Error('Minutes is an invalid number');
   }
 
@@ -56,7 +56,7 @@ const formatMinutes = (minutes: string): string => {
   return minutes;
 };
 
-export const formattingTimeString = (time: string): TimeFormattingResult => {
+export const formatTimeString = (time: string): formatTimeStringResult => {
   if (!validUserInput(time)) {
     return { time, success: false };
   }
