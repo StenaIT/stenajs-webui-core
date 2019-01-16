@@ -1,4 +1,4 @@
-export interface formatTimeStringResult {
+export interface FormatTimeStringResult {
   time: string;
   success: boolean;
 }
@@ -56,7 +56,7 @@ const formatMinutes = (minutes: string): string => {
   return minutes;
 };
 
-export const formatTimeString = (time: string): formatTimeStringResult => {
+export const formatTimeString = (time: string): FormatTimeStringResult => {
   if (!validUserInput(time)) {
     return { time, success: false };
   }
