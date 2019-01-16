@@ -39,9 +39,74 @@ export const addDateTimeInputStories = () => {
         />
       )),
     )
-    .add('empty', () => <TimeTextInput value={''} />)
-    .add('with time', () => <TimeTextInput value={'23:59'} />)
-    .add('with invalid time', () => <TimeTextInput value={'9:xx'} />);
+    .add(
+      'empty',
+      withState<TimeTextInputState>({
+        value: '',
+      })(({ store }: { store: Store<TimeTextInputState> }) => (
+        <TimeTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'with time',
+      withState<TimeTextInputState>({
+        value: '23:59',
+      })(({ store }: { store: Store<TimeTextInputState> }) => (
+        <TimeTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'with invalid time',
+      withState<TimeTextInputState>({
+        value: '9:xx',
+      })(({ store }: { store: Store<TimeTextInputState> }) => (
+        <TimeTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+        />
+      )),
+    )
+    .add(
+      'without icon',
+      withState<TimeTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<TimeTextInputState> }) => (
+        <TimeTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+          useIcon={false}
+        />
+      )),
+    )
+    .add(
+      'without placeholder',
+      withState<TimeTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<TimeTextInputState> }) => (
+        <TimeTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+          showPlaceHolder={false}
+        />
+      )),
+    ).add(
+    'disabled',
+    withState<TimeTextInputState>({
+      value: undefined,
+    })(({ store }: { store: Store<TimeTextInputState> }) => (
+      <TimeTextInput
+        value={store.state.value}
+        onChange={value => store.set({ value })}
+        disabled={true}
+      />
+    )),
+  );
 
   storiesOf('Form/DateTimeInput/DateInput', module)
     .addDecorator(withInfo())
@@ -158,6 +223,5 @@ export const addDateTimeInputStories = () => {
           disabled={true}
         />
       )),
-    )
-    ;
+    );
 };
