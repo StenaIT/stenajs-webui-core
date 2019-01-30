@@ -1,32 +1,30 @@
 import { faClock } from '@fortawesome/free-regular-svg-icons/faClock';
-import { useCallback, useState } from 'react';
 import * as React from 'react';
+import { useCallback, useState } from 'react';
 import { formatTimeString, validUserInput } from '../../../../util/time';
 import { useTheme } from '../../../theme/UseThemeHook';
-import { Icon } from '../../icon';
 import {
   DefaultTextInput,
   DefaultTextInputProps,
 } from '../text-input/DefaultTextInput';
 
 interface TimeTextInputProps extends DefaultTextInputProps {
-  /** Onchange callback, returns the current value */
-  onChange: (value: string) => void;
-  /** Show/Hide placeholder */
-  showPlaceHolder?: boolean;
-  /** Show/Hide icon */
+  /** Show placeholder when true */
+  showPlaceholder?: boolean;
+  /** Show icon when true */
   useIcon?: boolean;
 }
 
 export const TimeTextInput: React.FC<TimeTextInputProps> = ({
   onChange,
-  showPlaceHolder = true,
+  showPlaceholder = true,
   useIcon = true,
   value,
   width = '50px',
   ...props
 }) => {
-  const [valid, setValid] = useState(validUserInput(value));
+  const [valid, setValid] = useState(() => validUserInput(value));
+
   const timeFormat = 'hh:mm';
 
   const theme = useTheme();
@@ -37,11 +35,13 @@ export const TimeTextInput: React.FC<TimeTextInputProps> = ({
         const formattedResult = formatTimeString(value);
         setValid(formattedResult.success);
         if (formattedResult.success) {
-          onChange(formattedResult.time);
+          if (onChange) {
+            onChange(formattedResult.time);
+          }
         }
       }
     },
-    [value, onChange],
+    [value, onChange, setValid],
   );
 
   const updateValue = useCallback(
@@ -50,18 +50,20 @@ export const TimeTextInput: React.FC<TimeTextInputProps> = ({
 
       setValid(validInput && time.length <= timeFormat.length);
 
-      onChange(time);
+      if (onChange) {
+        onChange(time);
+      }
     },
-    [onChange],
+    [onChange, setValid],
   );
 
   return (
     <DefaultTextInput
       {...props}
       backgroundColor={valid ? undefined : theme.colors.errorBgLight}
-      contentLeft={useIcon && <Icon name={faClock} />}
+      iconLeft={useIcon ? faClock : undefined}
       value={value}
-      placeholder={showPlaceHolder ? timeFormat : undefined}
+      placeholder={showPlaceholder ? timeFormat : undefined}
       onChange={updateValue}
       onBlur={onBlur}
       width={width}

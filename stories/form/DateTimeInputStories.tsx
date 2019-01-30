@@ -92,7 +92,7 @@ export const addDateTimeInputStories = () => {
         <TimeTextInput
           value={store.state.value}
           onChange={value => store.set({ value })}
-          showPlaceHolder={false}
+          showPlaceholder={false}
         />
       )),
     ).add(
