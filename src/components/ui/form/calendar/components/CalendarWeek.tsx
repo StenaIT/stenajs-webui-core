@@ -2,6 +2,7 @@ import * as React from 'react';
 import { MonthData, WeekData } from '../util/CalendarDataFactory';
 import {
   CalendarDayProps,
+  CalendarUserWeekData,
   DayState,
   DayStateHighlight,
   ExtraDayContentProps,
@@ -12,14 +13,12 @@ import {
 import { CalendarTheme } from './CalendarTheme';
 import { WeekNumberCell } from './renderers/WeekNumberCell';
 
-export type DataPerWeekDay<T> = { [key: number]: T };
-
 export interface CalendarWeekProps<T> {
   dayComponent: React.ComponentType<CalendarDayProps<T>>;
   week: WeekData;
   month: MonthData;
-  statePerWeekDay?: DataPerWeekDay<DayState>;
-  userDataPerWeekDay?: DataPerWeekDay<T>;
+  statePerWeekDay?: CalendarUserWeekData<DayState>;
+  userDataPerWeekDay?: CalendarUserWeekData<T>;
   onClickWeek?: OnClickWeek;
   onClickDay?: OnClickDay<T>;
   theme: CalendarTheme;

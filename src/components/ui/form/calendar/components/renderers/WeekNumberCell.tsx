@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { Background } from '../../../../colors';
+import { ClickableSwitcher } from '../../../../interaction/ClickableSwitcher';
 import { Column } from '../../../../layout';
 import { Absolute, Relative } from '../../../../positioning';
 import { SmallText } from '../../../../text';
@@ -16,19 +17,18 @@ export interface WeekNumberCellProps {
   backgroundColor?: string;
 }
 
-export const WeekNumberCell = ({
+export const WeekNumberCell: React.FC<WeekNumberCellProps> = ({
   onClickWeek,
   theme,
   week,
   background,
   backgroundColor,
   prefix,
-}: WeekNumberCellProps) => (
+}) => (
   <Background color={backgroundColor || theme.WeekNumber.backgroundColor}>
     <Relative>
-      <div
+      <ClickableSwitcher
         onClick={onClickWeek ? () => onClickWeek(week) : undefined}
-        style={{ cursor: onClickWeek ? 'cursor' : undefined }}
       >
         <Column
           width={theme.width}
@@ -44,7 +44,7 @@ export const WeekNumberCell = ({
             </SmallText>
           </Absolute>
         </Column>
-      </div>
+      </ClickableSwitcher>
     </Relative>
   </Background>
 );

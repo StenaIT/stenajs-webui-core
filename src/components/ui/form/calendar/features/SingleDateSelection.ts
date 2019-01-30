@@ -34,7 +34,7 @@ const addSelectionLogic = withHandlers<
   SingleDateCalendarProps<{}>,
   SelectionLogicHandlers
 >({
-  onClickDay: ({ onChange }) => (day: DayData) => {
+  onClickDay: ({ onChange }) => day => {
     if (onChange) {
       onChange(day.date);
     }
@@ -44,15 +44,13 @@ const addSelectionLogic = withHandlers<
 const buildSelectionState = withProps<
   Pick<CalendarProps<{}>, 'statePerMonth'>,
   SingleDateCalendarProps<{}>
->(({ value, statePerMonth }) => {
-  return {
-    statePerMonth: value
-      ? addDayStateHighlights(statePerMonth, value, ['selected'])
-      : statePerMonth,
-    date: value,
-    startDateInFocus: value,
-  };
-});
+>(({ value, statePerMonth }) => ({
+  statePerMonth: value
+    ? addDayStateHighlights(statePerMonth, value, ['selected'])
+    : statePerMonth,
+  date: value,
+  startDateInFocus: value,
+}));
 
 export const withSingleDateSelection = compose(
   addSelectionLogic,

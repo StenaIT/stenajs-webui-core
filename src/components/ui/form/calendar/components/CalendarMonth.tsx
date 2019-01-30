@@ -6,22 +6,21 @@ import { DayData, MonthData, WeekData } from '../util/CalendarDataFactory';
 import {
   CalendarDayProps,
   CalendarOnClicks,
+  CalendarUserMonthData,
   DayState,
   DayStateHighlight,
   ExtraDayContentProps,
   Renderers,
 } from './Calendar';
 import { CalendarTheme } from './CalendarTheme';
-import { CalendarWeek, DataPerWeekDay } from './CalendarWeek';
+import { CalendarWeek } from './CalendarWeek';
 import { WeekDayCell } from './renderers/WeekDayCell';
-
-export type DataPerWeek<T> = { [key: number]: DataPerWeekDay<T> };
 
 export interface CalendarMonthProps<T> extends CalendarOnClicks<T>, Renderers {
   month: MonthData;
   dayComponent: React.ComponentType<CalendarDayProps<T>>;
-  userDataPerWeek?: DataPerWeek<T>;
-  statePerWeek?: DataPerWeek<DayState>;
+  userDataPerWeek?: CalendarUserMonthData<T>;
+  statePerWeek?: CalendarUserMonthData<DayState>;
   theme: CalendarTheme;
   headerLeftContent?: React.ReactElement<{}>;
   headerRightContent?: React.ReactElement<{}>;

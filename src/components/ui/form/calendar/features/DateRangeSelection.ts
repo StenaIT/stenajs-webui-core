@@ -8,7 +8,11 @@ import {
   withState,
 } from 'recompose';
 import { Omit } from '../../../../../types/Omit';
-import { CalendarProps, DataPerMonth, DayState } from '../components/Calendar';
+import {
+  CalendarProps,
+  CalendarUserData,
+  DayState,
+} from '../components/Calendar';
 import { WithCalendarTheme } from '../types/WithCalendarTheme';
 import { DayData } from '../util/CalendarDataFactory';
 import { ensureStartIsFirst } from '../util/CalendarIntervalValidator';
@@ -127,7 +131,7 @@ const toggleDatesIfEndIsEarlierThanStart = withProps(
 );
 
 interface WithStatePerMonth {
-  statePerMonth?: DataPerMonth<DayState>;
+  statePerMonth?: CalendarUserData<DayState>;
 }
 
 const withStatePerMonth = withProps<WithStatePerMonth, InnerProps<{}>>(
@@ -137,13 +141,13 @@ const withStatePerMonth = withProps<WithStatePerMonth, InnerProps<{}>>(
 );
 
 export const buildDayState = (
-  statePerMonth: DataPerMonth<DayState> = {},
+  statePerMonth: CalendarUserData<DayState> = {},
   start?: Date,
   end?: Date,
-): DataPerMonth<DayState> | undefined => {
+): CalendarUserData<DayState> | undefined => {
   if (start && end) {
     return eachDayOfInterval({ start, end }).reduce(
-      (result: DataPerMonth<DayState>, date: Date) => {
+      (result: CalendarUserData<DayState>, date: Date) => {
         const isFirstInRange = isSameDay(date, start);
         const isLastInRange = isSameDay(date, end);
         return addDayStateHighlights(

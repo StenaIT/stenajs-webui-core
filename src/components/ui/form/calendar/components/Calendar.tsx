@@ -16,7 +16,7 @@ import {
   MonthData,
   WeekData,
 } from '../util/CalendarDataFactory';
-import { CalendarMonth, DataPerWeek } from './CalendarMonth';
+import { CalendarMonth } from './CalendarMonth';
 import { CalendarTheme, defaultCalendarTheme } from './CalendarTheme';
 import { CalendarDay } from './renderers/CalendarDay';
 
@@ -80,9 +80,9 @@ export interface CalendarProps<T>
   /** Split the months into rows. */
   monthsPerRow?: number;
   /** User value to pass down to renderers. */
-  userDataPerMonth?: DataPerMonth<T>;
+  userDataPerMonth?: CalendarUserData<T>;
   /** Internal state to pass down to renderers. Do not use it, this is used by the framework. */
-  statePerMonth?: DataPerMonth<DayState>;
+  statePerMonth?: CalendarState;
   /**
    * The component to use to render a day in the calendar.
    * Must use CalendarDayProps. Use CalendarDay or create your own.
@@ -123,8 +123,6 @@ export interface CalendarPropsWithDateSet<T> {
   dayComponent?: React.ComponentType<CalendarDayProps<T>>;
 }
 
-export type CalendarUserData<T> = DataPerMonth<T>;
-
 interface InnerProps<T>
   extends CalendarProps<T>,
     CalendarOnClicks<T>,
@@ -133,7 +131,7 @@ interface InnerProps<T>
   month: number;
   monthRows: Array<Array<MonthData>>;
   userDataPerMonth?: CalendarUserData<T>;
-  statePerMonth?: DataPerMonth<DayState>;
+  statePerMonth?: CalendarUserData<DayState>;
   width?: string;
   height?: string;
   theme?: CalendarTheme;
@@ -147,15 +145,25 @@ export type DayStateHighlight =
   | 'disabled'
   | string;
 
-export interface DayState {
+export interface HighlightsState {
   highlights?: Array<DayStateHighlight>;
 }
+
+export type DayState = HighlightsState;
 
 export type OnClickDay<T> = (day: DayData, data?: T) => void;
 export type OnClickWeekDay = (weekDay: number) => void;
 export type OnClickWeek = (week: WeekData) => void;
 
-export type DataPerMonth<T> = { [key: string]: DataPerWeek<T> };
+export type CalendarUserData<T> = { [key: string]: CalendarUserMonthData<T> };
+export type CalendarUserMonthData<T> = {
+  [key: number]: CalendarUserWeekData<T>;
+};
+export type CalendarUserWeekData<T> = { [key: number]: T };
+
+export type CalendarState = { [key: string]: StateForMonth };
+export type StateForMonth = { [key: number]: StateForWeek };
+export type StateForWeek = { [key: number]: DayState } & HighlightsState;
 
 const CalendarComponent = <T extends {}>({
   year,

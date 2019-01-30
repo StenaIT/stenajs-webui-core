@@ -156,6 +156,21 @@ export const getDaysForWeekForDate = (firstDayOfWeek: Date): Array<DayData> => {
   }).map(createDay);
 };
 
+export const getStartDateOfISOWeek = (
+  weekNumber: number,
+  year: number,
+): Date => {
+  const simple = new Date(year, 0, 1 + (weekNumber - 1) * 7);
+  const dayOfWeek = simple.getDay();
+  const isoWeekStart = simple;
+  if (dayOfWeek <= 4) {
+    isoWeekStart.setDate(simple.getDate() - simple.getDay() + 1);
+  } else {
+    isoWeekStart.setDate(simple.getDate() + 8 - simple.getDay());
+  }
+  return isoWeekStart;
+};
+
 export const calculateOverflowingMonth = (
   year: number,
   month: number,
