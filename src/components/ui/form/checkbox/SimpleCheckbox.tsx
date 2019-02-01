@@ -31,7 +31,7 @@ const Wrapper = styled('div')<{
         ? theme.checkedColors.backgroundColor
         : theme.colors.backgroundColor};
   border: 1px solid;
-  border-radius: ${({ theme }) => theme.borderRadius}px;
+  border-radius: ${({ theme }) => theme.borderRadius};
   border-color: ${({ disabled, theme, value }) =>
     disabled
       ? theme.disabledColors.borderColor

@@ -12,9 +12,9 @@ export interface SimpleCheckboxTheme {
   disabledColors: SimpleCheckboxStateTheme;
   checkedColors: SimpleCheckboxStateTheme;
   checkIcon: IconProp;
-  width: number;
-  height: number;
-  borderRadius: number;
+  width: string;
+  height: string;
+  borderRadius: string;
   iconSize: number;
 }
 
@@ -35,9 +35,9 @@ export const defaultSimpleCheckboxTheme: SimpleCheckboxTheme = {
     iconColor: defaultColors.primaryText,
   },
   checkIcon: 'check',
-  width: 22,
-  height: 22,
-  borderRadius: 4,
+  width: '22px',
+  height: '22px',
+  borderRadius: '4px',
   iconSize: 10,
 };
 
@@ -58,8 +58,8 @@ export const defaultSimpleCheckboxThemeDark: SimpleCheckboxTheme = {
     iconColor: defaultColors.primaryText,
   },
   checkIcon: 'check',
-  width: 22,
-  height: 22,
-  borderRadius: 4,
+  width: '22px',
+  height: '22px',
+  borderRadius: '4px',
   iconSize: 10,
 };
