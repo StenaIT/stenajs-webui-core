@@ -49,10 +49,23 @@ export const addCheckboxStories = () => {
           value={store.state.value}
           onChange={value => store.set({ value })}
           theme={{
-            borderColor: 'red',
-            iconColor: 'blue',
+            colors: {
+              backgroundColor: 'lightgray',
+              borderColor: 'black',
+              iconColor: 'white',
+            },
+            disabledColors: {
+              backgroundColor: 'lightgray',
+              borderColor: 'black',
+              iconColor: 'white',
+            },
+            checkedColors: {
+              backgroundColor: 'lightblue',
+              borderColor: 'red',
+              iconColor: 'white',
+            },
             checkIcon: 'coffee',
-            borderRadius: '8px',
+            borderRadius: 2,
           }}
         />
       )),

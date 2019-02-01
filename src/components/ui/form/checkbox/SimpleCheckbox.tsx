@@ -1,16 +1,9 @@
 import * as React from 'react';
+import styled from 'react-emotion';
 import { compose, pure, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types/DeepPartial';
-import {
-  withOnToggleHandler,
-  WithOnToggleHandler,
-} from '../../../util/enhancers/withOnToggleHandler';
-import {
-  withComponentTheme,
-  WithInnerComponentThemeProps,
-} from '../../../util/enhancers/WithComponentTheme';
-import { Background } from '../../colors/Background';
-import { Border } from '../../decorations/Border';
+import { withComponentTheme, WithInnerComponentThemeProps, } from '../../../util/enhancers/WithComponentTheme';
+import { withOnToggleHandler, WithOnToggleHandler, } from '../../../util/enhancers/withOnToggleHandler';
 import { Icon } from '../../icon/Icon';
 import { Clickable } from '../../interaction/Clickable';
 import { Row } from '../../layout/Row';
@@ -26,6 +19,28 @@ type InnerProps = SimpleCheckboxProps &
   WithOnToggleHandler &
   WithInnerComponentThemeProps<SimpleCheckboxTheme>;
 
+const Wrapper = styled('div')<{
+  disabled: boolean | undefined;
+  theme: SimpleCheckboxTheme;
+  value: boolean | undefined;
+}>`
+  background-color: ${({ disabled, theme, value }) =>
+    disabled
+      ? theme.disabledColors.backgroundColor
+      : value
+        ? theme.checkedColors.backgroundColor
+        : theme.colors.backgroundColor};
+  border: 1px solid;
+  border-radius: ${({ theme }) => theme.borderRadius};
+  border-color: ${({ disabled, theme, value }) =>
+    disabled
+      ? theme.disabledColors.borderColor
+      : value
+        ? theme.checkedColors.borderColor
+        : theme.colors.borderColor};
+  overflow: hidden;
+`;
+
 export const SimpleCheckboxComponent = ({
   theme,
   disabled,
@@ -34,32 +49,26 @@ export const SimpleCheckboxComponent = ({
 }: InnerProps) => {
   return (
     <Clickable onClick={disabled ? undefined : onToggle}>
-      <Border
-        color={disabled ? theme.borderColorDisabled : theme.borderColor}
-        borderRadius={theme.borderRadius}
-        overflow={'hidden'}
-      >
-        <Background
-          color={
-            disabled ? theme.backgroundColorDisabled : theme.backgroundColor
-          }
+      <Wrapper disabled={disabled} theme={theme} value={value}>
+        <Row
+          justifyContent={'center'}
+          alignItems={'center'}
+          width={theme.width}
+          height={theme.height}
         >
-          <Row
-            justifyContent={'center'}
-            alignItems={'center'}
-            width={theme.width}
-            height={theme.height}
-          >
-            {value && (
-              <Icon
-                name={theme.checkIcon}
-                color={disabled ? theme.iconColorDisabled : theme.iconColor}
-                size={theme.iconSize}
-              />
-            )}
-          </Row>
-        </Background>
-      </Border>
+          {value && (
+            <Icon
+              name={theme.checkIcon}
+              color={
+                disabled
+                  ? theme.disabledColors.iconColor
+                  : theme.colors.iconColor
+              }
+              size={theme.iconSize}
+            />
+          )}
+        </Row>
+      </Wrapper>
     </Clickable>
   );
 };

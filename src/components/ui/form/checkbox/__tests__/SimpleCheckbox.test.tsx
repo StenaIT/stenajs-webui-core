@@ -58,7 +58,7 @@ describe('SimpleCheckbox', () => {
           <SimpleCheckboxComponent {...props} value={true} disabled />,
         );
         expect(wrapper.find(Icon).prop('color')).toBe(
-          defaultTheme.components.SimpleCheckbox.iconColorDisabled,
+          defaultTheme.components.SimpleCheckbox.disabledColors.iconColor,
         );
       });
     });
@@ -69,7 +69,7 @@ describe('SimpleCheckbox', () => {
           <SimpleCheckboxComponent {...props} value={true} />,
         );
         expect(wrapper.find(Icon).prop('color')).toBe(
-          defaultTheme.components.SimpleCheckbox.iconColor,
+          defaultTheme.components.SimpleCheckbox.colors.iconColor,
         );
       });
     });
