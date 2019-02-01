@@ -20,9 +20,9 @@ type InnerProps = SimpleCheckboxProps &
   WithInnerComponentThemeProps<SimpleCheckboxTheme>;
 
 const Wrapper = styled('div')<{
-  disabled: boolean;
+  disabled: boolean | undefined;
   theme: SimpleCheckboxTheme;
-  value: boolean;
+  value: boolean | undefined;
 }>`
   background-color: ${({ disabled, theme, value }) =>
     disabled
