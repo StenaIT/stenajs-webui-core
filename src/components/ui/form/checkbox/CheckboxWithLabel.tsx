@@ -42,7 +42,7 @@ export const CheckboxWithLabelComponent: React.SFC<InnerProps> = props => {
         <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />
         <Space />
         {label && (
-          <DefaultText color={disabled ? theme.iconColorDisabled : textColor}>
+          <DefaultText color={disabled ? theme.disabledColors.iconColor : textColor}>
             {label}
           </DefaultText>
         )}
