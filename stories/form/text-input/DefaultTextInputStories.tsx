@@ -155,6 +155,13 @@ export const addDefaultTextInputStories = () => {
     .add('disabled', () => (
       <DefaultTextInput value={''} placeholder={'Enter name'} disabled={true} />
     ))
+    .add('without border', () => (
+      <DefaultTextInput
+        value={'Value'}
+        placeholder={'Enter name'}
+        theme={{ borderStyle: 'none' }}
+      />
+    ))
     .add('disabled with content', () => (
       <DefaultTextInput
         disabled={true}

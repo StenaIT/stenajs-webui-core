@@ -35,6 +35,13 @@ export const addBorderStories = () => {
         </Border>
       </div>
     ))
+    .add('with custom border style', () => (
+      <div style={{ display: 'table' }}>
+        <Border borderRadius={'5px'} borderStyle={'dotted'}>
+          <DefaultText>This text has a dotted border</DefaultText>
+        </Border>
+      </div>
+    ))
     .add('with partial borderRadius', () => (
       <div style={{ display: 'table' }}>
         <Border borderTopLeftRadius={'5px'} borderTopRightRadius={'5px'}>
