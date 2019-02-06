@@ -35,7 +35,7 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
   onChange,
   placeholder = 'YYYY-MM-DD',
   value,
-  width = '100px',
+  width = '125px',
   zIndex = 100,
   ...props
 }) => {

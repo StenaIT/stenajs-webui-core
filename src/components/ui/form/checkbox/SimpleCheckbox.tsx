@@ -2,8 +2,14 @@ import * as React from 'react';
 import styled from 'react-emotion';
 import { compose, pure, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types/DeepPartial';
-import { withComponentTheme, WithInnerComponentThemeProps, } from '../../../util/enhancers/WithComponentTheme';
-import { withOnToggleHandler, WithOnToggleHandler, } from '../../../util/enhancers/withOnToggleHandler';
+import {
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../../util/enhancers/WithComponentTheme';
+import {
+  withOnToggleHandler,
+  WithOnToggleHandler,
+} from '../../../util/enhancers/withOnToggleHandler';
 import { Icon } from '../../icon/Icon';
 import { Clickable } from '../../interaction/Clickable';
 import { Row } from '../../layout/Row';

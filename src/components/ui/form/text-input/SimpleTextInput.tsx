@@ -199,7 +199,7 @@ class SimpleTextInputComponent extends React.Component<
     return (
       <input
         style={{
-          width,
+          width: width || '100%',
           height: height || theme.components.SimpleTextInput.height,
           fontSize: fontSize || theme.components.SimpleTextInput.fontSize,
           backgroundColor:

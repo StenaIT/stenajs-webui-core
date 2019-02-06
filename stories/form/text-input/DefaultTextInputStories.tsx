@@ -169,5 +169,28 @@ export const addDefaultTextInputStories = () => {
         contentRight={<DefaultText>ms</DefaultText>}
         iconLeft={'coffee'}
       />
+    ))
+    .add('with dynamic width', () => (
+      <div>
+        <DefaultTextInput
+          value={'120px'}
+          width={'120px'}
+        />
+
+        <Spacing />
+
+        <DefaultTextInput
+          value={'24em'}
+          width={'24em'}
+        />
+
+        <Spacing />
+
+        <DefaultTextInput
+          value={'100%'}
+          width={'100%'}
+        />
+
+      </div>
     ));
 };

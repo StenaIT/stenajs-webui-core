@@ -29,7 +29,6 @@ const borderClass = css`
   display: inline-block;
   overflow: hidden;
 `;
-
 const inputClass = css`
   border: 0;
   :focus {
@@ -153,6 +152,7 @@ const DefaultTextInputComponent = ({
     }
     borderStyle={theme.borderStyle}
     width={theme.borderWidth}
+    style={{ width: inputProps.width || '100%' }}
   >
     <Background
       color={
@@ -160,42 +160,47 @@ const DefaultTextInputComponent = ({
           ? theme.disabledBackgroundColor
           : backgroundColor || theme.backgroundColor
       }
+      style={{ width: inputProps.width || '100%' }}
     >
-      <Row alignItems={'center'}>
+      <Row alignItems={'center'} style={{ width: inputProps.width || '100%' }}>
         <TextInputIcon
           content={contentLeft}
-          icon={iconLeft}
-          iconSize={iconSizeLeft}
-          theme={theme}
-          iconColor={iconColorLeft}
-          spaceOnLeft
           disableContentPadding={disableContentPadding}
           disableContentPaddingLeft={disableContentPaddingLeft}
           disableContentPaddingRight={disableContentPaddingRight}
+          icon={iconLeft}
+          iconColor={iconColorLeft}
+          iconSize={iconSizeLeft}
+          spaceOnLeft
+          theme={theme}
         />
-        <SimpleTextInput
-          {...inputProps}
-          disabled={disabled}
-          textColor={textColor || theme.textColor}
-          backgroundColor={backgroundColor || theme.backgroundColor}
-          style={{
-            fontSize: theme.fontSize,
-            height: theme.height,
-            paddingLeft: theme.paddingLeft,
-            paddingRight: theme.paddingRight,
-          }}
-          className={inputClass}
-        />
+        <div style={{ width: '100%' }}>
+          <SimpleTextInput
+            {...inputProps}
+            backgroundColor={backgroundColor || theme.backgroundColor}
+            className={inputClass}
+            disabled={disabled}
+            textColor={textColor || theme.textColor}
+            width={'100%'}
+            style={{
+              fontSize: theme.fontSize,
+              height: theme.height,
+              paddingLeft: theme.paddingLeft,
+              paddingRight: theme.paddingRight,
+              boxSizing: 'border-box',
+            }}
+          />
+        </div>
         <TextInputIcon
           content={contentRight}
-          icon={iconRight}
-          iconSize={iconSizeRight}
-          theme={theme}
-          iconColor={iconColorRight}
-          spaceOnRight
           disableContentPadding={disableContentPadding}
           disableContentPaddingLeft={disableContentPaddingLeft}
           disableContentPaddingRight={disableContentPaddingRight}
+          icon={iconRight}
+          iconColor={iconColorRight}
+          iconSize={iconSizeRight}
+          spaceOnRight
+          theme={theme}
         />
       </Row>
     </Background>

@@ -20,7 +20,7 @@ export const TimeTextInput: React.FC<TimeTextInputProps> = ({
   showPlaceholder = true,
   useIcon = true,
   value,
-  width = '50px',
+  width = '85px',
   ...props
 }) => {
   const [valid, setValid] = useState(() => validUserInput(value));
