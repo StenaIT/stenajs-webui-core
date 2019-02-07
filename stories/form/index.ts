@@ -4,6 +4,7 @@ import { addDateTimeInputStories } from './DateTimeInputStories';
 import { addMultipleOptionsStories } from './MultipleOptionsStories';
 import { addRadioButtonStories } from './RadioButtonStories';
 import { addSelectStories } from './SelectStories';
+import { addSwitchStories } from './SwitchStories';
 import { addTextInputStories } from './TextInputStories';
 
 export const addFormStories = () => {
@@ -13,5 +14,6 @@ export const addFormStories = () => {
   addMultipleOptionsStories();
   addRadioButtonStories();
   addSelectStories();
+  addSwitchStories();
   addTextInputStories();
 };
