@@ -53,6 +53,16 @@ export const addSwitchStories = () => {
           theme={{
             ...defaultSwitchTheme,
             borderRadius: 10,
+            checkedColors: {
+              backgroundColor: 'lightgreen',
+              iconBackgroundColor: 'pink',
+              iconColor: 'darkblue',
+            },
+            colors: {
+              backgroundColor: 'pink',
+              iconBackgroundColor: 'darkblue',
+              iconColor: 'lightgreen',
+            },
             height: 20,
             width: 100,
           }}

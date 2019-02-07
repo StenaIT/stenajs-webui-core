@@ -1,8 +1,8 @@
 import { defaultColors } from '../../../../themes/default-values/DefaultColors';
 
 export interface SwitchStateTheme {
-  borderColor: string;
   backgroundColor: string;
+  iconBackgroundColor: string;
   iconColor: string;
 }
 
@@ -17,18 +17,18 @@ export interface SwitchTheme {
 
 export const defaultSwitchTheme: SwitchTheme = {
   colors: {
-    backgroundColor: defaultColors.white,
-    borderColor: defaultColors.inputBorder,
-    iconColor: defaultColors.primaryText,
+    backgroundColor: defaultColors.primaryTextLight,
+    iconBackgroundColor: defaultColors.white,
+    iconColor: defaultColors.primaryTextLight,
   },
   disabledColors: {
     backgroundColor: '#f1f1f1',
-    borderColor: defaultColors.inputBorder,
+    iconBackgroundColor: defaultColors.white,
     iconColor: defaultColors.disabledText,
   },
   checkedColors: {
-    backgroundColor: defaultColors.white,
-    borderColor: defaultColors.inputBorder,
+    backgroundColor: defaultColors.primaryText,
+    iconBackgroundColor: defaultColors.white,
     iconColor: defaultColors.primaryText,
   },
   width: 40,
@@ -39,17 +39,17 @@ export const defaultSwitchTheme: SwitchTheme = {
 export const defaultSwitchThemeDark: SwitchTheme = {
   colors: {
     backgroundColor: '#b7d1d9',
-    borderColor: 'transparent',
+    iconBackgroundColor: defaultColors.white,
     iconColor: '#4d7989',
   },
   disabledColors: {
     backgroundColor: '#f1f1f1',
-    borderColor: defaultColors.inputBorder,
+    iconBackgroundColor: defaultColors.white,
     iconColor: defaultColors.disabledText,
   },
   checkedColors: {
     backgroundColor: '#b7d1d9',
-    borderColor: defaultColors.inputBorder,
+    iconBackgroundColor: defaultColors.white,
     iconColor: defaultColors.primaryText,
   },
   width: 40,

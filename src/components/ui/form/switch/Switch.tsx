@@ -28,19 +28,24 @@ const InvisibleInput = styled('input')`
   position: absolute;
 `;
 
-const Back = styled('div')<Pick<SwitchProps, 'theme'>>`
+const Back = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>`
   cursor: pointer;
   width: ${({ theme }) => theme.width}px;
   height: ${({ theme }) => theme.height}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
-  background-color: #da419c;
+  background-color: ${({ checked, theme }) =>
+    checked
+      ? theme.checkedColors.backgroundColor
+      : theme.colors.backgroundColor};
   position: relative;
 `;
 
 const Front = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>`
-  background-color: #fff;
+  background-color: ${({ checked, theme }) =>
+    checked
+      ? theme.checkedColors.iconBackgroundColor
+      : theme.colors.iconBackgroundColor};
   border-radius: ${({ theme }) => theme.borderRadius - 1}px;
-  color: #303030;
   height: ${({ theme }) => theme.height - 4}px;
   position: absolute;
   right ${({ checked, theme }) =>
@@ -82,7 +87,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
 
   return (
     <>
-      <Back onClick={handleSwitchClick} theme={theme}>
+      <Back checked={checked} onClick={handleSwitchClick} theme={theme}>
         <InvisibleInput
           checked={checked}
           onChange={handleInputChange}
@@ -92,7 +97,15 @@ const SwitchComponent: React.FC<InnerProps> = ({
         <Front checked={checked} theme={theme}>
           {checked && (
             <IconWrapper theme={theme}>
-              <Icon color={'#303030'} name={'check'} size={theme.height - 8} />
+              <Icon
+                color={
+                  checked
+                    ? theme.checkedColors.iconColor
+                    : theme.colors.iconColor
+                }
+                name={'check'}
+                size={theme.height - 8}
+              />
             </IconWrapper>
           )}
         </Front>
