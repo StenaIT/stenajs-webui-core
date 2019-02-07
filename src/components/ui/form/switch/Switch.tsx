@@ -11,6 +11,7 @@ import { SwitchTheme } from './SwitchTheme';
 
 export interface SwitchProps {
   checked: boolean;
+  disabled?: boolean;
   onChange: (value: boolean) => void;
   value: string;
   theme?: SwitchTheme;
@@ -28,23 +29,29 @@ const InvisibleInput = styled('input')`
   position: absolute;
 `;
 
-const Back = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>`
+const Back = styled('div')<Pick<SwitchProps, 'checked' | 'disabled' | 'theme'>>`
   cursor: pointer;
   width: ${({ theme }) => theme.width}px;
   height: ${({ theme }) => theme.height}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
-  background-color: ${({ checked, theme }) =>
-    checked
-      ? theme.checkedColors.backgroundColor
-      : theme.colors.backgroundColor};
+  background-color: ${({ checked, disabled, theme }) =>
+    disabled
+      ? theme.disabledColors.backgroundColor
+      : checked
+        ? theme.checkedColors.backgroundColor
+        : theme.colors.backgroundColor};
   position: relative;
 `;
 
-const Front = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>`
-  background-color: ${({ checked, theme }) =>
-    checked
-      ? theme.checkedColors.iconBackgroundColor
-      : theme.colors.iconBackgroundColor};
+const Front = styled('div')<
+  Pick<SwitchProps, 'checked' | 'disabled' | 'theme'>
+>`
+  background-color: ${({ checked, disabled, theme }) =>
+    disabled
+      ? theme.disabledColors.iconBackgroundColor
+      : checked
+        ? theme.checkedColors.iconBackgroundColor
+        : theme.colors.iconBackgroundColor};
   border-radius: ${({ theme }) => theme.borderRadius - 1}px;
   height: ${({ theme }) => theme.height - 4}px;
   position: absolute;
@@ -67,41 +74,53 @@ type InnerProps = WithInnerComponentThemeProps<SwitchTheme> & SwitchProps;
 
 const SwitchComponent: React.FC<InnerProps> = ({
   checked,
+  disabled = false,
   onChange,
   value,
   theme,
 }) => {
   const handleInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
-      onChange(e.target.checked);
+      if (!disabled) {
+        onChange(e.target.checked);
+      }
     },
     [onChange],
   );
 
   const handleSwitchClick = useCallback(
     () => {
-      onChange(!checked);
+      if (!disabled) {
+        onChange(!checked);
+      }
     },
     [checked, onChange],
   );
 
   return (
     <>
-      <Back checked={checked} onClick={handleSwitchClick} theme={theme}>
+      <Back
+        checked={checked}
+        disabled={disabled}
+        onClick={handleSwitchClick}
+        theme={theme}
+      >
         <InvisibleInput
           checked={checked}
           onChange={handleInputChange}
           type={'checkbox'}
           value={value}
         />
-        <Front checked={checked} theme={theme}>
+        <Front checked={checked} disabled={disabled} theme={theme}>
           {checked && (
             <IconWrapper theme={theme}>
               <Icon
                 color={
-                  checked
-                    ? theme.checkedColors.iconColor
-                    : theme.colors.iconColor
+                  disabled
+                    ? theme.disabledColors.iconColor
+                    : checked
+                      ? theme.checkedColors.iconColor
+                      : theme.colors.iconColor
                 }
                 name={'check'}
                 size={theme.height - 8}

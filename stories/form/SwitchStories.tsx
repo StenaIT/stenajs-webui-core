@@ -68,5 +68,18 @@ export const addSwitchStories = () => {
           }}
         />
       )),
+    )
+    .add(
+      'disabled',
+      withState<State>({
+        checked: true,
+      })(({ store }: { store: Store<State> }) => (
+        <Switch
+          checked={store.state.checked}
+          disabled={true}
+          onChange={checked => store.set({ checked })}
+          value="checkbox"
+        />
+      )),
     );
 };

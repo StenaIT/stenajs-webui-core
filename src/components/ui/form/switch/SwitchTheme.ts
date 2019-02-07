@@ -22,7 +22,7 @@ export const defaultSwitchTheme: SwitchTheme = {
     iconColor: defaultColors.primaryTextLight,
   },
   disabledColors: {
-    backgroundColor: '#f1f1f1',
+    backgroundColor: defaultColors.inputBorder,
     iconBackgroundColor: defaultColors.white,
     iconColor: defaultColors.disabledText,
   },
@@ -43,7 +43,7 @@ export const defaultSwitchThemeDark: SwitchTheme = {
     iconColor: '#4d7989',
   },
   disabledColors: {
-    backgroundColor: '#f1f1f1',
+    backgroundColor: defaultColors.inputBorder,
     iconBackgroundColor: defaultColors.white,
     iconColor: defaultColors.disabledText,
   },
