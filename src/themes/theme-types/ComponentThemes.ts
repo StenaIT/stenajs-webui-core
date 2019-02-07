@@ -12,6 +12,7 @@ import {
   DateRangeInputTheme,
 } from '../../components/ui/form/date-time-input/index';
 import { RadioButtonTheme } from '../../components/ui/form/radio/RadioButtonTheme';
+import { SwitchTheme } from '../../components/ui/form/switch/SwitchTheme';
 import {
   DefaultTextInputTheme,
   SimpleTextInputTheme,
@@ -43,5 +44,6 @@ export interface ComponentThemes {
   SmallText: TextTheme;
   SmallerText: TextTheme;
   StandardButton: StandardButtonTheme;
+  Switch: SwitchTheme;
   TinyText: TextTheme;
 }

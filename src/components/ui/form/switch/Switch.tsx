@@ -1,12 +1,19 @@
 import * as React from 'react';
 import { ChangeEvent, useCallback } from 'react';
 import styled from 'react-emotion';
+import { compose, setDisplayName } from 'recompose';
+import {
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../../util/enhancers';
 import { Icon } from '../../icon';
+import { SwitchTheme } from './SwitchTheme';
 
 export interface SwitchProps {
   checked: boolean;
   onChange: (value: boolean) => void;
   value: string;
+  theme?: SwitchTheme;
 }
 
 const InvisibleInput = styled('input')`
@@ -21,36 +28,44 @@ const InvisibleInput = styled('input')`
   position: absolute;
 `;
 
-const Back = styled('div')`
+const Back = styled('div')<Pick<SwitchProps, 'theme'>>`
   cursor: pointer;
-  width: 40px;
-  height: 21px;
-  border-radius: 4px;
+  width: ${({ theme }) => theme.width}px;
+  height: ${({ theme }) => theme.height}px;
+  border-radius: ${({ theme }) => theme.borderRadius}px;
   background-color: #da419c;
   position: relative;
 `;
 
-const Front = styled('div')<Pick<SwitchProps, 'checked'>>`
+const Front = styled('div')<Pick<SwitchProps, 'checked' | 'theme'>>`
   background-color: #fff;
-  border-radius: 3px;
+  border-radius: ${({ theme }) => theme.borderRadius - 1}px;
   color: #303030;
-  height: 17px;
+  height: ${({ theme }) => theme.height - 4}px;
   position: absolute;
-  right ${({ checked }) => (checked ? '2px' : '21px')};
+  right ${({ checked, theme }) =>
+    checked ? '2px' : `${theme.width - theme.height + 2}px`};
   top: 2px;
   transition: right .1s linear;
-  width: 17px;
+  width: ${({ theme }) => theme.height - 4}px;
 `;
 
-const IconWrapper = styled('div')`
+const IconWrapper = styled('div')<Pick<SwitchProps, 'theme'>>`
   align-items: center;
   display: flex;
-  height: 17px;
+  height: ${({ theme }) => theme.height - 4}px;
   justify-content: center;
-  width: 17px;
+  width: ${({ theme }) => theme.height - 4}px;
 `;
 
-export const Switch: React.FC<SwitchProps> = ({ checked, onChange, value }) => {
+type InnerProps = WithInnerComponentThemeProps<SwitchTheme> & SwitchProps;
+
+const SwitchComponent: React.FC<InnerProps> = ({
+  checked,
+  onChange,
+  value,
+  theme,
+}) => {
   const handleInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
       onChange(e.target.checked);
@@ -67,17 +82,17 @@ export const Switch: React.FC<SwitchProps> = ({ checked, onChange, value }) => {
 
   return (
     <>
-      <Back onClick={handleSwitchClick}>
+      <Back onClick={handleSwitchClick} theme={theme}>
         <InvisibleInput
           checked={checked}
           onChange={handleInputChange}
           type={'checkbox'}
           value={value}
         />
-        <Front checked={checked}>
+        <Front checked={checked} theme={theme}>
           {checked && (
-            <IconWrapper>
-              <Icon color={'#303030'} name={'check'} size={12} />
+            <IconWrapper theme={theme}>
+              <Icon color={'#303030'} name={'check'} size={theme.height - 8} />
             </IconWrapper>
           )}
         </Front>
@@ -85,3 +100,8 @@ export const Switch: React.FC<SwitchProps> = ({ checked, onChange, value }) => {
     </>
   );
 };
+
+export const Switch = compose<InnerProps, SwitchProps>(
+  setDisplayName('Switch'),
+  withComponentTheme('Switch'),
+)(SwitchComponent);
