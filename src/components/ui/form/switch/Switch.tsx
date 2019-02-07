@@ -30,7 +30,7 @@ const InvisibleInput = styled('input')`
 `;
 
 const Back = styled('div')<Pick<SwitchProps, 'checked' | 'disabled' | 'theme'>>`
-  cursor: pointer;
+  cursor: ${({ disabled }) => (disabled ? 'inherit' : 'pointer')};
   width: ${({ theme }) => theme.width}px;
   height: ${({ theme }) => theme.height}px;
   border-radius: ${({ theme }) => theme.borderRadius}px;
@@ -41,6 +41,10 @@ const Back = styled('div')<Pick<SwitchProps, 'checked' | 'disabled' | 'theme'>>`
         ? theme.checkedColors.backgroundColor
         : theme.colors.backgroundColor};
   position: relative;
+
+  :hover {
+    opacity: ${({ disabled }) => (disabled ? '1' : '0.7')};
+  }
 `;
 
 const Front = styled('div')<
@@ -59,7 +63,7 @@ const Front = styled('div')<
     checked ? '2px' : `${theme.width - theme.height + 2}px`};
   top: 2px;
   transition: right ${({ theme }) => theme.width / 400}s linear;
-  width: ${({ theme }) => theme.height - 4}px;
+  width: ${({ theme }) => theme.height - 4}px; 
 `;
 
 const IconWrapper = styled('div')<Pick<SwitchProps, 'theme'>>`
