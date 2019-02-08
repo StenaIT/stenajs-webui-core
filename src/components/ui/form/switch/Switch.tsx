@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { ChangeEvent, useCallback } from 'react';
-import styled from 'react-emotion';
+import styled, { css } from 'react-emotion';
 import { compose, setDisplayName } from 'recompose';
+import { RequiredInputComponentProps } from '../../../RequiredComponentProps';
 import {
   withComponentTheme,
   WithInnerComponentThemeProps,
@@ -9,7 +10,8 @@ import {
 import { Icon } from '../../icon';
 import { SwitchTheme } from './SwitchTheme';
 
-export interface SwitchProps {
+export interface SwitchProps
+  extends RequiredInputComponentProps<HTMLInputElement> {
   checked: boolean;
   disabled?: boolean;
   onChange: (value: boolean) => void;
@@ -17,7 +19,7 @@ export interface SwitchProps {
   theme?: SwitchTheme;
 }
 
-const InvisibleInput = styled('input')`
+const invisibleInputStyles = css`
   top: 0;
   left: 0;
   width: 100%;
@@ -60,7 +62,7 @@ const Front = styled('div')<
   height: ${({ theme }) => theme.height - 4}px;
   position: absolute;
   right ${({ checked, theme }) =>
-    checked ? '2px' : `${theme.width - theme.height + 2}px`};
+    checked ? 2 : `${theme.width - theme.height + 2}`}px;
   top: 2px;
   transition: right ${({ theme }) => theme.width / 400}s linear;
   width: ${({ theme }) => theme.height - 4}px; 
@@ -78,10 +80,14 @@ type InnerProps = WithInnerComponentThemeProps<SwitchTheme> & SwitchProps;
 
 const SwitchComponent: React.FC<InnerProps> = ({
   checked,
+  className,
   disabled = false,
+  inputRef,
   onChange,
   value,
+  ref,
   theme,
+  ...rest
 }) => {
   const handleInputChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
@@ -102,19 +108,23 @@ const SwitchComponent: React.FC<InnerProps> = ({
   );
 
   return (
-    <>
+    <div ref={ref}>
       <Back
         checked={checked}
+        className={className}
         disabled={disabled}
         onClick={handleSwitchClick}
         theme={theme}
       >
-        <InvisibleInput
+        <input
           checked={checked}
+          className={invisibleInputStyles}
           onChange={handleInputChange}
+          ref={inputRef}
           type={'checkbox'}
           value={value}
         />
+
         <Front checked={checked} disabled={disabled} theme={theme}>
           {checked && (
             <IconWrapper theme={theme}>
@@ -133,7 +143,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
           )}
         </Front>
       </Back>
-    </>
+    </div>
   );
 };
 
