@@ -6,7 +6,7 @@ import { Switch } from '../../src/components/ui/form/switch/Switch';
 import { defaultSwitchTheme } from '../../src/components/ui/form/switch/SwitchTheme';
 
 interface State {
-  checked: boolean;
+  value: boolean;
 }
 
 export const addSwitchStories = () => {
@@ -15,24 +15,22 @@ export const addSwitchStories = () => {
     .add(
       'standard',
       withState<State>({
-        checked: true,
+        value: true,
       })(({ store }: { store: Store<State> }) => (
         <Switch
-          checked={store.state.checked}
-          onChange={checked => store.set({ checked })}
-          value="checkbox"
+          value={store.state.value}
+          onChange={value => store.set({ value })}
         />
       )),
     )
     .add(
       'custom size',
       withState<State>({
-        checked: true,
+        value: true,
       })(({ store }: { store: Store<State> }) => (
         <Switch
-          checked={store.state.checked}
-          onChange={checked => store.set({ checked })}
-          value="checkbox"
+          value={store.state.value}
+          onChange={value => store.set({ value })}
           theme={{
             ...defaultSwitchTheme,
             height: 40,
@@ -44,12 +42,11 @@ export const addSwitchStories = () => {
     .add(
       'custom style',
       withState<State>({
-        checked: true,
+        value: true,
       })(({ store }: { store: Store<State> }) => (
         <Switch
-          checked={store.state.checked}
-          onChange={checked => store.set({ checked })}
-          value="checkbox"
+          value={store.state.value}
+          onChange={value => store.set({ value })}
           theme={{
             ...defaultSwitchTheme,
             borderRadius: 10,
@@ -72,13 +69,12 @@ export const addSwitchStories = () => {
     .add(
       'disabled',
       withState<State>({
-        checked: true,
+        value: true,
       })(({ store }: { store: Store<State> }) => (
         <Switch
-          checked={store.state.checked}
+          value={store.state.value}
           disabled={true}
-          onChange={checked => store.set({ checked })}
-          value="checkbox"
+          onChange={value => store.set({ value })}
         />
       )),
     );
