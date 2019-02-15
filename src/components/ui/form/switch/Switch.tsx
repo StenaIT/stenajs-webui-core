@@ -50,7 +50,7 @@ const Back = styled('div')<Pick<SwitchProps, 'value' | 'disabled' | 'theme'>>`
   }
 `;
 
-const Front = styled('div')<Pick<SwitchProps, 'value' | 'disabled' | 'theme'>>`
+const Front = styled('div')<Pick<SwitchProps, 'disabled' | 'theme' | 'value' >>`
   background-color: ${({ value, disabled, theme }) =>
     disabled
       ? theme.disabledColors.iconBackgroundColor
@@ -63,16 +63,18 @@ const Front = styled('div')<Pick<SwitchProps, 'value' | 'disabled' | 'theme'>>`
   right ${({ value, theme }) =>
     value ? 2 : `${theme.width - theme.height + 2}`}px;
   top: 2px;
-  transition: right ${({ theme }) => 0.1}s linear;
+  transition: right 0.1s linear;
   width: ${({ theme }) => theme.height - 4}px; 
 `;
 
-const IconWrapper = styled('div')<Pick<SwitchProps, 'theme'>>`
+const IconWrapper = styled('div')<Pick<SwitchProps, 'theme' | 'value'>>`
   align-items: center;
   display: flex;
   height: ${({ theme }) => theme.height - 4}px;
   justify-content: center;
   width: ${({ theme }) => theme.height - 4}px;
+  opacity: ${({ value }) => value ? 1 : 0};
+  transition: opacity 0.1s linear;
 `;
 
 type InnerProps = WithInnerComponentThemeProps<SwitchTheme> & SwitchProps;
@@ -123,21 +125,19 @@ const SwitchComponent: React.FC<InnerProps> = ({
         />
 
         <Front value={value} disabled={disabled} theme={theme}>
-          {value && (
-            <IconWrapper theme={theme}>
-              <Icon
-                color={
-                  disabled
-                    ? theme.disabledColors.iconColor
-                    : value
-                      ? theme.checkedColors.iconColor
-                      : theme.colors.iconColor
-                }
-                name={'check'}
-                size={theme.height - 8}
-              />
-            </IconWrapper>
-          )}
+          <IconWrapper theme={theme} value={value}>
+            <Icon
+              color={
+                disabled
+                  ? theme.disabledColors.iconColor
+                  : value
+                    ? theme.checkedColors.iconColor
+                    : theme.colors.iconColor
+              }
+              name={'check'}
+              size={theme.height - 8}
+            />
+          </IconWrapper>
         </Front>
       </Back>
     </div>
