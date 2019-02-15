@@ -2,6 +2,7 @@ import * as React from 'react';
 import { ChangeEvent, useCallback } from 'react';
 import styled, { css } from 'react-emotion';
 import { compose, setDisplayName } from 'recompose';
+import { DeepPartial } from '../../../../types';
 import { RequiredInputComponentProps } from '../../../RequiredComponentProps';
 import {
   withComponentTheme,
@@ -15,8 +16,8 @@ export interface SwitchProps
   checked: boolean;
   disabled?: boolean;
   onChange: (value: boolean) => void;
-  value: string;
-  theme?: SwitchTheme;
+  value?: string;
+  theme?: DeepPartial<SwitchTheme>;
 }
 
 const invisibleInputStyles = css`
