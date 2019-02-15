@@ -152,6 +152,11 @@ export const addDefaultTextInputStories = () => {
         <DefaultTextInput value={'some entered text'} />
       </UseTheme>
     ))
+    .add('with custom styling', () => (
+      <div style={{width: 200}}>
+        <DefaultTextInput value={'some input text'} style={{fontStyle: 'italic', fontWeight: 'bold', color: 'orange'}} />
+      </div>
+    ))
     .add('disabled', () => (
       <DefaultTextInput value={''} placeholder={'Enter name'} disabled={true} />
     ))
