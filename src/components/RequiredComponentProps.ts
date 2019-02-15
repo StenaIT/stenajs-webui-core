@@ -1,8 +1,9 @@
+import { Ref } from 'react';
 import * as React from 'react';
 
 export interface RequiredComponentProps<T> {
   className: string;
-  ref: React.LegacyRef<T>;
+  ref: Ref<T>;
 }
 
 export interface RequiredInputComponentProps<T> extends RequiredComponentProps<T> {
