@@ -188,6 +188,7 @@ const DefaultTextInputComponent = ({
               paddingLeft: theme.paddingLeft,
               paddingRight: theme.paddingRight,
               boxSizing: 'border-box',
+              ...inputProps.style,
             }}
           />
         </div>
