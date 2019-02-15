@@ -63,7 +63,7 @@ const Front = styled('div')<Pick<SwitchProps, 'value' | 'disabled' | 'theme'>>`
   right ${({ value, theme }) =>
     value ? 2 : `${theme.width - theme.height + 2}`}px;
   top: 2px;
-  transition: right ${({ theme }) => theme.width / 400}s linear;
+  transition: right ${({ theme }) => 0.1}s linear;
   width: ${({ theme }) => theme.height - 4}px; 
 `;
 
