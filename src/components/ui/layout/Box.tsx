@@ -28,51 +28,48 @@ import { CSSProperties } from 'react';
 
 // tslint:disable:no-shadowed-variable
 
-type FlexBoxProps = StyledSystemProps;
-
-type StyledSystemProps = WidthProps &
+type StyledSystemProps = AlignItemsProps &
   BgColorProps &
-  AlignItemsProps &
-  FlexProps &
-  JustifyContentProps &
   DisplayProps &
   FlexDirectionProps &
+  FlexProps &
   FlexWrapProps &
   HeightProps &
+  JustifyContentProps &
+  MaxHeightProps &
   MaxWidthProps &
-  MaxHeightProps;
+  WidthProps;
 
-type FlexBoxStyleProps = StyledSystemProps & {
+type FlexBoxMetricsProps = {
   metrics: ThemeMetrics;
-} & BoxProps;
+};
 
-const numberOrZero = (num: number | boolean | undefined): number =>
-  (num as number) || 0;
+type FlexBoxProps = StyledSystemProps & BoxProps & FlexBoxMetricsProps;
 
-const FlexBox = styled('div')<FlexBoxStyleProps>`
+export interface BoxProps extends StyledSystemProps {
+  row?: boolean;
+  spacing?: boolean | number;
+  indent?: boolean | number;
+  style?: CSSProperties;
+}
+
+const FlexBox = styled('div')<FlexBoxProps>`
   display: ${props => props.display || 'flex'};
   ${alignItems}
   ${bgColor}
   ${flex}
   flex-direction: ${props =>
-  (props.row && 'row') || props.flexDirection || 'column'}
+    (props.row && 'row') || props.flexDirection || 'column'}
   ${flexWrap}
   ${height}
   ${justifyContent}
   ${maxHeight}
   ${maxWidth}
   padding: ${props =>
-  numberOrZero(props.spacing) * props.metrics.spacing}px ${props =>
+    numberOrZero(props.spacing) * props.metrics.spacing}px ${props =>
   numberOrZero(props.indent) * props.metrics.indent}px;
   ${width}
 `;
-
-interface BoxProps extends FlexBoxProps {
-  row?: boolean;
-  spacing?: boolean | number;
-  indent?: boolean | number;
-  style?: CSSProperties;
-}
 
 export const Box: React.FC<BoxProps> = props => {
   const theme = useTheme();
@@ -90,3 +87,6 @@ export const ColumnBox: React.FC<BoxProps> = props => {
     </Box>
   );
 };
+
+const numberOrZero = (num: number | boolean | undefined): number =>
+  (num as number) || 0;
