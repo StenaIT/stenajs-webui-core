@@ -23,6 +23,7 @@ import {
   WidthProps,
 } from 'styled-system';
 import { ThemeMetrics } from '../../../themes/theme-types/ThemeMetrics';
+import { Omit } from '../../../types/Omit';
 import { useTheme } from '../../theme/UseThemeHook';
 import { CSSProperties } from 'react';
 
@@ -76,11 +77,15 @@ export const Box: React.FC<BoxProps> = props => {
   return <FlexBox metrics={theme.metrics} {...props} />;
 };
 
-export const RowBox: React.FC<BoxProps> = props => {
+export type RowBoxProps = Omit<BoxProps, 'row'>;
+
+export const RowBox: React.FC<RowBoxProps> = props => {
   return <Box row {...props} />;
 };
 
-export const ColumnBox: React.FC<BoxProps> = props => {
+export type ColumnBoxProps = Omit<BoxProps, 'row'>;
+
+export const ColumnBox: React.FC<ColumnBoxProps> = props => {
   return (
     <Box {...props}>
       <div />
