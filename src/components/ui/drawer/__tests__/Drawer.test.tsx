@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import {Drawer, DrawerHeader, DrawerWrapper} from '../Drawer';
+import { Drawer, DrawerHeader, DrawerWrapper } from '../Drawer';
 import { StandardButton } from '../../buttons';
 import { IconProp } from '@fortawesome/fontawesome';
 

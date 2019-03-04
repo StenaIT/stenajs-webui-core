@@ -16,7 +16,6 @@ export const AccordionTitleButton = styled('button')`
   font-family: "Open Sans";
 `;
 
-
 export const AccordionTitle: React.FC<
   DrawerCollapsibleStaticProps
 > = ({ onClick, children }) => (
