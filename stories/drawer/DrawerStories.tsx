@@ -3,9 +3,9 @@ import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from 
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { AccordionTitle } from "../../src/components/ui/drawer/AccordionTitle";
-import { Drawer } from '../../src/components/ui/drawer';
+import { Drawer, DrawerHeader } from '../../src/components/ui/drawer';
 import { DrawerText } from "../../src/components/ui/drawer/DrawerText";
-
+import { StandardButton } from '../../src/components/ui/buttons';
 import 'react-accessible-accordion/dist/minimal-example.css';
 import 'react-accessible-accordion/dist/fancy-example.css';
 
@@ -21,7 +21,16 @@ export const addDrawerStories = () => {
                 }
             })(() => (
                 <div style={{ display: 'table', width: "100%" }}>
-                    <Drawer headerColor={'black'} isOpen={true} onClick={() => false}>
+                    <Drawer header={(
+                      <DrawerHeader headerColor={'black'}>
+                        <StandardButton
+                          label={'Hide filter'}
+                          leftIcon={'angle-double-left'}
+                          color={'black'}
+                          onClick={() => false}
+                        />
+                      </DrawerHeader>
+                    )} isOpen={true} onClick={() => false}>
                         DrawerContent
                     </Drawer>
                 </div>
@@ -37,7 +46,16 @@ export const addDrawerStories = () => {
                 }
             })(() => (
                 <div style={{ display: 'table', width: "100%" }}>
-                    <Drawer headerColor={'black'} isOpen={true} onClick={() => false} marginTop={120}>
+                    <Drawer header={(
+                      <DrawerHeader headerColor={'black'}>
+                        <StandardButton
+                          label={'Hide filter'}
+                          leftIcon={'angle-double-left'}
+                          color={'black'}
+                          onClick={() => false}
+                        />
+                      </DrawerHeader>
+                    )} isOpen={true} onClick={() => false} marginTop={120}>
                         DrawerContent
                     </Drawer>
                 </div>
@@ -53,7 +71,17 @@ export const addDrawerStories = () => {
                 }
             })(() => (
                 <div style={{ display: 'table', width: "100%" }}>
-                    <Drawer isOpen={true} onClick={() => false} headerColor="#417EBF" buttonLabel="Custom button" buttonIcon="coffee">
+                    <Drawer header={(
+                      <DrawerHeader headerColor={'red'}>
+                        <StandardButton
+                          label={'Custom text'}
+                          leftIcon={'coffee'}
+                          color={'red'}
+                          onClick={() => false}
+                        />
+                      </DrawerHeader>
+                    )}
+                    isOpen={true} onClick={() => false}>
                         DrawerContent
                     </Drawer>
                 </div>
@@ -69,7 +97,16 @@ export const addDrawerStories = () => {
                 }
             })(() => (
                 <div style={{ display: 'table', width: "100%" }}>
-                    <Drawer isOpen={true} onClick={() => false} headerColor="#417EBF" buttonLabel="Custom button" buttonIcon="coffee">
+                    <Drawer isOpen={true} onClick={() => false} header={(
+                      <DrawerHeader headerColor={'red'}>
+                        <StandardButton
+                          label={'Custom text'}
+                          leftIcon={'coffee'}
+                          color={'red'}
+                          onClick={() => false}
+                        />
+                      </DrawerHeader>
+                    )}>
                         <Accordion accordion={false}>
                             <AccordionItem>
                                 <AccordionItemTitle>
@@ -97,4 +134,20 @@ export const addDrawerStories = () => {
                 </div>
             )),
         )
+      .add(
+        'without header',
+        withInfo({
+          styles: {
+            infoBody: {
+              paddingLeft:400
+            }
+          }
+        })(() => (
+          <div style={{ display: 'table', width: "100%" }}>
+            <Drawer isOpen={true} onClick={() => false}>
+              DrawerContent
+            </Drawer>
+          </div>
+        )),
+      )
 };

@@ -1,14 +1,10 @@
 import * as React from 'react';
 import { Column, Row } from '../layout';
-import { StandardButton } from '../buttons';
-import { IconProp } from '@fortawesome/fontawesome';
 import styled from 'react-emotion';
 
 export interface DrawerProps {
   isOpen: boolean;
-  buttonLabel?: string;
-  buttonIcon?: IconProp;
-  headerColor: string;
+  header?: JSX.Element;
   onClick: () => void;
   marginTop?: number;
 }
@@ -37,8 +33,8 @@ export const DrawerWrapper = styled('div')<{isOpen: boolean, top?: number}>`
   z-index: 9999;
   background: white;
   
-  top: ${({ top }) => top || 0};
-  padding-bottom: ${({ top }) => top || 0};
+  top: ${({ top }) => top || 0}px;
+  padding-bottom: ${({ top }) => top || 0}px;
   
   *{
     box-sizing: border-box;
@@ -54,9 +50,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   isOpen,
   onClick,
   children,
-  buttonLabel,
-  buttonIcon,
-  headerColor,
+  header,
   marginTop,
 }) => (
   <DrawerWrapper
@@ -65,14 +59,7 @@ export const Drawer: React.FC<DrawerProps> = ({
   >
     <DrawerContent>
       <Row>
-        <DrawerHeader headerColor={headerColor}>
-          <StandardButton
-            label={buttonLabel ? buttonLabel : 'Hide filter'}
-            leftIcon={buttonIcon ? buttonIcon : 'angle-double-left'}
-            color={headerColor}
-            onClick={onClick}
-          />
-        </DrawerHeader>
+        {header && header}
       </Row>
       <Row>
         <DrawerChildWrapper>
