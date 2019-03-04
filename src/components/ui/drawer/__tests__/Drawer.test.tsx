@@ -1,6 +1,6 @@
 import { shallow } from 'enzyme';
 import * as React from 'react';
-import { Drawer } from '../Drawer';
+import {Drawer, DrawerHeader, DrawerWrapper} from '../Drawer';
 import { StandardButton } from '../../buttons';
 import { IconProp } from '@fortawesome/fontawesome';
 
@@ -9,6 +9,7 @@ describe('drawer', () => {
   const defaultOptions = {
     isOpen: true,
     onClick,
+    headerColor: 'black'
   };
 
   describe('open', () => {
@@ -18,16 +19,12 @@ describe('drawer', () => {
     };
     it('1', () => {
       const w = shallow(<Drawer {...o} />);
-      expect(w.find('.DrawerWrapper').prop('className')).toContain(
-        'Drawer--open',
-      );
+      expect(w.find(DrawerWrapper).prop('isOpen')).toEqual(o.isOpen);
     });
     it('0', () => {
       o.isOpen = false;
       const w = shallow(<Drawer {...o} />);
-      expect(w.find('.DrawerWrapper').prop('className')).not.toContain(
-        'Drawer--open',
-      );
+      expect(w.find(DrawerWrapper).prop('isOpen')).toEqual(o.isOpen);
     });
   });
   it('function triggered', () => {
@@ -45,21 +42,14 @@ describe('drawer', () => {
           marginTop: val,
         };
         const w = shallow(<Drawer {...o} />);
-        expect(w.find('.DrawerWrapper').prop('style')).toEqual({
-          top: val,
-          paddingBottom: val,
-        });
+        expect(w.find(DrawerWrapper).prop('top')).toEqual(val);
       });
       it('not set', () => {
-        const val = 0;
         const o = {
           ...defaultOptions,
         };
         const w = shallow(<Drawer {...o} />);
-        expect(w.find('.DrawerWrapper').prop('style')).toEqual({
-          top: val,
-          paddingBottom: val,
-        });
+        expect(w.find(DrawerWrapper).prop('top')).toEqual(undefined);
       });
     });
     describe('headerColor', () => {
@@ -70,26 +60,20 @@ describe('drawer', () => {
           headerColor: val,
         };
         const w = shallow(<Drawer {...o} />);
-        const h = w.find('.DrawerHeader');
+        const h = w.find(DrawerHeader);
         const b = h.find(StandardButton);
-        expect(h.prop('style')).toEqual({
-          textAlign: 'right',
-          background: val,
-        });
+        expect(h.prop('headerColor')).toEqual(val);
         expect(b.prop('color')).toEqual(val);
       });
       it('not set', () => {
-        const val = '#87b758';
+        const val = 'black';
         const o = {
           ...defaultOptions,
         };
         const w = shallow(<Drawer {...o} />);
-        const h = w.find('.DrawerHeader');
+        const h = w.find(DrawerHeader);
         const b = h.find(StandardButton);
-        expect(h.prop('style')).toEqual({
-          textAlign: 'right',
-          background: val,
-        });
+        expect(h.prop('headerColor')).toEqual(val);
         expect(b.prop('color')).toEqual(val);
       });
     });
@@ -101,7 +85,7 @@ describe('drawer', () => {
           buttonLabel: val,
         };
         const w = shallow(<Drawer {...o} />);
-        const b = w.find('.DrawerHeader').find(StandardButton);
+        const b = w.find(DrawerHeader).find(StandardButton);
         expect(b.prop('label')).toEqual(val);
       });
       it('not set', () => {
@@ -110,7 +94,7 @@ describe('drawer', () => {
           ...defaultOptions,
         };
         const w = shallow(<Drawer {...o} />);
-        const b = w.find('.DrawerHeader').find(StandardButton);
+        const b = w.find(DrawerHeader).find(StandardButton);
         expect(b.prop('label')).toEqual(val);
       });
     });
@@ -122,7 +106,7 @@ describe('drawer', () => {
           buttonIcon: val as IconProp,
         };
         const w = shallow(<Drawer {...o} />);
-        const b = w.find('.DrawerHeader').find(StandardButton);
+        const b = w.find(DrawerHeader).find(StandardButton);
         expect(b.prop('leftIcon')).toEqual(val);
       });
       it('not set', () => {
@@ -131,7 +115,7 @@ describe('drawer', () => {
           ...defaultOptions,
         };
         const w = shallow(<Drawer {...o} />);
-        const b = w.find('.DrawerHeader').find(StandardButton);
+        const b = w.find(DrawerHeader).find(StandardButton);
         expect(b.prop('leftIcon')).toEqual(val);
       });
     });

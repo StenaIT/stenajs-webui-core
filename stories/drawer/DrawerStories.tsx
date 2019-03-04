@@ -1,10 +1,10 @@
 import * as React from 'react';
+import { Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle } from "react-accessible-accordion";
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
-import { AccordionItemTitleStatic } from "../../src/components/ui/drawer/AccordionItemTitleStatic";
+import { AccordionTitle } from "../../src/components/ui/drawer/AccordionTitle";
 import { Drawer } from '../../src/components/ui/drawer';
 import { DrawerText } from "../../src/components/ui/drawer/DrawerText";
-import {Accordion, AccordionItem, AccordionItemBody, AccordionItemTitle} from "react-accessible-accordion";
 
 import 'react-accessible-accordion/dist/minimal-example.css';
 import 'react-accessible-accordion/dist/fancy-example.css';
@@ -21,7 +21,7 @@ export const addDrawerStories = () => {
                 }
             })(() => (
                 <div style={{ display: 'table', width: "100%" }}>
-                    <Drawer isOpen={true} onClick={() => false}>
+                    <Drawer headerColor={'black'} isOpen={true} onClick={() => false}>
                         DrawerContent
                     </Drawer>
                 </div>
@@ -37,7 +37,7 @@ export const addDrawerStories = () => {
                 }
             })(() => (
                 <div style={{ display: 'table', width: "100%" }}>
-                    <Drawer isOpen={true} onClick={() => false} marginTop={120}>
+                    <Drawer headerColor={'black'} isOpen={true} onClick={() => false} marginTop={120}>
                         DrawerContent
                     </Drawer>
                 </div>
@@ -88,9 +88,9 @@ export const addDrawerStories = () => {
                                 </AccordionItemBody>
                             </AccordionItem>
                             <AccordionItem>
-                                <AccordionItemTitleStatic onClick={() => alert(1)}>
+                                <AccordionTitle onClick={() => alert(1)}>
                                     <DrawerText title="Title 3" value={"4%"} />
-                                </AccordionItemTitleStatic>
+                                </AccordionTitle>
                             </AccordionItem>
                         </Accordion>
                     </Drawer>

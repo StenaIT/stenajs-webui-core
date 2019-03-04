@@ -1,23 +1,56 @@
 import * as React from 'react';
-import { Column, Row, Space, Spacing } from '../layout';
-import { Border } from '../decorations';
+import { Column, Row } from '../layout';
 import { StandardButton } from '../buttons';
 import { IconProp } from '@fortawesome/fontawesome';
-import {
-  drawerContentStyle,
-  drawerOpenWrapperStyle,
-  drawerWrapperStyle,
-} from './DrawerStyle';
+import styled from 'react-emotion';
 
 export interface DrawerProps {
   isOpen: boolean;
   buttonLabel?: string;
   buttonIcon?: IconProp;
-  headerColor?: string;
+  headerColor: string;
   onClick: () => void;
   marginTop?: number;
 }
-export const Drawer: React.StatelessComponent<DrawerProps> = ({
+
+export const DrawerHeader = styled(Column)<{headerColor: string}>`
+  width: 100%;
+  text-align: right;
+  background: ${({ headerColor }) => headerColor};
+`;
+const DrawerChildWrapper = styled('div')`
+  display: block;
+  width: 100%;
+  min-width: 360px;
+`;
+const DrawerContent = styled('div')`
+  height: 100%;
+  overflow-y: scroll;
+`;
+export const DrawerWrapper = styled('div')<{isOpen: boolean, top?: number}>`  
+  position: fixed;
+  left: ${({isOpen}) => isOpen ? '0' : '-500px'};
+  height: 100%;
+  width: 400px;
+  transition: .6s all;
+  display: block;
+  z-index: 9999;
+  background: white;
+  
+  top: ${({ top }) => top || 0};
+  padding-bottom: ${({ top }) => top || 0};
+  
+  *{
+    box-sizing: border-box;
+  }
+  .accordion__title,
+  .Collapsible__trigger{
+    font-size: 14px;
+    font-family: "Open Sans";
+  }
+`;
+
+export const Drawer: React.FC<DrawerProps> = ({
   isOpen,
   onClick,
   children,
@@ -26,44 +59,26 @@ export const Drawer: React.StatelessComponent<DrawerProps> = ({
   headerColor,
   marginTop,
 }) => (
-  <div
-    className={`DrawerWrapper ${drawerWrapperStyle} ${isOpen &&
-      `${drawerOpenWrapperStyle} Drawer--open`}`}
-    style={
-      marginTop
-        ? { top: marginTop, paddingBottom: marginTop }
-        : { top: 0, paddingBottom: 0 }
-    }
+  <DrawerWrapper
+    isOpen={isOpen}
+    top={marginTop}
   >
-    <div className={`DrawerContent ${drawerContentStyle}`}>
+    <DrawerContent>
       <Row>
-        <Column
-          width="100%"
-          className="DrawerHeader"
-          style={{
-            textAlign: 'right',
-            background: headerColor ? headerColor : '#87b758',
-          }}
-        >
+        <DrawerHeader headerColor={headerColor}>
           <StandardButton
             label={buttonLabel ? buttonLabel : 'Hide filter'}
             leftIcon={buttonIcon ? buttonIcon : 'angle-double-left'}
-            color={headerColor ? headerColor : '#87b758'}
+            color={headerColor}
             onClick={onClick}
           />
-        </Column>
+        </DrawerHeader>
       </Row>
       <Row>
-        <Space num={2} />
-        <Spacing num={2}>
-          <Border>
-            <div style={{ display: 'block', width: '100%', minWidth: 360 }}>
-              {children}
-            </div>
-          </Border>
-        </Spacing>
-        <Space num={2} />
+        <DrawerChildWrapper>
+          {children}
+        </DrawerChildWrapper>
       </Row>
-    </div>
-  </div>
+    </DrawerContent>
+  </DrawerWrapper>
 );

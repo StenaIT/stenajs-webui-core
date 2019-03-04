@@ -80,6 +80,7 @@
     "create-emotion": "^9.2.6",
     "date-fns": "2.0.0-alpha.26",
     "lodash": "^4.17.10",
+    "react-accessible-accordion": "^2.4.5",
     "react-click-outside": "^3.0.1",
     "react-popper": "^1.0.2",
     "react-spinkit": "^3.0.0",
