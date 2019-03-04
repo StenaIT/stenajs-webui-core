@@ -1,19 +1,18 @@
 import * as React from 'react';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export interface SpacingProps {
   num?: number;
   half?: boolean;
-  children?: {};
 }
 
-export const SpacingComponent = ({
+export const SpacingComponent: React.SFC<SpacingProps & WithThemeProps> = ({
   num = 1,
   half = false,
   children,
   theme,
-}: SpacingProps & WithThemeProps) => {
+}) => {
   const halfMod = half ? 0.5 : 1;
   const padding = num * halfMod;
   return (
@@ -28,6 +27,8 @@ export const SpacingComponent = ({
   );
 };
 
-export const Spacing = compose<SpacingProps & WithThemeProps, SpacingProps>(
-  withTheme,
-)(SpacingComponent);
+export const Spacing = setDisplayName<SpacingProps>('Spacing')(
+  compose<SpacingProps & WithThemeProps, SpacingProps>(withTheme)(
+    SpacingComponent,
+  ),
+);

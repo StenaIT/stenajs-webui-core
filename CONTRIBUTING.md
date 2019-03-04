@@ -40,12 +40,12 @@ Make sure that all conditional parts of the component are tested.
 
 Make sure that there are tests for disabled=true and disabled=false.
 
-### 6) Verifying in browser.
+### 6) Verifying in browser
 
 The component should work and look as expected in:
 Chrome, Firefox, Edge, Safari.
 
-### 7) Create a pull request in Github.
+### 7) Create a pull request in Github
 
 ## Enhancers
 

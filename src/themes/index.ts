@@ -1,6 +1,6 @@
 // created from 'create-ts-index'
 
-export * from './Colors';
+export * from './default-values';
+export * from './theme-types';
 export * from './DefaultTheme';
-export * from './DefaultThemeValues';
 export * from './Theme';

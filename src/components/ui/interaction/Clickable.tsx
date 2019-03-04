@@ -1,7 +1,7 @@
 import { css } from 'emotion';
 import * as React from 'react';
 import { CSSProperties, MouseEventHandler } from 'react';
-import { compose, withHandlers, withState } from 'recompose';
+import { compose, withHandlers, withState, setDisplayName } from 'recompose';
 
 export interface ClickableProps {
   /** Callback function called when clicking on click area. */
@@ -65,7 +65,7 @@ export class ClickableComponent extends React.Component<ClickableInnerProps> {
         title={tooltip}
         style={{
           cursor: hasClickHandler && !disablePointer ? 'pointer' : undefined,
-          display: 'table',
+          display: 'inline-block',
           userSelect: 'none',
           opacity,
           ...style,
@@ -82,20 +82,22 @@ export class ClickableComponent extends React.Component<ClickableInnerProps> {
   }
 }
 
-export const Clickable = compose<ClickableInnerProps, ClickableProps>(
-  withState('mouseIsDown', 'setMouseIsDown', false),
-  withHandlers({
-    onMouseDown: ({ setMouseIsDown }: SetMouseIsDown) => () => {
-      setMouseIsDown(true);
-    },
-    onMouseUp: ({ setMouseIsDown }: SetMouseIsDown) => () => {
-      setMouseIsDown(false);
-    },
-    onMouseOut: ({ setMouseIsDown }: SetMouseIsDown) => () => {
-      setMouseIsDown(false);
-    },
-  }),
-)(ClickableComponent);
+export const Clickable = setDisplayName<ClickableProps>('Clickable')(
+  compose<ClickableInnerProps, ClickableProps>(
+    withState('mouseIsDown', 'setMouseIsDown', false),
+    withHandlers({
+      onMouseDown: ({ setMouseIsDown }: SetMouseIsDown) => () => {
+        setMouseIsDown(true);
+      },
+      onMouseUp: ({ setMouseIsDown }: SetMouseIsDown) => () => {
+        setMouseIsDown(false);
+      },
+      onMouseOut: ({ setMouseIsDown }: SetMouseIsDown) => () => {
+        setMouseIsDown(false);
+      },
+    }),
+  )(ClickableComponent),
+);
 
 const getMouseCallback = (
   clickable: boolean,

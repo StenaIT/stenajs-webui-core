@@ -1,3 +1,4 @@
+import { FontWeightProperty } from 'csstype';
 import { css } from 'emotion';
 import * as React from 'react';
 
@@ -6,7 +7,15 @@ export interface TextBaseProps {
   fontSize: string;
   /** The font family of the text. */
   fontFamily: string;
+  /** The normal font weight of the text. */
+  fontWeightNormal?: FontWeightProperty;
+  /** The bold font weight of the text. */
+  fontWeightBold: FontWeightProperty;
+  /** The light font weight of the text. */
+  fontWeightLight: FontWeightProperty;
 }
+
+export type TextBaseWeight = 'bold' | 'normal' | 'light';
 
 export interface TextBaseSharedProps {
   /** The color family of the text. */
@@ -15,8 +24,13 @@ export interface TextBaseSharedProps {
   nowrap?: boolean;
   /** Adds underline to text. */
   underline?: boolean;
-  /** Makes text bold. */
+  /**
+   * Makes text bold.
+   * @deprecated Use prop weight instead.
+   */
   bold?: boolean;
+  /** Font weight to use. */
+  weight?: TextBaseWeight;
   /** Adds underline when mouse hovers over text. */
   hoverUnderline?: boolean;
   /** Makes text italic. */
@@ -45,6 +59,7 @@ export class TextBase extends React.PureComponent<
       hoverUnderline,
       italic,
       disableSelect,
+      weight,
     } = this.props;
     return (
       <span
@@ -56,7 +71,7 @@ export class TextBase extends React.PureComponent<
           fontFamily,
           whiteSpace: nowrap ? 'nowrap' : undefined,
           textDecoration: underline ? 'underline' : undefined,
-          fontWeight: bold ? 'bold' : undefined,
+          fontWeight: bold ? 'bold' : getWeight(weight, this.props),
           userSelect: disableSelect ? 'none' : undefined,
         }}
       >
@@ -65,3 +80,17 @@ export class TextBase extends React.PureComponent<
     );
   }
 }
+
+const getWeight = (
+  weight: TextBaseWeight | undefined,
+  props: TextBaseProps,
+): FontWeightProperty | undefined => {
+  switch (weight) {
+    case 'bold':
+      return props.fontWeightBold;
+    case 'light':
+      return props.fontWeightLight;
+    default:
+      return props.fontWeightNormal;
+  }
+};

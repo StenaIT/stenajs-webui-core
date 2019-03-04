@@ -7,10 +7,9 @@ export interface FixedProps {
   right?: string | number;
 }
 
-export const Fixed: StyledComponent<FixedProps, {}, {}> = styled<
-  FixedProps,
-  'div'
->('div')(({ top, right, bottom, left }) => ({
+export const Fixed: StyledComponent<FixedProps, {}, {}> = styled('div')<
+  FixedProps
+>(({ top, right, bottom, left }) => ({
   display: 'flex',
   position: 'fixed',
   top,

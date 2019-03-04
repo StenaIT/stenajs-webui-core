@@ -1,4 +1,5 @@
 import { format, isAfter, parse } from 'date-fns';
+import { DateFormats } from '../../../../../util/date/DateFormats';
 
 export interface DateInterval {
   startDate?: Date;
@@ -13,8 +14,9 @@ export interface DateStringInterval {
 export const transformDateIntervalToDateStringInterval = (
   interval: DateInterval,
 ): DateStringInterval => ({
-  startDate: interval.startDate && format(interval.startDate, 'YYYY-MM-dd'),
-  endDate: interval.endDate && format(interval.endDate, 'YYYY-MM-dd'),
+  startDate:
+    interval.startDate && format(interval.startDate, DateFormats.fullDate),
+  endDate: interval.endDate && format(interval.endDate, DateFormats.fullDate),
 });
 
 export const transformDateStringIntervalToDateInterval = (
@@ -23,10 +25,12 @@ export const transformDateStringIntervalToDateInterval = (
   const now = new Date();
   return {
     startDate:
-      (interval.startDate && parse(interval.startDate, 'YYYY-MM-dd', now)) ||
+      (interval.startDate &&
+        parse(interval.startDate, DateFormats.fullDate, now)) ||
       undefined,
     endDate:
-      (interval.endDate && parse(interval.endDate, 'YYYY-MM-dd', now)) ||
+      (interval.endDate &&
+        parse(interval.endDate, DateFormats.fullDate, now)) ||
       undefined,
   };
 };

@@ -15,7 +15,7 @@ interface ModalWrapperProps {
   zIndex: number;
 }
 
-const ModalWrapper = styled<ModalWrapperProps, 'div'>('div')(props => ({
+const ModalWrapper = styled('div')<ModalWrapperProps>(props => ({
   display: 'flex',
   justifyContent: 'center',
   alignItems: 'center',

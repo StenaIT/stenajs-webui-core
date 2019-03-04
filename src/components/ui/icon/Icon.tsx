@@ -37,6 +37,7 @@ const withDefaultColor = withProps<
   color: color || theme.colors.primaryTextLight,
 }));
 
-export const Icon = compose<InnerProps, IconProps>(withTheme, withDefaultColor)(
-  IconComponent,
-);
+export const Icon = compose<InnerProps, IconProps>(
+  withTheme,
+  withDefaultColor,
+)(IconComponent);

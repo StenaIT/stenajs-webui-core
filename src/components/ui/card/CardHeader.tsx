@@ -15,14 +15,6 @@ export const CardHeader: React.StatelessComponent<{
 }> = ({ isExpanded, attributes, title, onClick }) => {
   const doShow =
     attributes.hasButton || title || !(attributes.notice === undefined);
-  console.log(
-    '______',
-    attributes.hasButton || title || !(attributes.notice === undefined),
-    attributes.hasButton,
-    title,
-    attributes.notice,
-    !(attributes.notice === undefined),
-  );
   if (!doShow) {
     return <div />;
   }

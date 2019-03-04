@@ -1,19 +1,27 @@
 import * as React from 'react';
-import { Button, ButtonProps } from './Button';
-import { compose } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { compose, setDisplayName } from 'recompose';
+import {
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
+import { Button, ButtonProps, ButtonPropsWithTheme } from './Button';
+import { SmallButtonTheme } from './SmallButtonTheme';
 
-const SmallButtonComponent = ({
+type InnerProps = ButtonProps & WithInnerComponentThemeProps<SmallButtonTheme>;
+
+const SmallButtonComponent: React.SFC<InnerProps> = ({
   theme,
   ...buttonProps
-}: ButtonProps & WithThemeProps) => (
+}) => (
   <Button
-    height={theme.components.SmallButton.height}
-    borderRadius={theme.components.SmallButton.borderRadius}
+    height={theme.height}
+    borderRadius={theme.borderRadius}
     {...buttonProps}
   />
 );
 
-export const SmallButton = compose<ButtonProps & WithThemeProps, ButtonProps>(
-  withTheme,
-)(SmallButtonComponent);
+export const SmallButton = setDisplayName<ButtonPropsWithTheme>('SmallButton')(
+  compose<InnerProps, ButtonPropsWithTheme>(withComponentTheme('SmallButton'))(
+    SmallButtonComponent,
+  ),
+);

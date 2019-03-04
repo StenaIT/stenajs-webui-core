@@ -1,4 +1,4 @@
-import { eachDayOfInterval, isAfter } from 'date-fns';
+import { eachDayOfInterval, isAfter, isSameDay } from 'date-fns';
 import {
   ComponentEnhancer,
   compose,
@@ -7,21 +7,37 @@ import {
   withProps,
   withState,
 } from 'recompose';
-import { CalendarProps, DataPerMonth, DayState } from '../components/Calendar';
+import { Omit } from '../../../../../types/Omit';
+import {
+  CalendarProps,
+  CalendarUserData,
+  DayState,
+} from '../components/Calendar';
+import { WithCalendarTheme } from '../types/WithCalendarTheme';
 import { DayData } from '../util/CalendarDataFactory';
 import { ensureStartIsFirst } from '../util/CalendarIntervalValidator';
-import { setDayStateValue } from '../util/StateModifier';
+import { addDayStateHighlights } from '../util/StateModifier';
+import { WithMonthSwitcherProps } from './month-switcher/MonthSwitcher';
+import { MonthSwitcherLogicOuterProps } from './month-switcher/MonthSwitcherLogic';
 
 export type __C359813518 = ComponentEnhancer<{}, {}>;
 
 export type DateRangeFocusedInput = 'startDate' | 'endDate' | undefined;
 
-export type DateRangeCalendarProps<T> = CalendarProps<T> &
+export type DateRangeCalendarProps<T> = Omit<CalendarProps<T>, 'theme'> &
+  MonthSwitcherLogicOuterProps &
   DateRangeCalendarState &
-  OnChangePropsDateRangeSelection;
+  OnChangePropsDateRangeSelection &
+  WithCalendarTheme &
+  WithMonthSwitcherProps;
 
-export type DateRangeCalendarPropsWithStateProps<T> = CalendarProps<T> &
-  OnChangePropsDateRangeSelection;
+export type DateRangeCalendarPropsWithStateProps<T> = Omit<
+  CalendarProps<T>,
+  'theme'
+> &
+  OnChangePropsDateRangeSelection &
+  WithCalendarTheme &
+  WithMonthSwitcherProps;
 
 export interface DateRangeCalendarState {
   startDate: Date | undefined;
@@ -39,7 +55,7 @@ export interface DateRangeCalendarOnChangeValue {
 
 export interface OnChangePropsDateRangeSelection {
   /** onChange handler for when the user selects a date. */
-  onChange: (value: DateRangeCalendarOnChangeValue) => void;
+  onChange?: (value: DateRangeCalendarOnChangeValue) => void;
 }
 
 type InnerProps<T> = CalendarProps<T> &
@@ -114,34 +130,42 @@ const toggleDatesIfEndIsEarlierThanStart = withProps(
   },
 );
 
-const buildSelectionState = withProps(
-  ({ startDate, endDate }: InnerProps<{}>) => {
-    const statePerMonth = buildDayState(startDate, endDate);
-    return {
-      statePerMonth,
-    };
-  },
+interface WithStatePerMonth {
+  statePerMonth?: CalendarUserData<DayState>;
+}
+
+const withStatePerMonth = withProps<WithStatePerMonth, InnerProps<{}>>(
+  ({ startDate, endDate, statePerMonth }) => ({
+    statePerMonth: buildDayState(statePerMonth, startDate, endDate),
+  }),
 );
 
-const buildDayState = (
+export const buildDayState = (
+  statePerMonth: CalendarUserData<DayState> = {},
   start?: Date,
   end?: Date,
-): DataPerMonth<DayState> | undefined => {
+): CalendarUserData<DayState> | undefined => {
   if (start && end) {
     return eachDayOfInterval({ start, end }).reduce(
-      (result: DataPerMonth<DayState>, date: Date) => {
-        return setDayStateValue(result, date, { highlighted: true });
+      (result: CalendarUserData<DayState>, date: Date) => {
+        const isFirstInRange = isSameDay(date, start);
+        const isLastInRange = isSameDay(date, end);
+        return addDayStateHighlights(
+          result,
+          date,
+          isFirstInRange || isLastInRange ? ['selected', 'range'] : ['range'],
+        );
       },
-      {},
+      statePerMonth,
     );
   }
   if (start) {
-    return setDayStateValue({}, start, { highlighted: true });
+    return addDayStateHighlights(statePerMonth, start, ['selected']);
   }
   if (end) {
-    return setDayStateValue({}, end, { highlighted: true });
+    return addDayStateHighlights(statePerMonth, end, ['selected']);
   }
-  return undefined;
+  return statePerMonth;
 };
 
 export const withDateRangeSelectionState = compose(
@@ -154,5 +178,5 @@ export const withDateRangeSelection = compose(
   withOnClickDayHandler,
   toggleDatesIfEndIsEarlierThanStart,
   pure,
-  buildSelectionState,
+  withStatePerMonth,
 );

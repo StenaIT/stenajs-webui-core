@@ -1,22 +1,25 @@
 import * as React from 'react';
+import { compose, pure, setDisplayName } from 'recompose';
+import {
+  ComponentThemeProps,
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
-import { compose, pure } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { TextTheme } from './TextTheme';
 
-export type LargeTextProps = TextBaseSharedProps;
+export type LargeTextProps = TextBaseSharedProps &
+  ComponentThemeProps<'LargeText'>;
 
-const LargeTextComponent = ({
-  theme,
-  ...textProps
-}: LargeTextProps & WithThemeProps) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.components.LargeText.fontSize}
-    fontFamily={theme.components.LargeText.fontFamily}
-  />
+type InnerProps = LargeTextProps & WithInnerComponentThemeProps<TextTheme>;
+
+const LargeTextComponent = ({ theme, ...textProps }: InnerProps) => (
+  <TextBase {...textProps} {...theme} />
 );
 
-export const LargeText = compose<
-  LargeTextProps & WithThemeProps,
-  LargeTextProps
->(pure, withTheme)(LargeTextComponent);
+export const LargeText = setDisplayName<LargeTextProps>('LargeText')(
+  compose<InnerProps, LargeTextProps>(
+    pure,
+    withComponentTheme('LargeText'),
+  )(LargeTextComponent),
+);

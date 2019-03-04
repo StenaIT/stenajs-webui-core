@@ -1,13 +1,20 @@
 import { format } from 'date-fns';
 import * as React from 'react';
-import { compose, defaultProps, withHandlers, withState } from 'recompose';
+import {
+  compose,
+  defaultProps,
+  setDisplayName,
+  withHandlers,
+  withState,
+} from 'recompose';
+import { DateFormats } from '../../../../util/date/DateFormats';
 import { withTheme, WithThemeProps } from '../../../util/enhancers';
 import { Background } from '../../colors';
 import { Border } from '../../decorations';
+import { Indent } from '../../layout/Indent';
 import { Overlay } from '../../overlay';
 import { Absolute, Relative } from '../../positioning';
-import { CalendarDay } from '../calendar/components/renderers/CalendarDay';
-import { SingleDateCalendar } from '../calendar/SingleDateCalendar';
+import { createSingleDateCalendar } from '../calendar/SingleDateCalendar';
 import { DefaultTextInput } from '../text-input';
 
 export interface DateInputProps {
@@ -15,6 +22,10 @@ export interface DateInputProps {
   value?: Date;
   /** onChange handler for when the user selects a date. */
   onChange?: (date: Date | undefined) => void;
+  /** If true, calendar will be open when component mounts. */
+  openOnMount?: boolean;
+  /** Is invoked when user closes the calendar popup. */
+  onClose?: () => void;
   /**
    * The date format in the input field. See date-fns docs.
    * @default YYYY-MM-dd
@@ -47,6 +58,8 @@ type InnerProps = DateInputProps &
   DateInputPropsWithDefaultProps &
   WithThemeProps;
 
+const SingleDateCalendar = createSingleDateCalendar();
+
 const DateInputComponent = ({
   showCalendar,
   hideCalendar,
@@ -57,14 +70,18 @@ const DateInputComponent = ({
   value,
   zIndex,
   theme,
+  openOnMount,
 }: InnerProps) => (
   <>
     <DefaultTextInput
+      iconLeft={'calendar-alt'}
       onFocus={showCalendar}
       value={value ? format(value, displayFormat) : ''}
       placeholder={placeholder}
       onChange={noop}
       size={9}
+      forceFocusHighlight={showingCalendar}
+      focusOnMount={openOnMount}
     />
     {showingCalendar && (
       <Relative>
@@ -72,12 +89,13 @@ const DateInputComponent = ({
         <Absolute zIndex={zIndex}>
           <Border color={theme.components.DateInput.borderColor}>
             <Background color={theme.components.DateInput.backgroundColor}>
-              <SingleDateCalendar
-                dayComponent={CalendarDay}
-                onChange={onSelectDate}
-                value={value}
-                theme={theme.components.DateInput.calendar}
-              />
+              <Indent>
+                <SingleDateCalendar
+                  onChange={onSelectDate}
+                  value={value}
+                  theme={theme.components.DateInput.calendar}
+                />
+              </Indent>
             </Background>
           </Border>
         </Absolute>
@@ -94,7 +112,7 @@ interface WithShowingCalendarStateProps {
 const withShowingCalendarState = withState(
   'showingCalendar',
   'setShowingCalendar',
-  false,
+  ({ openOnMount }: DateInputProps) => openOnMount,
 );
 
 interface WithShowCalendarHandlers {
@@ -103,15 +121,18 @@ interface WithShowCalendarHandlers {
 }
 
 const withShowCalendarHandlers = withHandlers<
-  WithShowingCalendarStateProps,
+  WithShowingCalendarStateProps & DateInputProps,
   WithShowCalendarHandlers
 >({
   showCalendar: ({ setShowingCalendar }) => () => {
     setShowingCalendar(true);
     return true;
   },
-  hideCalendar: ({ setShowingCalendar }) => () => {
+  hideCalendar: ({ setShowingCalendar, onClose }) => () => {
     setShowingCalendar(false);
+    if (onClose) {
+      onClose();
+    }
   },
 });
 
@@ -134,15 +155,17 @@ const withOnSelectDateHandler = withHandlers<
 });
 
 const withDefaultProps = defaultProps<Partial<DateInputProps>>({
-  displayFormat: 'YYYY-MM-dd',
+  displayFormat: DateFormats.fullDate,
   placeholder: 'Enter date',
   zIndex: 100,
 });
 
-export const DateInput = compose<InnerProps, DateInputProps>(
-  withDefaultProps,
-  withShowingCalendarState,
-  withShowCalendarHandlers,
-  withOnSelectDateHandler,
-  withTheme,
-)(DateInputComponent);
+export const DateInput = setDisplayName<DateInputProps>('DateInput')(
+  compose<InnerProps, DateInputProps>(
+    withDefaultProps,
+    withShowingCalendarState,
+    withShowCalendarHandlers,
+    withOnSelectDateHandler,
+    withTheme,
+  )(DateInputComponent),
+);

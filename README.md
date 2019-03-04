@@ -1,6 +1,6 @@
 # stenajs-webui-common
 
-A library with common UI components for React
+A library with common UI components for React,
 
 ## Installation
 
@@ -13,6 +13,10 @@ or with NPM:
 ```
 $ npm install stenajs-webui-core
 ```
+
+## Documentation
+
+See component examples in the storybook, [https://stenait.github.io/stenajs-webui-core](https://stenait.github.io/stenajs-webui-core)
 
 ## Usage
 
@@ -66,3 +70,5 @@ library.add(
 ```
 
 Then import `initFontAwesome` in your project.
+
+For more information, [https://github.com/FortAwesome/react-fontawesome](https://github.com/FortAwesome/react-fontawesome)

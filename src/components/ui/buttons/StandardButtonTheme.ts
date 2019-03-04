@@ -4,6 +4,6 @@ export interface StandardButtonTheme {
 }
 
 export const defaultStandardButtonTheme: StandardButtonTheme = {
-  height: '30px',
+  height: '34px',
   borderRadius: '5px',
 };

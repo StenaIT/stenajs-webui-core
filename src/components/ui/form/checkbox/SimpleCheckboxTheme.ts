@@ -1,18 +1,65 @@
 import { IconProp } from '@fortawesome/fontawesome';
-import { defaultColors } from '../../../../themes/DefaultThemeValues';
+import { defaultColors } from '../../../../themes/default-values/DefaultColors';
+
+export interface SimpleCheckboxStateTheme {
+  borderColor: string;
+  backgroundColor: string;
+  iconColor: string;
+}
 
 export interface SimpleCheckboxTheme {
-  colorOn: string | undefined;
-  colorOff: string | undefined;
-  colorDisabled: string | undefined;
-  iconOn: IconProp;
-  iconOff: IconProp;
+  colors: SimpleCheckboxStateTheme;
+  disabledColors: SimpleCheckboxStateTheme;
+  checkedColors: SimpleCheckboxStateTheme;
+  checkIcon: IconProp;
+  width: string;
+  height: string;
+  borderRadius: string;
+  iconSize: number;
 }
 
 export const defaultSimpleCheckboxTheme: SimpleCheckboxTheme = {
-  colorOn: undefined,
-  colorOff: undefined,
-  colorDisabled: defaultColors.disabledText,
-  iconOn: ['far', 'check-circle'],
-  iconOff: ['far', 'circle'],
+  colors: {
+    backgroundColor: defaultColors.white,
+    borderColor: defaultColors.inputBorder,
+    iconColor: defaultColors.primaryText,
+  },
+  disabledColors: {
+    backgroundColor: '#f1f1f1',
+    borderColor: defaultColors.inputBorder,
+    iconColor: defaultColors.disabledText,
+  },
+  checkedColors: {
+    backgroundColor: defaultColors.white,
+    borderColor: defaultColors.inputBorder,
+    iconColor: defaultColors.primaryText,
+  },
+  checkIcon: 'check',
+  width: '22px',
+  height: '22px',
+  borderRadius: '4px',
+  iconSize: 10,
+};
+
+export const defaultSimpleCheckboxThemeDark: SimpleCheckboxTheme = {
+  colors: {
+    backgroundColor: '#b7d1d9',
+    borderColor: 'transparent',
+    iconColor: '#4d7989',
+  },
+  disabledColors: {
+    backgroundColor: '#f1f1f1',
+    borderColor: defaultColors.inputBorder,
+    iconColor: defaultColors.disabledText,
+  },
+  checkedColors: {
+    backgroundColor: '#b7d1d9',
+    borderColor: defaultColors.inputBorder,
+    iconColor: defaultColors.primaryText,
+  },
+  checkIcon: 'check',
+  width: '22px',
+  height: '22px',
+  borderRadius: '4px',
+  iconSize: 10,
 };

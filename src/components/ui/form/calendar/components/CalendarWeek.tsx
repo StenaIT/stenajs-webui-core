@@ -1,9 +1,11 @@
 import * as React from 'react';
-import { Row } from '../../../layout';
 import { MonthData, WeekData } from '../util/CalendarDataFactory';
 import {
   CalendarDayProps,
+  CalendarUserWeekData,
   DayState,
+  DayStateHighlight,
+  ExtraDayContentProps,
   OnClickDay,
   OnClickWeek,
   RenderWeekNumber,
@@ -11,18 +13,18 @@ import {
 import { CalendarTheme } from './CalendarTheme';
 import { WeekNumberCell } from './renderers/WeekNumberCell';
 
-export type DataPerWeekDay<T> = { [key: number]: T };
-
 export interface CalendarWeekProps<T> {
   dayComponent: React.ComponentType<CalendarDayProps<T>>;
   week: WeekData;
   month: MonthData;
-  statePerWeekDay?: DataPerWeekDay<DayState>;
-  userDataPerWeekDay?: DataPerWeekDay<T>;
+  statePerWeekDay?: CalendarUserWeekData<DayState>;
+  userDataPerWeekDay?: CalendarUserWeekData<T>;
   onClickWeek?: OnClickWeek;
   onClickDay?: OnClickDay<T>;
   theme: CalendarTheme;
   renderWeekNumber?: RenderWeekNumber;
+  extraDayContent?: React.ComponentType<ExtraDayContentProps<T>>;
+  defaultHighlights?: Array<DayStateHighlight>;
 }
 
 export const CalendarWeek = <T extends {}>({
@@ -35,25 +37,30 @@ export const CalendarWeek = <T extends {}>({
   onClickDay,
   theme,
   renderWeekNumber,
+  extraDayContent,
+  defaultHighlights,
 }: CalendarWeekProps<T>) => (
-  <Row key={week.weekNumber}>
-    <div>
+  <tr key={week.weekNumber}>
+    <td>
       {renderWeekNumber ? (
         renderWeekNumber(week, theme, onClickWeek)
       ) : (
         <WeekNumberCell week={week} onClickWeek={onClickWeek} theme={theme} />
       )}
-    </div>
+    </td>
     {week.days.map(day => (
       <DayComponent
         key={day.dateString}
         day={day}
+        week={week}
         month={month}
         dayState={statePerWeekDay && statePerWeekDay[day.dayOfMonth]}
         userData={userDataPerWeekDay && userDataPerWeekDay[day.dayOfMonth]}
         onClickDay={onClickDay}
         theme={theme}
+        extraDayContent={extraDayContent}
+        defaultHighlights={defaultHighlights}
       />
     ))}
-  </Row>
+  </tr>
 );

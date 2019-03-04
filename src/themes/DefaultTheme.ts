@@ -2,12 +2,16 @@ import { defaultButtonTheme } from '../components/ui/buttons/ButtonTheme';
 import { defaultFlatButtonTheme } from '../components/ui/buttons/FlatButtonTheme';
 import { defaultSmallButtonTheme } from '../components/ui/buttons/SmallButtonTheme';
 import { defaultStandardButtonTheme } from '../components/ui/buttons/StandardButtonTheme';
+import { defaultSeparatorLineTheme } from '../components/ui/decorations/SeparatorLineTheme';
 import { defaultCalendarTheme } from '../components/ui/form/calendar/components/CalendarTheme';
 import { defaultSimpleCheckboxTheme } from '../components/ui/form/checkbox/SimpleCheckboxTheme';
 import { defaultDateInputTheme } from '../components/ui/form/date-time-input/DateInputTheme';
 import { defaultDateRangeInputTheme } from '../components/ui/form/date-time-input/DateRangeInputTheme';
+import { defaultRadioButtonTheme } from '../components/ui/form/radio/RadioButtonTheme';
 import { defaultDefaultTextInputTheme } from '../components/ui/form/text-input/DefaultTextInputTheme';
+import { defaultNumericTextInputTheme } from '../components/ui/form/text-input/NumericTextInputTheme';
 import { defaultSimpleTextInputTheme } from '../components/ui/form/text-input/SimpleTextInputTheme';
+import { defaultSliderTheme } from '../components/ui/slider/SliderTheme';
 import {
   defaultDefaultTextTheme,
   defaultHeaderTextTheme,
@@ -17,12 +21,11 @@ import {
   defaultSmallTextTheme,
   defaultTinyTextTheme,
 } from '../components/ui/text/TextTheme';
-import {
-  defaultColors,
-  defaultFonts,
-  defaultFontSizes,
-  defaultMetrics,
-} from './DefaultThemeValues';
+import { defaultSelectTheme } from '../features/select/SelectTheme';
+import { defaultColors } from './default-values/DefaultColors';
+import { defaultFonts } from './default-values/DefaultFonts';
+import { defaultFontSizes } from './default-values/DefaultFontSizes';
+import { defaultMetrics } from './default-values/DefaultMetrics';
 import { Theme } from './Theme';
 
 export const defaultTheme: Theme = {
@@ -32,21 +35,26 @@ export const defaultTheme: Theme = {
   fontSizes: defaultFontSizes,
   components: {
     Button: defaultButtonTheme,
-    FlatButton: defaultFlatButtonTheme,
-    SmallButton: defaultSmallButtonTheme,
-    StandardButton: defaultStandardButtonTheme,
-    SimpleCheckbox: defaultSimpleCheckboxTheme,
-    SimpleTextInput: defaultSimpleTextInputTheme,
-    HeaderText: defaultHeaderTextTheme,
-    SectionHeaderText: defaultSectionHeaderTextTheme,
-    LargeText: defaultLargeTextTheme,
-    DefaultText: defaultDefaultTextTheme,
-    SmallText: defaultSmallTextTheme,
-    SmallerText: defaultSmallerTextTheme,
-    TinyText: defaultTinyTextTheme,
-    DefaultTextInput: defaultDefaultTextInputTheme,
+    Calendar: defaultCalendarTheme,
     DateInput: defaultDateInputTheme,
     DateRangeInput: defaultDateRangeInputTheme,
-    Calendar: defaultCalendarTheme,
+    DefaultText: defaultDefaultTextTheme,
+    DefaultTextInput: defaultDefaultTextInputTheme,
+    FlatButton: defaultFlatButtonTheme,
+    HeaderText: defaultHeaderTextTheme,
+    LargeText: defaultLargeTextTheme,
+    NumericTextInput: defaultNumericTextInputTheme,
+    RadioButton: defaultRadioButtonTheme,
+    SectionHeaderText: defaultSectionHeaderTextTheme,
+    Select: defaultSelectTheme,
+    SeparatorLine: defaultSeparatorLineTheme,
+    SimpleCheckbox: defaultSimpleCheckboxTheme,
+    SimpleTextInput: defaultSimpleTextInputTheme,
+    Slider: defaultSliderTheme,
+    SmallButton: defaultSmallButtonTheme,
+    SmallText: defaultSmallTextTheme,
+    SmallerText: defaultSmallerTextTheme,
+    StandardButton: defaultStandardButtonTheme,
+    TinyText: defaultTinyTextTheme,
   },
 };

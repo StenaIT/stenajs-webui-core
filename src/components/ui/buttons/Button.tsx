@@ -1,15 +1,27 @@
 import { IconProp } from '@fortawesome/fontawesome';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
 import styled from 'react-emotion';
 import { compose } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { addIcons } from '../../icon-library/IconLibrary';
+import {
+  ComponentThemeProps,
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
 import { Background } from '../colors/Background';
 import { Border } from '../decorations/Border';
 import { Clickable } from '../interaction/Clickable';
 import { Row } from '../layout/Row';
 import { Space } from '../layout/Space';
 import { ProgressIndicator } from '../progress/ProgressIndicator';
+import { ButtonTheme } from './ButtonTheme';
+
+addIcons(faCheck);
+
+export type ButtonPropsWithTheme = ButtonProps &
+  ComponentThemeProps<'StandardButton'>;
 
 export interface ButtonProps {
   /** The color of the button. */
@@ -46,25 +58,27 @@ export interface ButtonProps {
   success?: boolean;
 }
 
-export interface ButtonTextProps {
+export interface ButtonTextProps extends ComponentThemeProps<'Button'> {
   color: string;
   fontFamily: string;
   fontSize: string;
 }
 
-const ButtonText = styled<ButtonTextProps, 'span'>('span')(
+const ButtonText = styled('span')<ButtonTextProps>(
+  {
+    fontWeight: 600,
+    letterSpacing: '1px',
+  },
   ({ color, fontFamily, fontSize }) => ({
-    fontWeight: 100,
     fontSize,
     color,
     fontFamily,
-    letterSpacing: '1px',
   }),
 );
 
-class ButtonComponent extends React.PureComponent<
-  ButtonProps & WithThemeProps
-> {
+type InnerProps = ButtonProps & WithInnerComponentThemeProps<ButtonTheme>;
+
+class ButtonComponent extends React.PureComponent<InnerProps> {
   renderButton() {
     const {
       color,
@@ -87,7 +101,7 @@ class ButtonComponent extends React.PureComponent<
     return (
       <Border
         width={0}
-        borderRadius={borderRadius || theme.components.Button.borderRadius}
+        borderRadius={borderRadius || theme.borderRadius}
         overflow={'hidden'}
       >
         <Background
@@ -95,8 +109,8 @@ class ButtonComponent extends React.PureComponent<
             loading || success
               ? 'transparent'
               : disabled
-                ? disabledColor || theme.components.Button.bgColorDisabled
-                : color || theme.components.Button.bgColor
+                ? disabledColor || theme.bgColorDisabled
+                : color || theme.bgColor
           }
           height={height}
         >
@@ -106,13 +120,13 @@ class ButtonComponent extends React.PureComponent<
             justifyContent={'center'}
             alignItems={'center'}
           >
-            <Space />
+            <Space num={theme.numSpacing} />
             {!loading && !success && (leftIcon || left) ? (
               <>
                 {leftIcon ? (
                   <FontAwesomeIcon
                     icon={leftIcon}
-                    color={textColor || theme.components.Button.textColor}
+                    color={textColor || theme.textColor}
                     style={{ fontSize: iconSize }}
                   />
                 ) : (
@@ -126,9 +140,9 @@ class ButtonComponent extends React.PureComponent<
             )}
             {!loading && !success && label ? (
               <ButtonText
-                color={textColor || theme.components.Button.textColor}
-                fontSize={theme.fontSizes.normal}
-                fontFamily={theme.fonts.buttons}
+                color={textColor || theme.textColor}
+                fontSize={theme.fontSize}
+                fontFamily={theme.font}
               >
                 {label}
               </ButtonText>
@@ -140,7 +154,7 @@ class ButtonComponent extends React.PureComponent<
             {success && (
               <FontAwesomeIcon
                 icon={'check'}
-                color={theme.colors.successGreen}
+                color={theme.successIconColor}
                 style={{ fontSize: 20 }}
               />
             )}
@@ -152,7 +166,7 @@ class ButtonComponent extends React.PureComponent<
                 {rightIcon ? (
                   <FontAwesomeIcon
                     icon={rightIcon}
-                    color={textColor || theme.components.Button.textColor}
+                    color={textColor || theme.textColor}
                     style={{ fontSize: iconSize }}
                   />
                 ) : (
@@ -162,7 +176,7 @@ class ButtonComponent extends React.PureComponent<
             ) : (
               undefined
             )}
-            <Space />
+            <Space num={theme.numSpacing} />
           </Row>
         </Background>
       </Border>
@@ -173,7 +187,9 @@ class ButtonComponent extends React.PureComponent<
     const { disabled, onClick } = this.props;
 
     if (disabled) {
-      return <div style={{ display: 'table' }}>{this.renderButton()}</div>;
+      return (
+        <div style={{ display: 'inline-block' }}>{this.renderButton()}</div>
+      );
     }
 
     return (
@@ -184,6 +200,6 @@ class ButtonComponent extends React.PureComponent<
   }
 }
 
-export const Button = compose<ButtonProps & WithThemeProps, ButtonProps>(
-  withTheme,
+export const Button = compose<InnerProps, ButtonProps>(
+  withComponentTheme('Button'),
 )(ButtonComponent);

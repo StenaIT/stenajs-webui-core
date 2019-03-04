@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react';
-import { compose, withProps } from 'recompose';
-import { withTheme, WithThemeProps } from '../../../util/enhancers';
+import { compose, setDisplayName } from 'recompose';
+import { withComponentTheme } from '../../../util/enhancers/WithComponentTheme';
 import { CalendarProps, createCalendar } from './components/Calendar';
 import {
   DateRangeCalendarProps,
@@ -8,33 +8,33 @@ import {
   withDateRangeSelection,
   withDateRangeSelectionState,
 } from './features/DateRangeSelection';
-import { withMonthSwitcher } from './features/MonthSwitcher';
+import { withMonthSwitcher } from './features/month-switcher/MonthSwitcher';
+import { withTodayInDayState } from './features/today-state/WithTodayInDayState';
 
 export type __C1241241 = ComponentClass<{}>;
 
 export const createDateRangeCalendar = <T extends {}>() =>
-  compose<CalendarProps<T>, DateRangeCalendarProps<T>>(
-    withDateRangeSelection,
-    withMonthSwitcher,
-    withTheme,
-    withProps(({ theme }: WithThemeProps) => ({
-      theme: theme.components.Calendar,
-    })),
-  )(createCalendar<T>());
+  setDisplayName<DateRangeCalendarProps<T>>('DateRangeCalendar')(
+    compose<CalendarProps<T>, DateRangeCalendarProps<T>>(
+      withDateRangeSelection,
+      withMonthSwitcher,
+      withComponentTheme('Calendar'),
+      withTodayInDayState<T>(),
+    )(createCalendar<T>()),
+  );
 
 export const createDateRangeCalendarWithState = <T extends {}>() =>
-  compose<CalendarProps<T>, DateRangeCalendarPropsWithStateProps<T>>(
-    withDateRangeSelectionState,
-    withDateRangeSelection,
-    withMonthSwitcher,
-    withTheme,
-    withProps(({ theme }: WithThemeProps) => ({
-      theme: theme.components.Calendar,
-    })),
-  )(createCalendar<T>());
+  setDisplayName<DateRangeCalendarPropsWithStateProps<T>>(
+    'DateRangeCalendarWithState',
+  )(
+    compose<CalendarProps<T>, DateRangeCalendarPropsWithStateProps<T>>(
+      withDateRangeSelectionState,
+      withDateRangeSelection,
+      withMonthSwitcher,
+      withComponentTheme('Calendar'),
+      withTodayInDayState<T>(),
+    )(createCalendar<T>()),
+  );
 
 export const DateRangeCalendar = createDateRangeCalendar();
-DateRangeCalendar.displayName = 'DateRangeCalendar';
-
 export const DateRangeCalendarWithState = createDateRangeCalendarWithState();
-DateRangeCalendarWithState.displayName = 'DateRangeCalendarWithState';

@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { compose, setDisplayName } from 'recompose';
 import { Theme } from '../../..';
 import { GetTheme } from '../../theme/GetTheme';
 
@@ -12,7 +13,7 @@ export const withTheme = <
 >(
   WrappedComponent: React.ComponentType<WrappedComponentProps>,
 ): React.ComponentType<OuterProps> => {
-  return class extends React.Component<OuterProps> {
+  class WithThemeComponent extends React.Component<WrappedComponentProps> {
     renderWrappedComponent = (theme: Theme) => {
       return <WrappedComponent {...this.props} theme={theme} />;
     };
@@ -20,5 +21,9 @@ export const withTheme = <
     render() {
       return <GetTheme>{this.renderWrappedComponent}</GetTheme>;
     }
-  };
+  }
+
+  return compose<WrappedComponentProps, OuterProps>(
+    setDisplayName('withTheme()'),
+  )(WithThemeComponent);
 };

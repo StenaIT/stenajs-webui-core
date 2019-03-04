@@ -1,26 +1,29 @@
 import * as React from 'react';
-import { compose } from 'recompose';
+import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
 export interface SpaceProps {
-  num?: number;
   half?: boolean;
-  children?: {};
+  horizontal?: boolean;
+  num?: number;
+  vertical?: boolean;
 }
 
-export const SpaceComponent = ({
+export const SpaceComponent: React.SFC<SpaceProps & WithThemeProps> = ({
   children,
-  num = 1,
   half = false,
+  horizontal,
+  num = 1,
   theme,
-}: SpaceProps & WithThemeProps) => {
+  vertical,
+}) => {
   const halfMod = half ? 0.5 : 1.0;
   const size = num * halfMod;
   return (
     <div
       style={{
-        width: `${size * theme.metrics.space}px`,
-        height: `${size * theme.metrics.space}px`,
+        width: vertical ? '1px' : `${size * theme.metrics.space}px`,
+        height: horizontal ? '1px' : `${size * theme.metrics.space}px`,
       }}
     >
       {children}
@@ -28,6 +31,6 @@ export const SpaceComponent = ({
   );
 };
 
-export const Space = compose<SpaceProps & WithThemeProps, SpaceProps>(
-  withTheme,
-)(SpaceComponent);
+export const Space = setDisplayName<SpaceProps>('Space')(
+  compose<SpaceProps & WithThemeProps, SpaceProps>(withTheme)(SpaceComponent),
+);

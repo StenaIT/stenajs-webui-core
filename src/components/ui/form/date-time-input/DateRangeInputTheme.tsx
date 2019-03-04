@@ -2,7 +2,7 @@ import {
   separator,
   separatorHighlighted,
   white,
-} from '../../../../themes/Colors';
+} from '../../../../themes/default-values/Colors';
 import {
   CalendarTheme,
   defaultCalendarTheme,

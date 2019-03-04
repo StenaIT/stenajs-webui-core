@@ -1,17 +1,14 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { shallow } from 'enzyme';
 import * as React from 'react';
 import { defaultTheme } from '../../../../../themes/DefaultTheme';
+import { Icon } from '../../../icon/Icon';
 import { Clickable } from '../../../interaction/Clickable';
-import {
-  InnerPropsForSimpleCheckboxComponent,
-  SimpleCheckboxComponent,
-} from '../SimpleCheckbox';
+import { SimpleCheckboxComponent } from '../SimpleCheckbox';
 
 describe('SimpleCheckbox', () => {
-  const props: InnerPropsForSimpleCheckboxComponent = {
+  const props = {
     onToggle: jest.fn(),
-    theme: defaultTheme,
+    theme: defaultTheme.components.SimpleCheckbox,
   };
 
   describe('disabled', () => {
@@ -38,20 +35,18 @@ describe('SimpleCheckbox', () => {
         const wrapper = shallow(
           <SimpleCheckboxComponent {...props} value={true} />,
         );
-        expect(wrapper.find(FontAwesomeIcon).prop('icon')).toBe(
-          defaultTheme.components.SimpleCheckbox.iconOn,
+        expect(wrapper.find(Icon).prop('name')).toBe(
+          defaultTheme.components.SimpleCheckbox.checkIcon,
         );
       });
     });
 
     describe('when not checked', () => {
-      it('uses specified icon from theme', () => {
+      it('has no icon', () => {
         const wrapper = shallow(
           <SimpleCheckboxComponent {...props} value={false} />,
         );
-        expect(wrapper.find(FontAwesomeIcon).prop('icon')).toBe(
-          defaultTheme.components.SimpleCheckbox.iconOff,
-        );
+        expect(wrapper.find(Icon).length).toBe(0);
       });
     });
   });
@@ -62,17 +57,8 @@ describe('SimpleCheckbox', () => {
         const wrapper = shallow(
           <SimpleCheckboxComponent {...props} value={true} disabled />,
         );
-        expect(wrapper.find(FontAwesomeIcon).prop('color')).toBe(
-          defaultTheme.components.SimpleCheckbox.colorDisabled,
-        );
-      });
-
-      it('uses specified color from theme even if value is false', () => {
-        const wrapper = shallow(
-          <SimpleCheckboxComponent {...props} value={false} disabled />,
-        );
-        expect(wrapper.find(FontAwesomeIcon).prop('color')).toBe(
-          defaultTheme.components.SimpleCheckbox.colorDisabled,
+        expect(wrapper.find(Icon).prop('color')).toBe(
+          defaultTheme.components.SimpleCheckbox.disabledColors.iconColor,
         );
       });
     });
@@ -82,19 +68,8 @@ describe('SimpleCheckbox', () => {
         const wrapper = shallow(
           <SimpleCheckboxComponent {...props} value={true} />,
         );
-        expect(wrapper.find(FontAwesomeIcon).prop('color')).toBe(
-          defaultTheme.components.SimpleCheckbox.colorOn,
-        );
-      });
-    });
-
-    describe('when not checked', () => {
-      it('uses specified color from theme', () => {
-        const wrapper = shallow(
-          <SimpleCheckboxComponent {...props} value={false} />,
-        );
-        expect(wrapper.find(FontAwesomeIcon).prop('color')).toBe(
-          defaultTheme.components.SimpleCheckbox.colorOff,
+        expect(wrapper.find(Icon).prop('color')).toBe(
+          defaultTheme.components.SimpleCheckbox.colors.iconColor,
         );
       });
     });

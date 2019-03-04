@@ -1,22 +1,24 @@
 import * as React from 'react';
+import { compose, pure, setDisplayName } from 'recompose';
+import {
+  ComponentThemeProps,
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
-import { compose, pure } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { TextTheme } from './TextTheme';
 
-export type TinyTextProps = TextBaseSharedProps;
+export type TinyTextProps = TextBaseSharedProps &
+  ComponentThemeProps<'TinyText'>;
 
-const TinyTextComponent = ({
-  theme,
-  ...textProps
-}: TinyTextProps & WithThemeProps) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.components.TinyText.fontSize}
-    fontFamily={theme.components.TinyText.fontFamily}
-  />
+type InnerProps = TinyTextProps & WithInnerComponentThemeProps<TextTheme>;
+const TinyTextComponent: React.SFC<InnerProps> = ({ theme, ...textProps }) => (
+  <TextBase {...textProps} {...theme} />
 );
 
-export const TinyText = compose<TinyTextProps & WithThemeProps, TinyTextProps>(
-  pure,
-  withTheme,
-)(TinyTextComponent);
+export const TinyText = setDisplayName<TinyTextProps>('TinyText')(
+  compose<InnerProps, TinyTextProps>(
+    pure,
+    withComponentTheme('TinyText'),
+  )(TinyTextComponent),
+);

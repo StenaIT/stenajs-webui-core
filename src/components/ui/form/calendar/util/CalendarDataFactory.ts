@@ -3,14 +3,18 @@ import {
   addHours,
   addWeeks,
   eachDayOfInterval,
+  endOfMonth,
   format,
   getDate,
   getISODay,
   getISOWeek,
   getMonth,
   getYear,
+  isSameDay,
   startOfISOWeek,
+  startOfMonth,
 } from 'date-fns';
+import { DateFormats } from '../../../../../util/date/DateFormats';
 
 export enum Months {
   JANUARY = 0,
@@ -46,6 +50,10 @@ export interface DayData {
   month: number; // 0-11
   dayOfMonth: number; // 1-31
   dayOfWeek: number; // 1-7
+  isFirstDayOfWeek: boolean;
+  isLastDayOfWeek: boolean;
+  isFirstDayOfMonth: boolean;
+  isLastDayOfMonth: boolean;
 }
 
 export interface WeekData {
@@ -54,6 +62,7 @@ export interface WeekData {
   startYear: number;
   endMonth: number;
   endYear: number;
+  isLastWeekOfMonth: boolean;
   days: Array<DayData>;
 }
 
@@ -82,8 +91,8 @@ export const getMonthInYear = (year: number, month: number): MonthData => {
   const monthToUse = month % 12;
   const firstDayOfMonth = new Date(yearToUse, monthToUse, 1);
   return {
-    monthString: format(firstDayOfMonth, 'YYYY-MM'),
-    name: format(firstDayOfMonth, 'MMMM'),
+    monthString: format(firstDayOfMonth, DateFormats.yearAndMonth),
+    name: format(firstDayOfMonth, DateFormats.fullMonthName),
     year: yearToUse,
     monthInYear: monthToUse,
     weeks: getWeeksForMonth(yearToUse, monthToUse),
@@ -108,31 +117,58 @@ export const getWeeksForMonth = (
   return weeks;
 };
 
-export const getWeekForDate = (firstDayOfWeek: Date): WeekData => ({
-  weekNumber: getISOWeek(firstDayOfWeek),
-  startMonth: getMonth(firstDayOfWeek),
-  startYear: getYear(firstDayOfWeek),
-  endMonth: getMonth(addDays(firstDayOfWeek, 6)),
-  endYear: getYear(addDays(firstDayOfWeek, 6)),
-  days: getDaysForWeekForDate(firstDayOfWeek),
-});
+export const getWeekForDate = (firstDayOfWeek: Date): WeekData => {
+  const isLastWeekOfMonth =
+    getMonth(addDays(firstDayOfWeek, 7)) !== getMonth(firstDayOfWeek);
+  return {
+    weekNumber: getISOWeek(firstDayOfWeek),
+    startMonth: getMonth(firstDayOfWeek),
+    startYear: getYear(firstDayOfWeek),
+    endMonth: getMonth(addDays(firstDayOfWeek, 6)),
+    endYear: getYear(addDays(firstDayOfWeek, 6)),
+    days: getDaysForWeekForDate(firstDayOfWeek),
+    isLastWeekOfMonth,
+  };
+};
 
-export const createDay = (date: Date): DayData => ({
-  date,
-  name: format(date, 'EEE'),
-  dateString: format(addHours(date, 12), 'YYYY-MM-dd'),
-  weekNumber: getISOWeek(date),
-  year: getYear(date),
-  month: getMonth(date),
-  dayOfMonth: getDate(date),
-  dayOfWeek: getISODay(date),
-});
+export const createDay = (date: Date): DayData => {
+  const dayOfWeek = getISODay(date);
+  return {
+    date,
+    name: format(date, 'EEE'),
+    dateString: format(addHours(date, 12), DateFormats.fullDate),
+    weekNumber: getISOWeek(date),
+    year: getYear(date),
+    month: getMonth(date),
+    dayOfMonth: getDate(date),
+    dayOfWeek,
+    isFirstDayOfWeek: dayOfWeek === 1,
+    isLastDayOfWeek: dayOfWeek === 7,
+    isFirstDayOfMonth: isSameDay(startOfMonth(date), date),
+    isLastDayOfMonth: isSameDay(endOfMonth(date), date),
+  };
+};
 
 export const getDaysForWeekForDate = (firstDayOfWeek: Date): Array<DayData> => {
   return eachDayOfInterval({
     start: firstDayOfWeek,
     end: addDays(firstDayOfWeek, 6),
   }).map(createDay);
+};
+
+export const getStartDateOfISOWeek = (
+  weekNumber: number,
+  year: number,
+): Date => {
+  const simple = new Date(year, 0, 1 + (weekNumber - 1) * 7);
+  const dayOfWeek = simple.getDay();
+  const isoWeekStart = simple;
+  if (dayOfWeek <= 4) {
+    isoWeekStart.setDate(simple.getDate() - simple.getDay() + 1);
+  } else {
+    isoWeekStart.setDate(simple.getDate() + 8 - simple.getDay());
+  }
+  return isoWeekStart;
 };
 
 export const calculateOverflowingMonth = (
@@ -143,7 +179,7 @@ export const calculateOverflowingMonth = (
     return { year: year + Math.floor(month / 12), month: month % 12 };
   }
   if (month < Months.JANUARY) {
-    return { year: year + Math.floor(month / 12), month: 12 + month % 12 };
+    return { year: year + Math.floor(month / 12), month: 12 + (month % 12) };
   }
   return { year, month };
 };

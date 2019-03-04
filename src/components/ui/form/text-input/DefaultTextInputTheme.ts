@@ -1,19 +1,50 @@
-import { defaultColors } from '../../../../themes/DefaultThemeValues';
+import { defaultColors } from '../../../../themes/default-values/DefaultColors';
+import { BorderStyle } from '../../decorations';
 
 export interface DefaultTextInputTheme {
   borderRadius: string;
-  border: string;
+  borderColor: string;
+  borderColorFocused: string;
+  borderStyle: BorderStyle;
+  borderWidth: number;
+  disabledBackgroundColor: string;
   fontSize: string;
   height: string;
   paddingLeft: string;
   paddingRight: string;
+  iconSize: number;
+  backgroundColor: string;
+  textColor: string;
 }
 
 export const defaultDefaultTextInputTheme: DefaultTextInputTheme = {
   borderRadius: '4px',
-  border: `1px solid ${defaultColors.separator}`,
+  borderColor: defaultColors.inputBorder,
+  borderColorFocused: defaultColors.inputBorderFocused,
+  borderStyle: 'solid',
+  borderWidth: 1,
+  disabledBackgroundColor: defaultColors.disabledBackground,
   fontSize: '13px',
   height: '34px',
   paddingLeft: '8px',
   paddingRight: '8px',
+  iconSize: 13,
+  backgroundColor: defaultColors.white,
+  textColor: defaultColors.primaryText,
+};
+
+export const defaultTextInputThemeDark: DefaultTextInputTheme = {
+  borderRadius: '4px',
+  borderColor: 'transparent',
+  borderColorFocused: defaultColors.white,
+  borderStyle: 'solid',
+  borderWidth: 1,
+  disabledBackgroundColor: defaultColors.disabledBackground,
+  fontSize: '13px',
+  height: '34px',
+  paddingLeft: '8px',
+  paddingRight: '8px',
+  iconSize: 13,
+  backgroundColor: '#4a5d73',
+  textColor: defaultColors.white,
 };

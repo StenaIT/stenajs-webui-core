@@ -4,6 +4,6 @@ export interface SmallButtonTheme {
 }
 
 export const defaultSmallButtonTheme: SmallButtonTheme = {
-  height: '24px',
+  height: '28px',
   borderRadius: '3px',
 };

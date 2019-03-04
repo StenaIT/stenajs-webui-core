@@ -1,22 +1,26 @@
 import * as React from 'react';
+import { compose, pure, setDisplayName } from 'recompose';
+import {
+  ComponentThemeProps,
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../util/enhancers/WithComponentTheme';
 import { TextBase, TextBaseSharedProps } from './TextBase';
-import { compose, pure } from 'recompose';
-import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
+import { TextTheme } from './TextTheme';
 
-export type SmallerTextProps = TextBaseSharedProps;
+export type SmallerTextProps = TextBaseSharedProps &
+  ComponentThemeProps<'SmallerText'>;
 
-const SmallerTextComponent = ({
+type InnerProps = SmallerTextProps & WithInnerComponentThemeProps<TextTheme>;
+
+const SmallerTextComponent: React.SFC<InnerProps> = ({
   theme,
   ...textProps
-}: SmallerTextProps & WithThemeProps) => (
-  <TextBase
-    {...textProps}
-    fontSize={theme.components.SmallerText.fontSize}
-    fontFamily={theme.components.SmallerText.fontFamily}
-  />
-);
+}) => <TextBase {...textProps} {...theme} />;
 
-export const SmallerText = compose<
-  SmallerTextProps & WithThemeProps,
-  SmallerTextProps
->(pure, withTheme)(SmallerTextComponent);
+export const SmallerText = setDisplayName<SmallerTextProps>('SmallerText')(
+  compose<InnerProps, SmallerTextProps>(
+    pure,
+    withComponentTheme('SmallerText'),
+  )(SmallerTextComponent),
+);

@@ -1,4 +1,5 @@
 // created from 'create-ts-index'
 
-export * from './OverlappingTimeValidator';
+export * from './OverlappingTimesValidator';
+export * from './TimeStringFormatValidator';
 export * from './TimeTransformer';

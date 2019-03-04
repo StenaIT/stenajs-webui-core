@@ -19,7 +19,7 @@ describe('Card', () => {
     isExpanded: false,
     onClick: () => false,
   };
-  let props: any = {};
+  let props: CardProps = {};
 
   describe('is expanded', () => {
     it('regular', () => {
@@ -147,7 +147,7 @@ describe('Card', () => {
           .prop('num'),
       ).toEqual(0);
 
-      let style: any = shallow(<Card {...props} />)
+      let style: string = shallow(<Card {...props} />)
         .find(CardContent)
         .dive()
         .find('.CardContentWrapper')
@@ -198,7 +198,7 @@ describe('Card', () => {
           .prop('num'),
       ).toEqual(0);
 
-      let style: any = shallow(<Card {...props} />)
+      let style: string = shallow(<Card {...props} />)
         .find(CardContent)
         .dive()
         .find('.CardContentWrapper')
@@ -249,7 +249,7 @@ describe('Card', () => {
           .prop('num'),
       ).toEqual(2);
 
-      let style: any = shallow(<Card {...props} />)
+      let style: string = shallow(<Card {...props} />)
         .find(CardContent)
         .dive()
         .find('.CardContentWrapper')
@@ -297,7 +297,7 @@ describe('Card', () => {
           .prop('num'),
       ).toEqual(2);
 
-      let style: any = shallow(<Card {...props} />)
+      let style: string = shallow(<Card {...props} />)
         .find(CardContent)
         .dive()
         .find('.CardContentWrapper')
