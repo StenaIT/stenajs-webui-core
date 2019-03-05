@@ -1,3 +1,4 @@
+import { WhiteSpaceProperty } from 'csstype';
 import { defaultColors } from '../../themes/default-values/DefaultColors';
 import { defaultFonts } from '../../themes/default-values/DefaultFonts';
 import { defaultFontSizes } from '../../themes/default-values/DefaultFontSizes';
@@ -40,9 +41,12 @@ export interface SelectTheme {
     backgroundColor: string;
     hoverTextColor: string;
     hoverBackgroundColor: string;
+    minWidth?: string;
     selectedItemTextColor: string;
     selectedItemBackgroundColor: string;
     zIndex: number;
+    width?: string;
+    whiteSpace?: WhiteSpaceProperty;
   };
   menuPortal: {
     zIndex: number;
