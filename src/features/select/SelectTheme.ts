@@ -20,6 +20,8 @@ export interface SelectTheme {
   };
   input: {
     backgroundColor: string;
+    border: string;
+    borderFocused: string;
     borderColor: string;
     borderColorFocused: string;
     borderRadius: string;
@@ -77,6 +79,8 @@ export const defaultSelectTheme: SelectTheme = {
   },
   input: {
     backgroundColor: defaultColors.white,
+    border: `1px solid ${defaultColors.inputBorder}`,
+    borderFocused: `1px solid ${defaultColors.inputBorderFocused}`,
     borderColor: defaultColors.inputBorder,
     borderColorFocused: defaultColors.inputBorderFocused,
     disabledBackgroundColor: defaultColors.disabledBackground,
@@ -131,6 +135,8 @@ export const selectThemeDark: SelectTheme = {
   },
   input: {
     backgroundColor: '#4a5d73',
+    border: '1px solid transparent',
+    borderFocused: `1px solid #92a3b5`,
     borderColor: 'transparent',
     borderColorFocused: '#92a3b5',
     disabledBackgroundColor: defaultColors.disabledBackground,

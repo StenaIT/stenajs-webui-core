@@ -71,10 +71,16 @@ const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
       : selectTheme.input.backgroundColor,
     boxShadow: '0',
     borderRadius: selectTheme.input.borderRadius,
+    border: isFocused
+      ? selectTheme.input.borderFocused
+      : selectTheme.input.border,
     borderColor: isFocused
       ? selectTheme.input.borderColorFocused
       : selectTheme.input.borderColor,
     '&:hover': {
+      border: isFocused
+        ? selectTheme.input.borderFocused
+        : selectTheme.input.border,
       borderColor: isFocused
         ? selectTheme.input.borderColorFocused
         : selectTheme.input.borderColor,
