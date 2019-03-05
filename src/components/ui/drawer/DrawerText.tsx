@@ -7,7 +7,7 @@ export interface DrawerTextProps {
 }
 
 const DrawerValueText = styled('strong')`
-  float: right;
+  align-self: flex-end;
   font-size: .8em;
 `;
 
