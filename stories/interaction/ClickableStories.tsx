@@ -16,5 +16,28 @@ export const addClickableStories = () => {
       <Clickable opacityOnHover onClick={() => alert('Clicked!')}>
         <DefaultText underline>Hover over me!</DefaultText>
       </Clickable>
+    ))
+    .add('with double click', () => (
+      <Clickable onDblClick={() => alert('Double clicked!')}>
+        <DefaultText underline>Double click me!</DefaultText>
+      </Clickable>
+    ))
+    .add('with no pointer as mouse cursor', () => (
+      <Clickable disablePointer onClick={() => alert('Clicked!')}>
+        <DefaultText underline>Click me!</DefaultText>
+      </Clickable>
+    ))
+    .add('with no opacity effect when clicking', () => (
+      <Clickable disableOpacityOnClick onClick={() => alert('Clicked!')}>
+        <DefaultText underline>Click me!</DefaultText>
+      </Clickable>
+    ))
+    .add('with tooltip', () => (
+      <Clickable
+        tooltip={'This is some nice information'}
+        onClick={() => alert('Clicked!')}
+      >
+        <DefaultText underline>Hover me a second</DefaultText>
+      </Clickable>
     ));
 };
