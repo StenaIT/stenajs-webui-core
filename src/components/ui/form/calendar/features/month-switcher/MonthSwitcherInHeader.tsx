@@ -1,7 +1,5 @@
-import {
-  faChevronLeft,
-  faChevronRight,
-} from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
 import * as React from 'react';
 import { ComponentEnhancer, compose, withProps } from 'recompose';
 import { addIcons } from '../../../../../icon-library/IconLibrary';

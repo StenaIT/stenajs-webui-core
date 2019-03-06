@@ -54,7 +54,7 @@ export interface BoxProps extends StyledSystemProps {
   style?: CSSProperties;
 }
 
-const FlexBox = styled('div')<FlexBoxProps>`
+const FlexBox = styled.div<FlexBoxProps>`
   display: ${props => props.display || 'flex'};
   ${alignItems}
   ${bgColor}

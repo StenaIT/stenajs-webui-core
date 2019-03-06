@@ -1,7 +1,6 @@
+import styled from '@emotion/styled';
 import * as React from 'react';
 import { ChangeEvent, useCallback } from 'react';
-import styled from '@emotion/styled';
-import { css } from 'emotion';
 import { compose, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types';
 import { RequiredInputComponentProps } from '../../../RequiredComponentProps';
@@ -21,7 +20,7 @@ export interface SwitchProps
   theme?: DeepPartial<SwitchTheme>;
 }
 
-const invisibleInputStyles = css`
+const InvisibleInput = styled.input`
   top: 0;
   left: 0;
   width: 100%;
@@ -51,7 +50,7 @@ const Back = styled('div')<Pick<SwitchProps, 'value' | 'disabled' | 'theme'>>`
   }
 `;
 
-const Front = styled('div')<Pick<SwitchProps, 'disabled' | 'theme' | 'value' >>`
+const Front = styled('div')<Pick<SwitchProps, 'disabled' | 'theme' | 'value'>>`
   background-color: ${({ value, disabled, theme }) =>
     disabled
       ? theme.disabledColors.iconBackgroundColor
@@ -74,7 +73,7 @@ const IconWrapper = styled('div')<Pick<SwitchProps, 'theme' | 'value'>>`
   height: ${({ theme }) => theme.height - 4}px;
   justify-content: center;
   width: ${({ theme }) => theme.height - 4}px;
-  opacity: ${({ value }) => value ? 1 : 0};
+  opacity: ${({ value }) => (value ? 1 : 0)};
   transition: opacity 0.1s linear;
 `;
 
@@ -117,9 +116,8 @@ const SwitchComponent: React.FC<InnerProps> = ({
         onClick={handleSwitchClick}
         theme={theme}
       >
-        <input
+        <InvisibleInput
           checked={value}
-          className={invisibleInputStyles}
           onChange={handleInputChange}
           ref={inputRef}
           type={'checkbox'}

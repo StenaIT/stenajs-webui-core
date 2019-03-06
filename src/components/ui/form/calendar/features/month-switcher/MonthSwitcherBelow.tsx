@@ -1,4 +1,5 @@
-import { faChevronDown, faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons/faChevronDown';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
 import * as React from 'react';
 import { ComponentEnhancer, compose } from 'recompose';
 import { addIcons } from '../../../../../icon-library/IconLibrary';

@@ -7,7 +7,7 @@ export interface IndentProps {
   half?: boolean;
 }
 
-export const IndentComponent: React.SFC<IndentProps & WithThemeProps> = ({
+export const IndentComponent: React.FC<IndentProps & WithThemeProps> = ({
   num = 1,
   children,
   half,

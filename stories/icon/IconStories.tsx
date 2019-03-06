@@ -1,9 +1,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 
-import {
-  faCheckCircle as farCheckCircle,
-  faCircle as farCircle,
-} from '@fortawesome/free-regular-svg-icons';
+import { faCheckCircle } from '@fortawesome/free-regular-svg-icons/faCheckCircle';
+import { faCircle } from '@fortawesome/free-regular-svg-icons/faCircle';
 import {
   faBicycle,
   faClock,
@@ -19,8 +17,8 @@ import { Indent, Row, Space } from '../../src/components/ui/layout';
 import { DefaultText } from '../../src/components/ui/text';
 
 library.add(
-  farCheckCircle,
-  farCircle,
+  faCheckCircle,
+  faCircle,
   faBicycle,
   faClock,
   faCog,

@@ -5,9 +5,7 @@ export interface FloatProps {
   left?: boolean;
 }
 
-export const Float = styled('div')<
-  FloatProps
->(props => ({
+export const Float = styled.div<FloatProps>(props => ({
   float: getFloat(props),
 }));
 

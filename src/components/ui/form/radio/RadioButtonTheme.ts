@@ -1,16 +1,14 @@
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
+import { IconProp } from '@fortawesome/fontawesome';
+import { faCircle } from '@fortawesome/free-regular-svg-icons/faCircle';
+import { faDotCircle } from '@fortawesome/free-regular-svg-icons/faDotCircle';
 import { Color } from 'csstype';
 import {
   defaultColors,
   defaultFontSizes,
 } from '../../../../themes/default-values';
-import {
-  faCircle as farCircle,
-  faDotCircle as farDotCircle,
-} from '@fortawesome/free-regular-svg-icons';
 import { addIcons } from '../../../icon-library/IconLibrary';
 
-addIcons(farCircle, farDotCircle);
+addIcons(faCircle, faDotCircle);
 
 export interface RadioButtonTheme {
   disabledIconColor: Color;

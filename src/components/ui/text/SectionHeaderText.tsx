@@ -13,7 +13,7 @@ export type SectionHeaderTextProps = TextBaseSharedProps &
 
 type InnerProps = SectionHeaderTextProps &
   WithInnerComponentThemeProps<TextTheme>;
-const SectionHeaderTextComponent: React.SFC<InnerProps> = ({
+const SectionHeaderTextComponent: React.FC<InnerProps> = ({
   theme,
   ...textProps
 }) => <TextBase {...textProps} {...theme} />;

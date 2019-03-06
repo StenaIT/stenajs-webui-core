@@ -1,8 +1,8 @@
+import styled from '@emotion/styled';
 import * as React from 'react';
 import { KeyboardEventHandler, MouseEventHandler } from 'react';
-import styled from '@emotion/styled';
 
-/* tslint:disable:no-any */
+// tslint:disable:no-any
 
 export interface OverlayProps {
   onClickOutside?: () => void;
@@ -13,23 +13,25 @@ export interface OverlayProps {
 interface ModalWrapperProps {
   opacity?: number;
   zIndex: number;
-  innerRef?: any;
 }
 
-const ModalWrapper = styled('div')<ModalWrapperProps>(props => ({
-  display: 'flex',
-  justifyContent: 'center',
-  alignItems: 'center',
-  position: 'fixed',
-  top: 0,
-  left: 0,
-  width: '100%',
-  height: '100%',
-  background: `rgba(0, 0, 0, ${
-    typeof props.opacity === 'number' ? props.opacity : 0.3
-  })`,
-  zIndex: props.zIndex || 100,
-}));
+const ModalWrapper = styled.div<ModalWrapperProps>`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(
+    0,
+    0,
+    0,
+    ${props => (typeof props.opacity === 'number' ? props.opacity : 0.3)}
+  );
+  z-index: ${props => props.zIndex || 100};
+`;
 
 export class Overlay extends React.Component<OverlayProps> {
   div: HTMLDivElement | undefined = undefined;
@@ -61,7 +63,7 @@ export class Overlay extends React.Component<OverlayProps> {
         opacity={backgroundOpacity}
         id={'modal-wrapper'}
         onClick={this.onClickOutside}
-        innerRef={(div: any) => (this.div = div as HTMLDivElement)}
+        ref={(div: any) => (this.div = div as HTMLDivElement)}
         onKeyDown={this.onKeyDown}
         tabIndex={0}
       >

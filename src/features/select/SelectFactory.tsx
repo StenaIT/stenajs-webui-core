@@ -57,6 +57,7 @@ const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
           ? selectTheme.menu.hoverTextColor
           : undefined,
     cursor: isDisabled ? 'not-allowed' : 'default',
+    whiteSpace: selectTheme.menu.whiteSpace || base.whiteSpace,
   }),
   control: (base, { isFocused, isDisabled }) => ({
     ...base,
@@ -70,10 +71,16 @@ const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
       : selectTheme.input.backgroundColor,
     boxShadow: '0',
     borderRadius: selectTheme.input.borderRadius,
+    border: isFocused
+      ? selectTheme.input.borderFocused
+      : selectTheme.input.border,
     borderColor: isFocused
       ? selectTheme.input.borderColorFocused
       : selectTheme.input.borderColor,
     '&:hover': {
+      border: isFocused
+        ? selectTheme.input.borderFocused
+        : selectTheme.input.border,
       borderColor: isFocused
         ? selectTheme.input.borderColorFocused
         : selectTheme.input.borderColor,
@@ -137,7 +144,9 @@ const customStyles = (selectTheme: SelectTheme): StylesConfig => ({
     ...base,
     backgroundColor: selectTheme.menu.backgroundColor,
     color: selectTheme.menu.textColor,
+    minWidth: selectTheme.menu.minWidth || base.minWidth,
     zIndex: selectTheme.menu.zIndex,
+    width: selectTheme.menu.width || base.width,
   }),
   menuPortal: base => ({
     ...base,

@@ -1,6 +1,17 @@
-# stenajs-webui-common
+# stenajs-webui-core
 
 A library with common UI components for React,
+
+### Yarn ###
+
+All instructions are written with Yarn as package manager.
+If you are using NPM, replace `yarn add` with `npm install --save` in the following instructions.
+
+## Prerequisites
+ 
+It is highly recommended that you use `create-react-app` to setup your application. This ensure that you have a proper webpack configuration.
+
+For more information, see [https://facebook.github.io/create-react-app/]().
 
 ## Installation
 
@@ -8,41 +19,46 @@ A library with common UI components for React,
 $ yarn add stenajs-webui-core
 ```
 
-or with NPM:
+This installs all dependencies, including two icon packs from Font Awesome that are used by components.
+You can install more icon packs if you need them for your project. The included ones are `free-regular-svg-icons` and `free-solid-svg-icons`.
+## Storybook
+
+All components are documented in Storybook.
+
+[https://stenait.github.io/stenajs-webui-core](https://stenait.github.io/stenajs-webui-core)
+
+#### Run Storybook on your local machine
+
+You can run Storybook locally by cloning the `stenajs-webui-core` repository and running:
 
 ```
-$ npm install stenajs-webui-core
+yarn
+yarn start
 ```
 
-## Documentation
+## Typescript
 
-See component examples in the storybook, [https://stenait.github.io/stenajs-webui-core](https://stenait.github.io/stenajs-webui-core)
+`stenajs-webui-core` was developed in Typescript, and all exported components and functions are fully typed.
+It is recommended to use Typescript, as this will type-check your usage with the library.
 
-## Usage
-
-### Components
-
-For documentation on the components, see the Storybook.
-
-### Icons
+`create-react-app` supports Typescript out of the box. Just create `.ts` and `.tsx` files in your project.
+## Icons
 
 This library uses FontAwesome 5, which adds some setup steps.
 
-#### 1) Install the icon packs that you want
-
-```
-$ yarn add @fortawesome/fontawesome-svg-core
-```
+### 1) Install the icon packs that you want (optional)
 
 Install any other icon packs that you want to use.
 
+For example, add `free-brands-svg-icons` like this:
+
 ```
 $ yarn add @fortawesome/free-brands-svg-icons
-$ yarn add @fortawesome/free-regular-svg-icons
-$ yarn add @fortawesome/free-solid-svg-icons
 ```
 
-#### 2) Build your library
+The icon packs `free-regular-svg-icons` and `free-solid-svg-icons` is used by `stenajs-webui-core` and installed automatically.
+
+### 2) Build your icon library
 
 Create a source file, for example `initFontAwesome.ts`
 
@@ -71,4 +87,14 @@ library.add(
 
 Then import `initFontAwesome` in your project.
 
-For more information, [https://github.com/FortAwesome/react-fontawesome](https://github.com/FortAwesome/react-fontawesome)
+`index.tsx`
+```
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { App } from './App';
+import './initFontAwesome';
+
+ReactDOM.render(<App />, document.getElementById('root');
+```
+
+For more information, see [https://fontawesome.com/how-to-use/on-the-web/using-with/react]().

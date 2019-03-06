@@ -7,13 +7,11 @@ export interface FixedProps {
   right?: string | number;
 }
 
-export const Fixed = styled('div')<
-  FixedProps
->(({ top, right, bottom, left }) => ({
-  display: 'flex',
-  position: 'fixed',
-  top,
-  right,
-  bottom,
-  left,
-}));
+export const Fixed = styled.div<FixedProps>`
+  display: flex;
+  position: fixed;
+  top: ${props => props.top};
+  right: ${props => props.right};
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+`;

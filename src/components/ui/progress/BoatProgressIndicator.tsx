@@ -1,6 +1,6 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
-import { boatProgressIndicatorStyle } from './BoatProgressIndicatorStyle';
+import * as React from 'react';
+import { BoatWrapper } from './BoatWrapper';
 
 const Wrapper = styled('div')({
   width: '80px',
@@ -21,7 +21,7 @@ const Locator = styled('div')({
 });
 
 export const BoatProgressIndicator: React.ComponentType = () => (
-  <div className={boatProgressIndicatorStyle}>
+  <BoatWrapper>
     <Wrapper>
       <Locator>
         <span className={'ferry'}>
@@ -30,7 +30,7 @@ export const BoatProgressIndicator: React.ComponentType = () => (
         </span>
       </Locator>
     </Wrapper>
-  </div>
+  </BoatWrapper>
 );
 
 BoatProgressIndicator.displayName = 'BoatProgressIndicator';

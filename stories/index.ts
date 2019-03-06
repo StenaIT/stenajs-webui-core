@@ -1,6 +1,5 @@
 import { addBoxStories } from './box';
 import { addButtonsStories } from './buttons';
-import { addCardStories } from './card/CardStories';
 import { addColorsStories } from './colors';
 import { addDecorationsStories } from './decorations';
 import { addFormStories } from './form';
@@ -18,7 +17,6 @@ import { addTextStories } from './text';
 
 addBoxStories();
 addButtonsStories();
-addCardStories();
 addColorsStories();
 addDecorationsStories();
 addFormStories();
