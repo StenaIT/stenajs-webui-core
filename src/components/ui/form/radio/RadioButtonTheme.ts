@@ -1,4 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { Color } from 'csstype';
 import {
   defaultColors,

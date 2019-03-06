@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Column, Indent, Spacing } from '../layout';
 import { cardNotice, cardNoticeContainer } from './CardStyle';
-import { IconProp } from '@fortawesome/fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { ArrowBox } from '../box';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 

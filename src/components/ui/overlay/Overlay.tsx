@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { KeyboardEventHandler, MouseEventHandler } from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 
-// tslint:disable:no-any
+/* tslint:disable:no-any */
 
 export interface OverlayProps {
   onClickOutside?: () => void;
@@ -13,6 +13,7 @@ export interface OverlayProps {
 interface ModalWrapperProps {
   opacity?: number;
   zIndex: number;
+  innerRef?: any;
 }
 
 const ModalWrapper = styled('div')<ModalWrapperProps>(props => ({

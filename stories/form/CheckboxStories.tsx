@@ -65,7 +65,7 @@ export const addCheckboxStories = () => {
               iconColor: 'white',
             },
             checkIcon: 'coffee',
-            borderRadius: 2,
+            borderRadius: '2px',
           }}
         />
       )),

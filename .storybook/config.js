@@ -1,6 +1,6 @@
 // addon-info
 import { setDefaults } from '@storybook/addon-info';
-import { configure } from '@storybook/react';
+import { addParameters, configure } from '@storybook/react';
 
 function loadStories() {
     require('../stories/index.ts');
@@ -9,6 +9,12 @@ function loadStories() {
 
 setDefaults({
   inline: true,
+});
+
+addParameters({
+  options: {
+    theme: {},
+  },
 });
 
 configure(loadStories, module);

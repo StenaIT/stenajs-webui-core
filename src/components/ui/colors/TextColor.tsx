@@ -1,4 +1,4 @@
-import styled, { StyledComponent } from 'react-emotion';
+import styled from '@emotion/styled';
 import { setDisplayName } from 'recompose';
 
 export interface TextColorProps {
@@ -9,4 +9,4 @@ export const TextColor = setDisplayName<TextColorProps>('TextColor')(
   styled('div')<TextColorProps>(({ color }) => ({
     color: color,
   })),
-) as StyledComponent<TextColorProps, {}, {}>;
+);

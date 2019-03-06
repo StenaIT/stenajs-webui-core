@@ -1,4 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { defaultColors } from '../../../../themes/default-values/DefaultColors';
 
 export interface SimpleCheckboxStateTheme {

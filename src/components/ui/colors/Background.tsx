@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { CSSProperties } from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { setDisplayName } from 'recompose';
 
 export const __C_BACKGROUND = <div />;
