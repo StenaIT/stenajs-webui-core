@@ -13,7 +13,7 @@ export type SmallerTextProps = TextBaseSharedProps &
 
 type InnerProps = SmallerTextProps & WithInnerComponentThemeProps<TextTheme>;
 
-const SmallerTextComponent: React.SFC<InnerProps> = ({
+const SmallerTextComponent: React.FC<InnerProps> = ({
   theme,
   ...textProps
 }) => <TextBase {...textProps} {...theme} />;

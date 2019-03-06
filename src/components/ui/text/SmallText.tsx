@@ -12,7 +12,7 @@ export type SmallTextProps = TextBaseSharedProps &
   ComponentThemeProps<'SmallText'>;
 
 type InnerProps = SmallTextProps & WithInnerComponentThemeProps<TextTheme>;
-const SmallTextComponent: React.SFC<InnerProps> = ({ theme, ...textProps }) => (
+const SmallTextComponent: React.FC<InnerProps> = ({ theme, ...textProps }) => (
   <TextBase {...textProps} {...theme} />
 );
 

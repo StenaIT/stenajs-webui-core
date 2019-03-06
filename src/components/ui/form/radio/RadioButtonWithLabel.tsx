@@ -25,7 +25,7 @@ type InnerProps = WithOnToggleHandler &
   WithInnerComponentThemeProps<RadioButtonTheme> &
   RadioButtonWithLabelProps;
 
-export const RadioButtonWithLabelComponent: React.SFC<InnerProps> = ({
+export const RadioButtonWithLabelComponent: React.FC<InnerProps> = ({
   disabled,
   label,
   onToggle,

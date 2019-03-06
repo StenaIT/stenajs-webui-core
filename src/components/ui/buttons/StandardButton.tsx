@@ -10,7 +10,7 @@ import { StandardButtonTheme } from './StandardButtonTheme';
 type InnerProps = ButtonProps &
   WithInnerComponentThemeProps<StandardButtonTheme>;
 
-const StandardButtonComponent: React.SFC<InnerProps> = ({
+const StandardButtonComponent: React.FC<InnerProps> = ({
   theme,
   ...buttonProps
 }) => (

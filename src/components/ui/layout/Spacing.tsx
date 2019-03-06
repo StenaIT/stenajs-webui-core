@@ -7,7 +7,7 @@ export interface SpacingProps {
   half?: boolean;
 }
 
-export const SpacingComponent: React.SFC<SpacingProps & WithThemeProps> = ({
+export const SpacingComponent: React.FC<SpacingProps & WithThemeProps> = ({
   num = 1,
   half = false,
   children,

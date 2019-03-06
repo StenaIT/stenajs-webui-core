@@ -7,7 +7,9 @@ import { StandardButton } from '../../src/components/ui/buttons/StandardButton';
 export const addStandardButtonStories = () => {
   storiesOf('Buttons/StandardButton', module)
     .addDecorator(withInfo())
-    .add('default', () => <StandardButton label={'Submit'} />)
+    .add('default', () => (
+      <StandardButton label={'Submit'} onClick={() => alert('Click')} />
+    ))
     .add('disabled', () => <StandardButton label={'Submit'} disabled />)
     .add('with icon and no text', () => <StandardButton leftIcon={'coffee'} />)
     .add('with icon left', () => (

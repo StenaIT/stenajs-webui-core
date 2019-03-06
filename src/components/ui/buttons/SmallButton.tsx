@@ -9,7 +9,7 @@ import { SmallButtonTheme } from './SmallButtonTheme';
 
 type InnerProps = ButtonProps & WithInnerComponentThemeProps<SmallButtonTheme>;
 
-const SmallButtonComponent: React.SFC<InnerProps> = ({
+const SmallButtonComponent: React.FC<InnerProps> = ({
   theme,
   ...buttonProps
 }) => (

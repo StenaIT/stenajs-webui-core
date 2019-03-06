@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import { Border } from '../../../src/components/ui/decorations/index';
 import { withDivCopyPasteListener } from '../../../src/components/ui/interaction/CopyPasteListener';

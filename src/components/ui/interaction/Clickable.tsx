@@ -1,7 +1,7 @@
-import { css } from 'emotion';
+import styled from '@emotion/styled';
 import * as React from 'react';
 import { CSSProperties, MouseEventHandler } from 'react';
-import { compose, withHandlers, withState, setDisplayName } from 'recompose';
+import { compose, setDisplayName, withHandlers, withState } from 'recompose';
 
 export interface ClickableProps {
   /** Callback function called when clicking on click area. */
@@ -34,11 +34,17 @@ export interface ClickHandlers {
   onMouseOut: () => void;
 }
 
-const hoverStyle = css(`
-:hover {
-    opacity: 0.7;
+interface HoverStyledDivProps {
+  opacityOnHover: boolean | undefined;
 }
-`);
+
+const HoverStyledDiv = styled.div<HoverStyledDivProps>`
+  :hover {
+    ${props => (props.opacityOnHover ? 'opacity: 0.7;' : '')};
+  }
+`;
+
+HoverStyledDiv.displayName = 'HoverStyledDiv';
 
 export type ClickableInnerProps = ClickableProps & MouseIsDown & ClickHandlers;
 
@@ -60,8 +66,8 @@ export class ClickableComponent extends React.Component<ClickableInnerProps> {
     const hasClickHandler = !!(onClick || onDblClick);
     const opacity = !disableOpacityOnClick && mouseIsDown ? 0.5 : undefined;
     return (
-      <div
-        className={opacityOnHover ? hoverStyle : undefined}
+      <HoverStyledDiv
+        opacityOnHover={opacityOnHover}
         title={tooltip}
         style={{
           cursor: hasClickHandler && !disablePointer ? 'pointer' : undefined,
@@ -77,7 +83,7 @@ export class ClickableComponent extends React.Component<ClickableInnerProps> {
         onMouseOut={getMouseCallback(hasClickHandler, onMouseOut)}
       >
         {this.props.children}
-      </div>
+      </HoverStyledDiv>
     );
   }
 }

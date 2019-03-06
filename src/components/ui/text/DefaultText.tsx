@@ -13,7 +13,7 @@ export type DefaultTextProps = TextBaseSharedProps &
 
 type InnerProps = DefaultTextProps & WithInnerComponentThemeProps<TextTheme>;
 
-const DefaultTextComponent: React.SFC<InnerProps> = ({
+const DefaultTextComponent: React.FC<InnerProps> = ({
   theme,
   ...textProps
 }) => <TextBase {...textProps} {...theme} />;

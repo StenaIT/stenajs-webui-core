@@ -1,4 +1,4 @@
-import styled, { StyledComponent } from 'react-emotion';
+import styled from '@emotion/styled';
 
 export interface FixedProps {
   top?: string | number;
@@ -7,13 +7,11 @@ export interface FixedProps {
   right?: string | number;
 }
 
-export const Fixed: StyledComponent<FixedProps, {}, {}> = styled('div')<
-  FixedProps
->(({ top, right, bottom, left }) => ({
-  display: 'flex',
-  position: 'fixed',
-  top,
-  right,
-  bottom,
-  left,
-}));
+export const Fixed = styled.div<FixedProps>`
+  display: flex;
+  position: fixed;
+  top: ${props => props.top};
+  right: ${props => props.right};
+  bottom: ${props => props.bottom};
+  left: ${props => props.left};
+`;

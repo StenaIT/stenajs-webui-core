@@ -6,7 +6,7 @@ import {
   KeyboardEvent,
   KeyboardEventHandler,
 } from 'react';
-import { css } from 'react-emotion';
+import { css } from '@emotion/core';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
 import { InputType } from './InputType';

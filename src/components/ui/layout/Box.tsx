@@ -1,5 +1,5 @@
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import {
   alignItems,
   AlignItemsProps,
@@ -54,7 +54,7 @@ export interface BoxProps extends StyledSystemProps {
   style?: CSSProperties;
 }
 
-const FlexBox = styled('div')<FlexBoxProps>`
+const FlexBox = styled.div<FlexBoxProps>`
   display: ${props => props.display || 'flex'};
   ${alignItems}
   ${bgColor}

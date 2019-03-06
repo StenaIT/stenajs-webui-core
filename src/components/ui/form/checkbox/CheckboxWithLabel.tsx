@@ -25,7 +25,7 @@ type InnerProps = CheckboxWithLabelProps &
   WithInnerComponentThemeProps<SimpleCheckboxTheme> &
   WithOnToggleHandler;
 
-export const CheckboxWithLabelComponent: React.SFC<InnerProps> = props => {
+export const CheckboxWithLabelComponent: React.FC<InnerProps> = props => {
   const {
     children,
     label,

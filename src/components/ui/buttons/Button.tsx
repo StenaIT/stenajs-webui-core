@@ -1,8 +1,8 @@
 import { IconProp } from '@fortawesome/fontawesome';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import styled from 'react-emotion';
+import styled from '@emotion/styled';
 import { compose } from 'recompose';
 import { addIcons } from '../../icon-library/IconLibrary';
 import {

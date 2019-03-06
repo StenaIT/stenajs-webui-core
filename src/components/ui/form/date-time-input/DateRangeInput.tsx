@@ -1,4 +1,4 @@
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons/faCalendarAlt';
 import { format } from 'date-fns';
 import * as React from 'react';
 import {

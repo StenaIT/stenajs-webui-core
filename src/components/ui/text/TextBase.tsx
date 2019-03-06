@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import { FontWeightProperty } from 'csstype';
-import { css } from 'emotion';
 import * as React from 'react';
 
 export interface TextBaseProps {
@@ -39,11 +39,15 @@ export interface TextBaseSharedProps {
   disableSelect?: boolean;
 }
 
-const hoverStyle = css(`
-:hover {
-    text-decoration: underline;
+interface SpanWithHoverProps {
+  hoverUnderline: boolean | undefined;
 }
-`);
+
+const SpanWithHover = styled.span<SpanWithHoverProps>`
+  :hover {
+    ${props => (props.hoverUnderline ? 'text-decoration: underline;' : '')};
+  }
+`;
 
 export class TextBase extends React.PureComponent<
   TextBaseProps & TextBaseSharedProps
@@ -62,8 +66,8 @@ export class TextBase extends React.PureComponent<
       weight,
     } = this.props;
     return (
-      <span
-        className={hoverUnderline ? hoverStyle : undefined}
+      <SpanWithHover
+        hoverUnderline={hoverUnderline}
         style={{
           fontSize,
           fontStyle: italic ? 'italic' : undefined,
@@ -76,7 +80,7 @@ export class TextBase extends React.PureComponent<
         }}
       >
         {this.props.children}
-      </span>
+      </SpanWithHover>
     );
   }
 }

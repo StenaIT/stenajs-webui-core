@@ -1,5 +1,5 @@
+import styled from '@emotion/styled';
 import { IconProp } from '@fortawesome/fontawesome';
-import { css } from 'emotion';
 import * as React from 'react';
 import { ComponentClass, ReactNode } from 'react';
 import {
@@ -25,11 +25,12 @@ export type __C_DEFAULT_TEXT_INPUT_12491142 = ComponentClass<{}>;
 
 // TODO Move to theme.
 
-const borderClass = css`
+const StyledBorder = styled(Border)`
   display: inline-block;
   overflow: hidden;
 `;
-const inputClass = css`
+
+const StyledSimpleTextInput = styled(SimpleTextInput)`
   border: 0;
   :focus {
     outline: 0;
@@ -142,8 +143,7 @@ const DefaultTextInputComponent = ({
   disabled,
   ...inputProps
 }: InnerProps) => (
-  <Border
-    className={borderClass}
+  <StyledBorder
     borderRadius={theme.borderRadius}
     color={
       forceFocusHighlight || focused
@@ -175,10 +175,9 @@ const DefaultTextInputComponent = ({
           theme={theme}
         />
         <div style={{ width: '100%' }}>
-          <SimpleTextInput
+          <StyledSimpleTextInput
             {...inputProps}
             backgroundColor={backgroundColor || theme.backgroundColor}
-            className={inputClass}
             disabled={disabled}
             textColor={textColor || theme.textColor}
             width={'100%'}
@@ -205,7 +204,7 @@ const DefaultTextInputComponent = ({
         />
       </Row>
     </Background>
-  </Border>
+  </StyledBorder>
 );
 
 interface FocusStateProps {

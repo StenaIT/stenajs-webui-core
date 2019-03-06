@@ -1,4 +1,5 @@
-import { faCaretDown, faCaretUp } from '@fortawesome/free-solid-svg-icons';
+import { faCaretDown } from '@fortawesome/free-solid-svg-icons/faCaretDown';
+import { faCaretUp } from '@fortawesome/free-solid-svg-icons/faCaretUp';
 import * as React from 'react';
 import { setDisplayName } from 'recompose';
 import { addIcons } from '../../icon-library/IconLibrary';

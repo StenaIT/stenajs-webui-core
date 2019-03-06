@@ -1,13 +1,11 @@
-import styled, { StyledComponent } from 'react-emotion';
+import styled from '@emotion/styled';
 
 export interface FloatProps {
   right?: boolean;
   left?: boolean;
 }
 
-export const Float: StyledComponent<FloatProps, {}, {}> = styled('div')<
-  FloatProps
->(props => ({
+export const Float = styled.div<FloatProps>(props => ({
   float: getFloat(props),
 }));
 

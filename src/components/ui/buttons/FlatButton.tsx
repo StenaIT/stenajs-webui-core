@@ -9,7 +9,7 @@ import { FlatButtonTheme } from './FlatButtonTheme';
 
 type InnerProps = ButtonProps & WithInnerComponentThemeProps<FlatButtonTheme>;
 
-export const FlatButtonComponent: React.SFC<InnerProps> = ({
+export const FlatButtonComponent: React.FC<InnerProps> = ({
   textColor,
   disabled,
   theme,
