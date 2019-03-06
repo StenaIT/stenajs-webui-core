@@ -1,6 +1,7 @@
-// addon-info
-import { setDefaults } from '@storybook/addon-info';
-import { addParameters, configure } from '@storybook/react';
+import { setDefaults, withInfo } from '@storybook/addon-info';
+import { addDecorator, addParameters, configure } from '@storybook/react';
+import { StenaTheme } from './stena-theme';
+import { typography } from "./base";
 
 function loadStories() {
     require('../stories/index.ts');
@@ -13,7 +14,7 @@ setDefaults({
 
 addParameters({
   options: {
-    theme: {},
+    theme: StenaTheme,
   },
 });
 
