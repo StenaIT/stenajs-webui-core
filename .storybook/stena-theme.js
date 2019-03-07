@@ -5,8 +5,8 @@ export const RawStenaTheme = {
   base: 'light',
 
   // Storybook-specific color palette
-  colorPrimary: '#FF4785', // coral
-  colorSecondary: '#1EA7FD', // ocean
+  colorPrimary: '#3284de', // coral
+  colorSecondary: '#143e62', // ocean
 
   // UI
   appBg: background.app,

@@ -1,7 +1,7 @@
 export const color = {
   // Official color palette
-  primary: '#FF4785', // coral
-  secondary: '#1EA7FD', // ocean
+  primary: '#3284de', // coral
+  secondary: '#143e62', // ocean
   tertiary: '#FAFBFC',
   ancillary: '#22a699', // for code
 
@@ -50,6 +50,7 @@ export const background = {
 export const typography = {
   fonts: {
     base: [
+      '"Open Sans"',
       '"Nunito Sans"',
       '-apple-system',
       '".SFNSText-Regular"',
@@ -62,6 +63,7 @@ export const typography = {
       'sans-serif',
     ].join(', '),
     mono: [
+      '"Menlo"',
       '"Operator Mono"',
       '"Fira Code Retina"',
       '"Fira Code"',
