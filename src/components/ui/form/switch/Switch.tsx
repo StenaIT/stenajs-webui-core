@@ -95,7 +95,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
         onChange(e.target.checked);
       }
     },
-    [onChange],
+    [disabled, onChange],
   );
 
   const handleSwitchClick = useCallback(
@@ -104,7 +104,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
         onChange(!value);
       }
     },
-    [value, onChange],
+    [disabled, onChange, value],
   );
 
   return (

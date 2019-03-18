@@ -41,7 +41,7 @@ export const useRevertableValue = <TValue>(
         setValue(lastKeyEvent.key as any);
       }
     },
-    [value, setValue, revertValue],
+    [value, setValue],
   );
 
   return {

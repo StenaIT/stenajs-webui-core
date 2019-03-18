@@ -97,7 +97,7 @@ export const useGridNavigation = (
         wrap,
         onCellMove,
       ),
-    [tableId, rowIndex, colIndex, numRows, numCols, onCellMove],
+    [tableId, rowIndex, colIndex, numRows, numCols, wrap, onCellMove],
   );
 
   const onKeyDown = useMemo(() => createKeyDownHandler(moveHandler), [

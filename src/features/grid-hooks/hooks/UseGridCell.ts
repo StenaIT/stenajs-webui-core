@@ -93,13 +93,7 @@ export const useGridCell = <TValue>(
         options.onChange(edit.revertableValue.value);
       }
     },
-    [
-      edit.setIsEditing,
-      edit.revertableValue.value,
-      tableId,
-      options.onChange,
-      cellCoordinates,
-    ],
+    [edit, tableId, cellCoordinates, options],
   );
 
   const stopEditingAndRevert = useCallback(
@@ -108,7 +102,7 @@ export const useGridCell = <TValue>(
       edit.setIsEditing(false);
       focusOnCell(tableId, cellCoordinates);
     },
-    [edit.setIsEditing, edit.revertableValue.revert, tableId, cellCoordinates],
+    [edit, tableId, cellCoordinates],
   );
 
   const stopEditingAndMove = useCallback(
@@ -116,7 +110,7 @@ export const useGridCell = <TValue>(
       stopEditing();
       nav.moveHandler(direction);
     },
-    [stopEditing, nav.moveHandler],
+    [stopEditing, nav],
   );
 
   const onKeyDown = useCallback<KeyboardEventHandler>(
@@ -128,7 +122,7 @@ export const useGridCell = <TValue>(
         }
       }
     },
-    [nav.requiredProps.onKeyDown, edit.onKeyDown, edit.isEditing],
+    [edit, nav.requiredProps],
   );
 
   return {
