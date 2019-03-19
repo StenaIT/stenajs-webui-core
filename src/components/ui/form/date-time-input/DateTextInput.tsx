@@ -14,6 +14,8 @@ import { SingleDateCalendar } from '../calendar';
 import { DefaultTextInput, DefaultTextInputProps } from '../text-input';
 
 interface DateTextInputProps extends DefaultTextInputProps {
+  /** Close calendar when date is selected, @default true */
+  closeOnCalendarSelectDate?: boolean;
   /** Valid date format, @default YYYY-MM-DD */
   dateFormat?: string;
   /** Make the icon not clickable, @default false */
@@ -29,6 +31,7 @@ interface DateTextInputProps extends DefaultTextInputProps {
 }
 
 export const DateTextInput: React.FC<DateTextInputProps> = ({
+  closeOnCalendarSelectDate = true,
   dateFormat = 'yyyy-MM-dd',
   disableCalender = false,
   useCalenderIcon = true,
@@ -55,16 +58,19 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
     disableCalender || props.disabled ? (
       <Icon name={faCalendarAlt} />
     ) : (
-      useCalenderIcon && (
-        <Clickable onClick={toggleCalendar}>
-          <Icon name={faCalendarAlt} />
-        </Clickable>
-      )
-    );
+        useCalenderIcon && (
+          <Clickable onClick={toggleCalendar}>
+            <Icon name={faCalendarAlt} />
+          </Clickable>
+        )
+      );
 
   const onCalendarSelectDate = (date: Date | undefined) => {
     if (date) {
       updateValue(format(date, dateFormat));
+      if (closeOnCalendarSelectDate) {
+        setTimeout(() => setOpen(!open), 200);
+      }
     }
   };
 
