@@ -6,7 +6,7 @@ import {
   withProps,
 } from 'recompose';
 import { Omit } from '../../../../../types/Omit';
-import { CalendarProps } from '../components/Calendar';
+import { CalendarProps } from '../types/CalendarTypes';
 import { WithCalendarTheme } from '../types/WithCalendarTheme';
 import {
   DayData,

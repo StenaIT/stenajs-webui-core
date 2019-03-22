@@ -4,6 +4,7 @@ import { storiesOf } from '@storybook/react';
 import { addDays, getISOWeek } from 'date-fns';
 import * as React from 'react';
 import { UseTheme } from '../../../src/components/theme';
+import { defaultButtonTheme } from '../../../src/components/ui/buttons';
 import {
   CalendarTheme,
   extranetCalendarTheme,
@@ -195,7 +196,17 @@ export const addSingleDateCalendarStories = () => {
         <UseTheme
           theme={{
             components: {
-              Calendar: extranetCalendarTheme,
+              Calendar: {
+                ...extranetCalendarTheme,
+                CalendarMonth: {
+                  ...extranetCalendarTheme.CalendarMonth,
+                  SwitchButton: {
+                    ...defaultButtonTheme,
+                    bgColor: 'pink',
+                    height: '50px',
+                  },
+                },
+              },
             },
           }}
         >

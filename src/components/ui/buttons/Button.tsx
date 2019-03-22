@@ -20,8 +20,7 @@ import { ButtonTheme } from './ButtonTheme';
 
 addIcons(faCheck);
 
-export type ButtonPropsWithTheme = ButtonProps &
-  ComponentThemeProps<'StandardButton'>;
+export type ButtonPropsWithTheme = ButtonProps & ComponentThemeProps<'Button'>;
 
 export interface ButtonProps {
   /** The color of the button. */
@@ -200,6 +199,6 @@ class ButtonComponent extends React.PureComponent<InnerProps> {
   }
 }
 
-export const Button = compose<InnerProps, ButtonProps>(
+export const Button = compose<InnerProps, ButtonPropsWithTheme>(
   withComponentTheme('Button'),
 )(ButtonComponent);

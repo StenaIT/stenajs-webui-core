@@ -6,7 +6,7 @@ import {
   withProps,
 } from 'recompose';
 import { Omit } from '../../../../../types/Omit';
-import { CalendarProps } from '../components/Calendar';
+import { CalendarProps } from '../types/CalendarTypes';
 import { WithCalendarTheme } from '../types/WithCalendarTheme';
 import { DayData } from '../util/CalendarDataFactory';
 import { addDayStateHighlights } from '../util/StateModifier';
@@ -44,13 +44,15 @@ const addSelectionLogic = withHandlers<
 const buildSelectionState = withProps<
   Pick<CalendarProps<{}>, 'statePerMonth'>,
   SingleDateCalendarProps<{}>
->(({ value, statePerMonth }) => ({
-  statePerMonth: value
-    ? addDayStateHighlights(statePerMonth, value, ['selected'])
-    : statePerMonth,
-  date: value,
-  startDateInFocus: value,
-}));
+>(({ value, statePerMonth }) => {
+  return {
+    statePerMonth: value
+      ? addDayStateHighlights(statePerMonth, value, ['selected'])
+      : statePerMonth,
+    date: value,
+    startDateInFocus: value,
+  };
+});
 
 export const withSingleDateSelection = compose(
   addSelectionLogic,

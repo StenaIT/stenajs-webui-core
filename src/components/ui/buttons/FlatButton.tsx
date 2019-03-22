@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
 import {
+  ComponentThemeProps,
   withComponentTheme,
   WithInnerComponentThemeProps,
 } from '../../util/enhancers/WithComponentTheme';
@@ -8,6 +9,9 @@ import { Button, ButtonProps } from './Button';
 import { FlatButtonTheme } from './FlatButtonTheme';
 
 type InnerProps = ButtonProps & WithInnerComponentThemeProps<FlatButtonTheme>;
+
+export type FlatButtonPropsWithTheme = ButtonProps &
+  ComponentThemeProps<'FlatButton'>;
 
 export const FlatButtonComponent: React.FC<InnerProps> = ({
   textColor,
@@ -26,7 +30,9 @@ export const FlatButtonComponent: React.FC<InnerProps> = ({
   />
 );
 
-export const FlatButton = setDisplayName<ButtonProps>('FlatButton')(
+export const FlatButton = setDisplayName<FlatButtonPropsWithTheme>(
+  'FlatButton',
+)(
   compose<InnerProps, ButtonProps>(withComponentTheme('FlatButton'))(
     FlatButtonComponent,
   ),

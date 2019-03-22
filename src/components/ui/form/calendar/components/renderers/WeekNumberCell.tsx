@@ -5,7 +5,7 @@ import { Column } from '../../../../layout';
 import { Absolute, Relative } from '../../../../positioning';
 import { SmallText } from '../../../../text';
 import { WeekData } from '../../util/CalendarDataFactory';
-import { OnClickWeek } from '../Calendar';
+import { OnClickWeek } from '../../types/CalendarTypes';
 import { CalendarTheme } from '../CalendarTheme';
 
 export interface WeekNumberCellProps {

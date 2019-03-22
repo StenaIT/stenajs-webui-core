@@ -2,7 +2,7 @@ import * as React from 'react';
 import { Column } from '../../../../layout';
 import { DefaultText } from '../../../../text';
 import { DayData } from '../../util/CalendarDataFactory';
-import { OnClickWeekDay } from '../Calendar';
+import { OnClickWeekDay } from '../../types/CalendarTypes';
 import { CalendarTheme } from '../CalendarTheme';
 
 export interface WeekDayCellProps {

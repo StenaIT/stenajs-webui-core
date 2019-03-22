@@ -1,4 +1,5 @@
-import { DayState, DayStateHighlight } from '../components/Calendar';
+import { DayStateHighlight } from '../types/CalendarTypes';
+import { DayState } from '../types/CalendarTypes';
 
 export const dayHasHighlight = (
   dayState: DayState | undefined,

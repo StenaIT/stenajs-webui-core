@@ -1,6 +1,6 @@
 import { addMonths, subMonths } from 'date-fns';
 import { ComponentEnhancer, compose, withHandlers, withState } from 'recompose';
-import { CalendarProps } from '../../components/Calendar';
+import { CalendarProps } from '../../types/CalendarTypes';
 
 export type __C31235123518 = ComponentEnhancer<{}, {}>;
 

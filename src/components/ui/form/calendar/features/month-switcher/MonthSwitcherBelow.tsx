@@ -3,9 +3,9 @@ import { faChevronUp } from '@fortawesome/free-solid-svg-icons/faChevronUp';
 import * as React from 'react';
 import { ComponentEnhancer, compose } from 'recompose';
 import { addIcons } from '../../../../../icon-library/IconLibrary';
-import { StandardButton } from '../../../../buttons/StandardButton';
+import { Button, defaultStandardButtonTheme } from '../../../../buttons';
 import { Indent, Row, Space } from '../../../../layout/index';
-import { CalendarProps } from '../../components/Calendar';
+import { CalendarProps } from '../../types/CalendarTypes';
 import {
   MonthSwitcherHandlerProps,
   MonthSwitcherStateProps,
@@ -21,15 +21,55 @@ type InnerProps = CalendarProps<{}> &
   MonthSwitcherHandlerProps;
 
 const withSwitchButtons = (
-  WrappedComponent: React.StatelessComponent<InnerProps>,
-): React.StatelessComponent<InnerProps> => (props: InnerProps) => (
+  WrappedComponent: React.FC<InnerProps>,
+): React.FC<InnerProps> => (props: InnerProps) => (
   <div>
     <WrappedComponent {...props} />
     <Indent>
       <Row>
-        <StandardButton onClick={props.prevMonth} leftIcon={'chevron-up'} />
+        <Button
+          height={
+            props.theme &&
+            props.theme.CalendarMonth.SwitchButton &&
+            props.theme.CalendarMonth.SwitchButton.height
+              ? props.theme.CalendarMonth.SwitchButton.height
+              : defaultStandardButtonTheme.height
+          }
+          onClick={props.prevMonth}
+          leftIcon={'chevron-up'}
+          theme={
+            props.theme && props.theme.CalendarMonth.SwitchButton
+              ? props.theme.CalendarMonth.SwitchButton
+              : undefined
+          }
+          width={
+            props.theme && props.theme.CalendarMonth.SwitchButton
+              ? props.theme.CalendarMonth.SwitchButton.width
+              : undefined
+          }
+        />
         <Space />
-        <StandardButton onClick={props.nextMonth} leftIcon={'chevron-down'} />
+        <Button
+          height={
+            props.theme &&
+            props.theme.CalendarMonth.SwitchButton &&
+            props.theme.CalendarMonth.SwitchButton.height
+              ? props.theme.CalendarMonth.SwitchButton.height
+              : defaultStandardButtonTheme.height
+          }
+          onClick={props.nextMonth}
+          leftIcon={'chevron-down'}
+          theme={
+            props.theme && props.theme.CalendarMonth.SwitchButton
+              ? props.theme.CalendarMonth.SwitchButton
+              : undefined
+          }
+          width={
+            props.theme && props.theme.CalendarMonth.SwitchButton
+              ? props.theme.CalendarMonth.SwitchButton.width
+              : undefined
+          }
+        />
       </Row>
     </Indent>
     <Space />
