@@ -1,3 +1,5 @@
+import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
+import { faPaw } from '@fortawesome/free-solid-svg-icons/faPaw';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
@@ -36,7 +38,7 @@ export const addDefaultTextInputStories = () => {
             <Spacing num={4}>
               <DefaultTextInput
                 value={'some entered text'}
-                iconLeft={'coffee'}
+                iconLeft={faCoffee}
                 theme={defaultTextInputThemeDark}
               />
             </Spacing>
@@ -45,10 +47,10 @@ export const addDefaultTextInputStories = () => {
       </div>
     ))
     .add('with icon left', () => (
-      <DefaultTextInput value={'some entered text'} iconLeft={'coffee'} />
+      <DefaultTextInput value={'some entered text'} iconLeft={faCoffee} />
     ))
     .add('with icon right', () => (
-      <DefaultTextInput value={'some entered text'} iconRight={'paw'} />
+      <DefaultTextInput value={'some entered text'} iconRight={faPaw} />
     ))
     .add('with content left', () => (
       <DefaultTextInput
@@ -119,8 +121,8 @@ export const addDefaultTextInputStories = () => {
     .add('with icons with colors', () => (
       <DefaultTextInput
         value={'some entered text'}
-        iconLeft={'coffee'}
-        iconRight={'paw'}
+        iconLeft={faCoffee}
+        iconRight={faPaw}
         iconColorLeft={'red'}
         iconColorRight={'green'}
       />
@@ -128,8 +130,8 @@ export const addDefaultTextInputStories = () => {
     .add('with icons and background color', () => (
       <DefaultTextInput
         value={'some entered text'}
-        iconLeft={'coffee'}
-        iconRight={'paw'}
+        iconLeft={faCoffee}
+        iconRight={faPaw}
         backgroundColor={defaultColors.errorBgLight}
       />
     ))
@@ -153,8 +155,11 @@ export const addDefaultTextInputStories = () => {
       </UseTheme>
     ))
     .add('with custom styling', () => (
-      <div style={{width: 200}}>
-        <DefaultTextInput value={'some input text'} style={{fontStyle: 'italic', fontWeight: 'bold', color: 'orange'}} />
+      <div style={{ width: 200 }}>
+        <DefaultTextInput
+          value={'some input text'}
+          style={{ fontStyle: 'italic', fontWeight: 'bold', color: 'orange' }}
+        />
       </div>
     ))
     .add('disabled', () => (
@@ -172,30 +177,20 @@ export const addDefaultTextInputStories = () => {
         disabled={true}
         value={'some entered text'}
         contentRight={<DefaultText>ms</DefaultText>}
-        iconLeft={'coffee'}
+        iconLeft={faCoffee}
       />
     ))
     .add('with dynamic width', () => (
       <div>
-        <DefaultTextInput
-          value={'120px'}
-          width={'120px'}
-        />
+        <DefaultTextInput value={'120px'} width={'120px'} />
 
         <Spacing />
 
-        <DefaultTextInput
-          value={'24em'}
-          width={'24em'}
-        />
+        <DefaultTextInput value={'24em'} width={'24em'} />
 
         <Spacing />
 
-        <DefaultTextInput
-          value={'100%'}
-          width={'100%'}
-        />
-
+        <DefaultTextInput value={'100%'} width={'100%'} />
       </div>
     ));
 };

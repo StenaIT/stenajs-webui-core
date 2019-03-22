@@ -1,4 +1,5 @@
 import { Store, withState } from '@dump247/storybook-state';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
@@ -79,7 +80,7 @@ export const addNumericTextInputStories = () => {
         value: 5,
       })(({ store }: { store: Store<State> }) => (
         <NumericTextInput
-          iconLeft={'coffee'}
+          iconLeft={faCoffee}
           value={store.state.value}
           min={1}
           max={8}

@@ -2,7 +2,6 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
 import * as React from 'react';
 import { ComponentEnhancer, compose, withProps } from 'recompose';
-import { addIcons } from '../../../../../icon-library/IconLibrary';
 import { Button, defaultStandardButtonTheme } from '../../../../buttons';
 import {
   CalendarHeaderContentProps,
@@ -13,8 +12,6 @@ import {
   MonthSwitcherStateProps,
   withMonthSwitcherLogic,
 } from './MonthSwitcherLogic';
-
-addIcons(faChevronLeft, faChevronRight);
 
 export type __C3135136785123518 = ComponentEnhancer<{}, {}>;
 
@@ -36,7 +33,7 @@ const withSwitchButtonsLeftRight = withProps<
           : defaultStandardButtonTheme.height
       }
       onClick={prevMonth}
-      leftIcon={'chevron-left'}
+      leftIcon={faChevronLeft}
       theme={
         theme && theme.CalendarMonth.SwitchButton
           ? theme.CalendarMonth.SwitchButton
@@ -59,7 +56,7 @@ const withSwitchButtonsLeftRight = withProps<
           : defaultStandardButtonTheme.height
       }
       onClick={nextMonth}
-      leftIcon={'chevron-right'}
+      leftIcon={faChevronRight}
       theme={
         theme && theme.CalendarMonth.SwitchButton
           ? theme.CalendarMonth.SwitchButton

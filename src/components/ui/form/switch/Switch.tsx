@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import * as React from 'react';
 import { ChangeEvent, useCallback } from 'react';
 import { compose, setDisplayName } from 'recompose';
@@ -133,7 +134,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
                     ? theme.checkedColors.iconColor
                     : theme.colors.iconColor
               }
-              name={'check'}
+              name={faCheck}
               size={theme.height - 8}
             />
           </IconWrapper>

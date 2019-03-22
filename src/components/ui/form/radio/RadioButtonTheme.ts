@@ -6,9 +6,6 @@ import {
   defaultColors,
   defaultFontSizes,
 } from '../../../../themes/default-values';
-import { addIcons } from '../../../icon-library/IconLibrary';
-
-addIcons(faCircle, faDotCircle);
 
 export interface RadioButtonTheme {
   disabledIconColor: Color;
@@ -33,8 +30,8 @@ export const defaultRadioButtonTheme: RadioButtonTheme = {
 };
 
 export const defaultRadioButtonThemeDark: RadioButtonTheme = {
-  checkedIcon: ['far', 'dot-circle'],
-  notCheckedIcon: ['far', 'circle'],
+  checkedIcon: faDotCircle,
+  notCheckedIcon: faCircle,
   disabledIconColor: defaultColors.disabledText,
   disabledTextColor: defaultColors.disabledText,
   iconColor: '#4d7989',
