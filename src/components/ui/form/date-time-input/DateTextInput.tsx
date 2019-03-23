@@ -2,6 +2,7 @@ import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons/faCalendarAlt
 import { format, isValid, parse } from 'date-fns';
 import * as React from 'react';
 import { useState } from 'react';
+import { Omit } from '../../../../types';
 import { useTheme } from '../../../theme/UseThemeHook';
 import { Background } from '../../colors';
 import { Border } from '../../decorations';
@@ -10,10 +11,15 @@ import { Clickable } from '../../interaction';
 import { Indent } from '../../layout';
 import { Overlay } from '../../overlay';
 import { Absolute, Relative } from '../../positioning';
-import { SingleDateCalendar } from '../calendar';
+import { SingleDateCalendar, SingleDateCalendarProps } from '../calendar';
 import { DefaultTextInput, DefaultTextInputProps } from '../text-input';
 
-interface DateTextInputProps extends DefaultTextInputProps {
+interface DateTextInputProps<T> extends DefaultTextInputProps {
+  /** Props to be passed to Calendar, see SingleDateCalendar for sage */
+  calendarProps?: Omit<
+    SingleDateCalendarProps<T>,
+    'value' | 'onChange' | 'theme'
+  >;
   /** Close calendar when date is selected, @default true */
   closeOnCalendarSelectDate?: boolean;
   /** Valid date format, @default YYYY-MM-DD */
@@ -30,7 +36,8 @@ interface DateTextInputProps extends DefaultTextInputProps {
   zIndex?: number;
 }
 
-export const DateTextInput: React.FC<DateTextInputProps> = ({
+export const DateTextInput = <T extends {}>({
+  calendarProps,
   closeOnCalendarSelectDate = true,
   dateFormat = 'yyyy-MM-dd',
   disableCalender = false,
@@ -41,7 +48,7 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
   width = '125px',
   zIndex = 100,
   ...props
-}) => {
+}: DateTextInputProps<T>) => {
   const [open, setOpen] = useState(false);
 
   const theme = useTheme();
@@ -103,6 +110,7 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
               <Background color={theme.components.DateInput.backgroundColor}>
                 <Indent>
                   <SingleDateCalendar
+                    {...calendarProps}
                     onChange={onCalendarSelectDate}
                     value={
                       value && dateIsValid
