@@ -179,16 +179,16 @@ const DefaultTextInputComponent = ({
             {...inputProps}
             backgroundColor={backgroundColor || theme.backgroundColor}
             disabled={disabled}
-            textColor={textColor || theme.textColor}
-            width={'100%'}
+            fontSize={theme.fontSize}
+            height={theme.height}
             style={{
-              fontSize: theme.fontSize,
-              height: theme.height,
               paddingLeft: theme.paddingLeft,
               paddingRight: theme.paddingRight,
               boxSizing: 'border-box',
               ...inputProps.style,
             }}
+            textColor={textColor || theme.textColor}
+            width={'100%'}
           />
         </div>
         <TextInputIcon
