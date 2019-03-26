@@ -1,7 +1,6 @@
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons/faCalendarAlt';
 import { format, isValid, parse } from 'date-fns';
 import * as React from 'react';
-import { useState } from 'react';
 import { useTheme } from '../../../theme/UseThemeHook';
 import { Background } from '../../colors';
 import { Border } from '../../decorations';
@@ -39,7 +38,7 @@ export const DateTextInput: React.FC<DateTextInputProps> = ({
   zIndex = 100,
   ...props
 }) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = React.useState(false);
 
   const theme = useTheme();
 

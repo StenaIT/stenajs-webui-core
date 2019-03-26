@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import * as React from 'react';
-import { ChangeEvent, useCallback } from 'react';
 import { compose, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types';
 import { RequiredInputComponentProps } from '../../../RequiredComponentProps';
@@ -11,6 +10,8 @@ import {
 import { Icon } from '../../icon';
 import { ValueOnChangeProps } from '../types';
 import { SwitchTheme } from './SwitchTheme';
+
+const { useCallback } = React;
 
 export interface SwitchProps
   extends RequiredInputComponentProps<HTMLInputElement>,
@@ -90,7 +91,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
   ...rest
 }) => {
   const handleInputChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!disabled) {
         onChange(e.target.checked);
       }

@@ -12,7 +12,6 @@ it('works', () => {
 // import { shallow } from 'enzyme';
 // import { createSerializer } from 'jest-emotion';
 // import * as React from 'react';
-// import { ReactElement } from 'react';
 // import * as Popper from 'react-popper';
 // import { PopperChildrenProps } from 'react-popper';
 // import { EnhancedPopper, PopperProps, PurePopper } from '../EnhancedPopper';

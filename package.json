@@ -48,6 +48,7 @@
     "@types/storybook__addon-info": "^3.4.2",
     "@types/storybook__react": "^4.0.0",
     "babel-loader": "^8.0.4",
+    "babel-plugin-typescript-to-proptypes": "^0.17.1",
     "create-ts-index": "^1.0.14",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "^1.1.1",
@@ -71,6 +72,8 @@
     "typescript": "^3.2.2"
   },
   "dependencies": {
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.3.3",
     "@emotion/core": "10.0.7",
     "@emotion/styled": "10.0.7",
     "@fortawesome/fontawesome": "1.2.0-6",

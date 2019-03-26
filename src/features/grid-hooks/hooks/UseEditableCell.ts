@@ -1,11 +1,10 @@
-import {
-  KeyboardEvent,
-  KeyboardEventHandler,
+import * as React from 'react';
+import { RevertableValue, useRevertableValue } from './UseRevertableValue';
+const {
   useCallback,
   useMemo,
   useState,
-} from 'react';
-import { RevertableValue, useRevertableValue } from './UseRevertableValue';
+} = React;
 
 export type AllowedInputType = 'all' | 'numeric' | 'alphanumeric' | 'letters';
 
@@ -32,7 +31,7 @@ export interface UseEditableCellOptions<TValue> {
 }
 
 export interface UseEditableCellResult<TValue> {
-  onKeyDown: KeyboardEventHandler;
+  onKeyDown: React.KeyboardEventHandler;
   isEditing: boolean;
   setIsEditing: (isEditing: boolean) => void;
   lastKeyEvent: KeyDownEvent | undefined;
@@ -54,7 +53,7 @@ export interface KeyDownEvent {
   which: number;
 }
 
-const createKeyDownEvent = (event: KeyboardEvent): KeyDownEvent => ({
+const createKeyDownEvent = (event: React.KeyboardEvent): KeyDownEvent => ({
   altKey: event.altKey,
   charCode: event.charCode,
   ctrlKey: event.ctrlKey,
@@ -132,7 +131,7 @@ const createKeyDownHandler = <TValue>(
   allowedInputType: AllowedInputType,
   onStartEditing: OnStartEditingFunc | undefined,
   revertableValue: RevertableValue<TValue>,
-): KeyboardEventHandler => e => {
+): React.KeyboardEventHandler => e => {
   if (e.key === 'Enter' && isEditable) {
     setLastKeyEvent(undefined);
     setIsEditing(true);

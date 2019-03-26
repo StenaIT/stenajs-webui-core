@@ -1,11 +1,4 @@
 import * as React from 'react';
-import {
-  ChangeEvent,
-  ChangeEventHandler,
-  CSSProperties,
-  KeyboardEvent,
-  KeyboardEventHandler,
-} from 'react';
 import { css } from '@emotion/core';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
@@ -50,8 +43,8 @@ export interface SimpleTextInputProps {
   disabled?: boolean;
   placeholder?: string;
   placeholderColor?: string;
-  style?: CSSProperties;
-  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
+  style?: React.CSSProperties;
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
   /** onMove callback, triggered when user tries to move outside of field using arrow keys, tab or shift+tab. */
   onMove?: (direction: MoveDirection) => void;
   onFocus?: () => void;
@@ -95,7 +88,7 @@ class SimpleTextInputComponent extends React.Component<
     }
   }
 
-  onChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+  onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { onChange } = this.props;
     const { value } = target;
     if (onChange) {
@@ -103,7 +96,7 @@ class SimpleTextInputComponent extends React.Component<
     }
   };
 
-  onKeyDown: KeyboardEventHandler<HTMLInputElement> = e => {
+  onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = e => {
     const { onEsc, onEnter, onKeyDown, onMove } = this.props;
     const { key } = e;
     if (key === 'Enter') {
@@ -149,7 +142,7 @@ class SimpleTextInputComponent extends React.Component<
 
   blurMoveAndCancel = (
     direction: MoveDirection,
-    e: KeyboardEvent<HTMLInputElement>,
+    e: React.KeyboardEvent<HTMLInputElement>,
   ) => {
     const { onMove } = this.props;
     this.textInput.current!.blur();
@@ -160,7 +153,7 @@ class SimpleTextInputComponent extends React.Component<
     e.stopPropagation();
   };
 
-  onBlur = (e: ChangeEvent<any>) => {
+  onBlur = (e: React.ChangeEvent<any>) => {
     const { onDone, onBlur } = this.props;
     const { value } = e.target;
     const { wasCancelled } = this.state;

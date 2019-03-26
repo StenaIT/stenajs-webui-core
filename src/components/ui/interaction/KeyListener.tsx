@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { KeyboardEventHandler } from 'react';
 
 export interface KeyListenerProps {
   keyCode?: number | undefined;
@@ -9,7 +8,7 @@ export interface KeyListenerProps {
 }
 
 export class KeyListener extends React.Component<KeyListenerProps> {
-  onKeyDown: KeyboardEventHandler<HTMLDivElement> = e => {
+  onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = e => {
     const {
       keyCode,
       onKey,

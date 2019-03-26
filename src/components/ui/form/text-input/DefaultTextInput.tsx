@@ -1,7 +1,6 @@
 import styled from '@emotion/styled';
 import { IconProp } from '@fortawesome/fontawesome';
 import * as React from 'react';
-import { ComponentClass, ReactNode } from 'react';
 import {
   compose,
   setDisplayName,
@@ -21,7 +20,7 @@ import { Row, Space } from '../../layout';
 import { DefaultTextInputTheme } from './DefaultTextInputTheme';
 import { SimpleTextInput, SimpleTextInputProps } from './SimpleTextInput';
 
-export type __C_DEFAULT_TEXT_INPUT_12491142 = ComponentClass<{}>;
+export type __C_DEFAULT_TEXT_INPUT_12491142 = React.ComponentClass<{}>;
 
 // TODO Move to theme.
 
@@ -41,9 +40,9 @@ export interface DefaultTextInputProps
   extends SimpleTextInputProps,
     ComponentThemeProps<'DefaultTextInput'> {
   /** React node to put to the left. Left icon is ignored if this is set. */
-  contentLeft?: ReactNode;
+  contentLeft?: React.ReactNode;
   /** React node to put to the right. Right icon is ignored if this is set. */
-  contentRight?: ReactNode;
+  contentRight?: React.ReactNode;
   /** If true, there will be no padding between contentLeft/contentRight and the border. */
   disableContentPadding?: boolean;
   /** If true, there will be no padding between contentLeft and the border. */

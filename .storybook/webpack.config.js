@@ -17,7 +17,14 @@ module.exports = ({ config, mode }) => {
     test: /\.(ts|tsx)$/,
     loader: require.resolve('babel-loader'),
     options: {
-      presets: [['react-app', { flow: false, typescript: true }]],
+      presets: [
+        '@babel/preset-typescript',
+        '@babel/preset-react',
+        ['react-app', { flow: false, typescript: true }],
+      ],
+      plugins: [
+        ['babel-plugin-typescript-to-proptypes', { typeCheck: true }]
+      ],
     },
   });
 

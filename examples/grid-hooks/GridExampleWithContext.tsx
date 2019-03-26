@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { useCallback, useState } from 'react';
 import { Background } from '../../src/components/ui/colors/Background';
 import { DefaultTextInput } from '../../src/components/ui/form/text-input/DefaultTextInput';
 import { Indent } from '../../src/components/ui/layout/Indent';
@@ -13,6 +12,8 @@ import {
   createRows,
   FocusedBox,
 } from './util/GridHooksExampleUtils';
+
+const { useCallback, useState } = React;
 
 export const list10 = createIndexArray(10);
 

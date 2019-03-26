@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { CSSProperties } from 'react';
 import styled from '@emotion/styled';
 import { setDisplayName } from 'recompose';
 
@@ -9,7 +8,7 @@ export interface BackgroundProps {
   color?: string;
   hoverColor?: string;
   height?: string;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
 
 export const Background = setDisplayName<BackgroundProps>('Background')(

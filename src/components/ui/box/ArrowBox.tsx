@@ -11,6 +11,9 @@ export interface ArrowBoxProps {
 export class ArrowBox extends React.Component<ArrowBoxProps> {
   render() {
     const { direction = 'up' } = this.props;
+    console.log('________', {
+      type: Object as () => ArrowBoxProps
+    });
     return (
       <ArrowWrapper>
         <div className={`arrow_box ${direction}`}>{this.props.children}</div>

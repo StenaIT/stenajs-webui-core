@@ -6,7 +6,6 @@ import {
 } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';
-import { CSSProperties } from 'react';
 import { compose, setDisplayName, withProps } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers';
 import { DefaultText } from '../text';
@@ -25,7 +24,7 @@ export interface FontAwesomeProps {
   size?: number;
   source?: IconSource;
   spin?: boolean;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
   transform?: string | Transform;
 }
 

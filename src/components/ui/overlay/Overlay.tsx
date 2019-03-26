@@ -1,6 +1,5 @@
 import styled from '@emotion/styled';
 import * as React from 'react';
-import { KeyboardEventHandler, MouseEventHandler } from 'react';
 
 // tslint:disable:no-any
 
@@ -40,7 +39,7 @@ export class Overlay extends React.Component<OverlayProps> {
     this.div!.focus();
   }
 
-  onClickOutside: MouseEventHandler<HTMLDivElement> = e => {
+  onClickOutside: React.MouseEventHandler<HTMLDivElement> = e => {
     const { onClickOutside } = this.props;
     if (e.target === this.div && onClickOutside) {
       onClickOutside();
@@ -48,7 +47,7 @@ export class Overlay extends React.Component<OverlayProps> {
     }
   };
 
-  onKeyDown: KeyboardEventHandler<HTMLDivElement> = e => {
+  onKeyDown: React.KeyboardEventHandler<HTMLDivElement> = e => {
     const { onClickOutside } = this.props;
     if (e.key === 'Escape' && onClickOutside) {
       onClickOutside();
