@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Progress } from './Progress';
 
 const Spinner = require('react-spinkit');
 
@@ -14,7 +15,7 @@ export class ProgressIndicator extends React.Component<ProgressIndicatorProps> {
     const { small = false, color } = this.props;
 
     if (small) {
-      return <Spinner name="circle" fadeIn={'none'} color={color} />;
+      return <Progress size={22} trackColor={color} />;
     }
 
     return <Spinner name="ball-scale-ripple" fadeIn={'none'} />;
