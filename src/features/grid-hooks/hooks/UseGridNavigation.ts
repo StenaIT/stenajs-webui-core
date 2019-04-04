@@ -36,6 +36,10 @@ export interface UseGridNavigationOptions {
    * Callback that is invoked when user navigates to new cell by keyboard.
    */
   onCellMove?: CellMoveHandler;
+  /**
+   * Callback that is invoked when user navigates but don't move to new cell by keyboard.
+   */
+  onCellNavigation?: CellMoveNavigationHandler;
 }
 
 export interface ValidatedUseGridNavigationOptions {
@@ -46,6 +50,7 @@ export interface ValidatedUseGridNavigationOptions {
   tableId: string;
   wrap?: boolean;
   onCellMove?: CellMoveHandler;
+  onCellNavigation?: CellMoveNavigationHandler;
 }
 
 export interface UseGridNavigationResult {
@@ -63,14 +68,22 @@ export interface GridNavigationRequiredProps {
 }
 
 export type CellMoveHandler = (event: OnCellMoveEvent) => void;
+export type CellMoveNavigationHandler = (
+  event: OnCellMoveNavigationEvent,
+) => void;
 
 export interface OnCellMoveEvent {
+  direction: MoveDirection;
   fromRowIndex: number;
   fromColIndex: number;
   rowDidChange: boolean;
   colDidChange: boolean;
   rowIndex: number;
   colIndex: number;
+}
+
+export interface OnCellMoveNavigationEvent extends OnCellMoveEvent {
+  cellDidChange: boolean;
 }
 
 export const useGridNavigation = (
@@ -84,6 +97,7 @@ export const useGridNavigation = (
     tableId,
     wrap = false,
     onCellMove,
+    onCellNavigation,
   } = useGridNavigationOptionsFromContext(options);
 
   const moveHandler = useMemo(
@@ -96,8 +110,18 @@ export const useGridNavigation = (
         numCols,
         wrap,
         onCellMove,
+        onCellNavigation,
       ),
-    [tableId, rowIndex, colIndex, numRows, numCols, wrap, onCellMove],
+    [
+      tableId,
+      rowIndex,
+      colIndex,
+      numRows,
+      numCols,
+      wrap,
+      onCellMove,
+      onCellNavigation,
+    ],
   );
 
   const onKeyDown = useMemo(() => createKeyDownHandler(moveHandler), [
@@ -130,6 +154,7 @@ const createMoveHandler = (
   numCols: number,
   wrap: boolean,
   onCellMove?: CellMoveHandler,
+  onCellNavigation?: CellMoveNavigationHandler,
 ): MoveHandler => direction => {
   const pos = getNextPositionWrappedOrClamped(
     rowIndex,
@@ -146,6 +171,7 @@ const createMoveHandler = (
   if (colDidChange || rowDidChange) {
     if (onCellMove) {
       onCellMove({
+        direction,
         fromRowIndex: rowIndex,
         fromColIndex: colIndex,
         rowIndex: pos.rowIndex,
@@ -155,6 +181,19 @@ const createMoveHandler = (
       });
     }
     focusOnCell(tableId, pos);
+  }
+
+  if (onCellNavigation) {
+    onCellNavigation({
+      direction,
+      fromRowIndex: rowIndex,
+      fromColIndex: colIndex,
+      rowIndex: pos.rowIndex,
+      colIndex: pos.colIndex,
+      colDidChange,
+      rowDidChange,
+      cellDidChange: colDidChange || rowDidChange,
+    });
   }
 };
 
