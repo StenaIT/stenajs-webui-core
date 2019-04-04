@@ -39,7 +39,7 @@ export interface UseGridNavigationOptions {
   /**
    * Callback that is invoked when user navigates but don't move to new cell by keyboard.
    */
-  onCellNavigation?: CellMoveNavigationHandler;
+  onCellNavigation?: CellNavigationHandler;
 }
 
 export interface ValidatedUseGridNavigationOptions {
@@ -50,7 +50,7 @@ export interface ValidatedUseGridNavigationOptions {
   tableId: string;
   wrap?: boolean;
   onCellMove?: CellMoveHandler;
-  onCellNavigation?: CellMoveNavigationHandler;
+  onCellNavigation?: CellNavigationHandler;
 }
 
 export interface UseGridNavigationResult {
@@ -68,9 +68,7 @@ export interface GridNavigationRequiredProps {
 }
 
 export type CellMoveHandler = (event: OnCellMoveEvent) => void;
-export type CellMoveNavigationHandler = (
-  event: OnCellMoveNavigationEvent,
-) => void;
+export type CellNavigationHandler = (event: OnCellNavigationEvent) => void;
 
 export interface OnCellMoveEvent {
   direction: MoveDirection;
@@ -82,7 +80,7 @@ export interface OnCellMoveEvent {
   colIndex: number;
 }
 
-export interface OnCellMoveNavigationEvent extends OnCellMoveEvent {
+export interface OnCellNavigationEvent extends OnCellMoveEvent {
   cellDidChange: boolean;
 }
 
@@ -154,7 +152,7 @@ const createMoveHandler = (
   numCols: number,
   wrap: boolean,
   onCellMove?: CellMoveHandler,
-  onCellNavigation?: CellMoveNavigationHandler,
+  onCellNavigation?: CellNavigationHandler,
 ): MoveHandler => direction => {
   const pos = getNextPositionWrappedOrClamped(
     rowIndex,
