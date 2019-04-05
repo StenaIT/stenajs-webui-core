@@ -12,6 +12,7 @@ export interface SimpleCheckboxTheme {
   colors: SimpleCheckboxStateTheme;
   disabledColors: SimpleCheckboxStateTheme;
   checkedColors: SimpleCheckboxStateTheme;
+  borderColorFocused: string;
   checkIcon: IconProp;
   width: string;
   height: string;
@@ -35,6 +36,7 @@ export const defaultSimpleCheckboxTheme: SimpleCheckboxTheme = {
     borderColor: defaultColors.inputBorder,
     iconColor: defaultColors.primaryText,
   },
+  borderColorFocused: defaultColors.inputBorderFocused,
   checkIcon: faCheck,
   width: '22px',
   height: '22px',
@@ -58,6 +60,7 @@ export const defaultSimpleCheckboxThemeDark: SimpleCheckboxTheme = {
     borderColor: defaultColors.inputBorder,
     iconColor: defaultColors.primaryText,
   },
+  borderColorFocused: defaultColors.inputBorderFocused,
   checkIcon: faCheck,
   width: '22px',
   height: '22px',

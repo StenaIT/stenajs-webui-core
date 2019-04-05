@@ -14,7 +14,7 @@ import { ValueOnChangeProps } from '../types';
 import { SwitchTheme } from './SwitchTheme';
 
 export interface SwitchProps
-  extends RequiredInputComponentProps<HTMLInputElement>,
+  extends RequiredInputComponentProps<HTMLDivElement, HTMLInputElement>,
     ValueOnChangeProps<boolean> {
   disabled?: boolean;
   onChange: (value: boolean) => void;

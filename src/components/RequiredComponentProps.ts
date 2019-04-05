@@ -5,7 +5,7 @@ export interface RequiredComponentProps<T> {
   ref?: Ref<T>;
 }
 
-export interface RequiredInputComponentProps<T>
+export interface RequiredInputComponentProps<T, I>
   extends RequiredComponentProps<T> {
-  inputRef?: Ref<T>;
+  inputRef?: Ref<I>;
 }
