@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useMemo } from 'react';
 
 interface GridHooksContext {
   /**
@@ -21,8 +22,21 @@ interface GridHooksContext {
 
 export const GridHooksContext = React.createContext<GridHooksContext>({});
 
-export const GridHooksTable: React.FC<GridHooksContext> = props => (
-  <GridHooksContext.Provider value={props}>
-    {props.children}
-  </GridHooksContext.Provider>
-);
+export const GridHooksTable: React.FC<GridHooksContext> = ({
+  children,
+  numCols,
+  numRows,
+  tableId,
+  wrap,
+}) => {
+  const contextProps = useMemo<GridHooksContext>(
+    () => ({ numCols, numRows, tableId, wrap }),
+    [numCols, numRows, tableId, wrap],
+  );
+
+  return (
+    <GridHooksContext.Provider value={contextProps}>
+      {children}
+    </GridHooksContext.Provider>
+  );
+};
