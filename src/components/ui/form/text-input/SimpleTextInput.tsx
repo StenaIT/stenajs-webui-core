@@ -9,7 +9,6 @@ import {
 } from 'react';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
-import { InputType } from './InputType';
 
 // tslint:disable:no-any
 
@@ -39,7 +38,7 @@ export interface SimpleTextInputProps {
   /** If true, cursor will move to the end of the entered text on mount. */
   moveCursorToEndOnMount?: boolean;
   /** Type of input */
-  inputType?: InputType;
+  inputType?: string;
   fontSize?: string;
   maxLength?: number;
   size?: number;
