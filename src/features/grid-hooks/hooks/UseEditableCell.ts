@@ -10,6 +10,7 @@ import { RevertableValue, useRevertableValue } from './UseRevertableValue';
 export type AllowedInputType = 'all' | 'numeric' | 'alphanumeric' | 'letters';
 
 type OnStartEditingFunc = (keyEvent?: KeyDownEvent) => void;
+type TransformEnteredValueFunc<TValue> = (value?: string) => TValue;
 
 export interface UseEditableCellOptions<TValue> {
   /**
@@ -34,6 +35,11 @@ export interface UseEditableCellOptions<TValue> {
    * @param value
    */
   onChange?: (value: TValue | undefined) => void;
+  /**
+   * Transform entered input to TValue.
+   * @param value
+   */
+  transformEnteredValue?: TransformEnteredValueFunc<TValue>;
 }
 
 export interface UseEditableCellResult<TValue> {
@@ -75,6 +81,9 @@ const createKeyDownEvent = (event: KeyboardEvent): KeyDownEvent => ({
   which: event.which,
 });
 
+// tslint:disable-next-line:no-any
+const defaultTransformEnteredValue = (value: any) => value;
+
 export const useEditableCell = <TValue>(
   value: TValue,
   {
@@ -83,6 +92,7 @@ export const useEditableCell = <TValue>(
     onChange,
     onStartEditing,
     onStopEditing,
+    transformEnteredValue = defaultTransformEnteredValue,
   }: UseEditableCellOptions<TValue>,
 ): UseEditableCellResult<TValue> => {
   const [isEditing, setIsEditing] = useState(false);
@@ -139,6 +149,7 @@ export const useEditableCell = <TValue>(
         startEditing,
         setLastKeyEvent,
         allowedInputType,
+        transformEnteredValue,
         revertableValue,
       ),
     [
@@ -147,6 +158,7 @@ export const useEditableCell = <TValue>(
       startEditing,
       setLastKeyEvent,
       allowedInputType,
+      transformEnteredValue,
       revertableValue,
     ],
   );
@@ -169,6 +181,7 @@ const createKeyDownHandler = <TValue>(
   startEditing: OnStartEditingFunc,
   setLastKeyEvent: (lastKeyEvent: KeyDownEvent | undefined) => void,
   allowedInputType: AllowedInputType,
+  transformEnteredValue: TransformEnteredValueFunc<TValue>,
   revertableValue: RevertableValue<TValue>,
 ): KeyboardEventHandler => e => {
   if (e.key === 'Enter' && isEditable) {
@@ -194,7 +207,8 @@ const createKeyDownHandler = <TValue>(
       ) {
         startEditing(lastKeyEvent);
         setLastKeyEvent(lastKeyEvent);
-        revertableValue.commit(lastKeyEvent);
+        revertableValue.commit();
+        revertableValue.setValue(transformEnteredValue(lastKeyEvent.key));
         e.preventDefault();
         e.stopPropagation();
       }
@@ -205,7 +219,8 @@ const createKeyDownHandler = <TValue>(
     ) {
       startEditing(lastKeyEvent);
       setLastKeyEvent(lastKeyEvent);
-      revertableValue.commit(lastKeyEvent);
+      revertableValue.commit();
+      revertableValue.setValue(transformEnteredValue(lastKeyEvent.key));
       e.preventDefault();
       e.stopPropagation();
     }
