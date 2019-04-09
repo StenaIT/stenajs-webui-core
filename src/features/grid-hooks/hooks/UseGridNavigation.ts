@@ -56,6 +56,7 @@ export interface ValidatedUseGridNavigationOptions {
 export interface UseGridNavigationResult {
   requiredProps: GridNavigationRequiredProps;
   moveHandler: MoveHandler;
+  focusOnCell: FocusOnCellFunc;
 }
 
 /**
@@ -133,12 +134,13 @@ export const useGridNavigation = (
   ]);
 
   return {
+    focusOnCell,
+    moveHandler,
     requiredProps: {
       tabIndex: 0,
       onKeyDown,
       id,
     },
-    moveHandler,
   };
 };
 
@@ -229,7 +231,9 @@ const createKeyDownHandler = (moveHandler: MoveHandler) => (
   }
 };
 
-export const focusOnCell = (tableId: string, pos: CellIndices) => {
+type FocusOnCellFunc = (tableId: string, pos: CellIndices) => void;
+
+export const focusOnCell: FocusOnCellFunc = (tableId, pos) => {
   const el = (document.querySelector(
     `#${createCellId(tableId, pos.rowIndex, pos.colIndex)}`,
   ) ||
