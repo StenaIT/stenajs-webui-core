@@ -53,6 +53,7 @@ export const addRadioButtonStories = () => {
           onChange={value => store.set({ value })}
           theme={{
             ...defaultRadioButtonTheme,
+            notCheckedColor: 'magenta',
             iconColor: 'darkgreen',
             iconSize: 40,
           }}
