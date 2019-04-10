@@ -1,35 +1,25 @@
-const path = require('path');
+const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin-alt');
 
-// Export a function. Accept the base config as the only param.
-module.exports = ({ config, mode }) => {
-  // `mode` has a value of 'DEVELOPMENT' or 'PRODUCTION'
-  // You can change the configuration based on that.
-  // 'PRODUCTION' is used when building the static version of storybook.
-
-  // Make whatever fine-grained changes you need
-  config.module.rules.push({
-    test: /\.scss$/,
-    loaders: ['style-loader', 'css-loader', 'sass-loader'],
-    include: path.resolve(__dirname, '../'),
-  });
-
+module.exports = ({ config }) => {
   config.module.rules.push({
     test: /\.(ts|tsx)$/,
     loader: require.resolve('babel-loader'),
     options: {
-      presets: [
-        '@babel/preset-typescript',
-        '@babel/preset-react',
-        ['react-app', { flow: false, typescript: true }],
-      ],
-      plugins: [
-        ['babel-plugin-typescript-to-proptypes', { typeCheck: true }]
-      ],
-    },
+      presets: [require.resolve('babel-preset-react-app')]
+    }
   });
 
   config.resolve.extensions.push('.ts', '.tsx');
 
-  // Return the altered config
+  config.plugins.push(
+    new ForkTsCheckerWebpackPlugin({
+      async: true,
+      checkSyntacticErrors: true,
+      memoryLimit: 8192,
+      formatter: require('react-dev-utils/typescriptFormatter'),
+      workers: 4
+    }),
+  );
+
   return config;
 };

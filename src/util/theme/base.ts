@@ -139,6 +139,7 @@ export interface Brand {
   image: string | null | undefined;
 }
 
+/* tslint:disable */
 export interface Theme {
   color: Color;
   background: Background;

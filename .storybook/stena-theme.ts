@@ -34,6 +34,7 @@ export const RawStenaTheme = {
   inputBorderRadius: 4,
 };
 
+// @ts-ignore
 export const StenaTheme = create(RawStenaTheme);
 /*
  * base: 'light' | 'dark',

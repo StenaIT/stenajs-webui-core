@@ -1,5 +1,6 @@
-import {typography} from '../../../.storybook/base';
+import { typography } from '../../../.storybook/base';
 
+/* tslint:disable */
 export const stenaWebUiCoreStyles = (stylesheet: any) => ({
   ...stylesheet,
   button: {
