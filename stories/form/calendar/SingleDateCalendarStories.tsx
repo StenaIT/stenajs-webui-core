@@ -1,9 +1,11 @@
 import { Store, withState } from '@dump247/storybook-state';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { addDays, getISOWeek } from 'date-fns';
 import * as React from 'react';
 import { UseTheme } from '../../../src/components/theme';
+import { defaultButtonTheme } from '../../../src/components/ui/buttons';
 import {
   CalendarTheme,
   extranetCalendarTheme,
@@ -153,7 +155,7 @@ export const addSingleDateCalendarStories = () => {
               background={
                 week.startYear === now.getFullYear() &&
                 week.weekNumber === getISOWeek(now) ? (
-                  <Icon name={'coffee'} color={'blue'} size={30} />
+                  <Icon name={faCoffee} color={'blue'} size={30} />
                 ) : (
                   undefined
                 )
@@ -181,7 +183,7 @@ export const addSingleDateCalendarStories = () => {
           value={store.state.value}
           extraDayContent={() => (
             <Absolute top={'-10px'} right={'-10px'}>
-              <Icon name={'coffee'} />
+              <Icon name={faCoffee} />
             </Absolute>
           )}
         />
@@ -195,7 +197,17 @@ export const addSingleDateCalendarStories = () => {
         <UseTheme
           theme={{
             components: {
-              Calendar: extranetCalendarTheme,
+              Calendar: {
+                ...extranetCalendarTheme,
+                CalendarMonth: {
+                  ...extranetCalendarTheme.CalendarMonth,
+                  SwitchButton: {
+                    ...defaultButtonTheme,
+                    bgColor: 'pink',
+                    height: '50px',
+                  },
+                },
+              },
             },
           }}
         >

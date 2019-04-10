@@ -1,20 +1,18 @@
 import { IconProp } from '@fortawesome/fontawesome';
 import { faCircle } from '@fortawesome/free-regular-svg-icons/faCircle';
-import { faDotCircle } from '@fortawesome/free-regular-svg-icons/faDotCircle';
+import { faDotCircle } from '@fortawesome/free-solid-svg-icons/faDotCircle';
 import { Color } from 'csstype';
 import {
   defaultColors,
   defaultFontSizes,
 } from '../../../../themes/default-values';
-import { addIcons } from '../../../icon-library/IconLibrary';
-
-addIcons(faCircle, faDotCircle);
 
 export interface RadioButtonTheme {
   disabledIconColor: Color;
   disabledTextColor: Color;
   checkedIcon: IconProp;
   notCheckedIcon: IconProp;
+  notCheckedColor: Color;
   iconColor: Color;
   iconSize: number;
   textColor: Color;
@@ -22,8 +20,9 @@ export interface RadioButtonTheme {
 }
 
 export const defaultRadioButtonTheme: RadioButtonTheme = {
-  checkedIcon: ['far', 'dot-circle'],
-  notCheckedIcon: ['far', 'circle'],
+  checkedIcon: faDotCircle,
+  notCheckedIcon: faCircle,
+  notCheckedColor: defaultColors.primaryText,
   disabledIconColor: defaultColors.disabledText,
   disabledTextColor: defaultColors.disabledText,
   iconColor: defaultColors.primaryText,
@@ -33,8 +32,9 @@ export const defaultRadioButtonTheme: RadioButtonTheme = {
 };
 
 export const defaultRadioButtonThemeDark: RadioButtonTheme = {
-  checkedIcon: ['far', 'dot-circle'],
-  notCheckedIcon: ['far', 'circle'],
+  checkedIcon: faDotCircle,
+  notCheckedIcon: faCircle,
+  notCheckedColor: '#4d7989',
   disabledIconColor: defaultColors.disabledText,
   disabledTextColor: defaultColors.disabledText,
   iconColor: '#4d7989',

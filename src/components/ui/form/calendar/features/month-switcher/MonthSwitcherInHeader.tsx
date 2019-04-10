@@ -2,19 +2,16 @@ import { faChevronLeft } from '@fortawesome/free-solid-svg-icons/faChevronLeft';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons/faChevronRight';
 import * as React from 'react';
 import { ComponentEnhancer, compose, withProps } from 'recompose';
-import { addIcons } from '../../../../../icon-library/IconLibrary';
-import { StandardButton } from '../../../../buttons/StandardButton';
+import { Button, defaultStandardButtonTheme } from '../../../../buttons';
 import {
   CalendarHeaderContentProps,
   CalendarProps,
-} from '../../components/Calendar';
+} from '../../types/CalendarTypes';
 import {
   MonthSwitcherHandlerProps,
   MonthSwitcherStateProps,
   withMonthSwitcherLogic,
 } from './MonthSwitcherLogic';
-
-addIcons(faChevronLeft, faChevronRight);
 
 export type __C3135136785123518 = ComponentEnhancer<{}, {}>;
 
@@ -25,14 +22,55 @@ type InnerProps = CalendarProps<{}> &
 const withSwitchButtonsLeftRight = withProps<
   CalendarHeaderContentProps,
   InnerProps
->(({ prevMonth, nextMonth }) => ({
+>(({ prevMonth, nextMonth, theme }) => ({
   headerLeftContent: (
-    <StandardButton onClick={prevMonth} leftIcon={'chevron-left'} />
+    <Button
+      height={
+        theme &&
+        theme.CalendarMonth.SwitchButton &&
+        theme.CalendarMonth.SwitchButton.height
+          ? theme.CalendarMonth.SwitchButton.height
+          : defaultStandardButtonTheme.height
+      }
+      onClick={prevMonth}
+      leftIcon={faChevronLeft}
+      theme={
+        theme && theme.CalendarMonth.SwitchButton
+          ? theme.CalendarMonth.SwitchButton
+          : undefined
+      }
+      width={
+        theme && theme.CalendarMonth.SwitchButton
+          ? theme.CalendarMonth.SwitchButton.width
+          : undefined
+      }
+    />
   ),
   headerRightContent: (
-    <StandardButton onClick={nextMonth} leftIcon={'chevron-right'} />
+    <Button
+      height={
+        theme &&
+        theme.CalendarMonth.SwitchButton &&
+        theme.CalendarMonth.SwitchButton.height
+          ? theme.CalendarMonth.SwitchButton.height
+          : defaultStandardButtonTheme.height
+      }
+      onClick={nextMonth}
+      leftIcon={faChevronRight}
+      theme={
+        theme && theme.CalendarMonth.SwitchButton
+          ? theme.CalendarMonth.SwitchButton
+          : undefined
+      }
+      width={
+        theme && theme.CalendarMonth.SwitchButton
+          ? theme.CalendarMonth.SwitchButton.width
+          : undefined
+      }
+    />
   ),
 }));
+
 export const withMonthSwitcherInHeader = compose(
   withMonthSwitcherLogic,
   withSwitchButtonsLeftRight,

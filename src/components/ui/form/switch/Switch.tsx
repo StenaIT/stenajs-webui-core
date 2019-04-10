@@ -1,4 +1,5 @@
 import styled from '@emotion/styled';
+import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types';
@@ -14,7 +15,7 @@ import { SwitchTheme } from './SwitchTheme';
 const { useCallback } = React;
 
 export interface SwitchProps
-  extends RequiredInputComponentProps<HTMLInputElement>,
+  extends RequiredInputComponentProps<HTMLDivElement, HTMLInputElement>,
     ValueOnChangeProps<boolean> {
   disabled?: boolean;
   onChange: (value: boolean) => void;
@@ -96,7 +97,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
         onChange(e.target.checked);
       }
     },
-    [onChange],
+    [disabled, onChange],
   );
 
   const handleSwitchClick = useCallback(
@@ -105,7 +106,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
         onChange(!value);
       }
     },
-    [value, onChange],
+    [disabled, onChange, value],
   );
 
   return (
@@ -134,7 +135,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
                     ? theme.checkedColors.iconColor
                     : theme.colors.iconColor
               }
-              name={'check'}
+              name={faCheck}
               size={theme.height - 8}
             />
           </IconWrapper>

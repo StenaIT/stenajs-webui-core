@@ -1,12 +1,11 @@
 import { useCallback, useEffect, useState } from 'react';
-import { KeyDownEvent } from './UseEditableCell';
 
 export interface RevertableValue<TValue> {
   value: TValue;
   setValue: (value: TValue) => void;
   setRevertValue: (revertValue: TValue) => void;
   revert: () => void;
-  commit: (lastKeyEvent?: KeyDownEvent) => void;
+  commit: () => void;
 }
 
 export const useRevertableValue = <TValue>(
@@ -31,17 +30,14 @@ export const useRevertableValue = <TValue>(
     [setValue, revertValue],
   );
 
-  // TODO How do we handle lastKeyEvent
-  // tslint:disable:no-any
-
   const commit = useCallback(
-    (lastKeyEvent?: KeyDownEvent) => {
+    (commitValue?: TValue) => {
       setRevertValue(value);
-      if (lastKeyEvent) {
-        setValue(lastKeyEvent.key as any);
+      if (commitValue) {
+        setValue(commitValue);
       }
     },
-    [value, setValue, revertValue],
+    [value, setValue],
   );
 
   return {

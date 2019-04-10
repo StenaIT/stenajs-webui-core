@@ -4,7 +4,6 @@ import { addColorsStories } from './colors';
 import { addDecorationsStories } from './decorations';
 import { addFormStories } from './form';
 import { addIconStories } from './icon/IconStories';
-import './initFontAwesome';
 import { addInteractionStories } from './interaction';
 import { addLabelStories } from './label/LabelStories';
 import { addLayoutStories } from './layout';

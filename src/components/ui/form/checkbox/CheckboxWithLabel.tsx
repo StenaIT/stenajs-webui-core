@@ -1,13 +1,13 @@
 import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
 import {
-  withOnToggleHandler,
-  WithOnToggleHandler,
-} from '../../../util/enhancers/withOnToggleHandler';
-import {
   withComponentTheme,
   WithInnerComponentThemeProps,
 } from '../../../util/enhancers/WithComponentTheme';
+import {
+  withOnToggleHandler,
+  WithOnToggleHandler,
+} from '../../../util/enhancers/withOnToggleHandler';
 import { Clickable } from '../../interaction/Clickable';
 import { Row } from '../../layout/Row';
 import { Space } from '../../layout/Space';
@@ -28,29 +28,32 @@ type InnerProps = CheckboxWithLabelProps &
 export const CheckboxWithLabelComponent: React.FC<InnerProps> = props => {
   const {
     children,
-    label,
-    textColor,
     disabled,
-    theme,
-    onToggle,
+    label,
     onChange, // Do not pass to SimpleCheckbox
+    onToggle,
+    ref,
+    textColor,
+    theme,
     ...propsToCheckbox
   } = props;
   return (
-    <Clickable onClick={disabled ? undefined : onToggle}>
-      <Row alignItems={'center'}>
-        <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />
-        <Space />
-        {label && (
-          <DefaultText
-            color={disabled ? theme.disabledColors.iconColor : textColor}
-          >
-            {label}
-          </DefaultText>
-        )}
-        {children}
-      </Row>
-    </Clickable>
+    <div ref={ref}>
+      <Clickable onClick={disabled ? undefined : onToggle}>
+        <Row alignItems={'center'}>
+          <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />
+          <Space />
+          {label && (
+            <DefaultText
+              color={disabled ? theme.disabledColors.iconColor : textColor}
+            >
+              {label}
+            </DefaultText>
+          )}
+          {children}
+        </Row>
+      </Clickable>
+    </div>
   );
 };
 

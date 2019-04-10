@@ -8,11 +8,8 @@ import {
   withState,
 } from 'recompose';
 import { Omit } from '../../../../../types/Omit';
-import {
-  CalendarProps,
-  CalendarUserData,
-  DayState,
-} from '../components/Calendar';
+import { CalendarProps } from '../types/CalendarTypes';
+import { CalendarUserData, DayState } from '../types/CalendarTypes';
 import { WithCalendarTheme } from '../types/WithCalendarTheme';
 import { DayData } from '../util/CalendarDataFactory';
 import { ensureStartIsFirst } from '../util/CalendarIntervalValidator';

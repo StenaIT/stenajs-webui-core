@@ -1,8 +1,14 @@
+import styled from '@emotion/styled';
 import * as React from 'react';
-import { css } from '@emotion/core';
+import {
+  ChangeEvent,
+  ChangeEventHandler,
+  CSSProperties,
+  KeyboardEvent,
+  KeyboardEventHandler,
+} from 'react';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
-import { InputType } from './InputType';
 
 // tslint:disable:no-any
 
@@ -32,7 +38,7 @@ export interface SimpleTextInputProps {
   /** If true, cursor will move to the end of the entered text on mount. */
   moveCursorToEndOnMount?: boolean;
   /** Type of input */
-  inputType?: InputType;
+  inputType?: string;
   fontSize?: string;
   maxLength?: number;
   size?: number;
@@ -43,8 +49,8 @@ export interface SimpleTextInputProps {
   disabled?: boolean;
   placeholder?: string;
   placeholderColor?: string;
-  style?: React.CSSProperties;
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  style?: CSSProperties;
+  onKeyDown?: KeyboardEventHandler<HTMLInputElement>;
   /** onMove callback, triggered when user tries to move outside of field using arrow keys, tab or shift+tab. */
   onMove?: (direction: MoveDirection) => void;
   onFocus?: () => void;
@@ -54,6 +60,58 @@ export interface SimpleTextInputProps {
 export interface SimpleTextInputState {
   wasCancelled: boolean;
 }
+
+const StyledInput = styled('input')<
+  Pick<
+    SimpleTextInputProps,
+    | 'backgroundColor'
+    | 'fontSize'
+    | 'height'
+    | 'placeholderColor'
+    | 'textColor'
+    | 'width'
+  > &
+    Pick<WithThemeProps, 'theme'> & { outerStyle?: CSSProperties }
+>(
+  ({
+    backgroundColor,
+    fontSize,
+    height,
+    outerStyle,
+    placeholderColor,
+    textColor,
+    theme,
+    width,
+  }) => ({
+    '&::placeholder': {
+      color:
+        placeholderColor || theme.components.SimpleTextInput.placeholderColor,
+    },
+    '&::-webkit-outer-spin-button': {
+      webkitAppearance: 'none',
+      margin: 0,
+    },
+    '&::-webkit-inner-spin-button': {
+      webkitAppearance: 'none',
+      margin: 0,
+    },
+    backgroundColor:
+      backgroundColor || theme.components.SimpleTextInput.backgroundColor,
+    color: textColor || theme.components.SimpleTextInput.textColor,
+    '&:disabled': {
+      backgroundColor: `${
+        theme.components.SimpleTextInput.disabledBackgroundColor
+      }`,
+      color: `${theme.components.SimpleTextInput.disabledTextColor}`,
+    },
+    height: height || theme.components.SimpleTextInput.height,
+    mozAppearance: 'textfield',
+    width: width || '100%',
+    fontSize: fontSize || theme.components.SimpleTextInput.fontSize,
+    fontFamily: theme.components.SimpleTextInput.fontFamily,
+    ...outerStyle,
+  }),
+);
 
 class SimpleTextInputComponent extends React.Component<
   SimpleTextInputProps & WithThemeProps,
@@ -88,7 +146,7 @@ class SimpleTextInputComponent extends React.Component<
     }
   }
 
-  onChange: React.ChangeEventHandler<HTMLInputElement> = ({ target }) => {
+  onChange: ChangeEventHandler<HTMLInputElement> = ({ target }) => {
     const { onChange } = this.props;
     const { value } = target;
     if (onChange) {
@@ -96,7 +154,7 @@ class SimpleTextInputComponent extends React.Component<
     }
   };
 
-  onKeyDown: React.KeyboardEventHandler<HTMLInputElement> = e => {
+  onKeyDown: KeyboardEventHandler<HTMLInputElement> = e => {
     const { onEsc, onEnter, onKeyDown, onMove } = this.props;
     const { key } = e;
     if (key === 'Enter') {
@@ -142,7 +200,7 @@ class SimpleTextInputComponent extends React.Component<
 
   blurMoveAndCancel = (
     direction: MoveDirection,
-    e: React.KeyboardEvent<HTMLInputElement>,
+    e: KeyboardEvent<HTMLInputElement>,
   ) => {
     const { onMove } = this.props;
     this.textInput.current!.blur();
@@ -153,7 +211,7 @@ class SimpleTextInputComponent extends React.Component<
     e.stopPropagation();
   };
 
-  onBlur = (e: React.ChangeEvent<any>) => {
+  onBlur = (e: ChangeEvent<any>) => {
     const { onDone, onBlur } = this.props;
     const { value } = e.target;
     const { wasCancelled } = this.state;
@@ -190,41 +248,16 @@ class SimpleTextInputComponent extends React.Component<
     } = this.props;
 
     return (
-      <input
-        style={{
-          width: width || '100%',
-          height: height || theme.components.SimpleTextInput.height,
-          fontSize: fontSize || theme.components.SimpleTextInput.fontSize,
-          backgroundColor:
-            backgroundColor || theme.components.SimpleTextInput.backgroundColor,
-          fontFamily: theme.components.SimpleTextInput.fontFamily,
-          color: textColor || theme.components.SimpleTextInput.textColor,
-          ...style,
-        }}
-        className={`${className || ''} ${css({
-          '-moz-appearance': 'textfield',
-          '&::placeholder': {
-            color:
-              placeholderColor ||
-              theme.components.SimpleTextInput.placeholderColor,
-          },
-          '&::-webkit-outer-spin-button': {
-            '-webkit-appearance': 'none',
-            margin: 0,
-          },
-          '&::-webkit-inner-spin-button': {
-            '-webkit-appearance': 'none',
-            margin: 0,
-          },
-          '&:disabled': {
-            backgroundColor: `${
-              theme.components.SimpleTextInput.disabledBackgroundColor
-            } !important`,
-            color: `${
-              theme.components.SimpleTextInput.disabledTextColor
-            } !important`,
-          },
-        })}`}
+      <StyledInput
+        theme={theme}
+        placeholderColor={placeholderColor}
+        backgroundColor={backgroundColor}
+        textColor={textColor}
+        width={width}
+        height={height}
+        fontSize={fontSize}
+        outerStyle={style}
+        className={className}
         type={inputType}
         ref={this.textInput}
         onKeyDown={this.onKeyDown}

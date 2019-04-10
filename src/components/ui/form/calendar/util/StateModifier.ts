@@ -1,12 +1,12 @@
 import { format, getDate, getISOWeek } from 'date-fns';
 import { DateFormats } from '../../../../../util/date/DateFormats';
+import { DayStateHighlight } from '../types/CalendarTypes';
 import {
   CalendarState,
   CalendarUserData,
-  DayStateHighlight,
   DayState,
   StateForWeek,
-} from '../components/Calendar';
+} from '../types/CalendarTypes';
 import { WeekData } from './CalendarDataFactory';
 
 export const setDayStateValue = (

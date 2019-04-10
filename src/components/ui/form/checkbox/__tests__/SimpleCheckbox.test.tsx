@@ -7,7 +7,7 @@ import { SimpleCheckboxComponent } from '../SimpleCheckbox';
 
 describe('SimpleCheckbox', () => {
   const props = {
-    onToggle: jest.fn(),
+    onChange: jest.fn(),
     theme: defaultTheme.components.SimpleCheckbox,
   };
 
@@ -23,8 +23,12 @@ describe('SimpleCheckbox', () => {
 
     describe('when disabled is false', () => {
       it('sets onClick to specified onClick', () => {
-        const wrapper = shallow(<SimpleCheckboxComponent {...props} />);
-        expect(wrapper.find(Clickable).prop('onClick')).toBe(props.onToggle);
+        const value = true;
+        const wrapper = shallow(
+          <SimpleCheckboxComponent {...props} value={value} />,
+        );
+        wrapper.find(Clickable).prop('onClick')();
+        expect(props.onChange).toHaveBeenCalledWith(!value);
       });
     });
   });
@@ -72,17 +76,6 @@ describe('SimpleCheckbox', () => {
           defaultTheme.components.SimpleCheckbox.colors.iconColor,
         );
       });
-    });
-  });
-
-  describe('onChange', () => {
-    it('calls onToggle internally when clicking', () => {
-      const onToggle = jest.fn();
-      const wrapper = shallow(
-        <SimpleCheckboxComponent {...props} value={true} onToggle={onToggle} />,
-      );
-      wrapper.find(Clickable).simulate('click');
-      expect(onToggle).toHaveBeenCalled();
     });
   });
 });

@@ -1,5 +1,5 @@
 import { branch, compose } from 'recompose';
-import { CalendarProps } from '../../components/Calendar';
+import { CalendarProps } from '../../types/CalendarTypes';
 import { withMonthSwitcherBelow } from './MonthSwitcherBelow';
 import { withMonthSwitcherInHeader } from './MonthSwitcherInHeader';
 import { withMonthSwitcherLogic } from './MonthSwitcherLogic';

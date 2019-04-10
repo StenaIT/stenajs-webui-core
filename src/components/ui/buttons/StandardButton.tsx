@@ -1,14 +1,18 @@
 import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
 import {
+  ComponentThemeProps,
   withComponentTheme,
   WithInnerComponentThemeProps,
 } from '../../util/enhancers/WithComponentTheme';
-import { Button, ButtonProps, ButtonPropsWithTheme } from './Button';
+import { Button, ButtonProps } from './Button';
 import { StandardButtonTheme } from './StandardButtonTheme';
 
 type InnerProps = ButtonProps &
   WithInnerComponentThemeProps<StandardButtonTheme>;
+
+export type StandardButtonPropsWithTheme = ButtonProps &
+  ComponentThemeProps<'StandardButton'>;
 
 const StandardButtonComponent: React.FC<InnerProps> = ({
   theme,
@@ -21,10 +25,10 @@ const StandardButtonComponent: React.FC<InnerProps> = ({
   />
 );
 
-export const StandardButton = setDisplayName<ButtonPropsWithTheme>(
+export const StandardButton = setDisplayName<StandardButtonPropsWithTheme>(
   'StandardButton',
 )(
-  compose<InnerProps, ButtonPropsWithTheme>(
+  compose<InnerProps, StandardButtonPropsWithTheme>(
     withComponentTheme('StandardButton'),
   )(StandardButtonComponent),
 );

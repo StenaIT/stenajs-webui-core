@@ -1,9 +1,10 @@
 import { CSSProperties } from 'react';
 import { defaultColors } from '../../../../../themes/default-values/DefaultColors';
+import { ButtonTheme, defaultButtonTheme } from '../../../buttons/ButtonTheme';
 import { DefaultTextProps } from '../../../text/DefaultText';
+import { DayState, DayStateHighlight } from '../types/CalendarTypes';
 import { DayData, MonthData, WeekData } from '../util/CalendarDataFactory';
 import { dayHasHighlight, dayHighlightSelect } from '../util/StateHelper';
-import { DayState, DayStateHighlight } from './Calendar';
 
 export interface CalendarTheme<TUserData = {}> {
   width: string;
@@ -19,8 +20,14 @@ export interface WeekNumberTheme {
   textColor?: string;
 }
 
+export interface SwitchButtonTheme extends ButtonTheme {
+  height?: string;
+  width?: string;
+}
+
 export interface CalendarMonthTheme {
   headerTextColor?: string;
+  SwitchButton?: SwitchButtonTheme;
 }
 
 export interface WeekDayTheme {
@@ -62,7 +69,7 @@ interface DefaultWrapperColors {
   todayBackground: string;
 }
 
-const defaultWrapperStyleProvider = ({
+export const defaultWrapperStyleProvider = ({
   selectedBackground,
   todayBackground,
   rangeBackground,
@@ -114,7 +121,7 @@ interface DefaultTextColors {
   selectedColor: string;
 }
 
-const defaultTextPropsProvider = ({
+export const defaultTextPropsProvider = ({
   selectedColor,
   disabledColor,
   inOtherMonthColor,
@@ -157,12 +164,16 @@ export const defaultCalendarTheme: CalendarTheme = {
       inOtherMonthColor: 'transparent',
     }),
   },
-  CalendarMonth: {},
+  CalendarMonth: {
+    SwitchButton: {
+      ...defaultButtonTheme,
+    },
+  },
 };
 
 export const extranetCalendarTheme: CalendarTheme = {
-  width: '40px',
-  height: '40px',
+  width: '37px',
+  height: '37px',
   WeekNumber: {
     backgroundColor: 'transparent',
   },
@@ -184,5 +195,13 @@ export const extranetCalendarTheme: CalendarTheme = {
       inOtherMonthColor: 'transparent',
     }),
   },
-  CalendarMonth: {},
+  CalendarMonth: {
+    SwitchButton: {
+      ...defaultButtonTheme,
+      bgColor: '#2A7EC5',
+      textColor: '#FFFFFF',
+      borderRadius: '4px',
+      width: '26px',
+    },
+  },
 };

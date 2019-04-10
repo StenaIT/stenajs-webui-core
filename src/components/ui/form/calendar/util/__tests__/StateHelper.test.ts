@@ -1,5 +1,5 @@
 import { defaultColors } from '../../../../../../themes/default-values/DefaultColors';
-import { DayState } from '../../components/Calendar';
+import { DayState } from '../../types/CalendarTypes';
 import { dayHighlightSelect } from '../StateHelper';
 
 describe('StateHelper', () => {

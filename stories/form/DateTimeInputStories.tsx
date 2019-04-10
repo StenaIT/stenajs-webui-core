@@ -95,18 +95,19 @@ export const addDateTimeInputStories = () => {
           showPlaceholder={false}
         />
       )),
-    ).add(
-    'disabled',
-    withState<TimeTextInputState>({
-      value: undefined,
-    })(({ store }: { store: Store<TimeTextInputState> }) => (
-      <TimeTextInput
-        value={store.state.value}
-        onChange={value => store.set({ value })}
-        disabled={true}
-      />
-    )),
-  );
+    )
+    .add(
+      'disabled',
+      withState<TimeTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<TimeTextInputState> }) => (
+        <TimeTextInput
+          value={store.state.value}
+          onChange={value => store.set({ value })}
+          disabled={true}
+        />
+      )),
+    );
 
   storiesOf('Form/DateTimeInput/DateInput', module)
     .addDecorator(withInfo())
@@ -221,6 +222,21 @@ export const addDateTimeInputStories = () => {
           value={store.state.value}
           onChange={value => store.set({ value })}
           disabled={true}
+        />
+      )),
+    )
+    .add(
+      'custom calendar props',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <DateTextInput
+          calendarProps={{
+            defaultHighlights: ['disabled'],
+            highlightToday: true,
+          }}
+          value={store.state.value}
+          onChange={value => store.set({ value })}
         />
       )),
     );
