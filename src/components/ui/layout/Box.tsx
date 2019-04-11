@@ -3,7 +3,6 @@ import styled from '@emotion/styled';
 import {
   alignItems,
   AlignItemsProps,
-  // bgColor,
   BgColorProps,
   DisplayProps,
   flex,
@@ -52,7 +51,6 @@ export interface BoxProps extends StyledSystemProps {
   indent?: boolean | number;
   style?: React.CSSProperties;
 }
-// bgColor
 const FlexBox = styled.div<FlexBoxProps>`
   display: ${props => props.display || 'flex'};
   ${alignItems}

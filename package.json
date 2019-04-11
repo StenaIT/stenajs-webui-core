@@ -8,7 +8,6 @@
   "types": "lib/index",
   "scripts": {
     "start": "start-storybook -p 6006",
-    "start-strong": "NODE_OPTIONS=\"--max-old-space-size=8192\" start-storybook -p 6006",
     "start-from-scratch": "rm -rf node_modules && yarn && yarn build-index && yarn build-lib && yarn start",
     "prepublishOnly": "yarn && yarn build-index && yarn lint && CI=true yarn test && yarn build-lib",
     "deploy-storybook": "storybook-to-ghpages",

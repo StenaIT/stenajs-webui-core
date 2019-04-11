@@ -1,6 +1,6 @@
 import * as React from 'react';
+import { useCallback, useMemo, useState } from 'react';
 import { RevertableValue, useRevertableValue } from './UseRevertableValue';
-const { useCallback, useMemo, useState } = React;
 
 export type AllowedInputType = 'all' | 'numeric' | 'alphanumeric' | 'letters';
 

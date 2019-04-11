@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import * as React from 'react';
+import { useCallback } from 'react';
 import { compose, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types';
 import { RequiredInputComponentProps } from '../../../RequiredComponentProps';
@@ -11,8 +12,6 @@ import {
 import { Icon } from '../../icon';
 import { ValueOnChangeProps } from '../types';
 import { SwitchTheme } from './SwitchTheme';
-
-const { useCallback } = React;
 
 export interface SwitchProps
   extends RequiredInputComponentProps<HTMLDivElement, HTMLInputElement>,

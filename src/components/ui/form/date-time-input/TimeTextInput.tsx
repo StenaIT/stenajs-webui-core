@@ -1,12 +1,12 @@
 import { faClock } from '@fortawesome/free-regular-svg-icons/faClock';
 import * as React from 'react';
+import { useCallback, useState } from 'react';
 import { formatTimeString, validUserInput } from '../../../../util/time';
 import { useTheme } from '../../../theme/UseThemeHook';
 import {
   DefaultTextInput,
   DefaultTextInputProps,
 } from '../text-input/DefaultTextInput';
-const { useCallback, useState } = React;
 
 interface TimeTextInputProps extends DefaultTextInputProps {
   /** Show placeholder when true */

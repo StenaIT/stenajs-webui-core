@@ -9,6 +9,7 @@ it('works', () => {
 });
 // import { shallow } from 'enzyme';
 // import * as React from 'react';
+// import { ReactElement } from 'react';
 // import * as Popper from 'react-popper';
 // import { ReferenceChildrenProps } from 'react-popper';
 // import { EnhancedPopper } from '../EnhancedPopper';
