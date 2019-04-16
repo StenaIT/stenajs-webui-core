@@ -3,6 +3,7 @@ import styled from '@emotion/styled';
 import {
   alignItems,
   AlignItemsProps,
+  bgColor,
   BgColorProps,
   DisplayProps,
   flex,
@@ -54,7 +55,7 @@ export interface BoxProps extends StyledSystemProps {
 const FlexBox = styled.div<FlexBoxProps>`
   display: ${props => props.display || 'flex'};
   ${alignItems}
-  background-color: #fafafa;
+  ${bgColor}
   ${flex}
   flex-direction: ${props =>
     (props.row && 'row') || props.flexDirection || 'column'}
