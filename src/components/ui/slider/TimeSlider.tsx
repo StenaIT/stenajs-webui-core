@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { ComponentClass } from 'react';
 import { compose, withHandlers, withProps } from 'recompose';
 import { createSlider, SliderProps } from './Slider';
 import {
@@ -8,7 +7,7 @@ import {
   getValue,
 } from './sliderUtils';
 
-export declare type __C_TIME_SLIDER = ComponentClass<{}>;
+export declare type __C_TIME_SLIDER = React.ComponentClass<{}>;
 
 export interface Marks {
   [key: number]:

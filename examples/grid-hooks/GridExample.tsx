@@ -7,7 +7,11 @@ import { Row } from '../../src/components/ui/layout/Row';
 import { Spacing } from '../../src/components/ui/layout/Spacing';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
 import { useGridCell } from '../../src/features/grid-hooks/hooks/UseGridCell';
-import { createIndexArray, createRows, FocusedBox } from './util/GridHooksExampleUtils';
+import {
+  createIndexArray,
+  createRows,
+  FocusedBox,
+} from './util/GridHooksExampleUtils';
 
 export const list10 = createIndexArray(10);
 

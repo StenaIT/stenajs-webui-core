@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import * as React from 'react';
-import { ChangeEvent, useCallback } from 'react';
+import { useCallback } from 'react';
 import { compose, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types';
 import { RequiredInputComponentProps } from '../../../RequiredComponentProps';
@@ -91,7 +91,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
   ...rest
 }) => {
   const handleInputChange = useCallback(
-    (e: ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!disabled) {
         onChange(e.target.checked);
       }

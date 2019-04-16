@@ -25,7 +25,6 @@ import {
 import { ThemeMetrics } from '../../../themes/theme-types/ThemeMetrics';
 import { Omit } from '../../../types/Omit';
 import { useTheme } from '../../theme/UseThemeHook';
-import { CSSProperties } from 'react';
 
 // tslint:disable:no-shadowed-variable
 
@@ -51,9 +50,8 @@ export interface BoxProps extends StyledSystemProps {
   row?: boolean;
   spacing?: boolean | number;
   indent?: boolean | number;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
 }
-
 const FlexBox = styled.div<FlexBoxProps>`
   display: ${props => props.display || 'flex'};
   ${alignItems}

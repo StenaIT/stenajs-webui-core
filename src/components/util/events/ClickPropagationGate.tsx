@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { MouseEventHandler } from 'react';
 
 export interface ClickPropagationGateProps {
   disabled?: boolean;
@@ -8,7 +7,7 @@ export interface ClickPropagationGateProps {
 export class ClickPropagationGate extends React.Component<
   ClickPropagationGateProps
 > {
-  onClick: MouseEventHandler<HTMLDivElement> = e => {
+  onClick: React.MouseEventHandler<HTMLDivElement> = e => {
     e.stopPropagation();
     e.preventDefault();
   };
