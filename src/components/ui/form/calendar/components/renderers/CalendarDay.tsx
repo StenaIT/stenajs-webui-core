@@ -2,8 +2,9 @@ import * as React from 'react';
 import { Clickable } from '../../../../interaction';
 import { Column } from '../../../../layout';
 import { DefaultText } from '../../../../text';
+import { DayState, DayStateHighlight } from '../../types/CalendarTypes';
 import { dayHighlightSelect } from '../../util/StateHelper';
-import { CalendarDayProps, DayState, DayStateHighlight } from '../Calendar';
+import { CalendarDayProps } from '../../types/CalendarTypes';
 
 export const CalendarDay = <T extends {}>({
   day,

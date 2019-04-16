@@ -5,6 +5,10 @@ import { addDays } from 'date-fns';
 import * as React from 'react';
 import { UseTheme } from '../../../src/components/theme';
 import {
+  defaultButtonTheme,
+  defaultStandardButtonTheme,
+} from '../../../src/components/ui/buttons';
+import {
   DateRangeCalendar,
   DateRangeFocusedInput,
   extranetCalendarTheme,
@@ -143,6 +147,14 @@ export const addDateRangeCalendarStories = () => {
         <UseTheme
           theme={{
             components: {
+              Button: {
+                ...defaultButtonTheme,
+                bgColor: '#2A7EC5',
+              },
+              StandardButton: {
+                ...defaultStandardButtonTheme,
+                height: '26px',
+              },
               Calendar: extranetCalendarTheme,
             },
           }}

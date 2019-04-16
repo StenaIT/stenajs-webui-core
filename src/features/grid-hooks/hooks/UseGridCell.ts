@@ -6,7 +6,6 @@ import {
   UseEditableCellOptions,
 } from './UseEditableCell';
 import {
-  focusOnCell,
   GridNavigationRequiredProps,
   useGridNavigation,
   UseGridNavigationOptions,
@@ -34,6 +33,10 @@ export interface UseGridCellResult<TValue> {
    * Props that must be passed to the cell DOM element which can be focused.
    */
   requiredProps: GridCellRequiredProps;
+  /**
+   * Opens the editor. invokes onStartEdit if provided.
+   */
+  startEditing: () => void;
   /**
    * Closes the editor and invokes onChange with the editor value entered by user.
    */
@@ -85,38 +88,36 @@ export const useGridCell = <TValue>(
     [options.rowIndex, options.colIndex],
   );
 
+  const startEditing = useCallback(
+    () => {
+      edit.startEditing();
+      nav.focusOnCell(tableId, cellCoordinates);
+    },
+    [edit, nav, tableId, cellCoordinates],
+  );
+
   const stopEditing = useCallback(
     () => {
-      edit.setIsEditing(false);
-      focusOnCell(tableId, cellCoordinates);
-      if (options.onChange) {
-        options.onChange(edit.revertableValue.value);
-      }
+      edit.stopEditing();
+      nav.focusOnCell(tableId, cellCoordinates);
     },
-    [
-      edit.setIsEditing,
-      edit.revertableValue.value,
-      tableId,
-      options.onChange,
-      cellCoordinates,
-    ],
+    [edit, nav, tableId, cellCoordinates],
   );
 
   const stopEditingAndRevert = useCallback(
     () => {
-      edit.revertableValue.revert();
-      edit.setIsEditing(false);
-      focusOnCell(tableId, cellCoordinates);
+      edit.stopEditingAndRevert();
+      nav.focusOnCell(tableId, cellCoordinates);
     },
-    [edit.setIsEditing, edit.revertableValue.revert, tableId, cellCoordinates],
+    [edit, nav, tableId, cellCoordinates],
   );
 
   const stopEditingAndMove = useCallback(
     (direction: MoveDirection) => {
-      stopEditing();
+      edit.stopEditing();
       nav.moveHandler(direction);
     },
-    [stopEditing, nav.moveHandler],
+    [edit, nav],
   );
 
   const onKeyDown = useCallback<KeyboardEventHandler>(
@@ -128,7 +129,7 @@ export const useGridCell = <TValue>(
         }
       }
     },
-    [nav.requiredProps.onKeyDown, edit.onKeyDown, edit.isEditing],
+    [edit, nav.requiredProps],
   );
 
   return {
@@ -142,6 +143,7 @@ export const useGridCell = <TValue>(
       onKeyDown,
       onDoubleClick: edit.onDoubleClick,
     },
+    startEditing,
     stopEditing,
     stopEditingAndRevert,
     stopEditingAndMove,

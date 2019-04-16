@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { CSSProperties, ReactNode } from 'react';
 
 export type JustifyContentValue =
   | 'flex-start'
@@ -27,9 +26,9 @@ export interface FlexBaseCommonProps {
   border?: string;
   className?: string;
   hidden?: boolean;
-  style?: CSSProperties;
+  style?: React.CSSProperties;
   tabIndex?: number;
-  children?: ReactNode;
+  children?: React.ReactNode;
   id?: string;
 }
 

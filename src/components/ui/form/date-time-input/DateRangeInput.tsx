@@ -1,4 +1,3 @@
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { format } from 'date-fns';
 import * as React from 'react';
 import {
@@ -9,7 +8,6 @@ import {
   withState,
 } from 'recompose';
 import { DateFormats } from '../../../../util/date/DateFormats';
-import { addIcons } from '../../../icon-library/IconLibrary';
 import { withTheme, WithThemeProps } from '../../../util/enhancers';
 import { Background } from '../../colors';
 import { Border } from '../../decorations';
@@ -24,8 +22,6 @@ import {
   OnChangePropsDateRangeSelection,
 } from '../calendar/features/DateRangeSelection';
 import { DefaultTextInput } from '../text-input';
-
-addIcons(faCalendarAlt);
 
 export interface DateRangeInputProps extends OnChangePropsDateRangeSelection {
   /** The current date range value */

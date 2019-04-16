@@ -1,7 +1,6 @@
+import styled from '@emotion/styled';
 import { IconProp } from '@fortawesome/fontawesome';
-import { css } from 'emotion';
 import * as React from 'react';
-import { ComponentClass, ReactNode } from 'react';
 import {
   compose,
   setDisplayName,
@@ -21,16 +20,16 @@ import { Row, Space } from '../../layout';
 import { DefaultTextInputTheme } from './DefaultTextInputTheme';
 import { SimpleTextInput, SimpleTextInputProps } from './SimpleTextInput';
 
-export type __C_DEFAULT_TEXT_INPUT_12491142 = ComponentClass<{}>;
+export type __C_DEFAULT_TEXT_INPUT_12491142 = React.ComponentClass<{}>;
 
 // TODO Move to theme.
 
-const borderClass = css`
+const StyledBorder = styled(Border)`
   display: inline-block;
   overflow: hidden;
 `;
 
-const inputClass = css`
+const StyledSimpleTextInput = styled(SimpleTextInput)`
   border: 0;
   :focus {
     outline: 0;
@@ -41,9 +40,9 @@ export interface DefaultTextInputProps
   extends SimpleTextInputProps,
     ComponentThemeProps<'DefaultTextInput'> {
   /** React node to put to the left. Left icon is ignored if this is set. */
-  contentLeft?: ReactNode;
+  contentLeft?: React.ReactNode;
   /** React node to put to the right. Right icon is ignored if this is set. */
-  contentRight?: ReactNode;
+  contentRight?: React.ReactNode;
   /** If true, there will be no padding between contentLeft/contentRight and the border. */
   disableContentPadding?: boolean;
   /** If true, there will be no padding between contentLeft and the border. */
@@ -143,8 +142,7 @@ const DefaultTextInputComponent = ({
   disabled,
   ...inputProps
 }: InnerProps) => (
-  <Border
-    className={borderClass}
+  <StyledBorder
     borderRadius={theme.borderRadius}
     color={
       forceFocusHighlight || focused
@@ -153,6 +151,7 @@ const DefaultTextInputComponent = ({
     }
     borderStyle={theme.borderStyle}
     width={theme.borderWidth}
+    style={{ width: inputProps.width || '100%' }}
   >
     <Background
       color={
@@ -160,46 +159,51 @@ const DefaultTextInputComponent = ({
           ? theme.disabledBackgroundColor
           : backgroundColor || theme.backgroundColor
       }
+      style={{ width: inputProps.width || '100%' }}
     >
-      <Row alignItems={'center'}>
+      <Row alignItems={'center'} style={{ width: inputProps.width || '100%' }}>
         <TextInputIcon
           content={contentLeft}
-          icon={iconLeft}
-          iconSize={iconSizeLeft}
-          theme={theme}
-          iconColor={iconColorLeft}
-          spaceOnLeft
           disableContentPadding={disableContentPadding}
           disableContentPaddingLeft={disableContentPaddingLeft}
           disableContentPaddingRight={disableContentPaddingRight}
+          icon={iconLeft}
+          iconColor={iconColorLeft}
+          iconSize={iconSizeLeft}
+          spaceOnLeft
+          theme={theme}
         />
-        <SimpleTextInput
-          {...inputProps}
-          disabled={disabled}
-          textColor={textColor || theme.textColor}
-          backgroundColor={backgroundColor || theme.backgroundColor}
-          style={{
-            fontSize: theme.fontSize,
-            height: theme.height,
-            paddingLeft: theme.paddingLeft,
-            paddingRight: theme.paddingRight,
-          }}
-          className={inputClass}
-        />
+        <div style={{ width: '100%' }}>
+          <StyledSimpleTextInput
+            {...inputProps}
+            backgroundColor={backgroundColor || theme.backgroundColor}
+            disabled={disabled}
+            fontSize={theme.fontSize}
+            height={theme.height}
+            style={{
+              paddingLeft: theme.paddingLeft,
+              paddingRight: theme.paddingRight,
+              boxSizing: 'border-box',
+              ...inputProps.style,
+            }}
+            textColor={textColor || theme.textColor}
+            width={'100%'}
+          />
+        </div>
         <TextInputIcon
           content={contentRight}
-          icon={iconRight}
-          iconSize={iconSizeRight}
-          theme={theme}
-          iconColor={iconColorRight}
-          spaceOnRight
           disableContentPadding={disableContentPadding}
           disableContentPaddingLeft={disableContentPaddingLeft}
           disableContentPaddingRight={disableContentPaddingRight}
+          icon={iconRight}
+          iconColor={iconColorRight}
+          iconSize={iconSizeRight}
+          spaceOnRight
+          theme={theme}
         />
       </Row>
     </Background>
-  </Border>
+  </StyledBorder>
 );
 
 interface FocusStateProps {

@@ -2,7 +2,6 @@
 
 export * from './box';
 export * from './buttons';
-export * from './card';
 export * from './colors';
 export * from './decorations';
 export * from './drawer';

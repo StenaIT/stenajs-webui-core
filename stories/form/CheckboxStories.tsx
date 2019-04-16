@@ -1,4 +1,5 @@
 import { Store, withState } from '@dump247/storybook-state';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
@@ -64,8 +65,8 @@ export const addCheckboxStories = () => {
               borderColor: 'red',
               iconColor: 'white',
             },
-            checkIcon: 'coffee',
-            borderRadius: 2,
+            checkIcon: faCoffee,
+            borderRadius: '2px',
           }}
         />
       )),

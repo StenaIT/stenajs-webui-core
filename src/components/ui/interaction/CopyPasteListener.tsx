@@ -1,6 +1,4 @@
-import { HTMLAttributes } from 'react';
 import * as React from 'react';
-import { ClipboardEventHandler } from 'react';
 import {
   ComponentEnhancer,
   compose,
@@ -22,13 +20,13 @@ export interface CopyPasteListenerProps {
 }
 
 export interface CopyPasteListenerHandler {
-  onPasteHandler: ClipboardEventHandler<HTMLDivElement>;
-  onCopyHandler: ClipboardEventHandler<HTMLDivElement>;
+  onPasteHandler: React.ClipboardEventHandler<HTMLDivElement>;
+  onCopyHandler: React.ClipboardEventHandler<HTMLDivElement>;
 }
 
 export interface InnerOnCopyPasteProp {
-  onPaste?: ClipboardEventHandler<HTMLDivElement>;
-  onCopy?: ClipboardEventHandler<HTMLDivElement>;
+  onPaste?: React.ClipboardEventHandler<HTMLDivElement>;
+  onCopy?: React.ClipboardEventHandler<HTMLDivElement>;
 }
 
 const withPasteHandler = withHandlers<
@@ -66,7 +64,7 @@ const withOnPasteProp = withProps<
 const omitProps = (keys: Array<string>) => mapProps(props => omit(props, keys));
 
 export const withCopyPasteListener = <
-  ChildComponentProps extends Omit<HTMLAttributes<{}>, 'css'>
+  ChildComponentProps extends Omit<React.HTMLAttributes<{}>, 'css'>
 >() =>
   compose<
     InnerOnCopyPasteProp,
@@ -78,7 +76,7 @@ export const withCopyPasteListener = <
   );
 
 export const withDivCopyPasteListener = withCopyPasteListener<
-  Omit<HTMLAttributes<HTMLDivElement>, 'css'>
+  Omit<React.HTMLAttributes<HTMLDivElement>, 'css'>
 >();
 
 export const CopyPasteListener = withCopyPasteListener()(

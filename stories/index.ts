@@ -1,11 +1,10 @@
 import { addBoxStories } from './box';
 import { addButtonsStories } from './buttons';
-import { addCardStories } from './card/CardStories';
 import { addColorsStories } from './colors';
 import { addDecorationsStories } from './decorations';
 import { addDrawerStories } from './drawer';
 import { addFormStories } from './form';
-import './initFontAwesome';
+import { addIconStories } from './icon/IconStories';
 import { addInteractionStories } from './interaction';
 import { addLabelStories } from './label/LabelStories';
 import { addLayoutStories } from './layout';
@@ -18,12 +17,12 @@ import { addTextStories } from './text';
 
 addBoxStories();
 addButtonsStories();
-addCardStories();
 addColorsStories();
 addDecorationsStories();
 addDrawerStories();
 addFormStories();
 addGridHooksStories();
+addIconStories();
 addInteractionStories();
 addLabelStories();
 addLayoutStories();

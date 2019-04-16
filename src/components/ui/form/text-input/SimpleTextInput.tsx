@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import * as React from 'react';
 import {
   ChangeEvent,
@@ -6,10 +7,8 @@ import {
   KeyboardEvent,
   KeyboardEventHandler,
 } from 'react';
-import { css } from 'react-emotion';
 import { compose } from 'recompose';
 import { withTheme, WithThemeProps } from '../../../util/enhancers/WithTheme';
-import { InputType } from './InputType';
 
 // tslint:disable:no-any
 
@@ -39,7 +38,7 @@ export interface SimpleTextInputProps {
   /** If true, cursor will move to the end of the entered text on mount. */
   moveCursorToEndOnMount?: boolean;
   /** Type of input */
-  inputType?: InputType;
+  inputType?: string;
   fontSize?: string;
   maxLength?: number;
   size?: number;
@@ -61,6 +60,58 @@ export interface SimpleTextInputProps {
 export interface SimpleTextInputState {
   wasCancelled: boolean;
 }
+
+const StyledInput = styled('input')<
+  Pick<
+    SimpleTextInputProps,
+    | 'backgroundColor'
+    | 'fontSize'
+    | 'height'
+    | 'placeholderColor'
+    | 'textColor'
+    | 'width'
+  > &
+    Pick<WithThemeProps, 'theme'> & { outerStyle?: CSSProperties }
+>(
+  ({
+    backgroundColor,
+    fontSize,
+    height,
+    outerStyle,
+    placeholderColor,
+    textColor,
+    theme,
+    width,
+  }) => ({
+    '&::placeholder': {
+      color:
+        placeholderColor || theme.components.SimpleTextInput.placeholderColor,
+    },
+    '&::-webkit-outer-spin-button': {
+      webkitAppearance: 'none',
+      margin: 0,
+    },
+    '&::-webkit-inner-spin-button': {
+      webkitAppearance: 'none',
+      margin: 0,
+    },
+    backgroundColor:
+      backgroundColor || theme.components.SimpleTextInput.backgroundColor,
+    color: textColor || theme.components.SimpleTextInput.textColor,
+    '&:disabled': {
+      backgroundColor: `${
+        theme.components.SimpleTextInput.disabledBackgroundColor
+      }`,
+      color: `${theme.components.SimpleTextInput.disabledTextColor}`,
+    },
+    height: height || theme.components.SimpleTextInput.height,
+    mozAppearance: 'textfield',
+    width: width || '100%',
+    fontSize: fontSize || theme.components.SimpleTextInput.fontSize,
+    fontFamily: theme.components.SimpleTextInput.fontFamily,
+    ...outerStyle,
+  }),
+);
 
 class SimpleTextInputComponent extends React.Component<
   SimpleTextInputProps & WithThemeProps,
@@ -197,41 +248,16 @@ class SimpleTextInputComponent extends React.Component<
     } = this.props;
 
     return (
-      <input
-        style={{
-          width,
-          height: height || theme.components.SimpleTextInput.height,
-          fontSize: fontSize || theme.components.SimpleTextInput.fontSize,
-          backgroundColor:
-            backgroundColor || theme.components.SimpleTextInput.backgroundColor,
-          fontFamily: theme.components.SimpleTextInput.fontFamily,
-          color: textColor || theme.components.SimpleTextInput.textColor,
-          ...style,
-        }}
-        className={`${className || ''} ${css({
-          '-moz-appearance': 'textfield',
-          '&::placeholder': {
-            color:
-              placeholderColor ||
-              theme.components.SimpleTextInput.placeholderColor,
-          },
-          '&::-webkit-outer-spin-button': {
-            '-webkit-appearance': 'none',
-            margin: 0,
-          },
-          '&::-webkit-inner-spin-button': {
-            '-webkit-appearance': 'none',
-            margin: 0,
-          },
-          '&:disabled': {
-            backgroundColor: `${
-              theme.components.SimpleTextInput.disabledBackgroundColor
-            } !important`,
-            color: `${
-              theme.components.SimpleTextInput.disabledTextColor
-            } !important`,
-          },
-        })}`}
+      <StyledInput
+        theme={theme}
+        placeholderColor={placeholderColor}
+        backgroundColor={backgroundColor}
+        textColor={textColor}
+        width={width}
+        height={height}
+        fontSize={fontSize}
+        outerStyle={style}
+        className={className}
         type={inputType}
         ref={this.textInput}
         onKeyDown={this.onKeyDown}

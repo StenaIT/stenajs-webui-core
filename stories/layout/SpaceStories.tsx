@@ -6,10 +6,16 @@ import { Column } from '../../src/components/ui/layout/Column';
 import { Row } from '../../src/components/ui/layout/Row';
 import { Space } from '../../src/components/ui/layout/Space';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
+import { stenaWebUiCoreStyles } from '../../src/util/theme/stylesheet';
 
 export const addSpaceStories = () => {
   storiesOf('Layout/Space', module)
-    .addDecorator(withInfo({ propTables: false }))
+    .addDecorator(
+      withInfo({
+        styles: stenaWebUiCoreStyles,
+        inline: true,
+      }),
+    )
     .add('standard', () => (
       <div style={{ display: 'table' }}>
         <Row>

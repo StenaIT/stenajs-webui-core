@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { CSSProperties } from 'react';
 import { compose, setDisplayName } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers/WithTheme';
 
@@ -37,7 +36,7 @@ export interface BorderProps {
   /** The bottom right border radius of the border. */
   borderBottomRightRadius?: string;
   /** Custom style of the div that has the border. */
-  style?: CSSProperties;
+  style?: React.CSSProperties;
   /** Add border to the top. */
   top?: boolean;
   /** Add border to the bottom. */

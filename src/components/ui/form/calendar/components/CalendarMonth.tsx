@@ -1,8 +1,7 @@
 import * as React from 'react';
-import { Column, Row, Space } from '../../../layout';
+import { Column, Row } from '../../../layout';
 import { DefaultText } from '../../../text/DefaultText';
 import { SectionHeaderText } from '../../../text/SectionHeaderText';
-import { DayData, MonthData, WeekData } from '../util/CalendarDataFactory';
 import {
   CalendarDayProps,
   CalendarOnClicks,
@@ -11,7 +10,8 @@ import {
   DayStateHighlight,
   ExtraDayContentProps,
   Renderers,
-} from './Calendar';
+} from '../types/CalendarTypes';
+import { DayData, MonthData, WeekData } from '../util/CalendarDataFactory';
 import { CalendarTheme } from './CalendarTheme';
 import { CalendarWeek } from './CalendarWeek';
 import { WeekDayCell } from './renderers/WeekDayCell';
@@ -50,20 +50,29 @@ export class CalendarMonth<T> extends React.Component<CalendarMonthProps<T>> {
     return (
       <>
         <Column alignItems={'center'}>
-          <Row
-            justifyContent={'space-between'}
-            alignItems={'center'}
-            width={'100%'}
-          >
-            <div>{headerLeftContent}</div>
-            <SectionHeaderText color={theme.CalendarMonth.headerTextColor}>
-              {month.name} {month.year}
-            </SectionHeaderText>
-            <div>{headerRightContent}</div>
-          </Row>
-          <Space />
           <table style={{ borderSpacing: 0, borderCollapse: 'collapse' }}>
             <tbody>
+              <tr>
+                <td>
+                  <Column justifyContent={'center'} alignItems={'center'}>
+                    {headerLeftContent}
+                  </Column>
+                </td>
+                <td colSpan={6}>
+                  <Row justifyContent={'center'} alignItems={'center'}>
+                    <SectionHeaderText
+                      color={theme.CalendarMonth.headerTextColor}
+                    >
+                      {month.name} {month.year}
+                    </SectionHeaderText>
+                  </Row>
+                </td>
+                <td>
+                  <Column justifyContent={'center'} alignItems={'center'}>
+                    {headerRightContent}
+                  </Column>
+                </td>
+              </tr>
               <tr>
                 <td>
                   <Column

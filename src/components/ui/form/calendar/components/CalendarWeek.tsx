@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { MonthData, WeekData } from '../util/CalendarDataFactory';
 import {
-  CalendarDayProps,
   CalendarUserWeekData,
   DayState,
   DayStateHighlight,
@@ -9,7 +7,9 @@ import {
   OnClickDay,
   OnClickWeek,
   RenderWeekNumber,
-} from './Calendar';
+} from '../types/CalendarTypes';
+import { MonthData, WeekData } from '../util/CalendarDataFactory';
+import { CalendarDayProps } from '../types/CalendarTypes';
 import { CalendarTheme } from './CalendarTheme';
 import { WeekNumberCell } from './renderers/WeekNumberCell';
 

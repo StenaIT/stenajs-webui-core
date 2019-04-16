@@ -1,24 +1,19 @@
-import {
-  ButtonTheme,
-  FlatButtonTheme,
-  SmallButtonTheme,
-  StandardButtonTheme,
-} from '../../components/ui/buttons/index';
+import { ButtonTheme } from '../../components/ui/buttons/ButtonTheme';
+import { FlatButtonTheme } from '../../components/ui/buttons/FlatButtonTheme';
+import { SmallButtonTheme } from '../../components/ui/buttons/SmallButtonTheme';
+import { StandardButtonTheme } from '../../components/ui/buttons/StandardButtonTheme';
 import { SeparatorLineTheme } from '../../components/ui/decorations/SeparatorLineTheme';
-import { CalendarTheme } from '../../components/ui/form/calendar/components/index';
-import { SimpleCheckboxTheme } from '../../components/ui/form/checkbox/index';
-import {
-  DateInputTheme,
-  DateRangeInputTheme,
-} from '../../components/ui/form/date-time-input/index';
+import { CalendarTheme } from '../../components/ui/form/calendar/components/CalendarTheme';
+import { SimpleCheckboxTheme } from '../../components/ui/form/checkbox/SimpleCheckboxTheme';
+import { DateInputTheme } from '../../components/ui/form/date-time-input/DateInputTheme';
+import { DateRangeInputTheme } from '../../components/ui/form/date-time-input/DateRangeInputTheme';
 import { RadioButtonTheme } from '../../components/ui/form/radio/RadioButtonTheme';
-import {
-  DefaultTextInputTheme,
-  SimpleTextInputTheme,
-} from '../../components/ui/form/text-input/index';
+import { SwitchTheme } from '../../components/ui/form/switch/SwitchTheme';
+import { DefaultTextInputTheme } from '../../components/ui/form/text-input/DefaultTextInputTheme';
 import { NumericTextInputTheme } from '../../components/ui/form/text-input/NumericTextInputTheme';
-import { SliderTheme } from '../../components/ui/slider/index';
-import { TextTheme } from '../../components/ui/text/index';
+import { SimpleTextInputTheme } from '../../components/ui/form/text-input/SimpleTextInputTheme';
+import { SliderTheme } from '../../components/ui/slider/SliderTheme';
+import { TextTheme } from '../../components/ui/text/TextTheme';
 import { SelectTheme } from '../../features/select/SelectTheme';
 
 export interface ComponentThemes {
@@ -43,5 +38,6 @@ export interface ComponentThemes {
   SmallText: TextTheme;
   SmallerText: TextTheme;
   StandardButton: StandardButtonTheme;
+  Switch: SwitchTheme;
   TinyText: TextTheme;
 }

@@ -13,3 +13,4 @@ wallaby.js
 yarn.lock
 yarn-error.log
 .idea
+storybook-static

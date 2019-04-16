@@ -16,14 +16,18 @@ describe('Clickable', () => {
         const wrapper = shallow(
           <ClickableComponent {...props} opacityOnHover />,
         );
-        expect(wrapper.find('div').prop('className')).toBeDefined(); // TODO
+        expect(wrapper.find('HoverStyledDiv').prop('opacityOnHover')).toBe(
+          true,
+        );
       });
     });
 
     describe('when opacityOnHover is false', () => {
       it('does not set className', () => {
         const wrapper = shallow(<ClickableComponent {...props} />);
-        expect(wrapper.find('div').prop('className')).toBe(undefined);
+        expect(wrapper.find('HoverStyledDiv').prop('opacityOnHover')).toBe(
+          undefined,
+        );
       });
     });
   });
@@ -34,7 +38,9 @@ describe('Clickable', () => {
         const wrapper = shallow(
           <ClickableComponent {...props} mouseIsDown={false} />,
         );
-        expect(wrapper.find('div').prop('style')!.opacity).toBe(undefined);
+        expect(wrapper.find('HoverStyledDiv').prop('style')!.opacity).toBe(
+          undefined,
+        );
       });
     });
     describe('when mouseIsDown', () => {
@@ -43,7 +49,9 @@ describe('Clickable', () => {
           const wrapper = shallow(
             <ClickableComponent {...props} mouseIsDown={true} />,
           );
-          expect(wrapper.find('div').prop('style')!.opacity).toBe(0.5);
+          expect(wrapper.find('HoverStyledDiv').prop('style')!.opacity).toBe(
+            0.5,
+          );
         });
       });
       describe('and disableOpacityOnClick is true', () => {
@@ -55,7 +63,9 @@ describe('Clickable', () => {
               disableOpacityOnClick
             />,
           );
-          expect(wrapper.find('div').prop('style')!.opacity).toBe(undefined);
+          expect(wrapper.find('HoverStyledDiv').prop('style')!.opacity).toBe(
+            undefined,
+          );
         });
       });
     });
@@ -66,7 +76,9 @@ describe('Clickable', () => {
         const wrapper = shallow(
           <ClickableComponent {...props} onClick={jest.fn()} />,
         );
-        expect(wrapper.find('div').prop('style')!.cursor).toBe('pointer');
+        expect(wrapper.find('HoverStyledDiv').prop('style')!.cursor).toBe(
+          'pointer',
+        );
       });
     });
 
@@ -75,7 +87,9 @@ describe('Clickable', () => {
         const wrapper = shallow(
           <ClickableComponent {...props} onDblClick={jest.fn()} />,
         );
-        expect(wrapper.find('div').prop('style')!.cursor).toBe('pointer');
+        expect(wrapper.find('HoverStyledDiv').prop('style')!.cursor).toBe(
+          'pointer',
+        );
       });
     });
 
@@ -89,7 +103,9 @@ describe('Clickable', () => {
             disablePointer
           />,
         );
-        expect(wrapper.find('div').prop('style')!.cursor).toBe(undefined);
+        expect(wrapper.find('HoverStyledDiv').prop('style')!.cursor).toBe(
+          undefined,
+        );
       });
     });
   });
@@ -105,7 +121,7 @@ describe('Clickable', () => {
             onMouseDown={onMouseDown}
           />,
         );
-        wrapper.find('div').simulate('mouseDown');
+        wrapper.find('HoverStyledDiv').simulate('mouseDown');
         expect(onMouseDown).toHaveBeenCalled();
       });
 
@@ -118,7 +134,7 @@ describe('Clickable', () => {
             onMouseUp={onMouseUp}
           />,
         );
-        wrapper.find('div').simulate('mouseUp');
+        wrapper.find('HoverStyledDiv').simulate('mouseUp');
         expect(onMouseUp).toHaveBeenCalled();
       });
 
@@ -131,7 +147,7 @@ describe('Clickable', () => {
             onMouseOut={onMouseOut}
           />,
         );
-        wrapper.find('div').simulate('mouseOut');
+        wrapper.find('HoverStyledDiv').simulate('mouseOut');
         expect(onMouseOut).toHaveBeenCalled();
       });
     });
@@ -147,7 +163,7 @@ describe('Clickable', () => {
               onMouseDown={onMouseDown}
             />,
           );
-          wrapper.find('div').simulate('mouseDown');
+          wrapper.find('HoverStyledDiv').simulate('mouseDown');
           expect(onMouseDown).toHaveBeenCalled();
         });
 
@@ -160,7 +176,7 @@ describe('Clickable', () => {
               onMouseUp={onMouseUp}
             />,
           );
-          wrapper.find('div').simulate('mouseUp');
+          wrapper.find('HoverStyledDiv').simulate('mouseUp');
           expect(onMouseUp).toHaveBeenCalled();
         });
 
@@ -173,7 +189,7 @@ describe('Clickable', () => {
               onMouseOut={onMouseOut}
             />,
           );
-          wrapper.find('div').simulate('mouseOut');
+          wrapper.find('HoverStyledDiv').simulate('mouseOut');
           expect(onMouseOut).toHaveBeenCalled();
         });
       });
@@ -184,7 +200,7 @@ describe('Clickable', () => {
           const wrapper = shallow(
             <ClickableComponent {...props} onMouseDown={onMouseDown} />,
           );
-          wrapper.find('div').simulate('mouseDown');
+          wrapper.find('HoverStyledDiv').simulate('mouseDown');
           expect(onMouseDown).not.toHaveBeenCalled();
         });
 
@@ -193,7 +209,7 @@ describe('Clickable', () => {
           const wrapper = shallow(
             <ClickableComponent {...props} onMouseUp={onMouseUp} />,
           );
-          wrapper.find('div').simulate('mouseUp');
+          wrapper.find('HoverStyledDiv').simulate('mouseUp');
           expect(onMouseUp).not.toHaveBeenCalled();
         });
 
@@ -202,7 +218,7 @@ describe('Clickable', () => {
           const wrapper = shallow(
             <ClickableComponent {...props} onMouseOut={onMouseOut} />,
           );
-          wrapper.find('div').simulate('mouseOut');
+          wrapper.find('HoverStyledDiv').simulate('mouseOut');
           expect(onMouseOut).not.toHaveBeenCalled();
         });
       });

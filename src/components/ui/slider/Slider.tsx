@@ -1,13 +1,12 @@
+import styled from '@emotion/styled';
 import * as React from 'react';
-import { ComponentClass } from 'react';
-import styled from 'react-emotion';
 import { ComponentEnhancer, compose, defaultProps, nest } from 'recompose';
 import { withTheme, WithThemeProps } from '../../util/enhancers';
 import { Marks } from './TimeSlider';
 
 export declare type __C_SLIDER = ComponentEnhancer<{}, {}>;
 
-const SliderWrapper: ComponentClass<WithThemeProps> = styled('div')`
+const SliderWrapper = styled.div<WithThemeProps>`
   /* Copied from rc-slider/assets/index.css , all modifications are marked "MODIFIED" */
 
   .rc-slider {
@@ -28,8 +27,7 @@ const SliderWrapper: ComponentClass<WithThemeProps> = styled('div')`
   .rc-slider-rail {
     position: absolute;
     width: 100%;
-    background-color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.railColor};
+    background-color: ${props => props.theme.components.Slider.railColor};
     height: 4px;
     border-radius: 6px;
   }
@@ -38,8 +36,7 @@ const SliderWrapper: ComponentClass<WithThemeProps> = styled('div')`
     left: 0;
     height: 4px;
     border-radius: 6px;
-    background-color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.trackColor};
+    background-color: ${props => props.theme.components.Slider.trackColor};
   }
   .rc-slider-handle {
     position: absolute;
@@ -51,28 +48,22 @@ const SliderWrapper: ComponentClass<WithThemeProps> = styled('div')`
     cursor: -webkit-grab;
     cursor: grab;
     border-radius: 50%;
-    background-color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.handleColor};
+    background-color: ${props => props.theme.components.Slider.handleColor};
     -ms-touch-action: pan-x;
     touch-action: pan-x;
   }
   .rc-slider-handle:hover {
-    border-color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.handleColor};
+    border-color: ${props => props.theme.components.Slider.handleColor};
   }
   .rc-slider-handle:active {
-    border-color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.handleColor};
-    box-shadow: 0 0 5px
-      ${(props: WithThemeProps) => props.theme.components.Slider.handleColor};
+    border-color: ${props => props.theme.components.Slider.handleColor};
+    box-shadow: 0 0 5px ${props => props.theme.components.Slider.handleColor};
     cursor: -webkit-grabbing;
     cursor: grabbing;
   }
   .rc-slider-handle:focus {
-    border-color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.handleColor};
-    box-shadow: 0 0 0 5px
-      ${(props: WithThemeProps) => props.theme.components.Slider.handleColor};
+    border-color: ${props => props.theme.components.Slider.handleColor};
+    box-shadow: 0 0 0 5px ${props => props.theme.components.Slider.handleColor};
     outline: none;
   }
   .rc-slider-mark {
@@ -88,12 +79,10 @@ const SliderWrapper: ComponentClass<WithThemeProps> = styled('div')`
     vertical-align: middle;
     text-align: center;
     cursor: pointer;
-    color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.railMarkTextColor};
+    color: ${props => props.theme.components.Slider.railMarkTextColor};
   }
   .rc-slider-mark-text-active {
-    color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.trackMarkTextColor};
+    color: ${props => props.theme.components.Slider.trackMarkTextColor};
   }
   .rc-slider-step {
     position: absolute;
@@ -107,16 +96,14 @@ const SliderWrapper: ComponentClass<WithThemeProps> = styled('div')`
     margin-left: -4px;
     width: 8px;
     height: 8px;
-    border: 2px solid
-      ${(props: WithThemeProps) => props.theme.components.Slider.railColor};
+    border: 2px solid ${props => props.theme.components.Slider.railColor};
     background-color: #fff;
     cursor: pointer;
     border-radius: 50%;
     vertical-align: middle;
   }
   .rc-slider-dot-active {
-    border-color: ${(props: WithThemeProps) =>
-      props.theme.components.Slider.trackColor};
+    border-color: ${props => props.theme.components.Slider.trackColor};
   }
 `;
 

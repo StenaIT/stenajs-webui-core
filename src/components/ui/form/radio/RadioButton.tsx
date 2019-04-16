@@ -1,3 +1,4 @@
+import { Color } from 'csstype';
 import * as React from 'react';
 import { compose, pure, setDisplayName } from 'recompose';
 import {
@@ -22,18 +23,25 @@ type InnerProps = WithOnToggleHandler &
   WithInnerComponentThemeProps<RadioButtonTheme> &
   RadioButtonProps;
 
-export const RadioButtonComponent: React.SFC<InnerProps> = ({
+export const RadioButtonComponent: React.FC<InnerProps> = ({
   disabled,
   onChange,
   onToggle,
   theme,
   value,
 }) => {
+  let iconColor: Color = theme.iconColor;
+  if (disabled) {
+    iconColor = theme.disabledIconColor;
+  } else if (!value) {
+    iconColor = theme.notCheckedColor;
+  }
+
   return (
     <Row>
       <Clickable onClick={disabled ? undefined : onToggle}>
         <Icon
-          color={disabled ? theme.disabledIconColor : theme.iconColor}
+          color={iconColor}
           name={value ? theme.checkedIcon : theme.notCheckedIcon}
           size={theme.iconSize}
         />

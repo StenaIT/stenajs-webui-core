@@ -3,18 +3,21 @@ import { storiesOf } from '@storybook/react';
 import * as React from 'react';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 import { StandardButton } from '../../src/components/ui/buttons/StandardButton';
+import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
 
 export const addStandardButtonStories = () => {
   storiesOf('Buttons/StandardButton', module)
     .addDecorator(withInfo())
-    .add('default', () => <StandardButton label={'Submit'} />)
+    .add('default', () => (
+      <StandardButton label={'Submit'} onClick={() => alert('Click')} />
+    ))
     .add('disabled', () => <StandardButton label={'Submit'} disabled />)
-    .add('with icon and no text', () => <StandardButton leftIcon={'coffee'} />)
+    .add('with icon and no text', () => <StandardButton leftIcon={faCoffee} />)
     .add('with icon left', () => (
-      <StandardButton label={'Submit'} leftIcon={'coffee'} />
+      <StandardButton label={'Submit'} leftIcon={faCoffee} />
     ))
     .add('with icon right', () => (
-      <StandardButton label={'Submit'} rightIcon={'coffee'} />
+      <StandardButton label={'Submit'} rightIcon={faCoffee} />
     ))
     .add('with borderRadius', () => (
       <StandardButton label={'Submit'} borderRadius={'10px'} />

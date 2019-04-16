@@ -1,7 +1,8 @@
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
-import Select from 'react-select';
+import Select, { components } from 'react-select';
+import { SelectComponents } from 'react-select/lib/components';
 import {
   ExampleAsyncCustomTheme,
   ExampleAsyncSelect,
@@ -13,6 +14,19 @@ import { createSelect } from '../../src/features/select/SelectFactory';
 import { selectThemeDark } from '../../src/features/select/SelectTheme';
 
 const StyledSelect = createSelect(Select);
+
+const customDropdownComponents: Partial<SelectComponents<any>> = {
+  Option: ({ children, ...optionProps }: any) => (
+    <components.Option {...optionProps}>
+      <div>{optionProps.data.label}</div>
+    </components.Option>
+  ),
+  SingleValue: ({ children, ...optionProps }: any) => (
+    <components.SingleValue {...optionProps}>
+      <div>{optionProps.data.value}</div>
+    </components.SingleValue>
+  ),
+};
 
 export const addSelectStories = () => {
   storiesOf('Form/Select', module)
@@ -165,6 +179,28 @@ export const addSelectStories = () => {
             },
           ]}
           isDisabled={true}
+        />
+      </div>
+    ))
+    .add('custom option width', () => (
+      <div style={{ width: '100px' }}>
+        <StyledSelect
+          components={customDropdownComponents}
+          options={[
+            {
+              value: 'M',
+              label: 'Mattias',
+            },
+            {
+              value: 'J',
+              label: 'Johan',
+            },
+            {
+              value: 'D',
+              label: 'Dennis the menace',
+            },
+          ]}
+          theme={{ menu: { width: 'auto', whiteSpace: 'nowrap' } }}
         />
       </div>
     ));

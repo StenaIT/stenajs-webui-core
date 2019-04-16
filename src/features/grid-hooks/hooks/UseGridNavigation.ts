@@ -36,6 +36,10 @@ export interface UseGridNavigationOptions {
    * Callback that is invoked when user navigates to new cell by keyboard.
    */
   onCellMove?: CellMoveHandler;
+  /**
+   * Callback that is invoked when user navigates but don't move to new cell by keyboard.
+   */
+  onCellNavigation?: CellNavigationHandler;
 }
 
 export interface ValidatedUseGridNavigationOptions {
@@ -46,11 +50,13 @@ export interface ValidatedUseGridNavigationOptions {
   tableId: string;
   wrap?: boolean;
   onCellMove?: CellMoveHandler;
+  onCellNavigation?: CellNavigationHandler;
 }
 
 export interface UseGridNavigationResult {
   requiredProps: GridNavigationRequiredProps;
   moveHandler: MoveHandler;
+  focusOnCell: FocusOnCellFunc;
 }
 
 /**
@@ -63,14 +69,20 @@ export interface GridNavigationRequiredProps {
 }
 
 export type CellMoveHandler = (event: OnCellMoveEvent) => void;
+export type CellNavigationHandler = (event: OnCellNavigationEvent) => void;
 
 export interface OnCellMoveEvent {
+  direction: MoveDirection;
   fromRowIndex: number;
   fromColIndex: number;
   rowDidChange: boolean;
   colDidChange: boolean;
   rowIndex: number;
   colIndex: number;
+}
+
+export interface OnCellNavigationEvent extends OnCellMoveEvent {
+  cellDidChange: boolean;
 }
 
 export const useGridNavigation = (
@@ -84,6 +96,7 @@ export const useGridNavigation = (
     tableId,
     wrap = false,
     onCellMove,
+    onCellNavigation,
   } = useGridNavigationOptionsFromContext(options);
 
   const moveHandler = useMemo(
@@ -96,8 +109,18 @@ export const useGridNavigation = (
         numCols,
         wrap,
         onCellMove,
+        onCellNavigation,
       ),
-    [tableId, rowIndex, colIndex, numRows, numCols, onCellMove],
+    [
+      tableId,
+      rowIndex,
+      colIndex,
+      numRows,
+      numCols,
+      wrap,
+      onCellMove,
+      onCellNavigation,
+    ],
   );
 
   const onKeyDown = useMemo(() => createKeyDownHandler(moveHandler), [
@@ -111,12 +134,13 @@ export const useGridNavigation = (
   ]);
 
   return {
+    focusOnCell,
+    moveHandler,
     requiredProps: {
       tabIndex: 0,
       onKeyDown,
       id,
     },
-    moveHandler,
   };
 };
 
@@ -130,6 +154,7 @@ const createMoveHandler = (
   numCols: number,
   wrap: boolean,
   onCellMove?: CellMoveHandler,
+  onCellNavigation?: CellNavigationHandler,
 ): MoveHandler => direction => {
   const pos = getNextPositionWrappedOrClamped(
     rowIndex,
@@ -146,6 +171,7 @@ const createMoveHandler = (
   if (colDidChange || rowDidChange) {
     if (onCellMove) {
       onCellMove({
+        direction,
         fromRowIndex: rowIndex,
         fromColIndex: colIndex,
         rowIndex: pos.rowIndex,
@@ -155,6 +181,19 @@ const createMoveHandler = (
       });
     }
     focusOnCell(tableId, pos);
+  }
+
+  if (onCellNavigation) {
+    onCellNavigation({
+      direction,
+      fromRowIndex: rowIndex,
+      fromColIndex: colIndex,
+      rowIndex: pos.rowIndex,
+      colIndex: pos.colIndex,
+      colDidChange,
+      rowDidChange,
+      cellDidChange: colDidChange || rowDidChange,
+    });
   }
 };
 
@@ -192,7 +231,9 @@ const createKeyDownHandler = (moveHandler: MoveHandler) => (
   }
 };
 
-export const focusOnCell = (tableId: string, pos: CellIndices) => {
+type FocusOnCellFunc = (tableId: string, pos: CellIndices) => void;
+
+export const focusOnCell: FocusOnCellFunc = (tableId, pos) => {
   const el = (document.querySelector(
     `#${createCellId(tableId, pos.rowIndex, pos.colIndex)}`,
   ) ||

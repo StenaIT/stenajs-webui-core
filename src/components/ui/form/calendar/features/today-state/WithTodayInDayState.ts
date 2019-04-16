@@ -1,5 +1,5 @@
 import { withPropsOnChange } from 'recompose';
-import { CalendarProps } from '../../components/Calendar';
+import { CalendarProps } from '../../types/CalendarTypes';
 import { addDayStateHighlights } from '../../util/StateModifier';
 
 export const withTodayInDayState = <T>() =>

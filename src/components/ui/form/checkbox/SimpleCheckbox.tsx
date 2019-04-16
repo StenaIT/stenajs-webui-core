@@ -1,23 +1,40 @@
+import styled from '@emotion/styled';
 import * as React from 'react';
-import styled from 'react-emotion';
-import { compose, pure, setDisplayName } from 'recompose';
+import { ChangeEvent, useCallback } from 'react';
+import { compose, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types/DeepPartial';
-import { withComponentTheme, WithInnerComponentThemeProps, } from '../../../util/enhancers/WithComponentTheme';
-import { withOnToggleHandler, WithOnToggleHandler, } from '../../../util/enhancers/withOnToggleHandler';
+import { RequiredInputComponentProps } from '../../../RequiredComponentProps';
+import {
+  withComponentTheme,
+  WithInnerComponentThemeProps,
+} from '../../../util/enhancers/WithComponentTheme';
 import { Icon } from '../../icon/Icon';
 import { Clickable } from '../../interaction/Clickable';
 import { Row } from '../../layout/Row';
 import { ValueOnChangeProps } from '../types';
 import { SimpleCheckboxTheme } from './SimpleCheckboxTheme';
 
-export interface SimpleCheckboxProps extends ValueOnChangeProps<boolean> {
+export interface SimpleCheckboxProps
+  extends ValueOnChangeProps<boolean>,
+    RequiredInputComponentProps<HTMLDivElement, HTMLInputElement> {
   disabled?: boolean;
   theme?: DeepPartial<SimpleCheckboxTheme>;
 }
 
 type InnerProps = SimpleCheckboxProps &
-  WithOnToggleHandler &
   WithInnerComponentThemeProps<SimpleCheckboxTheme>;
+
+const InvisibleInput = styled.input`
+  top: 0;
+  left: 0;
+  width: 100%;
+  cursor: inherit;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  padding: 0;
+  position: absolute;
+`;
 
 const Wrapper = styled('div')<{
   disabled: boolean | undefined;
@@ -41,41 +58,81 @@ const Wrapper = styled('div')<{
   overflow: hidden;
 `;
 
-export const SimpleCheckboxComponent = ({
-  theme,
+const StyledSimpleCheckboxWrapper = styled.div<Pick<InnerProps, 'theme'>>`
+  height: ${({ theme }) => theme.height};
+  position: relative;
+  width: ${({ theme }) => theme.width};
+
+  input:focus + div {
+    border-color: ${({ theme }) => theme.borderColorFocused};
+  }
+`;
+
+export const SimpleCheckboxComponent: React.FC<InnerProps> = ({
+  className,
   disabled,
-  onToggle,
+  inputRef,
+  onChange,
+  ref,
+  theme,
   value,
-}: InnerProps) => {
+}) => {
+  const onClick = useCallback(
+    () => {
+      if (onChange) {
+        onChange(!value);
+      }
+    },
+    [onChange, value],
+  );
+
+  const handleInputChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      if (!disabled) {
+        if (onChange) {
+          onChange(e.target.checked);
+        }
+      }
+    },
+    [disabled, onChange],
+  );
+
   return (
-    <Clickable onClick={disabled ? undefined : onToggle}>
-      <Wrapper disabled={disabled} theme={theme} value={value}>
-        <Row
-          justifyContent={'center'}
-          alignItems={'center'}
-          width={theme.width}
-          height={theme.height}
-        >
-          {value && (
-            <Icon
-              name={theme.checkIcon}
-              color={
-                disabled
-                  ? theme.disabledColors.iconColor
-                  : theme.colors.iconColor
-              }
-              size={theme.iconSize}
-            />
-          )}
-        </Row>
-      </Wrapper>
-    </Clickable>
+    <StyledSimpleCheckboxWrapper className={className} ref={ref} theme={theme}>
+      <Clickable onClick={disabled ? undefined : onClick}>
+        <InvisibleInput
+          disabled={disabled}
+          checked={value}
+          ref={inputRef}
+          onChange={handleInputChange}
+          type={'checkbox'}
+        />
+        <Wrapper disabled={disabled} theme={theme} value={value}>
+          <Row
+            justifyContent={'center'}
+            alignItems={'center'}
+            width={theme.width}
+            height={theme.height}
+          >
+            {value && (
+              <Icon
+                name={theme.checkIcon}
+                color={
+                  disabled
+                    ? theme.disabledColors.iconColor
+                    : theme.colors.iconColor
+                }
+                size={theme.iconSize}
+              />
+            )}
+          </Row>
+        </Wrapper>
+      </Clickable>
+    </StyledSimpleCheckboxWrapper>
   );
 };
 
 export const SimpleCheckbox = compose<InnerProps, SimpleCheckboxProps>(
   setDisplayName('SimpleCheckbox'),
-  pure,
-  withOnToggleHandler,
   withComponentTheme('SimpleCheckbox'),
 )(SimpleCheckboxComponent);

@@ -9,7 +9,7 @@ export interface SpaceProps {
   vertical?: boolean;
 }
 
-export const SpaceComponent: React.SFC<SpaceProps & WithThemeProps> = ({
+export const SpaceComponent: React.FC<SpaceProps & WithThemeProps> = ({
   children,
   half = false,
   horizontal,

@@ -1,3 +1,4 @@
+import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
@@ -10,10 +11,10 @@ export const addSmallButtonStories = () => {
     .add('default', () => <SmallButton label={'Submit'} />)
     .add('disabled', () => <SmallButton label={'Submit'} disabled />)
     .add('with icon left', () => (
-      <SmallButton label={'Submit'} leftIcon={'coffee'} />
+      <SmallButton label={'Submit'} leftIcon={faCoffee} />
     ))
     .add('with icon right', () => (
-      <SmallButton label={'Submit'} rightIcon={'coffee'} />
+      <SmallButton label={'Submit'} rightIcon={faCoffee} />
     ))
     .add('with borderRadius', () => (
       <SmallButton label={'Submit'} borderRadius={'10px'} />
