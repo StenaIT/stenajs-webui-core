@@ -1,5 +1,6 @@
 import * as React from 'react';
 import styled from '@emotion/styled';
+import { defaultColors } from '../../../themes/default-values';
 
 export interface ProgressProps {
   /** Spinner track color */
@@ -45,23 +46,22 @@ export interface ProgressSpinnerProps {
 
 const Wrapper = styled('div')<{ size: number; margin?: number }>`
   height: ${({ size }) => size}px;
-  margin: ${({ margin }) => margin || 0} auto;
   box-sizing: border-box;
-  padding: 2px;
   position: relative;
   width: ${({ size }) => size}px;
 `;
 const ProgressSpinner = styled('div')<ProgressSpinnerProps>`
   animation-fill-mode: both;
-  background-color: ${({ trackColor }) => trackColor || '#fff'};
+  background-color: ${({ trackColor }) => trackColor || defaultColors.infoBlue};
   border-radius: 100%;
-  box-sizing: border-box;
+  box-sizing: inherit;
   display: block;
   height: ${({ size }) => size || 25}px;
   margin: 0 !important;
   width: ${({ size }) => size || 25}px;
   opacity: ${({ opacity }) => opacity || 1}px;
   position: relative;
+  overflow: hidden;
   animation: rotate ${({ duration }) => duration || 2}s infinite linear;
 
   :before {
@@ -75,7 +75,8 @@ const ProgressSpinner = styled('div')<ProgressSpinnerProps>`
     border: ${({ width }) => width || 2}px solid transparent;
     border-width: ${({ size }) =>
       `${size / 2}px ${size * 0.4}px 0px ${size * 0.4}px`};
-    border-top-color: ${({ backgroundColor }) => backgroundColor || '#fff'};
+    border-top-color: ${({ backgroundColor }) =>
+      backgroundColor || defaultColors.white};
     z-index: 99999;
   }
   :after {
@@ -86,7 +87,8 @@ const ProgressSpinner = styled('div')<ProgressSpinnerProps>`
     height: ${({ size, width }) => size - width || 20}px;
     width: ${({ size, width }) => size - width || 20}px;
     border-radius: 100%;
-    background: ${({ backgroundColor }) => backgroundColor || '#fff'};
+    background: ${({ backgroundColor }) =>
+      backgroundColor || defaultColors.white};
     transform: translate(-50%, -50%);
   }
 
@@ -101,8 +103,8 @@ const ProgressSpinner = styled('div')<ProgressSpinnerProps>`
 `;
 
 export const Progress = ({
-  backgroundColor = '#fff',
-  trackColor = '#000',
+  backgroundColor = defaultColors.white,
+  trackColor = defaultColors.infoBlue,
   opacity = 1,
   size = 20,
   width,
