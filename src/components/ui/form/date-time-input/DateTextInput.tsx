@@ -14,12 +14,14 @@ import { Absolute, Relative } from '../../positioning';
 import { SingleDateCalendar, SingleDateCalendarProps } from '../calendar';
 import { DefaultTextInput, DefaultTextInputProps } from '../text-input';
 
-interface DateTextInputProps<T> extends DefaultTextInputProps {
+export type DateTextInputCalendarProps<T> = Omit<
+  SingleDateCalendarProps<T>,
+  'value' | 'onChange' | 'theme'
+>;
+
+export interface DateTextInputProps<T> extends DefaultTextInputProps {
   /** Props to be passed to Calendar, see SingleDateCalendar for sage */
-  calendarProps?: Omit<
-    SingleDateCalendarProps<T>,
-    'value' | 'onChange' | 'theme'
-  >;
+  calendarProps?: DateTextInputCalendarProps<T>;
   /** Close calendar when date is selected, @default true */
   closeOnCalendarSelectDate?: boolean;
   /** Valid date format, @default YYYY-MM-DD */
