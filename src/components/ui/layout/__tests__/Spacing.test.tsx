@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { shallow } from 'enzyme';
-import { SpacingComponent } from '../Spacing';
-import { Theme } from '../../../..';
-import { defaultTheme } from '../../../../themes/DefaultTheme';
 import { merge } from 'lodash';
+import * as React from 'react';
+import { defaultTheme } from '../../../../themes/DefaultTheme';
+import { Theme } from '../../../../themes/Theme';
+import { SpacingComponent } from '../Spacing';
 
 describe('SpacingComponent', () => {
   it('should have a div with width and height', () => {

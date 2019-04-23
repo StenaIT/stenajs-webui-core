@@ -128,9 +128,9 @@ export interface ThemeVars {
   brandImage?: string;
 }
 
-export type Color = typeof color;
-export type Background = typeof background;
-export type Typography = typeof typography;
+export type ThemeColor = typeof color;
+export type ThemeBackground = typeof background;
+export type ThemeTypography = typeof typography;
 
 export type TextSize = number | string;
 export interface Brand {
@@ -140,10 +140,10 @@ export interface Brand {
 }
 
 /* tslint:disable */
-export interface Theme {
-  color: Color;
-  background: Background;
-  typography: Typography;
+export interface StorybookTheme {
+  color: ThemeColor;
+  background: ThemeBackground;
+  typography: ThemeTypography;
 
   input: {
     border: string;

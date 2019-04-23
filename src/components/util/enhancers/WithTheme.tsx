@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { compose, setDisplayName } from 'recompose';
-import { Theme } from '../../..';
+import { Theme } from '../../../themes/Theme';
 import { GetTheme } from '../../theme/GetTheme';
 
 export interface WithThemeProps {

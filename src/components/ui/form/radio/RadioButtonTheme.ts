@@ -1,4 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faCircle } from '@fortawesome/free-regular-svg-icons/faCircle';
 import { faDotCircle } from '@fortawesome/free-solid-svg-icons/faDotCircle';
 import { Color } from 'csstype';

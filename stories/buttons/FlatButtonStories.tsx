@@ -2,11 +2,11 @@ import { faCoffee } from '@fortawesome/free-solid-svg-icons/faCoffee';
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
+import { stenaWebUiCoreStyles } from '../../.storybook/theme/stylesheet';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 import { FlatButton } from '../../src/components/ui/buttons/FlatButton';
-import { stenaWebUiCoreStyles } from '../../src/util/theme/stylesheet';
-import { DefaultText } from '../../src/components/ui/text';
 import { Indent, Spacing } from '../../src/components/ui/layout';
+import { DefaultText } from '../../src/components/ui/text';
 import { StorybookCanvasWrapper } from '../utils/StorybookCanvasWrapper';
 
 export const addFlatButtonStories = () => {

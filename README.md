@@ -56,7 +56,7 @@ For example, add `free-brands-svg-icons` like this:
 $ yarn add @fortawesome/free-brands-svg-icons
 ```
 
-The icon packs `free-regular-svg-icons` and `free-solid-svg-icons` is used by `stenajs-webui-core` and installed automatically.
+The icon packs `free-regular-svg-icons` and `free-solid-svg-icons` is used by `stenajs-webui-core`.
 
 ### 2) How to use
 

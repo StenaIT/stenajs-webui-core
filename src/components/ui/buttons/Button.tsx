@@ -1,5 +1,5 @@
 import styled from '@emotion/styled';
-import { IconProp } from '@fortawesome/fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import * as React from 'react';

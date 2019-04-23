@@ -34,7 +34,7 @@
     "skipLibCheck": true,
     "esModuleInterop": false,
     "allowSyntheticDefaultImports": true,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true
   },
   "include": [

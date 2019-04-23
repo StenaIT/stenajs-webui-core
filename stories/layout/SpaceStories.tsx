@@ -1,19 +1,21 @@
 import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import * as React from 'react';
+import { stenaWebUiCoreStyles } from '../../.storybook/theme/stylesheet';
 import { UseTheme } from '../../src/components/theme/UseTheme';
 import { Column } from '../../src/components/ui/layout/Column';
 import { Row } from '../../src/components/ui/layout/Row';
 import { Space } from '../../src/components/ui/layout/Space';
 import { DefaultText } from '../../src/components/ui/text/DefaultText';
-import {stenaWebUiCoreStyles} from '../../src/util/theme/stylesheet';
 
 export const addSpaceStories = () => {
   storiesOf('Layout/Space', module)
-    .addDecorator(withInfo({
-      styles: stenaWebUiCoreStyles,
-      inline: true,
-    }))
+    .addDecorator(
+      withInfo({
+        styles: stenaWebUiCoreStyles,
+        inline: true,
+      }),
+    )
     .add('standard', () => (
       <div style={{ display: 'table' }}>
         <Row>

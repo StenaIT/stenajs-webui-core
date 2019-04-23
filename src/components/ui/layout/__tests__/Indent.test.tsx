@@ -1,9 +1,9 @@
-import * as React from 'react';
 import { shallow } from 'enzyme';
-import { IndentComponent } from '../Indent';
-import { Theme } from '../../../..';
-import { defaultTheme } from '../../../../themes/DefaultTheme';
 import { merge } from 'lodash';
+import * as React from 'react';
+import { defaultTheme } from '../../../../themes/DefaultTheme';
+import { Theme } from '../../../../themes/Theme';
+import { IndentComponent } from '../Indent';
 
 describe('IndentComponent', () => {
   it('should have a div with width and height', () => {

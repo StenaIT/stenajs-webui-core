@@ -1,4 +1,4 @@
-import { IconProp } from '@fortawesome/fontawesome';
+import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { faCheck } from '@fortawesome/free-solid-svg-icons/faCheck';
 import { defaultColors } from '../../../../themes/default-values/DefaultColors';
 
