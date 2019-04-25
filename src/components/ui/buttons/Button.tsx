@@ -49,6 +49,12 @@ export interface ButtonProps {
   loading?: boolean;
   /** Render success check icon instead of button. */
   success?: boolean;
+  /** Render text besides check icon after success. */
+  successText?: string;
+  /** The color of success icon */
+  successIconColor?: string;
+  /** The color of success text */
+  successTextColor?: string;
 }
 
 export interface ButtonTextProps extends ComponentThemeProps<'Button'> {
@@ -117,6 +123,9 @@ class ButtonComponent extends React.PureComponent<InnerProps> {
       disabled = false,
       loading = false,
       success = false,
+      successText,
+      successIconColor,
+      successTextColor,
       iconSize = 14,
       borderRadius,
       theme,
@@ -124,11 +133,9 @@ class ButtonComponent extends React.PureComponent<InnerProps> {
     return (
       <StyledButton
         backgroundColor={
-          loading || success
-            ? 'transparent'
-            : disabled
-              ? disabledColor || theme.bgColorDisabled
-              : color || theme.bgColor
+          disabled
+            ? disabledColor || theme.bgColorDisabled
+            : color || theme.bgColor
         }
         borderRadius={borderRadius || theme.borderRadius || '0'}
         disabled={disabled}
@@ -136,61 +143,81 @@ class ButtonComponent extends React.PureComponent<InnerProps> {
         width={width || '100%'}
       >
         <Space num={theme.numSpacing} />
-        {!loading && !success && (leftIcon || left) ? (
-          <>
-            {leftIcon ? (
+        {!loading &&
+          !success &&
+          (leftIcon || left) && (
+            <>
+              {leftIcon && (
+                <FontAwesomeIcon
+                  icon={leftIcon}
+                  color={textColor || theme.textColor}
+                  style={{ fontSize: iconSize }}
+                />
+              )}
+              {left || undefined}
+              {label && <Space num={2} />}
+            </>
+          )}
+        {success &&
+          successText && (
+            <>
               <FontAwesomeIcon
-                icon={leftIcon}
-                color={textColor || theme.textColor}
-                style={{ fontSize: iconSize }}
+                icon={faCheck}
+                color={successIconColor || theme.successIconColor}
+                style={{ fontSize: iconSize, marginRight: '9px' }}
               />
-            ) : (
-              undefined
-            )}
-            {left || undefined}
-            {label && <Space num={2} />}
-          </>
-        ) : (
-          undefined
-        )}
-        {!loading && !success && label ? (
-          <ButtonText
-            color={textColor || theme.textColor}
-            fontSize={theme.fontSize}
-            fontFamily={theme.font}
-          >
-            {label}
-          </ButtonText>
-        ) : (
-          undefined
-        )}
+              <ButtonText
+                color={successTextColor || theme.successTextColor}
+                fontSize={theme.fontSize}
+                fontFamily={theme.font}
+              >
+                {successText}
+              </ButtonText>
+            </>
+          )}
+        {!loading &&
+          !success &&
+          label && (
+            <ButtonText
+              color={textColor || theme.textColor}
+              fontSize={theme.fontSize}
+              fontFamily={theme.font}
+            >
+              {label}
+            </ButtonText>
+          )}
 
-        {loading && <ProgressIndicator small />}
-        {success && (
-          <FontAwesomeIcon
-            icon={faCheck}
-            color={theme.successIconColor}
-            style={{ fontSize: 20 }}
+        {loading && (
+          <ProgressIndicator
+            small
+            color={textColor || theme.textColor}
+            backgroundColor={color || theme.bgColor}
           />
         )}
+        {success &&
+          !successText && (
+            <FontAwesomeIcon
+              icon={faCheck}
+              color={successIconColor || theme.successIconColor}
+              style={{ fontSize: 20 }}
+            />
+          )}
 
-        {!loading && !success && (rightIcon || right) ? (
-          <>
-            {label && <Space num={2} />}
-            {right}
-            {rightIcon ? (
-              <FontAwesomeIcon
-                icon={rightIcon}
-                color={textColor || theme.textColor}
-                style={{ fontSize: iconSize }}
-              />
-            ) : (
-              undefined
-            )}
-          </>
-        ) : (
-          undefined
-        )}
+        {!loading &&
+          !success &&
+          (rightIcon || right) && (
+            <>
+              {label && <Space num={2} />}
+              {right}
+              {rightIcon && (
+                <FontAwesomeIcon
+                  icon={rightIcon}
+                  color={textColor || theme.textColor}
+                  style={{ fontSize: iconSize }}
+                />
+              )}
+            </>
+          )}
         <Space num={theme.numSpacing} />
       </StyledButton>
     );

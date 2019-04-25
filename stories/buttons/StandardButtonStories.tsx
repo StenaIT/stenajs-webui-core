@@ -23,7 +23,21 @@ export const addStandardButtonStories = () => {
       <StandardButton label={'Submit'} borderRadius={'10px'} />
     ))
     .add('with loading', () => <StandardButton label={'Submit'} loading />)
-    .add('with success', () => <StandardButton label={'Submit'} success />)
+    .add('with success', () => (
+      <StandardButton label={'Submit'} success successIconColor="#FFFFFF" />
+    ))
+    .add('with success text', () => (
+      <StandardButton label={'Submit'} success successText="Saved!" />
+    ))
+    .add('with success colored text', () => (
+      <StandardButton
+        label={'Submit'}
+        success
+        successText="Saved!"
+        successIconColor="#FFFFFF"
+        successTextColor="#FFFFFF"
+      />
+    ))
     .add('with custom theme background red', () => (
       <UseTheme
         theme={{

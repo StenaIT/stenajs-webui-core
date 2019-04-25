@@ -11,6 +11,7 @@ export interface ButtonTheme {
   fontSize: string;
   borderRadius: string | undefined;
   numSpacing: number;
+  successTextColor: string;
   successIconColor: string;
 }
 
@@ -23,5 +24,6 @@ export const defaultButtonTheme: ButtonTheme = {
   fontSize: defaultFontSizes.normal,
   borderRadius: '3px',
   numSpacing: 2,
+  successTextColor: defaultColors.successGreen,
   successIconColor: defaultColors.successGreen,
 };

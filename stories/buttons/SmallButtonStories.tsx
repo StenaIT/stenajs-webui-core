@@ -20,7 +20,21 @@ export const addSmallButtonStories = () => {
       <SmallButton label={'Submit'} borderRadius={'10px'} />
     ))
     .add('with loading', () => <SmallButton label={'Submit'} loading />)
-    .add('with success', () => <SmallButton label={'Submit'} success />)
+    .add('with success', () => (
+      <SmallButton label={'Submit'} success successIconColor="#FFFFFF" />
+    ))
+    .add('with success text', () => (
+      <SmallButton label={'Submit'} success successText="Saved!" />
+    ))
+    .add('with success colored text', () => (
+      <SmallButton
+        label={'Submit'}
+        success
+        successText="Saved!"
+        successIconColor="#FFFFFF"
+        successTextColor="#FFFFFF"
+      />
+    ))
     .add('with custom theme with height=16', () => (
       <UseTheme
         theme={{
