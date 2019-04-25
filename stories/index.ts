@@ -1,4 +1,5 @@
-import { addBoxStories } from './box';
+import { addArrowBoxStories } from './arrowbox/ArrowBoxStories';
+import { addBoxStories } from './box/BoxStories';
 import { addButtonsStories } from './buttons';
 import { addColorsStories } from './colors';
 import { addDecorationsStories } from './decorations';
@@ -14,6 +15,7 @@ import { addGridHooksStories } from './table/GridHooksStories';
 import { addTableStories } from './table/TableStories';
 import { addTextStories } from './text';
 
+addArrowBoxStories();
 addBoxStories();
 addButtonsStories();
 addColorsStories();

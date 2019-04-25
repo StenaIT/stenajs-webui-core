@@ -16,7 +16,7 @@ export const actions = {
 };
 
 export const addArrowBoxStories = () => {
-  storiesOf('Box/ArrowBox', module)
+  storiesOf('ArrowBox/ArrowBox', module)
     .addDecorator(
       withInfo({
         styles: stenaWebUiCoreStyles,

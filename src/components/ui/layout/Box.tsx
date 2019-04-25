@@ -1,16 +1,16 @@
-import * as React from 'react';
 import styled from '@emotion/styled';
+import * as React from 'react';
 import {
   alignItems,
   AlignItemsProps,
-  bgColor,
-  BgColorProps,
+  background,
+  BackgroundProps,
   DisplayProps,
   flex,
+  FlexDirectionProps,
   FlexProps,
   flexWrap,
   FlexWrapProps,
-  FlexDirectionProps,
   height,
   HeightProps,
   justifyContent,
@@ -19,6 +19,9 @@ import {
   MaxHeightProps,
   maxWidth,
   MaxWidthProps,
+  minHeight,
+  MinHeightProps,
+  MinWidthProps,
   width,
   WidthProps,
 } from 'styled-system';
@@ -29,14 +32,16 @@ import { useTheme } from '../../theme/UseThemeHook';
 // tslint:disable:no-shadowed-variable
 
 type StyledSystemProps = AlignItemsProps &
-  BgColorProps &
   DisplayProps &
+  BackgroundProps &
   FlexDirectionProps &
   FlexProps &
   FlexWrapProps &
   HeightProps &
   JustifyContentProps &
+  MinHeightProps &
   MaxHeightProps &
+  MinWidthProps &
   MaxWidthProps &
   WidthProps;
 
@@ -44,9 +49,10 @@ type FlexBoxMetricsProps = {
   metrics: ThemeMetrics;
 };
 
-type FlexBoxProps = StyledSystemProps & BoxProps & FlexBoxMetricsProps;
+type FlexBoxProps = BoxProps & FlexBoxMetricsProps;
 
 export interface BoxProps extends StyledSystemProps {
+  innerRef?: React.Ref<HTMLDivElement>;
   row?: boolean;
   spacing?: boolean | number;
   indent?: boolean | number;
@@ -54,25 +60,25 @@ export interface BoxProps extends StyledSystemProps {
 }
 const FlexBox = styled.div<FlexBoxProps>`
   display: ${props => props.display || 'flex'};
-  ${alignItems}
-  ${bgColor}
-  ${flex}
+  ${alignItems};
+  ${background};
+  ${flex};
   flex-direction: ${props =>
-    (props.row && 'row') || props.flexDirection || 'column'}
-  ${flexWrap}
-  ${height}
-  ${justifyContent}
-  ${maxHeight}
-  ${maxWidth}
-  padding: ${props =>
-    numberOrZero(props.spacing) * props.metrics.spacing}px ${props =>
-  numberOrZero(props.indent) * props.metrics.indent}px;
-  ${width}
+    (props.row && 'row') || props.flexDirection || 'column'};
+  ${flexWrap};
+  ${height};
+  ${justifyContent};
+  ${minHeight};
+  ${maxHeight};
+  ${maxWidth};
+  padding: ${props => numberOrZero(props.spacing) * props.metrics.spacing}px
+    ${props => numberOrZero(props.indent) * props.metrics.indent}px;
+  ${width};
 `;
 
-export const Box: React.FC<BoxProps> = props => {
+export const Box: React.FC<BoxProps> = ({ innerRef, ...props }) => {
   const theme = useTheme();
-  return <FlexBox metrics={theme.metrics} {...props} />;
+  return <FlexBox ref={innerRef} metrics={theme.metrics} {...props} />;
 };
 
 export type RowBoxProps = Omit<BoxProps, 'row'>;
