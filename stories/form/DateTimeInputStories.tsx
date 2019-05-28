@@ -3,7 +3,9 @@ import { withInfo } from '@storybook/addon-info';
 import { storiesOf } from '@storybook/react';
 import { addDays, addMonths } from 'date-fns';
 import * as React from 'react';
+import { UseTheme } from '../../src/components/theme';
 import { DateRangeCalendarOnChangeValue } from '../../src/components/ui/form/calendar/features';
+import { defaultDateInputTheme } from '../../src/components/ui/form/date-time-input';
 import { DateInput } from '../../src/components/ui/form/date-time-input/DateInput';
 import { DateRangeInput } from '../../src/components/ui/form/date-time-input/DateRangeInput';
 import { DateTextInput } from '../../src/components/ui/form/date-time-input/DateTextInput';
@@ -223,6 +225,29 @@ export const addDateTimeInputStories = () => {
           onChange={value => store.set({ value })}
           disabled={true}
         />
+      )),
+    )
+    .add(
+      'custom styled icon',
+      withState<DateTextInputState>({
+        value: undefined,
+      })(({ store }: { store: Store<DateTextInputState> }) => (
+        <UseTheme
+          theme={{
+            components: {
+              DateInput: {
+                ...defaultDateInputTheme,
+                iconColor: 'orange',
+                iconHighlightedColor: 'pink',
+              },
+            },
+          }}
+        >
+          <DateTextInput
+            value={store.state.value}
+            onChange={value => store.set({ value })}
+          />
+        </UseTheme>
       )),
     )
     .add(
