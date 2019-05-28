@@ -1,6 +1,7 @@
 import styled from '@emotion/styled';
+import { faMinus } from '@fortawesome/free-solid-svg-icons/faMinus';
 import * as React from 'react';
-import { ChangeEvent, useCallback } from 'react';
+import { ChangeEvent, useCallback, useEffect, useRef } from 'react';
 import { compose, setDisplayName } from 'recompose';
 import { DeepPartial } from '../../../../types/DeepPartial';
 import { RequiredInputComponentProps } from '../../../RequiredComponentProps';
@@ -18,6 +19,7 @@ export interface SimpleCheckboxProps
   extends ValueOnChangeProps<boolean>,
     RequiredInputComponentProps<HTMLDivElement, HTMLInputElement> {
   disabled?: boolean;
+  indeterminate?: boolean;
   theme?: DeepPartial<SimpleCheckboxTheme>;
 }
 
@@ -72,11 +74,14 @@ export const SimpleCheckboxComponent: React.FC<InnerProps> = ({
   className,
   disabled,
   inputRef,
+  indeterminate,
   onChange,
-  ref,
+  innerRef,
   theme,
   value,
 }) => {
+  const ref = useRef<HTMLInputElement>(null);
+
   const onClick = useCallback(
     () => {
       if (onChange) {
@@ -97,13 +102,27 @@ export const SimpleCheckboxComponent: React.FC<InnerProps> = ({
     [disabled, onChange],
   );
 
+  useEffect(
+    () => {
+      const checkboxRef = inputRef || ref;
+      if (checkboxRef.current) {
+        checkboxRef.current.indeterminate = Boolean(indeterminate);
+      }
+    },
+    [indeterminate, inputRef],
+  );
+
   return (
-    <StyledSimpleCheckboxWrapper className={className} ref={ref} theme={theme}>
+    <StyledSimpleCheckboxWrapper
+      className={className}
+      ref={innerRef}
+      theme={theme}
+    >
       <Clickable onClick={disabled ? undefined : onClick}>
         <InvisibleInput
           disabled={disabled}
           checked={value}
-          ref={inputRef}
+          ref={inputRef || ref}
           onChange={handleInputChange}
           type={'checkbox'}
         />
@@ -114,9 +133,9 @@ export const SimpleCheckboxComponent: React.FC<InnerProps> = ({
             width={theme.width}
             height={theme.height}
           >
-            {value && (
+            {(value || indeterminate) && (
               <Icon
-                name={theme.checkIcon}
+                name={indeterminate ? faMinus : theme.checkIcon}
                 color={
                   disabled
                     ? theme.disabledColors.iconColor

@@ -1,11 +1,11 @@
-import { Ref } from 'react';
+import { RefObject } from 'react';
 
 export interface RequiredComponentProps<T> {
   className?: string;
-  ref?: Ref<T>;
+  innerRef?: RefObject<T>;
 }
 
 export interface RequiredInputComponentProps<T, I>
   extends RequiredComponentProps<T> {
-  inputRef?: Ref<I>;
+  inputRef?: RefObject<I>;
 }

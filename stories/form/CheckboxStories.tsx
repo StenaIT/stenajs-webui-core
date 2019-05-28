@@ -26,6 +26,7 @@ export const addCheckboxStories = () => {
       )),
     )
     .add('checked and disabled', () => <SimpleCheckbox value={true} disabled />)
+    .add('indeterminate', () => <SimpleCheckbox indeterminate={true} />)
     .add('not checked and disabled', () => (
       <SimpleCheckbox value={false} disabled />
     ))

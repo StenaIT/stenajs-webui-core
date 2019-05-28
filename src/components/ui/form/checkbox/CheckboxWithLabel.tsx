@@ -32,13 +32,13 @@ export const CheckboxWithLabelComponent: React.FC<InnerProps> = props => {
     label,
     onChange, // Do not pass to SimpleCheckbox
     onToggle,
-    ref,
+    innerRef,
     textColor,
     theme,
     ...propsToCheckbox
   } = props;
   return (
-    <div ref={ref}>
+    <div ref={innerRef}>
       <Clickable onClick={disabled ? undefined : onToggle}>
         <Row alignItems={'center'}>
           <SimpleCheckbox {...propsToCheckbox} disabled={disabled} />

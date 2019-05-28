@@ -86,7 +86,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
   inputRef,
   onChange,
   value,
-  ref,
+  innerRef,
   theme,
   ...rest
 }) => {
@@ -109,7 +109,7 @@ const SwitchComponent: React.FC<InnerProps> = ({
   );
 
   return (
-    <div ref={ref}>
+    <div ref={innerRef}>
       <Back
         value={value}
         className={className}
