@@ -1,3 +1,4 @@
+import styled from '@emotion/styled';
 import { faCalendarAlt } from '@fortawesome/free-regular-svg-icons/faCalendarAlt';
 import { format, isValid, parse } from 'date-fns';
 import * as React from 'react';
@@ -38,6 +39,13 @@ export interface DateTextInputProps<T> extends DefaultTextInputProps {
   zIndex?: number;
 }
 
+const IconWrapper = styled(Icon)<{ defaultColor: string; hoverColor: string }>`
+  color: ${({ defaultColor }) => defaultColor};
+  &:hover {
+    color: ${({ hoverColor }) => hoverColor};
+  }
+`;
+
 export const DateTextInput = <T extends {}>({
   calendarProps,
   closeOnCalendarSelectDate = true,
@@ -69,7 +77,11 @@ export const DateTextInput = <T extends {}>({
     ) : (
       useCalenderIcon && (
         <Clickable onClick={toggleCalendar}>
-          <Icon name={faCalendarAlt} />
+          <IconWrapper
+            name={faCalendarAlt}
+            hoverColor={theme.components.DateInput.iconHighlightedColor}
+            defaultColor={theme.components.DateInput.iconColor}
+          />
         </Clickable>
       )
     );
