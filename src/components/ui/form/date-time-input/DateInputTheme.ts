@@ -1,5 +1,9 @@
-import { inputBorderFocused, primaryText } from '../../../../themes';
-import { separator, white } from '../../../../themes/default-values/Colors';
+import {
+  inputBorderFocused,
+  primaryText,
+  separator,
+  white,
+} from '../../../../themes/default-values/Colors';
 import {
   CalendarTheme,
   defaultCalendarTheme,
