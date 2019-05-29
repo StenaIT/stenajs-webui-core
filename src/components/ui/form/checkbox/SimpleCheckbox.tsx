@@ -38,25 +38,32 @@ const InvisibleInput = styled.input`
   position: absolute;
 `;
 
-const Wrapper = styled('div')<{
+type ColorType = 'backgroundColor' | 'borderColor' | 'iconColor';
+
+interface WrapperProps {
   disabled: boolean | undefined;
   theme: SimpleCheckboxTheme;
   value: boolean | undefined;
-}>`
-  background-color: ${({ disabled, theme, value }) =>
-    disabled
-      ? theme.disabledColors.backgroundColor
-      : value
-        ? theme.checkedColors.backgroundColor
-        : theme.colors.backgroundColor};
-  border: 1px solid;
+  indeterminate: boolean | undefined;
+}
+
+const resolveColor = (
+  { disabled, indeterminate, theme, value }: WrapperProps,
+  type: ColorType,
+) => {
+  if (disabled) {
+    return theme.disabledColors[type];
+  } else if (value || indeterminate) {
+    return theme.checkedColors[type];
+  } else {
+    return theme.colors[type];
+  }
+};
+
+const Wrapper = styled('div')<WrapperProps>`
+  background-color: ${props => resolveColor(props, 'backgroundColor')};
   border-radius: ${({ theme }) => theme.borderRadius};
-  border-color: ${({ disabled, theme, value }) =>
-    disabled
-      ? theme.disabledColors.borderColor
-      : value
-        ? theme.checkedColors.borderColor
-        : theme.colors.borderColor};
+  border: 1px solid ${props => resolveColor(props, 'borderColor')};
   overflow: hidden;
 `;
 
@@ -126,7 +133,12 @@ export const SimpleCheckboxComponent: React.FC<InnerProps> = ({
           onChange={handleInputChange}
           type={'checkbox'}
         />
-        <Wrapper disabled={disabled} theme={theme} value={value}>
+        <Wrapper
+          disabled={disabled}
+          theme={theme}
+          indeterminate={indeterminate}
+          value={value}
+        >
           <Row
             justifyContent={'center'}
             alignItems={'center'}
@@ -136,11 +148,15 @@ export const SimpleCheckboxComponent: React.FC<InnerProps> = ({
             {(value || indeterminate) && (
               <Icon
                 name={indeterminate ? faMinus : theme.checkIcon}
-                color={
-                  disabled
-                    ? theme.disabledColors.iconColor
-                    : theme.colors.iconColor
-                }
+                color={resolveColor(
+                  {
+                    disabled,
+                    indeterminate,
+                    theme,
+                    value,
+                  },
+                  'iconColor',
+                )}
                 size={theme.iconSize}
               />
             )}
