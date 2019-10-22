@@ -99,7 +99,7 @@
     "@emotion/core": "10.0.7",
     "@emotion/styled": "10.0.7",
     "date-fns": "2.0.0-alpha.26",
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "react-click-outside": "^3.0.1",
     "react-popper": "^1.0.2",
     "react-spinkit": "^3.0.0",
